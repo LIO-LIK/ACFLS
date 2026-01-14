@@ -16,6 +16,8 @@ TODO:
 
 - Export: writes a netlist into a standard format.
 
+- get a reference netlist for comparion
+
 We do Verilog, because it's easier than VHDL. 
 Ideally the CPU testproject is limited and unoptimized, leaving out more complex types or features of Verilog. 
 A minimum functional subset should be something like:
