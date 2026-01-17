@@ -57,3 +57,5 @@ Final segmentation of the porject:
 5. Export: input list of primitives / gate level netlist, translates into target output format(BLIF).(stage_export.py)
 
 6. Define Python classes necessary for the netlist(netlist.py)
+
+ATTENTION: MAKE SURE TO INSTALL PYVERILOG WITH "pip install pyverilog" BEFORE RUNNING
