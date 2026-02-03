@@ -1,0 +1,848 @@
+{
+    "module_name": "counter",
+    "signals": [
+        {
+            "name": "clk",
+            "width": 1,
+            "attributes": {
+                "input": true,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "rst",
+            "width": 1,
+            "attributes": {
+                "input": true,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "enable",
+            "width": 1,
+            "attributes": {
+                "input": true,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "count",
+            "width": 4,
+            "attributes": {
+                "input": false,
+                "output": true,
+                "reg": true
+            }
+        },
+        {
+            "name": "CONST_4'b0",
+            "width": 4,
+            "attributes": {
+                "input": false,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "CONST_1",
+            "width": 4,
+            "attributes": {
+                "input": false,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "tmp_add_0",
+            "width": 4,
+            "attributes": {
+                "input": false,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "CONST0",
+            "width": 1,
+            "attributes": {
+                "input": false,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "CONST1",
+            "width": 1,
+            "attributes": {
+                "input": false,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "count_0",
+            "width": 1,
+            "attributes": {
+                "input": false,
+                "output": true,
+                "reg": true
+            }
+        },
+        {
+            "name": "count_1",
+            "width": 1,
+            "attributes": {
+                "input": false,
+                "output": true,
+                "reg": true
+            }
+        },
+        {
+            "name": "count_2",
+            "width": 1,
+            "attributes": {
+                "input": false,
+                "output": true,
+                "reg": true
+            }
+        },
+        {
+            "name": "count_3",
+            "width": 1,
+            "attributes": {
+                "input": false,
+                "output": true,
+                "reg": true
+            }
+        },
+        {
+            "name": "CONST_4'b0_0",
+            "width": 1,
+            "attributes": {
+                "input": false,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "CONST_4'b0_1",
+            "width": 1,
+            "attributes": {
+                "input": false,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "CONST_4'b0_2",
+            "width": 1,
+            "attributes": {
+                "input": false,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "CONST_4'b0_3",
+            "width": 1,
+            "attributes": {
+                "input": false,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "CONST_1_0",
+            "width": 1,
+            "attributes": {
+                "input": false,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "CONST_1_1",
+            "width": 1,
+            "attributes": {
+                "input": false,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "CONST_1_2",
+            "width": 1,
+            "attributes": {
+                "input": false,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "CONST_1_3",
+            "width": 1,
+            "attributes": {
+                "input": false,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "tmp_add_0_0",
+            "width": 1,
+            "attributes": {
+                "input": false,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "tmp_add_0_1",
+            "width": 1,
+            "attributes": {
+                "input": false,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "tmp_add_0_2",
+            "width": 1,
+            "attributes": {
+                "input": false,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "tmp_add_0_3",
+            "width": 1,
+            "attributes": {
+                "input": false,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "tmp_xor_0",
+            "width": 1,
+            "attributes": {
+                "input": false,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "tmp_and_1",
+            "width": 1,
+            "attributes": {
+                "input": false,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "tmp_and_2",
+            "width": 1,
+            "attributes": {
+                "input": false,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "tmp_and_3",
+            "width": 1,
+            "attributes": {
+                "input": false,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "tmp_or_4",
+            "width": 1,
+            "attributes": {
+                "input": false,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "tmp_or_5",
+            "width": 1,
+            "attributes": {
+                "input": false,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "tmp_xor_6",
+            "width": 1,
+            "attributes": {
+                "input": false,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "tmp_and_7",
+            "width": 1,
+            "attributes": {
+                "input": false,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "tmp_and_8",
+            "width": 1,
+            "attributes": {
+                "input": false,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "tmp_and_9",
+            "width": 1,
+            "attributes": {
+                "input": false,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "tmp_or_10",
+            "width": 1,
+            "attributes": {
+                "input": false,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "tmp_or_11",
+            "width": 1,
+            "attributes": {
+                "input": false,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "tmp_xor_12",
+            "width": 1,
+            "attributes": {
+                "input": false,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "tmp_and_13",
+            "width": 1,
+            "attributes": {
+                "input": false,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "tmp_and_14",
+            "width": 1,
+            "attributes": {
+                "input": false,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "tmp_and_15",
+            "width": 1,
+            "attributes": {
+                "input": false,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "tmp_or_16",
+            "width": 1,
+            "attributes": {
+                "input": false,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "tmp_or_17",
+            "width": 1,
+            "attributes": {
+                "input": false,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "tmp_xor_18",
+            "width": 1,
+            "attributes": {
+                "input": false,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "tmp_and_19",
+            "width": 1,
+            "attributes": {
+                "input": false,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "tmp_and_20",
+            "width": 1,
+            "attributes": {
+                "input": false,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "tmp_and_21",
+            "width": 1,
+            "attributes": {
+                "input": false,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "tmp_or_22",
+            "width": 1,
+            "attributes": {
+                "input": false,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "tmp_or_23",
+            "width": 1,
+            "attributes": {
+                "input": false,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "tmp_mux_24",
+            "width": 1,
+            "attributes": {
+                "input": false,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "tmp_mux_25",
+            "width": 1,
+            "attributes": {
+                "input": false,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "tmp_mux_26",
+            "width": 1,
+            "attributes": {
+                "input": false,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "tmp_mux_27",
+            "width": 1,
+            "attributes": {
+                "input": false,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "tmp_mux_28",
+            "width": 1,
+            "attributes": {
+                "input": false,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "tmp_mux_29",
+            "width": 1,
+            "attributes": {
+                "input": false,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "tmp_mux_30",
+            "width": 1,
+            "attributes": {
+                "input": false,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "tmp_mux_31",
+            "width": 1,
+            "attributes": {
+                "input": false,
+                "output": false,
+                "reg": false
+            }
+        }
+    ],
+    "gates": [
+        {
+            "type": "XOR",
+            "inputs": [
+                "count_0",
+                "CONST1"
+            ],
+            "output": "tmp_xor_0"
+        },
+        {
+            "type": "XOR",
+            "inputs": [
+                "tmp_xor_0",
+                "CONST0"
+            ],
+            "output": "tmp_add_0_0"
+        },
+        {
+            "type": "AND",
+            "inputs": [
+                "count_0",
+                "CONST1"
+            ],
+            "output": "tmp_and_1"
+        },
+        {
+            "type": "AND",
+            "inputs": [
+                "count_0",
+                "CONST0"
+            ],
+            "output": "tmp_and_2"
+        },
+        {
+            "type": "AND",
+            "inputs": [
+                "CONST1",
+                "CONST0"
+            ],
+            "output": "tmp_and_3"
+        },
+        {
+            "type": "OR",
+            "inputs": [
+                "tmp_and_1",
+                "tmp_and_2"
+            ],
+            "output": "tmp_or_4"
+        },
+        {
+            "type": "OR",
+            "inputs": [
+                "tmp_or_4",
+                "tmp_and_3"
+            ],
+            "output": "tmp_or_5"
+        },
+        {
+            "type": "XOR",
+            "inputs": [
+                "count_1",
+                "CONST0"
+            ],
+            "output": "tmp_xor_6"
+        },
+        {
+            "type": "XOR",
+            "inputs": [
+                "tmp_xor_6",
+                "tmp_or_5"
+            ],
+            "output": "tmp_add_0_1"
+        },
+        {
+            "type": "AND",
+            "inputs": [
+                "count_1",
+                "CONST0"
+            ],
+            "output": "tmp_and_7"
+        },
+        {
+            "type": "AND",
+            "inputs": [
+                "count_1",
+                "tmp_or_5"
+            ],
+            "output": "tmp_and_8"
+        },
+        {
+            "type": "AND",
+            "inputs": [
+                "CONST0",
+                "tmp_or_5"
+            ],
+            "output": "tmp_and_9"
+        },
+        {
+            "type": "OR",
+            "inputs": [
+                "tmp_and_7",
+                "tmp_and_8"
+            ],
+            "output": "tmp_or_10"
+        },
+        {
+            "type": "OR",
+            "inputs": [
+                "tmp_or_10",
+                "tmp_and_9"
+            ],
+            "output": "tmp_or_11"
+        },
+        {
+            "type": "XOR",
+            "inputs": [
+                "count_2",
+                "CONST0"
+            ],
+            "output": "tmp_xor_12"
+        },
+        {
+            "type": "XOR",
+            "inputs": [
+                "tmp_xor_12",
+                "tmp_or_11"
+            ],
+            "output": "tmp_add_0_2"
+        },
+        {
+            "type": "AND",
+            "inputs": [
+                "count_2",
+                "CONST0"
+            ],
+            "output": "tmp_and_13"
+        },
+        {
+            "type": "AND",
+            "inputs": [
+                "count_2",
+                "tmp_or_11"
+            ],
+            "output": "tmp_and_14"
+        },
+        {
+            "type": "AND",
+            "inputs": [
+                "CONST0",
+                "tmp_or_11"
+            ],
+            "output": "tmp_and_15"
+        },
+        {
+            "type": "OR",
+            "inputs": [
+                "tmp_and_13",
+                "tmp_and_14"
+            ],
+            "output": "tmp_or_16"
+        },
+        {
+            "type": "OR",
+            "inputs": [
+                "tmp_or_16",
+                "tmp_and_15"
+            ],
+            "output": "tmp_or_17"
+        },
+        {
+            "type": "XOR",
+            "inputs": [
+                "count_3",
+                "CONST0"
+            ],
+            "output": "tmp_xor_18"
+        },
+        {
+            "type": "XOR",
+            "inputs": [
+                "tmp_xor_18",
+                "tmp_or_17"
+            ],
+            "output": "tmp_add_0_3"
+        },
+        {
+            "type": "AND",
+            "inputs": [
+                "count_3",
+                "CONST0"
+            ],
+            "output": "tmp_and_19"
+        },
+        {
+            "type": "AND",
+            "inputs": [
+                "count_3",
+                "tmp_or_17"
+            ],
+            "output": "tmp_and_20"
+        },
+        {
+            "type": "AND",
+            "inputs": [
+                "CONST0",
+                "tmp_or_17"
+            ],
+            "output": "tmp_and_21"
+        },
+        {
+            "type": "OR",
+            "inputs": [
+                "tmp_and_19",
+                "tmp_and_20"
+            ],
+            "output": "tmp_or_22"
+        },
+        {
+            "type": "OR",
+            "inputs": [
+                "tmp_or_22",
+                "tmp_and_21"
+            ],
+            "output": "tmp_or_23"
+        },
+        {
+            "type": "MUX",
+            "inputs": [
+                "enable",
+                "count_0",
+                "tmp_add_0_0"
+            ],
+            "output": "tmp_mux_24"
+        },
+        {
+            "type": "MUX",
+            "inputs": [
+                "rst",
+                "tmp_mux_24",
+                "CONST0"
+            ],
+            "output": "tmp_mux_25"
+        },
+        {
+            "type": "DFF",
+            "inputs": [
+                "tmp_mux_25",
+                "clk"
+            ],
+            "output": "count_0"
+        },
+        {
+            "type": "MUX",
+            "inputs": [
+                "enable",
+                "count_1",
+                "tmp_add_0_1"
+            ],
+            "output": "tmp_mux_26"
+        },
+        {
+            "type": "MUX",
+            "inputs": [
+                "rst",
+                "tmp_mux_26",
+                "CONST0"
+            ],
+            "output": "tmp_mux_27"
+        },
+        {
+            "type": "DFF",
+            "inputs": [
+                "tmp_mux_27",
+                "clk"
+            ],
+            "output": "count_1"
+        },
+        {
+            "type": "MUX",
+            "inputs": [
+                "enable",
+                "count_2",
+                "tmp_add_0_2"
+            ],
+            "output": "tmp_mux_28"
+        },
+        {
+            "type": "MUX",
+            "inputs": [
+                "rst",
+                "tmp_mux_28",
+                "CONST0"
+            ],
+            "output": "tmp_mux_29"
+        },
+        {
+            "type": "DFF",
+            "inputs": [
+                "tmp_mux_29",
+                "clk"
+            ],
+            "output": "count_2"
+        },
+        {
+            "type": "MUX",
+            "inputs": [
+                "enable",
+                "count_3",
+                "tmp_add_0_3"
+            ],
+            "output": "tmp_mux_30"
+        },
+        {
+            "type": "MUX",
+            "inputs": [
+                "rst",
+                "tmp_mux_30",
+                "CONST0"
+            ],
+            "output": "tmp_mux_31"
+        },
+        {
+            "type": "DFF",
+            "inputs": [
+                "tmp_mux_31",
+                "clk"
+            ],
+            "output": "count_3"
+        }
+    ]
+}

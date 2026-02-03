@@ -2,8 +2,6 @@ import sys
 import os
 import argparse
 
-# Import the stages (We will create these files next)
-# using try-except blocks so main.py runs even if stages are missing during dev
 try:
     import stage_parser
 except ImportError:
@@ -25,7 +23,7 @@ except ImportError:
     stage_export = None
 
 def main():
-    # 1. Setup Argument Parser
+    #Setup Argument Parser
     parser = argparse.ArgumentParser(description="Python Logic Synthesizer (PyLogSyn)")
     parser.add_argument("input_file", help="Path to the Verilog input file (.v)")
     parser.add_argument("--output", "-o", default="out.blif", help="Path to the output BLIF file")

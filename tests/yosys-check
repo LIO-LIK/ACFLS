@@ -1,0 +1,39 @@
+[OSS CAD Suite] C:\Users\e_lik\Documents\ACF\ACFLS>yosys -p "read_blif out.blif; stat; show -format dot -prefix output_graph"
+
+ /----------------------------------------------------------------------------\
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |  Copyright (C) 2012 - 2026  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |  Distributed under an ISC-like license, type "license" to see terms        |
+ \----------------------------------------------------------------------------/
+ Yosys 0.61+56 (git sha1 125609105-dirty, x86_64-w64-mingw32-g++ 13.2.1 -O3)
+
+-- Running command `read_blif out.blif; stat; show -format dot -prefix output_graph' --
+
+1. Executing BLIF frontend.
+
+2. Printing statistics.
+
+=== counter ===
+
+        +----------Local Count, excluding submodules.
+        |
+       45 wires
+       45 wire bits
+       45 public wires
+       45 public wire bits
+        7 ports
+        7 port bits
+       40 cells
+        4   $_DFF_P_
+       36   $lut
+
+3. Generating Graphviz representation of design.
+Writing dot description to `output_graph.dot'.
+Dumping module counter to page 1.
+
+End of script. Logfile hash: e56f4b81c8
+Yosys 0.61+56 (git sha1 125609105-dirty, x86_64-w64-mingw32-g++ 13.2.1 -O3)
+Time spent: 25% 2x read_blif (0 sec), 25% 1x stat (0 sec), ...
+
+This file was created using the oss cad suite, specifically yosys.
+I just made it read out out.blif because I didn't want to fight with yosys at the moment because it just did not want to work properly 

@@ -59,3 +59,4 @@ Final segmentation of the porject:
 6. Define Python classes necessary for the netlist(netlist.py)
 
 ATTENTION: MAKE SURE TO INSTALL PYVERILOG WITH "pip install pyverilog" BEFORE RUNNING
+If you encounter WinError2: install iverilog and during installation check "Add to PATH" box. 

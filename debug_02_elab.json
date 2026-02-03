@@ -1,0 +1,90 @@
+{
+    "module_name": "counter",
+    "signals": [
+        {
+            "name": "clk",
+            "width": 1,
+            "attributes": {
+                "input": true,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "rst",
+            "width": 1,
+            "attributes": {
+                "input": true,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "enable",
+            "width": 1,
+            "attributes": {
+                "input": true,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "count",
+            "width": 4,
+            "attributes": {
+                "input": false,
+                "output": true,
+                "reg": true
+            }
+        },
+        {
+            "name": "CONST_4'b0",
+            "width": 4,
+            "attributes": {
+                "input": false,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "CONST_1",
+            "width": 4,
+            "attributes": {
+                "input": false,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "tmp_add_0",
+            "width": 4,
+            "attributes": {
+                "input": false,
+                "output": false,
+                "reg": false
+            }
+        }
+    ],
+    "gates": [
+        {
+            "type": "ADD",
+            "inputs": [
+                "count",
+                "CONST_1"
+            ],
+            "output": "tmp_add_0"
+        },
+        {
+            "type": "DFF_EN_RST",
+            "inputs": [
+                "tmp_add_0",
+                "count",
+                "enable",
+                "CONST_4'b0",
+                "rst",
+                "clk"
+            ],
+            "output": "count"
+        }
+    ]
+}
