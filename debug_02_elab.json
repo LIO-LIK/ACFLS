@@ -1,9 +1,9 @@
 {
-    "module_name": "Control",
+    "module_name": "REG_FILE",
     "signals": [
         {
-            "name": "opcode",
-            "width": 7,
+            "name": "CLK",
+            "width": 1,
             "attributes": {
                 "input": true,
                 "output": false,
@@ -11,8 +11,8 @@
             }
         },
         {
-            "name": "funct3",
-            "width": 3,
+            "name": "WE",
+            "width": 1,
             "attributes": {
                 "input": true,
                 "output": false,
@@ -20,134 +20,71 @@
             }
         },
         {
-            "name": "RegDst",
+            "name": "RSTn",
             "width": 1,
+            "attributes": {
+                "input": true,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "RA1",
+            "width": 5,
+            "attributes": {
+                "input": true,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "RA2",
+            "width": 5,
+            "attributes": {
+                "input": true,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "WA",
+            "width": 5,
+            "attributes": {
+                "input": true,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "WD",
+            "width": 32,
+            "attributes": {
+                "input": true,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "RD1",
+            "width": 32,
             "attributes": {
                 "input": false,
                 "output": true,
-                "reg": true
-            }
-        },
-        {
-            "name": "Jump",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": true,
-                "reg": true
-            }
-        },
-        {
-            "name": "Branch",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": true,
-                "reg": true
-            }
-        },
-        {
-            "name": "MemRead",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": true,
-                "reg": true
-            }
-        },
-        {
-            "name": "MemtoReg",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": true,
-                "reg": true
-            }
-        },
-        {
-            "name": "ALUOp",
-            "width": 7,
-            "attributes": {
-                "input": false,
-                "output": true,
-                "reg": true
-            }
-        },
-        {
-            "name": "MemWrite",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": true,
-                "reg": true
-            }
-        },
-        {
-            "name": "ALUSrc1",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": true,
-                "reg": true
-            }
-        },
-        {
-            "name": "ALUSrc2",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": true,
-                "reg": true
-            }
-        },
-        {
-            "name": "RegWrite",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": true,
-                "reg": true
-            }
-        },
-        {
-            "name": "JALorJALR",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": true,
-                "reg": true
-            }
-        },
-        {
-            "name": "BE",
-            "width": 4,
-            "attributes": {
-                "input": false,
-                "output": true,
-                "reg": true
-            }
-        },
-        {
-            "name": "Concat_control",
-            "width": 3,
-            "attributes": {
-                "input": false,
-                "output": true,
-                "reg": true
+                "reg": false
             }
         },
         {
-            "name": "CONST_55_7b_2587546707648",
-            "width": 7,
+            "name": "RD2",
+            "width": 32,
             "attributes": {
-                "input": false,
+                "input": true,
                 "output": false,
                 "reg": false
             }
         },
         {
-            "name": "tmp_EQ_0",
-            "width": 1,
+            "name": "RF_0",
+            "width": 32,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -155,8 +92,8 @@
             }
         },
         {
-            "name": "CONST_1_1b_2587546701168",
-            "width": 1,
+            "name": "RF_1",
+            "width": 32,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -164,8 +101,8 @@
             }
         },
         {
-            "name": "CONST_23_7b_2587555157840",
-            "width": 7,
+            "name": "CONST_1_5b",
+            "width": 5,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -173,7 +110,7 @@
             }
         },
         {
-            "name": "CONST_1_1b_2587548035440",
+            "name": "tmp_ptr_eq_RF_1_0",
             "width": 1,
             "attributes": {
                 "input": false,
@@ -182,8 +119,8 @@
             }
         },
         {
-            "name": "CONST_51_7b_2587548024656",
-            "width": 7,
+            "name": "tmp_ptr_mux_RF_1_0",
+            "width": 32,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -191,8 +128,8 @@
             }
         },
         {
-            "name": "CONST_1_1b_2587548020048",
-            "width": 1,
+            "name": "RF_2",
+            "width": 32,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -200,8 +137,8 @@
             }
         },
         {
-            "name": "CONST_19_7b_2587552404912",
-            "width": 7,
+            "name": "CONST_2_5b",
+            "width": 5,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -209,17 +146,8 @@
             }
         },
         {
-            "name": "CONST_1_1b_2587552402992",
+            "name": "tmp_ptr_eq_RF_2_0",
             "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "CONST_1_3b_2587552966480",
-            "width": 3,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -227,8 +155,8 @@
             }
         },
         {
-            "name": "CONST_5_3b_2587552972432",
-            "width": 3,
+            "name": "tmp_ptr_mux_RF_2_0",
+            "width": 32,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -236,8 +164,8 @@
             }
         },
         {
-            "name": "tmp_OR_0",
-            "width": 1,
+            "name": "RF_3",
+            "width": 32,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -245,8 +173,8 @@
             }
         },
         {
-            "name": "CONST_3_7b_2587552967728",
-            "width": 7,
+            "name": "CONST_3_5b",
+            "width": 5,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -254,17 +182,8 @@
             }
         },
         {
-            "name": "CONST_1_1b_2587552968112",
+            "name": "tmp_ptr_eq_RF_3_0",
             "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "CONST_2_3b_2587552970224",
-            "width": 3,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -272,8 +191,8 @@
             }
         },
         {
-            "name": "eq_0",
-            "width": 1,
+            "name": "tmp_ptr_mux_RF_3_0",
+            "width": 32,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -281,8 +200,8 @@
             }
         },
         {
-            "name": "CONST_1_3b_2587552967248",
-            "width": 3,
+            "name": "RF_4",
+            "width": 32,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -290,8 +209,8 @@
             }
         },
         {
-            "name": "CONST_5_3b_2587552968208",
-            "width": 3,
+            "name": "CONST_4_5b",
+            "width": 5,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -299,7 +218,7 @@
             }
         },
         {
-            "name": "or_0",
+            "name": "tmp_ptr_eq_RF_4_0",
             "width": 1,
             "attributes": {
                 "input": false,
@@ -308,8 +227,8 @@
             }
         },
         {
-            "name": "CONST_0_3b_2587552972240",
-            "width": 3,
+            "name": "tmp_ptr_mux_RF_4_0",
+            "width": 32,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -317,8 +236,8 @@
             }
         },
         {
-            "name": "CONST_4_3b_2587552965328",
-            "width": 3,
+            "name": "RF_5",
+            "width": 32,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -326,8 +245,8 @@
             }
         },
         {
-            "name": "CONST_35_7b_2587552965616",
-            "width": 7,
+            "name": "CONST_5_5b",
+            "width": 5,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -335,35 +254,8 @@
             }
         },
         {
-            "name": "CONST_0_1b_2587552968784",
+            "name": "tmp_ptr_eq_RF_5_0",
             "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "CONST_2_3b_2587563790544",
-            "width": 3,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "CONST_1_3b_2587563791024",
-            "width": 3,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "CONST_0_3b_2587563789968",
-            "width": 3,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -371,8 +263,8 @@
             }
         },
         {
-            "name": "CONST_99_7b_2587563790352",
-            "width": 7,
+            "name": "tmp_ptr_mux_RF_5_0",
+            "width": 32,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -380,8 +272,8 @@
             }
         },
         {
-            "name": "CONST_0_1b_2587563792752",
-            "width": 1,
+            "name": "RF_6",
+            "width": 32,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -389,8 +281,8 @@
             }
         },
         {
-            "name": "CONST_111_7b_2587563796496",
-            "width": 7,
+            "name": "CONST_6_5b",
+            "width": 5,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -398,7 +290,7 @@
             }
         },
         {
-            "name": "CONST_1_1b_2587563798128",
+            "name": "tmp_ptr_eq_RF_6_0",
             "width": 1,
             "attributes": {
                 "input": false,
@@ -407,8 +299,8 @@
             }
         },
         {
-            "name": "CONST_103_7b_2587563835856",
-            "width": 7,
+            "name": "tmp_ptr_mux_RF_6_0",
+            "width": 32,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -416,8 +308,8 @@
             }
         },
         {
-            "name": "CONST_1_1b_2587563836336",
-            "width": 1,
+            "name": "RF_7",
+            "width": 32,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -425,8 +317,8 @@
             }
         },
         {
-            "name": "CONST_0_1b_2587563841424",
-            "width": 1,
+            "name": "CONST_7_5b",
+            "width": 5,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -434,7 +326,7 @@
             }
         },
         {
-            "name": "mux_RegDst_0",
+            "name": "tmp_ptr_eq_RF_7_0",
             "width": 1,
             "attributes": {
                 "input": false,
@@ -443,8 +335,8 @@
             }
         },
         {
-            "name": "tmp_EQ_32",
-            "width": 1,
+            "name": "tmp_ptr_mux_RF_7_0",
+            "width": 32,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -452,8 +344,8 @@
             }
         },
         {
-            "name": "CONST_0_1b_2587547158576",
-            "width": 1,
+            "name": "RF_8",
+            "width": 32,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -461,8 +353,8 @@
             }
         },
         {
-            "name": "CONST_0_1b_2587548034992",
-            "width": 1,
+            "name": "CONST_8_5b",
+            "width": 5,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -470,7 +362,7 @@
             }
         },
         {
-            "name": "CONST_0_1b_2587548019280",
+            "name": "tmp_ptr_eq_RF_8_0",
             "width": 1,
             "attributes": {
                 "input": false,
@@ -479,8 +371,8 @@
             }
         },
         {
-            "name": "CONST_0_1b_2587552401648",
-            "width": 1,
+            "name": "tmp_ptr_mux_RF_8_0",
+            "width": 32,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -488,8 +380,8 @@
             }
         },
         {
-            "name": "tmp_OR_32",
-            "width": 1,
+            "name": "RF_9",
+            "width": 32,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -497,8 +389,8 @@
             }
         },
         {
-            "name": "CONST_0_1b_2587552965712",
-            "width": 1,
+            "name": "CONST_9_5b",
+            "width": 5,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -506,7 +398,7 @@
             }
         },
         {
-            "name": "eq_32",
+            "name": "tmp_ptr_eq_RF_9_0",
             "width": 1,
             "attributes": {
                 "input": false,
@@ -515,8 +407,8 @@
             }
         },
         {
-            "name": "or_32",
-            "width": 1,
+            "name": "tmp_ptr_mux_RF_9_0",
+            "width": 32,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -524,8 +416,8 @@
             }
         },
         {
-            "name": "CONST_0_1b_2587563786704",
-            "width": 1,
+            "name": "RF_10",
+            "width": 32,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -533,8 +425,8 @@
             }
         },
         {
-            "name": "CONST_0_1b_2587563793232",
-            "width": 1,
+            "name": "CONST_10_5b",
+            "width": 5,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -542,7 +434,7 @@
             }
         },
         {
-            "name": "CONST_1_1b_2587563798608",
+            "name": "tmp_ptr_eq_RF_10_0",
             "width": 1,
             "attributes": {
                 "input": false,
@@ -551,8 +443,8 @@
             }
         },
         {
-            "name": "CONST_1_1b_2587563836816",
-            "width": 1,
+            "name": "tmp_ptr_mux_RF_10_0",
+            "width": 32,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -560,8 +452,8 @@
             }
         },
         {
-            "name": "CONST_0_1b_2587563841904",
-            "width": 1,
+            "name": "RF_11",
+            "width": 32,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -569,8 +461,8 @@
             }
         },
         {
-            "name": "mux_Jump_32",
-            "width": 1,
+            "name": "CONST_11_5b",
+            "width": 5,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -578,7 +470,7 @@
             }
         },
         {
-            "name": "tmp_EQ_64",
+            "name": "tmp_ptr_eq_RF_11_0",
             "width": 1,
             "attributes": {
                 "input": false,
@@ -587,8 +479,8 @@
             }
         },
         {
-            "name": "CONST_0_1b_2587547157008",
-            "width": 1,
+            "name": "tmp_ptr_mux_RF_11_0",
+            "width": 32,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -596,8 +488,8 @@
             }
         },
         {
-            "name": "CONST_0_1b_2587548024272",
-            "width": 1,
+            "name": "RF_12",
+            "width": 32,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -605,8 +497,8 @@
             }
         },
         {
-            "name": "CONST_0_1b_2587548018416",
-            "width": 1,
+            "name": "CONST_12_5b",
+            "width": 5,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -614,7 +506,7 @@
             }
         },
         {
-            "name": "CONST_0_1b_2587552400880",
+            "name": "tmp_ptr_eq_RF_12_0",
             "width": 1,
             "attributes": {
                 "input": false,
@@ -623,8 +515,8 @@
             }
         },
         {
-            "name": "tmp_OR_64",
-            "width": 1,
+            "name": "tmp_ptr_mux_RF_12_0",
+            "width": 32,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -632,8 +524,8 @@
             }
         },
         {
-            "name": "CONST_0_1b_2587552971280",
-            "width": 1,
+            "name": "RF_13",
+            "width": 32,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -641,8 +533,8 @@
             }
         },
         {
-            "name": "eq_64",
-            "width": 1,
+            "name": "CONST_13_5b",
+            "width": 5,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -650,7 +542,7 @@
             }
         },
         {
-            "name": "or_64",
+            "name": "tmp_ptr_eq_RF_13_0",
             "width": 1,
             "attributes": {
                 "input": false,
@@ -659,8 +551,8 @@
             }
         },
         {
-            "name": "CONST_0_1b_2587563787088",
-            "width": 1,
+            "name": "tmp_ptr_mux_RF_13_0",
+            "width": 32,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -668,8 +560,8 @@
             }
         },
         {
-            "name": "CONST_1_1b_2587563793616",
-            "width": 1,
+            "name": "RF_14",
+            "width": 32,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -677,8 +569,8 @@
             }
         },
         {
-            "name": "CONST_0_1b_2587563798992",
-            "width": 1,
+            "name": "CONST_14_5b",
+            "width": 5,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -686,7 +578,7 @@
             }
         },
         {
-            "name": "CONST_0_1b_2587563837200",
+            "name": "tmp_ptr_eq_RF_14_0",
             "width": 1,
             "attributes": {
                 "input": false,
@@ -695,8 +587,8 @@
             }
         },
         {
-            "name": "CONST_0_1b_2587563842288",
-            "width": 1,
+            "name": "tmp_ptr_mux_RF_14_0",
+            "width": 32,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -704,8 +596,8 @@
             }
         },
         {
-            "name": "mux_Branch_64",
-            "width": 1,
+            "name": "RF_15",
+            "width": 32,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -713,8 +605,8 @@
             }
         },
         {
-            "name": "tmp_EQ_96",
-            "width": 1,
+            "name": "CONST_15_5b",
+            "width": 5,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -722,7 +614,7 @@
             }
         },
         {
-            "name": "CONST_1_1b_2587547335792",
+            "name": "tmp_ptr_eq_RF_15_0",
             "width": 1,
             "attributes": {
                 "input": false,
@@ -731,8 +623,8 @@
             }
         },
         {
-            "name": "CONST_0_1b_2587548024080",
-            "width": 1,
+            "name": "tmp_ptr_mux_RF_15_0",
+            "width": 32,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -740,8 +632,8 @@
             }
         },
         {
-            "name": "CONST_1_1b_2587548017072",
-            "width": 1,
+            "name": "RF_16",
+            "width": 32,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -749,8 +641,8 @@
             }
         },
         {
-            "name": "CONST_1_1b_2587552400304",
-            "width": 1,
+            "name": "CONST_16_5b",
+            "width": 5,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -758,7 +650,7 @@
             }
         },
         {
-            "name": "tmp_OR_96",
+            "name": "tmp_ptr_eq_RF_16_0",
             "width": 1,
             "attributes": {
                 "input": false,
@@ -767,8 +659,8 @@
             }
         },
         {
-            "name": "CONST_1_1b_2587552969552",
-            "width": 1,
+            "name": "tmp_ptr_mux_RF_16_0",
+            "width": 32,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -776,8 +668,8 @@
             }
         },
         {
-            "name": "eq_96",
-            "width": 1,
+            "name": "RF_17",
+            "width": 32,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -785,8 +677,8 @@
             }
         },
         {
-            "name": "or_96",
-            "width": 1,
+            "name": "CONST_17_5b",
+            "width": 5,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -794,7 +686,7 @@
             }
         },
         {
-            "name": "CONST_1_1b_2587563787472",
+            "name": "tmp_ptr_eq_RF_17_0",
             "width": 1,
             "attributes": {
                 "input": false,
@@ -803,8 +695,8 @@
             }
         },
         {
-            "name": "CONST_1_1b_2587563794000",
-            "width": 1,
+            "name": "tmp_ptr_mux_RF_17_0",
+            "width": 32,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -812,8 +704,8 @@
             }
         },
         {
-            "name": "CONST_1_1b_2587563799376",
-            "width": 1,
+            "name": "RF_18",
+            "width": 32,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -821,8 +713,8 @@
             }
         },
         {
-            "name": "CONST_1_1b_2587563837584",
-            "width": 1,
+            "name": "CONST_18_5b",
+            "width": 5,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -830,7 +722,7 @@
             }
         },
         {
-            "name": "CONST_0_1b_2587563842672",
+            "name": "tmp_ptr_eq_RF_18_0",
             "width": 1,
             "attributes": {
                 "input": false,
@@ -839,8 +731,8 @@
             }
         },
         {
-            "name": "mux_MemRead_96",
-            "width": 1,
+            "name": "tmp_ptr_mux_RF_18_0",
+            "width": 32,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -848,8 +740,8 @@
             }
         },
         {
-            "name": "tmp_EQ_128",
-            "width": 1,
+            "name": "RF_19",
+            "width": 32,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -857,8 +749,8 @@
             }
         },
         {
-            "name": "CONST_0_1b_2587548113360",
-            "width": 1,
+            "name": "CONST_19_5b",
+            "width": 5,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -866,7 +758,7 @@
             }
         },
         {
-            "name": "CONST_0_1b_2587548023888",
+            "name": "tmp_ptr_eq_RF_19_0",
             "width": 1,
             "attributes": {
                 "input": false,
@@ -875,8 +767,8 @@
             }
         },
         {
-            "name": "CONST_0_1b_2587548016208",
-            "width": 1,
+            "name": "tmp_ptr_mux_RF_19_0",
+            "width": 32,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -884,8 +776,8 @@
             }
         },
         {
-            "name": "CONST_0_1b_2587552409040",
-            "width": 1,
+            "name": "RF_20",
+            "width": 32,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -893,8 +785,8 @@
             }
         },
         {
-            "name": "tmp_OR_128",
-            "width": 1,
+            "name": "CONST_20_5b",
+            "width": 5,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -902,7 +794,7 @@
             }
         },
         {
-            "name": "CONST_1_1b_2587552969456",
+            "name": "tmp_ptr_eq_RF_20_0",
             "width": 1,
             "attributes": {
                 "input": false,
@@ -911,8 +803,8 @@
             }
         },
         {
-            "name": "eq_128",
-            "width": 1,
+            "name": "tmp_ptr_mux_RF_20_0",
+            "width": 32,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -920,8 +812,8 @@
             }
         },
         {
-            "name": "or_128",
-            "width": 1,
+            "name": "RF_21",
+            "width": 32,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -929,8 +821,8 @@
             }
         },
         {
-            "name": "CONST_0_1b_2587563787856",
-            "width": 1,
+            "name": "CONST_21_5b",
+            "width": 5,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -938,7 +830,7 @@
             }
         },
         {
-            "name": "CONST_0_1b_2587563794384",
+            "name": "tmp_ptr_eq_RF_21_0",
             "width": 1,
             "attributes": {
                 "input": false,
@@ -947,8 +839,8 @@
             }
         },
         {
-            "name": "CONST_0_1b_2587563799760",
-            "width": 1,
+            "name": "tmp_ptr_mux_RF_21_0",
+            "width": 32,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -956,8 +848,8 @@
             }
         },
         {
-            "name": "CONST_0_1b_2587563837968",
-            "width": 1,
+            "name": "RF_22",
+            "width": 32,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -965,8 +857,8 @@
             }
         },
         {
-            "name": "CONST_0_1b_2587563843056",
-            "width": 1,
+            "name": "CONST_22_5b",
+            "width": 5,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -974,7 +866,7 @@
             }
         },
         {
-            "name": "mux_MemtoReg_128",
+            "name": "tmp_ptr_eq_RF_22_0",
             "width": 1,
             "attributes": {
                 "input": false,
@@ -983,8 +875,8 @@
             }
         },
         {
-            "name": "tmp_EQ_160",
-            "width": 1,
+            "name": "tmp_ptr_mux_RF_22_0",
+            "width": 32,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -992,8 +884,8 @@
             }
         },
         {
-            "name": "tmp_OR_160",
-            "width": 1,
+            "name": "RF_23",
+            "width": 32,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -1001,8 +893,8 @@
             }
         },
         {
-            "name": "eq_160",
-            "width": 1,
+            "name": "CONST_23_5b",
+            "width": 5,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -1010,7 +902,7 @@
             }
         },
         {
-            "name": "or_160",
+            "name": "tmp_ptr_eq_RF_23_0",
             "width": 1,
             "attributes": {
                 "input": false,
@@ -1019,8 +911,8 @@
             }
         },
         {
-            "name": "CONST_0_7b_2587563843440",
-            "width": 7,
+            "name": "tmp_ptr_mux_RF_23_0",
+            "width": 32,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -1028,8 +920,8 @@
             }
         },
         {
-            "name": "mux_ALUOp_160",
-            "width": 7,
+            "name": "RF_24",
+            "width": 32,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -1037,8 +929,8 @@
             }
         },
         {
-            "name": "tmp_EQ_192",
-            "width": 1,
+            "name": "CONST_24_5b",
+            "width": 5,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -1046,7 +938,7 @@
             }
         },
         {
-            "name": "CONST_0_1b_2587562805008",
+            "name": "tmp_ptr_eq_RF_24_0",
             "width": 1,
             "attributes": {
                 "input": false,
@@ -1055,8 +947,8 @@
             }
         },
         {
-            "name": "CONST_0_1b_2587548023792",
-            "width": 1,
+            "name": "tmp_ptr_mux_RF_24_0",
+            "width": 32,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -1064,8 +956,8 @@
             }
         },
         {
-            "name": "CONST_0_1b_2587548013904",
-            "width": 1,
+            "name": "RF_25",
+            "width": 32,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -1073,8 +965,8 @@
             }
         },
         {
-            "name": "CONST_0_1b_2587552964272",
-            "width": 1,
+            "name": "CONST_25_5b",
+            "width": 5,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -1082,7 +974,7 @@
             }
         },
         {
-            "name": "tmp_OR_192",
+            "name": "tmp_ptr_eq_RF_25_0",
             "width": 1,
             "attributes": {
                 "input": false,
@@ -1091,8 +983,8 @@
             }
         },
         {
-            "name": "CONST_0_1b_2587552971856",
-            "width": 1,
+            "name": "tmp_ptr_mux_RF_25_0",
+            "width": 32,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -1100,8 +992,8 @@
             }
         },
         {
-            "name": "eq_192",
-            "width": 1,
+            "name": "RF_26",
+            "width": 32,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -1109,8 +1001,8 @@
             }
         },
         {
-            "name": "or_192",
-            "width": 1,
+            "name": "CONST_26_5b",
+            "width": 5,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -1118,7 +1010,7 @@
             }
         },
         {
-            "name": "CONST_1_1b_2587563788624",
+            "name": "tmp_ptr_eq_RF_26_0",
             "width": 1,
             "attributes": {
                 "input": false,
@@ -1127,8 +1019,8 @@
             }
         },
         {
-            "name": "CONST_0_1b_2587563795152",
-            "width": 1,
+            "name": "tmp_ptr_mux_RF_26_0",
+            "width": 32,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -1136,8 +1028,8 @@
             }
         },
         {
-            "name": "CONST_0_1b_2587563800528",
-            "width": 1,
+            "name": "RF_27",
+            "width": 32,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -1145,8 +1037,8 @@
             }
         },
         {
-            "name": "CONST_0_1b_2587563838736",
-            "width": 1,
+            "name": "CONST_27_5b",
+            "width": 5,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -1154,7 +1046,7 @@
             }
         },
         {
-            "name": "CONST_0_1b_2587563843824",
+            "name": "tmp_ptr_eq_RF_27_0",
             "width": 1,
             "attributes": {
                 "input": false,
@@ -1163,8 +1055,8 @@
             }
         },
         {
-            "name": "mux_MemWrite_192",
-            "width": 1,
+            "name": "tmp_ptr_mux_RF_27_0",
+            "width": 32,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -1172,8 +1064,8 @@
             }
         },
         {
-            "name": "tmp_EQ_224",
-            "width": 1,
+            "name": "RF_28",
+            "width": 32,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -1181,8 +1073,8 @@
             }
         },
         {
-            "name": "CONST_0_1b_2587547619888",
-            "width": 1,
+            "name": "CONST_28_5b",
+            "width": 5,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -1190,7 +1082,7 @@
             }
         },
         {
-            "name": "CONST_1_1b_2587548023408",
+            "name": "tmp_ptr_eq_RF_28_0",
             "width": 1,
             "attributes": {
                 "input": false,
@@ -1199,8 +1091,8 @@
             }
         },
         {
-            "name": "CONST_0_1b_2587552408944",
-            "width": 1,
+            "name": "tmp_ptr_mux_RF_28_0",
+            "width": 32,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -1208,8 +1100,8 @@
             }
         },
         {
-            "name": "CONST_0_1b_2587552962736",
-            "width": 1,
+            "name": "RF_29",
+            "width": 32,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -1217,8 +1109,8 @@
             }
         },
         {
-            "name": "tmp_OR_224",
-            "width": 1,
+            "name": "CONST_29_5b",
+            "width": 5,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -1226,7 +1118,7 @@
             }
         },
         {
-            "name": "CONST_0_1b_2587552964848",
+            "name": "tmp_ptr_eq_RF_29_0",
             "width": 1,
             "attributes": {
                 "input": false,
@@ -1235,8 +1127,8 @@
             }
         },
         {
-            "name": "eq_224",
-            "width": 1,
+            "name": "tmp_ptr_mux_RF_29_0",
+            "width": 32,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -1244,8 +1136,8 @@
             }
         },
         {
-            "name": "or_224",
-            "width": 1,
+            "name": "RF_30",
+            "width": 32,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -1253,8 +1145,8 @@
             }
         },
         {
-            "name": "CONST_0_1b_2587563789008",
-            "width": 1,
+            "name": "CONST_30_5b",
+            "width": 5,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -1262,7 +1154,7 @@
             }
         },
         {
-            "name": "CONST_0_1b_2587563795536",
+            "name": "tmp_ptr_eq_RF_30_0",
             "width": 1,
             "attributes": {
                 "input": false,
@@ -1271,8 +1163,8 @@
             }
         },
         {
-            "name": "CONST_1_1b_2587563800912",
-            "width": 1,
+            "name": "tmp_ptr_mux_RF_30_0",
+            "width": 32,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -1280,8 +1172,8 @@
             }
         },
         {
-            "name": "CONST_0_1b_2587563839120",
-            "width": 1,
+            "name": "RF_31",
+            "width": 32,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -1289,8 +1181,8 @@
             }
         },
         {
-            "name": "mux_ALUSrc1_224",
-            "width": 1,
+            "name": "CONST_31_5b",
+            "width": 5,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -1298,7 +1190,7 @@
             }
         },
         {
-            "name": "tmp_EQ_256",
+            "name": "tmp_ptr_eq_RF_31_0",
             "width": 1,
             "attributes": {
                 "input": false,
@@ -1307,8 +1199,8 @@
             }
         },
         {
-            "name": "CONST_1_1b_2587547627456",
-            "width": 1,
+            "name": "tmp_ptr_mux_RF_31_0",
+            "width": 32,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -1316,7 +1208,7 @@
             }
         },
         {
-            "name": "CONST_1_1b_2587548022448",
+            "name": "tmp_ptr_eq_RF_1_63",
             "width": 1,
             "attributes": {
                 "input": false,
@@ -1325,8 +1217,8 @@
             }
         },
         {
-            "name": "CONST_0_1b_2587552408176",
-            "width": 1,
+            "name": "tmp_ptr_mux_RF_1_63",
+            "width": 32,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -1334,7 +1226,7 @@
             }
         },
         {
-            "name": "CONST_1_1b_2587552965424",
+            "name": "tmp_ptr_eq_RF_2_63",
             "width": 1,
             "attributes": {
                 "input": false,
@@ -1343,8 +1235,8 @@
             }
         },
         {
-            "name": "tmp_OR_256",
-            "width": 1,
+            "name": "tmp_ptr_mux_RF_2_63",
+            "width": 32,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -1352,7 +1244,7 @@
             }
         },
         {
-            "name": "CONST_1_1b_2587552967632",
+            "name": "tmp_ptr_eq_RF_3_63",
             "width": 1,
             "attributes": {
                 "input": false,
@@ -1361,8 +1253,8 @@
             }
         },
         {
-            "name": "eq_256",
-            "width": 1,
+            "name": "tmp_ptr_mux_RF_3_63",
+            "width": 32,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -1370,7 +1262,7 @@
             }
         },
         {
-            "name": "or_256",
+            "name": "tmp_ptr_eq_RF_4_63",
             "width": 1,
             "attributes": {
                 "input": false,
@@ -1379,8 +1271,8 @@
             }
         },
         {
-            "name": "CONST_1_1b_2587563789392",
-            "width": 1,
+            "name": "tmp_ptr_mux_RF_4_63",
+            "width": 32,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -1388,7 +1280,7 @@
             }
         },
         {
-            "name": "CONST_0_1b_2587563795920",
+            "name": "tmp_ptr_eq_RF_5_63",
             "width": 1,
             "attributes": {
                 "input": false,
@@ -1397,8 +1289,8 @@
             }
         },
         {
-            "name": "CONST_1_1b_2587563801296",
-            "width": 1,
+            "name": "tmp_ptr_mux_RF_5_63",
+            "width": 32,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -1406,7 +1298,7 @@
             }
         },
         {
-            "name": "CONST_1_1b_2587563839504",
+            "name": "tmp_ptr_eq_RF_6_63",
             "width": 1,
             "attributes": {
                 "input": false,
@@ -1415,8 +1307,8 @@
             }
         },
         {
-            "name": "CONST_0_1b_2587563844208",
-            "width": 1,
+            "name": "tmp_ptr_mux_RF_6_63",
+            "width": 32,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -1424,7 +1316,7 @@
             }
         },
         {
-            "name": "mux_ALUSrc2_256",
+            "name": "tmp_ptr_eq_RF_7_63",
             "width": 1,
             "attributes": {
                 "input": false,
@@ -1433,8 +1325,8 @@
             }
         },
         {
-            "name": "tmp_EQ_288",
-            "width": 1,
+            "name": "tmp_ptr_mux_RF_7_63",
+            "width": 32,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -1442,7 +1334,7 @@
             }
         },
         {
-            "name": "CONST_1_1b_2587555922000",
+            "name": "tmp_ptr_eq_RF_8_63",
             "width": 1,
             "attributes": {
                 "input": false,
@@ -1451,8 +1343,8 @@
             }
         },
         {
-            "name": "CONST_1_1b_2587548021488",
-            "width": 1,
+            "name": "tmp_ptr_mux_RF_8_63",
+            "width": 32,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -1460,7 +1352,7 @@
             }
         },
         {
-            "name": "CONST_1_1b_2587552407216",
+            "name": "tmp_ptr_eq_RF_9_63",
             "width": 1,
             "attributes": {
                 "input": false,
@@ -1469,8 +1361,8 @@
             }
         },
         {
-            "name": "CONST_1_1b_2587552962256",
-            "width": 1,
+            "name": "tmp_ptr_mux_RF_9_63",
+            "width": 32,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -1478,7 +1370,7 @@
             }
         },
         {
-            "name": "tmp_OR_288",
+            "name": "tmp_ptr_eq_RF_10_63",
             "width": 1,
             "attributes": {
                 "input": false,
@@ -1487,8 +1379,8 @@
             }
         },
         {
-            "name": "CONST_1_1b_2587552968304",
-            "width": 1,
+            "name": "tmp_ptr_mux_RF_10_63",
+            "width": 32,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -1496,7 +1388,7 @@
             }
         },
         {
-            "name": "eq_288",
+            "name": "tmp_ptr_eq_RF_11_63",
             "width": 1,
             "attributes": {
                 "input": false,
@@ -1505,8 +1397,8 @@
             }
         },
         {
-            "name": "or_288",
-            "width": 1,
+            "name": "tmp_ptr_mux_RF_11_63",
+            "width": 32,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -1514,7 +1406,7 @@
             }
         },
         {
-            "name": "CONST_0_1b_2587563789776",
+            "name": "tmp_ptr_eq_RF_12_63",
             "width": 1,
             "attributes": {
                 "input": false,
@@ -1523,8 +1415,8 @@
             }
         },
         {
-            "name": "CONST_0_1b_2587563796304",
-            "width": 1,
+            "name": "tmp_ptr_mux_RF_12_63",
+            "width": 32,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -1532,7 +1424,7 @@
             }
         },
         {
-            "name": "CONST_1_1b_2587563801680",
+            "name": "tmp_ptr_eq_RF_13_63",
             "width": 1,
             "attributes": {
                 "input": false,
@@ -1541,8 +1433,8 @@
             }
         },
         {
-            "name": "CONST_1_1b_2587563839888",
-            "width": 1,
+            "name": "tmp_ptr_mux_RF_13_63",
+            "width": 32,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -1550,7 +1442,7 @@
             }
         },
         {
-            "name": "CONST_0_1b_2587563844592",
+            "name": "tmp_ptr_eq_RF_14_63",
             "width": 1,
             "attributes": {
                 "input": false,
@@ -1559,8 +1451,8 @@
             }
         },
         {
-            "name": "mux_RegWrite_288",
-            "width": 1,
+            "name": "tmp_ptr_mux_RF_14_63",
+            "width": 32,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -1568,7 +1460,7 @@
             }
         },
         {
-            "name": "tmp_EQ_320",
+            "name": "tmp_ptr_eq_RF_15_63",
             "width": 1,
             "attributes": {
                 "input": false,
@@ -1577,8 +1469,8 @@
             }
         },
         {
-            "name": "CONST_0_1b_2587555922160",
-            "width": 1,
+            "name": "tmp_ptr_mux_RF_15_63",
+            "width": 32,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -1586,7 +1478,7 @@
             }
         },
         {
-            "name": "CONST_0_1b_2587548021296",
+            "name": "tmp_ptr_eq_RF_16_63",
             "width": 1,
             "attributes": {
                 "input": false,
@@ -1595,8 +1487,8 @@
             }
         },
         {
-            "name": "CONST_0_1b_2587552406160",
-            "width": 1,
+            "name": "tmp_ptr_mux_RF_16_63",
+            "width": 32,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -1604,7 +1496,7 @@
             }
         },
         {
-            "name": "CONST_0_1b_2587552968688",
+            "name": "tmp_ptr_eq_RF_17_63",
             "width": 1,
             "attributes": {
                 "input": false,
@@ -1613,8 +1505,8 @@
             }
         },
         {
-            "name": "tmp_OR_320",
-            "width": 1,
+            "name": "tmp_ptr_mux_RF_17_63",
+            "width": 32,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -1622,7 +1514,7 @@
             }
         },
         {
-            "name": "CONST_0_1b_2587552966192",
+            "name": "tmp_ptr_eq_RF_18_63",
             "width": 1,
             "attributes": {
                 "input": false,
@@ -1631,8 +1523,8 @@
             }
         },
         {
-            "name": "eq_320",
-            "width": 1,
+            "name": "tmp_ptr_mux_RF_18_63",
+            "width": 32,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -1640,7 +1532,7 @@
             }
         },
         {
-            "name": "or_320",
+            "name": "tmp_ptr_eq_RF_19_63",
             "width": 1,
             "attributes": {
                 "input": false,
@@ -1649,8 +1541,8 @@
             }
         },
         {
-            "name": "CONST_0_1b_2587563790160",
-            "width": 1,
+            "name": "tmp_ptr_mux_RF_19_63",
+            "width": 32,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -1658,7 +1550,7 @@
             }
         },
         {
-            "name": "CONST_0_1b_2587563796688",
+            "name": "tmp_ptr_eq_RF_20_63",
             "width": 1,
             "attributes": {
                 "input": false,
@@ -1667,8 +1559,8 @@
             }
         },
         {
-            "name": "CONST_0_1b_2587563802064",
-            "width": 1,
+            "name": "tmp_ptr_mux_RF_20_63",
+            "width": 32,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -1676,7 +1568,7 @@
             }
         },
         {
-            "name": "CONST_1_1b_2587563840272",
+            "name": "tmp_ptr_eq_RF_21_63",
             "width": 1,
             "attributes": {
                 "input": false,
@@ -1685,8 +1577,8 @@
             }
         },
         {
-            "name": "mux_JALorJALR_320",
-            "width": 1,
+            "name": "tmp_ptr_mux_RF_21_63",
+            "width": 32,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -1694,44 +1586,8 @@
             }
         },
         {
-            "name": "tmp_EQ_352",
+            "name": "tmp_ptr_eq_RF_22_63",
             "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "CONST_0_4b_2587547688624",
-            "width": 4,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "CONST_0_4b_2587548021104",
-            "width": 4,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "CONST_0_4b_2587552405200",
-            "width": 4,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "CONST_0_4b_2587552964560",
-            "width": 4,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -1739,8 +1595,8 @@
             }
         },
         {
-            "name": "tmp_OR_352",
-            "width": 1,
+            "name": "tmp_ptr_mux_RF_22_63",
+            "width": 32,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -1748,7 +1604,7 @@
             }
         },
         {
-            "name": "eq_352",
+            "name": "tmp_ptr_eq_RF_23_63",
             "width": 1,
             "attributes": {
                 "input": false,
@@ -1757,8 +1613,8 @@
             }
         },
         {
-            "name": "CONST_15_4b_2587552965808",
-            "width": 4,
+            "name": "tmp_ptr_mux_RF_23_63",
+            "width": 32,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -1766,16 +1622,7 @@
             }
         },
         {
-            "name": "mux_BE_352",
-            "width": 4,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "or_352",
+            "name": "tmp_ptr_eq_RF_24_63",
             "width": 1,
             "attributes": {
                 "input": false,
@@ -1784,8 +1631,8 @@
             }
         },
         {
-            "name": "CONST_3_4b_2587552968496",
-            "width": 4,
+            "name": "tmp_ptr_mux_RF_24_63",
+            "width": 32,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -1793,8 +1640,8 @@
             }
         },
         {
-            "name": "CONST_1_4b_2587552963504",
-            "width": 4,
+            "name": "tmp_ptr_eq_RF_25_63",
+            "width": 1,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -1802,8 +1649,8 @@
             }
         },
         {
-            "name": "CONST_15_4b_2587563791984",
-            "width": 4,
+            "name": "tmp_ptr_mux_RF_25_63",
+            "width": 32,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -1811,8 +1658,8 @@
             }
         },
         {
-            "name": "CONST_3_4b_2587563791504",
-            "width": 4,
+            "name": "tmp_ptr_eq_RF_26_63",
+            "width": 1,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -1820,8 +1667,8 @@
             }
         },
         {
-            "name": "CONST_1_4b_2587563790928",
-            "width": 4,
+            "name": "tmp_ptr_mux_RF_26_63",
+            "width": 32,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -1829,8 +1676,8 @@
             }
         },
         {
-            "name": "CONST_0_4b_2587563797072",
-            "width": 4,
+            "name": "tmp_ptr_eq_RF_27_63",
+            "width": 1,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -1838,8 +1685,8 @@
             }
         },
         {
-            "name": "CONST_0_4b_2587563802448",
-            "width": 4,
+            "name": "tmp_ptr_mux_RF_27_63",
+            "width": 32,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -1847,8 +1694,8 @@
             }
         },
         {
-            "name": "CONST_0_4b_2587563840656",
-            "width": 4,
+            "name": "tmp_ptr_eq_RF_28_63",
+            "width": 1,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -1856,8 +1703,8 @@
             }
         },
         {
-            "name": "CONST_0_4b_2587563844976",
-            "width": 4,
+            "name": "tmp_ptr_mux_RF_28_63",
+            "width": 32,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -1865,7 +1712,7 @@
             }
         },
         {
-            "name": "tmp_EQ_388",
+            "name": "tmp_ptr_eq_RF_29_63",
             "width": 1,
             "attributes": {
                 "input": false,
@@ -1874,8 +1721,8 @@
             }
         },
         {
-            "name": "CONST_1_3b_2587555157712",
-            "width": 3,
+            "name": "tmp_ptr_mux_RF_29_63",
+            "width": 32,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -1883,8 +1730,8 @@
             }
         },
         {
-            "name": "CONST_1_3b_2587548020912",
-            "width": 3,
+            "name": "tmp_ptr_eq_RF_30_63",
+            "width": 1,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -1892,8 +1739,8 @@
             }
         },
         {
-            "name": "CONST_0_3b_2587552404624",
-            "width": 3,
+            "name": "tmp_ptr_mux_RF_30_63",
+            "width": 32,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -1901,17 +1748,8 @@
             }
         },
         {
-            "name": "tmp_OR_388",
+            "name": "tmp_ptr_eq_RF_31_63",
             "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "CONST_6_3b_2587552972336",
-            "width": 3,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -1919,8 +1757,8 @@
             }
         },
         {
-            "name": "CONST_3_3b_2587552964176",
-            "width": 3,
+            "name": "tmp_ptr_mux_RF_31_63",
+            "width": 32,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -1928,8 +1766,8 @@
             }
         },
         {
-            "name": "mux_Concat_control_388",
-            "width": 3,
+            "name": "CONST_0_5b_rep",
+            "width": 5,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -1937,7 +1775,7 @@
             }
         },
         {
-            "name": "eq_388",
+            "name": "tmp_eq_126",
             "width": 1,
             "attributes": {
                 "input": false,
@@ -1946,53 +1784,8 @@
             }
         },
         {
-            "name": "or_388",
+            "name": "tmp_neq_126",
             "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "CONST_3_3b_2587552970416",
-            "width": 3,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "CONST_5_3b_2587563790832",
-            "width": 3,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "CONST_4_3b_2587563797456",
-            "width": 3,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "CONST_2_3b_2587563835664",
-            "width": 3,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "CONST_3_3b_2587563841040",
-            "width": 3,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -2000,8 +1793,8 @@
             }
         },
         {
-            "name": "CONST_0_3b_2587563845360",
-            "width": 3,
+            "name": "tmp_AND_126",
+            "width": 1,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -2013,3470 +1806,1093 @@
         {
             "type": "EQ",
             "inputs": [
-                "opcode",
-                "CONST_55_7b_2587546707648"
+                "RA1",
+                "CONST_1_5b"
             ],
-            "output": "tmp_EQ_0"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_23_7b_2587555157840"
-            ],
-            "output": "tmp_EQ_0"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_51_7b_2587548024656"
-            ],
-            "output": "tmp_EQ_0"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_19_7b_2587552404912"
-            ],
-            "output": "tmp_EQ_0"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_1_3b_2587552966480"
-            ],
-            "output": "tmp_EQ_0"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_5_3b_2587552972432"
-            ],
-            "output": "tmp_EQ_0"
-        },
-        {
-            "type": "OR",
-            "inputs": [
-                "tmp_EQ_0",
-                "tmp_EQ_0"
-            ],
-            "output": "tmp_OR_0"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_3_7b_2587552967728"
-            ],
-            "output": "tmp_EQ_0"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_2_3b_2587552970224"
-            ],
-            "output": "eq_0"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_1_3b_2587552967248"
-            ],
-            "output": "eq_0"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_5_3b_2587552968208"
-            ],
-            "output": "eq_0"
-        },
-        {
-            "type": "OR",
-            "inputs": [
-                "eq_0",
-                "eq_0"
-            ],
-            "output": "or_0"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_0_3b_2587552972240"
-            ],
-            "output": "eq_0"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_4_3b_2587552965328"
-            ],
-            "output": "eq_0"
-        },
-        {
-            "type": "OR",
-            "inputs": [
-                "eq_0",
-                "eq_0"
-            ],
-            "output": "or_0"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_35_7b_2587552965616"
-            ],
-            "output": "tmp_EQ_0"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_2_3b_2587563790544"
-            ],
-            "output": "eq_0"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_1_3b_2587563791024"
-            ],
-            "output": "eq_0"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_0_3b_2587563789968"
-            ],
-            "output": "eq_0"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_99_7b_2587563790352"
-            ],
-            "output": "tmp_EQ_0"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_111_7b_2587563796496"
-            ],
-            "output": "tmp_EQ_0"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_103_7b_2587563835856"
-            ],
-            "output": "tmp_EQ_0"
+            "output": "tmp_ptr_eq_RF_1_0"
         },
         {
             "type": "MUX",
             "inputs": [
-                "tmp_EQ_0",
-                "CONST_1_1b_2587563836336",
-                "CONST_0_1b_2587563841424"
+                "tmp_ptr_eq_RF_1_0",
+                "RF_1",
+                "RF_0"
             ],
-            "output": "mux_RegDst_0"
+            "output": "tmp_ptr_mux_RF_1_0"
+        },
+        {
+            "type": "EQ",
+            "inputs": [
+                "RA1",
+                "CONST_2_5b"
+            ],
+            "output": "tmp_ptr_eq_RF_2_0"
         },
         {
             "type": "MUX",
             "inputs": [
-                "tmp_EQ_0",
-                "CONST_1_1b_2587563798128",
-                "mux_RegDst_0"
+                "tmp_ptr_eq_RF_2_0",
+                "RF_2",
+                "tmp_ptr_mux_RF_1_0"
             ],
-            "output": "mux_RegDst_0"
+            "output": "tmp_ptr_mux_RF_2_0"
+        },
+        {
+            "type": "EQ",
+            "inputs": [
+                "RA1",
+                "CONST_3_5b"
+            ],
+            "output": "tmp_ptr_eq_RF_3_0"
         },
         {
             "type": "MUX",
             "inputs": [
-                "tmp_EQ_0",
-                "CONST_0_1b_2587563792752",
-                "mux_RegDst_0"
+                "tmp_ptr_eq_RF_3_0",
+                "RF_3",
+                "tmp_ptr_mux_RF_2_0"
             ],
-            "output": "mux_RegDst_0"
+            "output": "tmp_ptr_mux_RF_3_0"
+        },
+        {
+            "type": "EQ",
+            "inputs": [
+                "RA1",
+                "CONST_4_5b"
+            ],
+            "output": "tmp_ptr_eq_RF_4_0"
         },
         {
             "type": "MUX",
             "inputs": [
-                "tmp_EQ_0",
-                "CONST_0_1b_2587552968784",
-                "mux_RegDst_0"
+                "tmp_ptr_eq_RF_4_0",
+                "RF_4",
+                "tmp_ptr_mux_RF_3_0"
             ],
-            "output": "mux_RegDst_0"
+            "output": "tmp_ptr_mux_RF_4_0"
+        },
+        {
+            "type": "EQ",
+            "inputs": [
+                "RA1",
+                "CONST_5_5b"
+            ],
+            "output": "tmp_ptr_eq_RF_5_0"
         },
         {
             "type": "MUX",
             "inputs": [
-                "tmp_EQ_0",
-                "CONST_1_1b_2587552968112",
-                "mux_RegDst_0"
+                "tmp_ptr_eq_RF_5_0",
+                "RF_5",
+                "tmp_ptr_mux_RF_4_0"
             ],
-            "output": "mux_RegDst_0"
+            "output": "tmp_ptr_mux_RF_5_0"
+        },
+        {
+            "type": "EQ",
+            "inputs": [
+                "RA1",
+                "CONST_6_5b"
+            ],
+            "output": "tmp_ptr_eq_RF_6_0"
         },
         {
             "type": "MUX",
             "inputs": [
-                "tmp_EQ_0",
-                "CONST_1_1b_2587552402992",
-                "mux_RegDst_0"
+                "tmp_ptr_eq_RF_6_0",
+                "RF_6",
+                "tmp_ptr_mux_RF_5_0"
             ],
-            "output": "mux_RegDst_0"
+            "output": "tmp_ptr_mux_RF_6_0"
+        },
+        {
+            "type": "EQ",
+            "inputs": [
+                "RA1",
+                "CONST_7_5b"
+            ],
+            "output": "tmp_ptr_eq_RF_7_0"
         },
         {
             "type": "MUX",
             "inputs": [
-                "tmp_EQ_0",
-                "CONST_1_1b_2587548020048",
-                "mux_RegDst_0"
+                "tmp_ptr_eq_RF_7_0",
+                "RF_7",
+                "tmp_ptr_mux_RF_6_0"
             ],
-            "output": "mux_RegDst_0"
+            "output": "tmp_ptr_mux_RF_7_0"
+        },
+        {
+            "type": "EQ",
+            "inputs": [
+                "RA1",
+                "CONST_8_5b"
+            ],
+            "output": "tmp_ptr_eq_RF_8_0"
         },
         {
             "type": "MUX",
             "inputs": [
-                "tmp_EQ_0",
-                "CONST_1_1b_2587548035440",
-                "mux_RegDst_0"
+                "tmp_ptr_eq_RF_8_0",
+                "RF_8",
+                "tmp_ptr_mux_RF_7_0"
             ],
-            "output": "mux_RegDst_0"
+            "output": "tmp_ptr_mux_RF_8_0"
+        },
+        {
+            "type": "EQ",
+            "inputs": [
+                "RA1",
+                "CONST_9_5b"
+            ],
+            "output": "tmp_ptr_eq_RF_9_0"
         },
         {
             "type": "MUX",
             "inputs": [
-                "tmp_EQ_0",
-                "CONST_1_1b_2587546701168",
-                "mux_RegDst_0"
+                "tmp_ptr_eq_RF_9_0",
+                "RF_9",
+                "tmp_ptr_mux_RF_8_0"
             ],
-            "output": "mux_RegDst_0"
+            "output": "tmp_ptr_mux_RF_9_0"
+        },
+        {
+            "type": "EQ",
+            "inputs": [
+                "RA1",
+                "CONST_10_5b"
+            ],
+            "output": "tmp_ptr_eq_RF_10_0"
+        },
+        {
+            "type": "MUX",
+            "inputs": [
+                "tmp_ptr_eq_RF_10_0",
+                "RF_10",
+                "tmp_ptr_mux_RF_9_0"
+            ],
+            "output": "tmp_ptr_mux_RF_10_0"
+        },
+        {
+            "type": "EQ",
+            "inputs": [
+                "RA1",
+                "CONST_11_5b"
+            ],
+            "output": "tmp_ptr_eq_RF_11_0"
+        },
+        {
+            "type": "MUX",
+            "inputs": [
+                "tmp_ptr_eq_RF_11_0",
+                "RF_11",
+                "tmp_ptr_mux_RF_10_0"
+            ],
+            "output": "tmp_ptr_mux_RF_11_0"
+        },
+        {
+            "type": "EQ",
+            "inputs": [
+                "RA1",
+                "CONST_12_5b"
+            ],
+            "output": "tmp_ptr_eq_RF_12_0"
+        },
+        {
+            "type": "MUX",
+            "inputs": [
+                "tmp_ptr_eq_RF_12_0",
+                "RF_12",
+                "tmp_ptr_mux_RF_11_0"
+            ],
+            "output": "tmp_ptr_mux_RF_12_0"
+        },
+        {
+            "type": "EQ",
+            "inputs": [
+                "RA1",
+                "CONST_13_5b"
+            ],
+            "output": "tmp_ptr_eq_RF_13_0"
+        },
+        {
+            "type": "MUX",
+            "inputs": [
+                "tmp_ptr_eq_RF_13_0",
+                "RF_13",
+                "tmp_ptr_mux_RF_12_0"
+            ],
+            "output": "tmp_ptr_mux_RF_13_0"
+        },
+        {
+            "type": "EQ",
+            "inputs": [
+                "RA1",
+                "CONST_14_5b"
+            ],
+            "output": "tmp_ptr_eq_RF_14_0"
+        },
+        {
+            "type": "MUX",
+            "inputs": [
+                "tmp_ptr_eq_RF_14_0",
+                "RF_14",
+                "tmp_ptr_mux_RF_13_0"
+            ],
+            "output": "tmp_ptr_mux_RF_14_0"
+        },
+        {
+            "type": "EQ",
+            "inputs": [
+                "RA1",
+                "CONST_15_5b"
+            ],
+            "output": "tmp_ptr_eq_RF_15_0"
+        },
+        {
+            "type": "MUX",
+            "inputs": [
+                "tmp_ptr_eq_RF_15_0",
+                "RF_15",
+                "tmp_ptr_mux_RF_14_0"
+            ],
+            "output": "tmp_ptr_mux_RF_15_0"
+        },
+        {
+            "type": "EQ",
+            "inputs": [
+                "RA1",
+                "CONST_16_5b"
+            ],
+            "output": "tmp_ptr_eq_RF_16_0"
+        },
+        {
+            "type": "MUX",
+            "inputs": [
+                "tmp_ptr_eq_RF_16_0",
+                "RF_16",
+                "tmp_ptr_mux_RF_15_0"
+            ],
+            "output": "tmp_ptr_mux_RF_16_0"
+        },
+        {
+            "type": "EQ",
+            "inputs": [
+                "RA1",
+                "CONST_17_5b"
+            ],
+            "output": "tmp_ptr_eq_RF_17_0"
+        },
+        {
+            "type": "MUX",
+            "inputs": [
+                "tmp_ptr_eq_RF_17_0",
+                "RF_17",
+                "tmp_ptr_mux_RF_16_0"
+            ],
+            "output": "tmp_ptr_mux_RF_17_0"
+        },
+        {
+            "type": "EQ",
+            "inputs": [
+                "RA1",
+                "CONST_18_5b"
+            ],
+            "output": "tmp_ptr_eq_RF_18_0"
+        },
+        {
+            "type": "MUX",
+            "inputs": [
+                "tmp_ptr_eq_RF_18_0",
+                "RF_18",
+                "tmp_ptr_mux_RF_17_0"
+            ],
+            "output": "tmp_ptr_mux_RF_18_0"
+        },
+        {
+            "type": "EQ",
+            "inputs": [
+                "RA1",
+                "CONST_19_5b"
+            ],
+            "output": "tmp_ptr_eq_RF_19_0"
+        },
+        {
+            "type": "MUX",
+            "inputs": [
+                "tmp_ptr_eq_RF_19_0",
+                "RF_19",
+                "tmp_ptr_mux_RF_18_0"
+            ],
+            "output": "tmp_ptr_mux_RF_19_0"
+        },
+        {
+            "type": "EQ",
+            "inputs": [
+                "RA1",
+                "CONST_20_5b"
+            ],
+            "output": "tmp_ptr_eq_RF_20_0"
+        },
+        {
+            "type": "MUX",
+            "inputs": [
+                "tmp_ptr_eq_RF_20_0",
+                "RF_20",
+                "tmp_ptr_mux_RF_19_0"
+            ],
+            "output": "tmp_ptr_mux_RF_20_0"
+        },
+        {
+            "type": "EQ",
+            "inputs": [
+                "RA1",
+                "CONST_21_5b"
+            ],
+            "output": "tmp_ptr_eq_RF_21_0"
+        },
+        {
+            "type": "MUX",
+            "inputs": [
+                "tmp_ptr_eq_RF_21_0",
+                "RF_21",
+                "tmp_ptr_mux_RF_20_0"
+            ],
+            "output": "tmp_ptr_mux_RF_21_0"
+        },
+        {
+            "type": "EQ",
+            "inputs": [
+                "RA1",
+                "CONST_22_5b"
+            ],
+            "output": "tmp_ptr_eq_RF_22_0"
+        },
+        {
+            "type": "MUX",
+            "inputs": [
+                "tmp_ptr_eq_RF_22_0",
+                "RF_22",
+                "tmp_ptr_mux_RF_21_0"
+            ],
+            "output": "tmp_ptr_mux_RF_22_0"
+        },
+        {
+            "type": "EQ",
+            "inputs": [
+                "RA1",
+                "CONST_23_5b"
+            ],
+            "output": "tmp_ptr_eq_RF_23_0"
+        },
+        {
+            "type": "MUX",
+            "inputs": [
+                "tmp_ptr_eq_RF_23_0",
+                "RF_23",
+                "tmp_ptr_mux_RF_22_0"
+            ],
+            "output": "tmp_ptr_mux_RF_23_0"
+        },
+        {
+            "type": "EQ",
+            "inputs": [
+                "RA1",
+                "CONST_24_5b"
+            ],
+            "output": "tmp_ptr_eq_RF_24_0"
+        },
+        {
+            "type": "MUX",
+            "inputs": [
+                "tmp_ptr_eq_RF_24_0",
+                "RF_24",
+                "tmp_ptr_mux_RF_23_0"
+            ],
+            "output": "tmp_ptr_mux_RF_24_0"
+        },
+        {
+            "type": "EQ",
+            "inputs": [
+                "RA1",
+                "CONST_25_5b"
+            ],
+            "output": "tmp_ptr_eq_RF_25_0"
+        },
+        {
+            "type": "MUX",
+            "inputs": [
+                "tmp_ptr_eq_RF_25_0",
+                "RF_25",
+                "tmp_ptr_mux_RF_24_0"
+            ],
+            "output": "tmp_ptr_mux_RF_25_0"
+        },
+        {
+            "type": "EQ",
+            "inputs": [
+                "RA1",
+                "CONST_26_5b"
+            ],
+            "output": "tmp_ptr_eq_RF_26_0"
+        },
+        {
+            "type": "MUX",
+            "inputs": [
+                "tmp_ptr_eq_RF_26_0",
+                "RF_26",
+                "tmp_ptr_mux_RF_25_0"
+            ],
+            "output": "tmp_ptr_mux_RF_26_0"
+        },
+        {
+            "type": "EQ",
+            "inputs": [
+                "RA1",
+                "CONST_27_5b"
+            ],
+            "output": "tmp_ptr_eq_RF_27_0"
+        },
+        {
+            "type": "MUX",
+            "inputs": [
+                "tmp_ptr_eq_RF_27_0",
+                "RF_27",
+                "tmp_ptr_mux_RF_26_0"
+            ],
+            "output": "tmp_ptr_mux_RF_27_0"
+        },
+        {
+            "type": "EQ",
+            "inputs": [
+                "RA1",
+                "CONST_28_5b"
+            ],
+            "output": "tmp_ptr_eq_RF_28_0"
+        },
+        {
+            "type": "MUX",
+            "inputs": [
+                "tmp_ptr_eq_RF_28_0",
+                "RF_28",
+                "tmp_ptr_mux_RF_27_0"
+            ],
+            "output": "tmp_ptr_mux_RF_28_0"
+        },
+        {
+            "type": "EQ",
+            "inputs": [
+                "RA1",
+                "CONST_29_5b"
+            ],
+            "output": "tmp_ptr_eq_RF_29_0"
+        },
+        {
+            "type": "MUX",
+            "inputs": [
+                "tmp_ptr_eq_RF_29_0",
+                "RF_29",
+                "tmp_ptr_mux_RF_28_0"
+            ],
+            "output": "tmp_ptr_mux_RF_29_0"
+        },
+        {
+            "type": "EQ",
+            "inputs": [
+                "RA1",
+                "CONST_30_5b"
+            ],
+            "output": "tmp_ptr_eq_RF_30_0"
+        },
+        {
+            "type": "MUX",
+            "inputs": [
+                "tmp_ptr_eq_RF_30_0",
+                "RF_30",
+                "tmp_ptr_mux_RF_29_0"
+            ],
+            "output": "tmp_ptr_mux_RF_30_0"
+        },
+        {
+            "type": "EQ",
+            "inputs": [
+                "RA1",
+                "CONST_31_5b"
+            ],
+            "output": "tmp_ptr_eq_RF_31_0"
+        },
+        {
+            "type": "MUX",
+            "inputs": [
+                "tmp_ptr_eq_RF_31_0",
+                "RF_31",
+                "tmp_ptr_mux_RF_30_0"
+            ],
+            "output": "tmp_ptr_mux_RF_31_0"
         },
         {
             "type": "BUF",
             "inputs": [
-                "mux_RegDst_0"
+                "tmp_ptr_mux_RF_31_0"
             ],
-            "output": "RegDst"
+            "output": "RD1"
         },
         {
             "type": "EQ",
             "inputs": [
-                "opcode",
-                "CONST_55_7b_2587546707648"
+                "RA2",
+                "CONST_1_5b"
             ],
-            "output": "tmp_EQ_32"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_23_7b_2587555157840"
-            ],
-            "output": "tmp_EQ_32"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_51_7b_2587548024656"
-            ],
-            "output": "tmp_EQ_32"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_19_7b_2587552404912"
-            ],
-            "output": "tmp_EQ_32"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_1_3b_2587552966480"
-            ],
-            "output": "tmp_EQ_32"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_5_3b_2587552972432"
-            ],
-            "output": "tmp_EQ_32"
-        },
-        {
-            "type": "OR",
-            "inputs": [
-                "tmp_EQ_32",
-                "tmp_EQ_32"
-            ],
-            "output": "tmp_OR_32"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_3_7b_2587552967728"
-            ],
-            "output": "tmp_EQ_32"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_2_3b_2587552970224"
-            ],
-            "output": "eq_32"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_1_3b_2587552967248"
-            ],
-            "output": "eq_32"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_5_3b_2587552968208"
-            ],
-            "output": "eq_32"
-        },
-        {
-            "type": "OR",
-            "inputs": [
-                "eq_32",
-                "eq_32"
-            ],
-            "output": "or_32"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_0_3b_2587552972240"
-            ],
-            "output": "eq_32"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_4_3b_2587552965328"
-            ],
-            "output": "eq_32"
-        },
-        {
-            "type": "OR",
-            "inputs": [
-                "eq_32",
-                "eq_32"
-            ],
-            "output": "or_32"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_35_7b_2587552965616"
-            ],
-            "output": "tmp_EQ_32"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_2_3b_2587563790544"
-            ],
-            "output": "eq_32"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_1_3b_2587563791024"
-            ],
-            "output": "eq_32"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_0_3b_2587563789968"
-            ],
-            "output": "eq_32"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_99_7b_2587563790352"
-            ],
-            "output": "tmp_EQ_32"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_111_7b_2587563796496"
-            ],
-            "output": "tmp_EQ_32"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_103_7b_2587563835856"
-            ],
-            "output": "tmp_EQ_32"
+            "output": "tmp_ptr_eq_RF_1_63"
         },
         {
             "type": "MUX",
             "inputs": [
-                "tmp_EQ_32",
-                "CONST_1_1b_2587563836816",
-                "CONST_0_1b_2587563841904"
+                "tmp_ptr_eq_RF_1_63",
+                "RF_1",
+                "RF_0"
             ],
-            "output": "mux_Jump_32"
+            "output": "tmp_ptr_mux_RF_1_63"
+        },
+        {
+            "type": "EQ",
+            "inputs": [
+                "RA2",
+                "CONST_2_5b"
+            ],
+            "output": "tmp_ptr_eq_RF_2_63"
         },
         {
             "type": "MUX",
             "inputs": [
-                "tmp_EQ_32",
-                "CONST_1_1b_2587563798608",
-                "mux_Jump_32"
+                "tmp_ptr_eq_RF_2_63",
+                "RF_2",
+                "tmp_ptr_mux_RF_1_63"
             ],
-            "output": "mux_Jump_32"
+            "output": "tmp_ptr_mux_RF_2_63"
+        },
+        {
+            "type": "EQ",
+            "inputs": [
+                "RA2",
+                "CONST_3_5b"
+            ],
+            "output": "tmp_ptr_eq_RF_3_63"
         },
         {
             "type": "MUX",
             "inputs": [
-                "tmp_EQ_32",
-                "CONST_0_1b_2587563793232",
-                "mux_Jump_32"
+                "tmp_ptr_eq_RF_3_63",
+                "RF_3",
+                "tmp_ptr_mux_RF_2_63"
             ],
-            "output": "mux_Jump_32"
+            "output": "tmp_ptr_mux_RF_3_63"
+        },
+        {
+            "type": "EQ",
+            "inputs": [
+                "RA2",
+                "CONST_4_5b"
+            ],
+            "output": "tmp_ptr_eq_RF_4_63"
         },
         {
             "type": "MUX",
             "inputs": [
-                "tmp_EQ_32",
-                "CONST_0_1b_2587563786704",
-                "mux_Jump_32"
+                "tmp_ptr_eq_RF_4_63",
+                "RF_4",
+                "tmp_ptr_mux_RF_3_63"
             ],
-            "output": "mux_Jump_32"
+            "output": "tmp_ptr_mux_RF_4_63"
+        },
+        {
+            "type": "EQ",
+            "inputs": [
+                "RA2",
+                "CONST_5_5b"
+            ],
+            "output": "tmp_ptr_eq_RF_5_63"
         },
         {
             "type": "MUX",
             "inputs": [
-                "tmp_EQ_32",
-                "CONST_0_1b_2587552965712",
-                "mux_Jump_32"
+                "tmp_ptr_eq_RF_5_63",
+                "RF_5",
+                "tmp_ptr_mux_RF_4_63"
             ],
-            "output": "mux_Jump_32"
+            "output": "tmp_ptr_mux_RF_5_63"
+        },
+        {
+            "type": "EQ",
+            "inputs": [
+                "RA2",
+                "CONST_6_5b"
+            ],
+            "output": "tmp_ptr_eq_RF_6_63"
         },
         {
             "type": "MUX",
             "inputs": [
-                "tmp_EQ_32",
-                "CONST_0_1b_2587552401648",
-                "mux_Jump_32"
+                "tmp_ptr_eq_RF_6_63",
+                "RF_6",
+                "tmp_ptr_mux_RF_5_63"
             ],
-            "output": "mux_Jump_32"
+            "output": "tmp_ptr_mux_RF_6_63"
+        },
+        {
+            "type": "EQ",
+            "inputs": [
+                "RA2",
+                "CONST_7_5b"
+            ],
+            "output": "tmp_ptr_eq_RF_7_63"
         },
         {
             "type": "MUX",
             "inputs": [
-                "tmp_EQ_32",
-                "CONST_0_1b_2587548019280",
-                "mux_Jump_32"
+                "tmp_ptr_eq_RF_7_63",
+                "RF_7",
+                "tmp_ptr_mux_RF_6_63"
             ],
-            "output": "mux_Jump_32"
+            "output": "tmp_ptr_mux_RF_7_63"
+        },
+        {
+            "type": "EQ",
+            "inputs": [
+                "RA2",
+                "CONST_8_5b"
+            ],
+            "output": "tmp_ptr_eq_RF_8_63"
         },
         {
             "type": "MUX",
             "inputs": [
-                "tmp_EQ_32",
-                "CONST_0_1b_2587548034992",
-                "mux_Jump_32"
+                "tmp_ptr_eq_RF_8_63",
+                "RF_8",
+                "tmp_ptr_mux_RF_7_63"
             ],
-            "output": "mux_Jump_32"
+            "output": "tmp_ptr_mux_RF_8_63"
+        },
+        {
+            "type": "EQ",
+            "inputs": [
+                "RA2",
+                "CONST_9_5b"
+            ],
+            "output": "tmp_ptr_eq_RF_9_63"
         },
         {
             "type": "MUX",
             "inputs": [
-                "tmp_EQ_32",
-                "CONST_0_1b_2587547158576",
-                "mux_Jump_32"
+                "tmp_ptr_eq_RF_9_63",
+                "RF_9",
+                "tmp_ptr_mux_RF_8_63"
             ],
-            "output": "mux_Jump_32"
+            "output": "tmp_ptr_mux_RF_9_63"
+        },
+        {
+            "type": "EQ",
+            "inputs": [
+                "RA2",
+                "CONST_10_5b"
+            ],
+            "output": "tmp_ptr_eq_RF_10_63"
+        },
+        {
+            "type": "MUX",
+            "inputs": [
+                "tmp_ptr_eq_RF_10_63",
+                "RF_10",
+                "tmp_ptr_mux_RF_9_63"
+            ],
+            "output": "tmp_ptr_mux_RF_10_63"
+        },
+        {
+            "type": "EQ",
+            "inputs": [
+                "RA2",
+                "CONST_11_5b"
+            ],
+            "output": "tmp_ptr_eq_RF_11_63"
+        },
+        {
+            "type": "MUX",
+            "inputs": [
+                "tmp_ptr_eq_RF_11_63",
+                "RF_11",
+                "tmp_ptr_mux_RF_10_63"
+            ],
+            "output": "tmp_ptr_mux_RF_11_63"
+        },
+        {
+            "type": "EQ",
+            "inputs": [
+                "RA2",
+                "CONST_12_5b"
+            ],
+            "output": "tmp_ptr_eq_RF_12_63"
+        },
+        {
+            "type": "MUX",
+            "inputs": [
+                "tmp_ptr_eq_RF_12_63",
+                "RF_12",
+                "tmp_ptr_mux_RF_11_63"
+            ],
+            "output": "tmp_ptr_mux_RF_12_63"
+        },
+        {
+            "type": "EQ",
+            "inputs": [
+                "RA2",
+                "CONST_13_5b"
+            ],
+            "output": "tmp_ptr_eq_RF_13_63"
+        },
+        {
+            "type": "MUX",
+            "inputs": [
+                "tmp_ptr_eq_RF_13_63",
+                "RF_13",
+                "tmp_ptr_mux_RF_12_63"
+            ],
+            "output": "tmp_ptr_mux_RF_13_63"
+        },
+        {
+            "type": "EQ",
+            "inputs": [
+                "RA2",
+                "CONST_14_5b"
+            ],
+            "output": "tmp_ptr_eq_RF_14_63"
+        },
+        {
+            "type": "MUX",
+            "inputs": [
+                "tmp_ptr_eq_RF_14_63",
+                "RF_14",
+                "tmp_ptr_mux_RF_13_63"
+            ],
+            "output": "tmp_ptr_mux_RF_14_63"
+        },
+        {
+            "type": "EQ",
+            "inputs": [
+                "RA2",
+                "CONST_15_5b"
+            ],
+            "output": "tmp_ptr_eq_RF_15_63"
+        },
+        {
+            "type": "MUX",
+            "inputs": [
+                "tmp_ptr_eq_RF_15_63",
+                "RF_15",
+                "tmp_ptr_mux_RF_14_63"
+            ],
+            "output": "tmp_ptr_mux_RF_15_63"
+        },
+        {
+            "type": "EQ",
+            "inputs": [
+                "RA2",
+                "CONST_16_5b"
+            ],
+            "output": "tmp_ptr_eq_RF_16_63"
+        },
+        {
+            "type": "MUX",
+            "inputs": [
+                "tmp_ptr_eq_RF_16_63",
+                "RF_16",
+                "tmp_ptr_mux_RF_15_63"
+            ],
+            "output": "tmp_ptr_mux_RF_16_63"
+        },
+        {
+            "type": "EQ",
+            "inputs": [
+                "RA2",
+                "CONST_17_5b"
+            ],
+            "output": "tmp_ptr_eq_RF_17_63"
+        },
+        {
+            "type": "MUX",
+            "inputs": [
+                "tmp_ptr_eq_RF_17_63",
+                "RF_17",
+                "tmp_ptr_mux_RF_16_63"
+            ],
+            "output": "tmp_ptr_mux_RF_17_63"
+        },
+        {
+            "type": "EQ",
+            "inputs": [
+                "RA2",
+                "CONST_18_5b"
+            ],
+            "output": "tmp_ptr_eq_RF_18_63"
+        },
+        {
+            "type": "MUX",
+            "inputs": [
+                "tmp_ptr_eq_RF_18_63",
+                "RF_18",
+                "tmp_ptr_mux_RF_17_63"
+            ],
+            "output": "tmp_ptr_mux_RF_18_63"
+        },
+        {
+            "type": "EQ",
+            "inputs": [
+                "RA2",
+                "CONST_19_5b"
+            ],
+            "output": "tmp_ptr_eq_RF_19_63"
+        },
+        {
+            "type": "MUX",
+            "inputs": [
+                "tmp_ptr_eq_RF_19_63",
+                "RF_19",
+                "tmp_ptr_mux_RF_18_63"
+            ],
+            "output": "tmp_ptr_mux_RF_19_63"
+        },
+        {
+            "type": "EQ",
+            "inputs": [
+                "RA2",
+                "CONST_20_5b"
+            ],
+            "output": "tmp_ptr_eq_RF_20_63"
+        },
+        {
+            "type": "MUX",
+            "inputs": [
+                "tmp_ptr_eq_RF_20_63",
+                "RF_20",
+                "tmp_ptr_mux_RF_19_63"
+            ],
+            "output": "tmp_ptr_mux_RF_20_63"
+        },
+        {
+            "type": "EQ",
+            "inputs": [
+                "RA2",
+                "CONST_21_5b"
+            ],
+            "output": "tmp_ptr_eq_RF_21_63"
+        },
+        {
+            "type": "MUX",
+            "inputs": [
+                "tmp_ptr_eq_RF_21_63",
+                "RF_21",
+                "tmp_ptr_mux_RF_20_63"
+            ],
+            "output": "tmp_ptr_mux_RF_21_63"
+        },
+        {
+            "type": "EQ",
+            "inputs": [
+                "RA2",
+                "CONST_22_5b"
+            ],
+            "output": "tmp_ptr_eq_RF_22_63"
+        },
+        {
+            "type": "MUX",
+            "inputs": [
+                "tmp_ptr_eq_RF_22_63",
+                "RF_22",
+                "tmp_ptr_mux_RF_21_63"
+            ],
+            "output": "tmp_ptr_mux_RF_22_63"
+        },
+        {
+            "type": "EQ",
+            "inputs": [
+                "RA2",
+                "CONST_23_5b"
+            ],
+            "output": "tmp_ptr_eq_RF_23_63"
+        },
+        {
+            "type": "MUX",
+            "inputs": [
+                "tmp_ptr_eq_RF_23_63",
+                "RF_23",
+                "tmp_ptr_mux_RF_22_63"
+            ],
+            "output": "tmp_ptr_mux_RF_23_63"
+        },
+        {
+            "type": "EQ",
+            "inputs": [
+                "RA2",
+                "CONST_24_5b"
+            ],
+            "output": "tmp_ptr_eq_RF_24_63"
+        },
+        {
+            "type": "MUX",
+            "inputs": [
+                "tmp_ptr_eq_RF_24_63",
+                "RF_24",
+                "tmp_ptr_mux_RF_23_63"
+            ],
+            "output": "tmp_ptr_mux_RF_24_63"
+        },
+        {
+            "type": "EQ",
+            "inputs": [
+                "RA2",
+                "CONST_25_5b"
+            ],
+            "output": "tmp_ptr_eq_RF_25_63"
+        },
+        {
+            "type": "MUX",
+            "inputs": [
+                "tmp_ptr_eq_RF_25_63",
+                "RF_25",
+                "tmp_ptr_mux_RF_24_63"
+            ],
+            "output": "tmp_ptr_mux_RF_25_63"
+        },
+        {
+            "type": "EQ",
+            "inputs": [
+                "RA2",
+                "CONST_26_5b"
+            ],
+            "output": "tmp_ptr_eq_RF_26_63"
+        },
+        {
+            "type": "MUX",
+            "inputs": [
+                "tmp_ptr_eq_RF_26_63",
+                "RF_26",
+                "tmp_ptr_mux_RF_25_63"
+            ],
+            "output": "tmp_ptr_mux_RF_26_63"
+        },
+        {
+            "type": "EQ",
+            "inputs": [
+                "RA2",
+                "CONST_27_5b"
+            ],
+            "output": "tmp_ptr_eq_RF_27_63"
+        },
+        {
+            "type": "MUX",
+            "inputs": [
+                "tmp_ptr_eq_RF_27_63",
+                "RF_27",
+                "tmp_ptr_mux_RF_26_63"
+            ],
+            "output": "tmp_ptr_mux_RF_27_63"
+        },
+        {
+            "type": "EQ",
+            "inputs": [
+                "RA2",
+                "CONST_28_5b"
+            ],
+            "output": "tmp_ptr_eq_RF_28_63"
+        },
+        {
+            "type": "MUX",
+            "inputs": [
+                "tmp_ptr_eq_RF_28_63",
+                "RF_28",
+                "tmp_ptr_mux_RF_27_63"
+            ],
+            "output": "tmp_ptr_mux_RF_28_63"
+        },
+        {
+            "type": "EQ",
+            "inputs": [
+                "RA2",
+                "CONST_29_5b"
+            ],
+            "output": "tmp_ptr_eq_RF_29_63"
+        },
+        {
+            "type": "MUX",
+            "inputs": [
+                "tmp_ptr_eq_RF_29_63",
+                "RF_29",
+                "tmp_ptr_mux_RF_28_63"
+            ],
+            "output": "tmp_ptr_mux_RF_29_63"
+        },
+        {
+            "type": "EQ",
+            "inputs": [
+                "RA2",
+                "CONST_30_5b"
+            ],
+            "output": "tmp_ptr_eq_RF_30_63"
+        },
+        {
+            "type": "MUX",
+            "inputs": [
+                "tmp_ptr_eq_RF_30_63",
+                "RF_30",
+                "tmp_ptr_mux_RF_29_63"
+            ],
+            "output": "tmp_ptr_mux_RF_30_63"
+        },
+        {
+            "type": "EQ",
+            "inputs": [
+                "RA2",
+                "CONST_31_5b"
+            ],
+            "output": "tmp_ptr_eq_RF_31_63"
+        },
+        {
+            "type": "MUX",
+            "inputs": [
+                "tmp_ptr_eq_RF_31_63",
+                "RF_31",
+                "tmp_ptr_mux_RF_30_63"
+            ],
+            "output": "tmp_ptr_mux_RF_31_63"
         },
         {
             "type": "BUF",
             "inputs": [
-                "mux_Jump_32"
+                "tmp_ptr_mux_RF_31_63"
             ],
-            "output": "Jump"
+            "output": "RD2"
         },
         {
             "type": "EQ",
             "inputs": [
-                "opcode",
-                "CONST_55_7b_2587546707648"
+                "WA",
+                "CONST_0_5b_rep"
             ],
-            "output": "tmp_EQ_64"
+            "output": "tmp_eq_126"
         },
         {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_23_7b_2587555157840"
-            ],
-            "output": "tmp_EQ_64"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_51_7b_2587548024656"
-            ],
-            "output": "tmp_EQ_64"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_19_7b_2587552404912"
-            ],
-            "output": "tmp_EQ_64"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_1_3b_2587552966480"
-            ],
-            "output": "tmp_EQ_64"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_5_3b_2587552972432"
-            ],
-            "output": "tmp_EQ_64"
-        },
-        {
-            "type": "OR",
-            "inputs": [
-                "tmp_EQ_64",
-                "tmp_EQ_64"
-            ],
-            "output": "tmp_OR_64"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_3_7b_2587552967728"
-            ],
-            "output": "tmp_EQ_64"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_2_3b_2587552970224"
-            ],
-            "output": "eq_64"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_1_3b_2587552967248"
-            ],
-            "output": "eq_64"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_5_3b_2587552968208"
-            ],
-            "output": "eq_64"
-        },
-        {
-            "type": "OR",
-            "inputs": [
-                "eq_64",
-                "eq_64"
-            ],
-            "output": "or_64"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_0_3b_2587552972240"
-            ],
-            "output": "eq_64"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_4_3b_2587552965328"
-            ],
-            "output": "eq_64"
-        },
-        {
-            "type": "OR",
-            "inputs": [
-                "eq_64",
-                "eq_64"
-            ],
-            "output": "or_64"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_35_7b_2587552965616"
-            ],
-            "output": "tmp_EQ_64"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_2_3b_2587563790544"
-            ],
-            "output": "eq_64"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_1_3b_2587563791024"
-            ],
-            "output": "eq_64"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_0_3b_2587563789968"
-            ],
-            "output": "eq_64"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_99_7b_2587563790352"
-            ],
-            "output": "tmp_EQ_64"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_111_7b_2587563796496"
-            ],
-            "output": "tmp_EQ_64"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_103_7b_2587563835856"
-            ],
-            "output": "tmp_EQ_64"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_EQ_64",
-                "CONST_0_1b_2587563837200",
-                "CONST_0_1b_2587563842288"
-            ],
-            "output": "mux_Branch_64"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_EQ_64",
-                "CONST_0_1b_2587563798992",
-                "mux_Branch_64"
-            ],
-            "output": "mux_Branch_64"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_EQ_64",
-                "CONST_1_1b_2587563793616",
-                "mux_Branch_64"
-            ],
-            "output": "mux_Branch_64"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_EQ_64",
-                "CONST_0_1b_2587563787088",
-                "mux_Branch_64"
-            ],
-            "output": "mux_Branch_64"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_EQ_64",
-                "CONST_0_1b_2587552971280",
-                "mux_Branch_64"
-            ],
-            "output": "mux_Branch_64"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_EQ_64",
-                "CONST_0_1b_2587552400880",
-                "mux_Branch_64"
-            ],
-            "output": "mux_Branch_64"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_EQ_64",
-                "CONST_0_1b_2587548018416",
-                "mux_Branch_64"
-            ],
-            "output": "mux_Branch_64"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_EQ_64",
-                "CONST_0_1b_2587548024272",
-                "mux_Branch_64"
-            ],
-            "output": "mux_Branch_64"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_EQ_64",
-                "CONST_0_1b_2587547157008",
-                "mux_Branch_64"
-            ],
-            "output": "mux_Branch_64"
-        },
-        {
-            "type": "BUF",
-            "inputs": [
-                "mux_Branch_64"
-            ],
-            "output": "Branch"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_55_7b_2587546707648"
-            ],
-            "output": "tmp_EQ_96"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_23_7b_2587555157840"
-            ],
-            "output": "tmp_EQ_96"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_51_7b_2587548024656"
-            ],
-            "output": "tmp_EQ_96"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_19_7b_2587552404912"
-            ],
-            "output": "tmp_EQ_96"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_1_3b_2587552966480"
-            ],
-            "output": "tmp_EQ_96"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_5_3b_2587552972432"
-            ],
-            "output": "tmp_EQ_96"
-        },
-        {
-            "type": "OR",
-            "inputs": [
-                "tmp_EQ_96",
-                "tmp_EQ_96"
-            ],
-            "output": "tmp_OR_96"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_3_7b_2587552967728"
-            ],
-            "output": "tmp_EQ_96"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_2_3b_2587552970224"
-            ],
-            "output": "eq_96"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_1_3b_2587552967248"
-            ],
-            "output": "eq_96"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_5_3b_2587552968208"
-            ],
-            "output": "eq_96"
-        },
-        {
-            "type": "OR",
-            "inputs": [
-                "eq_96",
-                "eq_96"
-            ],
-            "output": "or_96"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_0_3b_2587552972240"
-            ],
-            "output": "eq_96"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_4_3b_2587552965328"
-            ],
-            "output": "eq_96"
-        },
-        {
-            "type": "OR",
-            "inputs": [
-                "eq_96",
-                "eq_96"
-            ],
-            "output": "or_96"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_35_7b_2587552965616"
-            ],
-            "output": "tmp_EQ_96"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_2_3b_2587563790544"
-            ],
-            "output": "eq_96"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_1_3b_2587563791024"
-            ],
-            "output": "eq_96"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_0_3b_2587563789968"
-            ],
-            "output": "eq_96"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_99_7b_2587563790352"
-            ],
-            "output": "tmp_EQ_96"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_111_7b_2587563796496"
-            ],
-            "output": "tmp_EQ_96"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_103_7b_2587563835856"
-            ],
-            "output": "tmp_EQ_96"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_EQ_96",
-                "CONST_1_1b_2587563837584",
-                "CONST_0_1b_2587563842672"
-            ],
-            "output": "mux_MemRead_96"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_EQ_96",
-                "CONST_1_1b_2587563799376",
-                "mux_MemRead_96"
-            ],
-            "output": "mux_MemRead_96"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_EQ_96",
-                "CONST_1_1b_2587563794000",
-                "mux_MemRead_96"
-            ],
-            "output": "mux_MemRead_96"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_EQ_96",
-                "CONST_1_1b_2587563787472",
-                "mux_MemRead_96"
-            ],
-            "output": "mux_MemRead_96"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_EQ_96",
-                "CONST_1_1b_2587552969552",
-                "mux_MemRead_96"
-            ],
-            "output": "mux_MemRead_96"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_EQ_96",
-                "CONST_1_1b_2587552400304",
-                "mux_MemRead_96"
-            ],
-            "output": "mux_MemRead_96"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_EQ_96",
-                "CONST_1_1b_2587548017072",
-                "mux_MemRead_96"
-            ],
-            "output": "mux_MemRead_96"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_EQ_96",
-                "CONST_0_1b_2587548024080",
-                "mux_MemRead_96"
-            ],
-            "output": "mux_MemRead_96"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_EQ_96",
-                "CONST_1_1b_2587547335792",
-                "mux_MemRead_96"
-            ],
-            "output": "mux_MemRead_96"
-        },
-        {
-            "type": "BUF",
-            "inputs": [
-                "mux_MemRead_96"
-            ],
-            "output": "MemRead"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_55_7b_2587546707648"
-            ],
-            "output": "tmp_EQ_128"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_23_7b_2587555157840"
-            ],
-            "output": "tmp_EQ_128"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_51_7b_2587548024656"
-            ],
-            "output": "tmp_EQ_128"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_19_7b_2587552404912"
-            ],
-            "output": "tmp_EQ_128"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_1_3b_2587552966480"
-            ],
-            "output": "tmp_EQ_128"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_5_3b_2587552972432"
-            ],
-            "output": "tmp_EQ_128"
-        },
-        {
-            "type": "OR",
-            "inputs": [
-                "tmp_EQ_128",
-                "tmp_EQ_128"
-            ],
-            "output": "tmp_OR_128"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_3_7b_2587552967728"
-            ],
-            "output": "tmp_EQ_128"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_2_3b_2587552970224"
-            ],
-            "output": "eq_128"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_1_3b_2587552967248"
-            ],
-            "output": "eq_128"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_5_3b_2587552968208"
-            ],
-            "output": "eq_128"
-        },
-        {
-            "type": "OR",
-            "inputs": [
-                "eq_128",
-                "eq_128"
-            ],
-            "output": "or_128"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_0_3b_2587552972240"
-            ],
-            "output": "eq_128"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_4_3b_2587552965328"
-            ],
-            "output": "eq_128"
-        },
-        {
-            "type": "OR",
-            "inputs": [
-                "eq_128",
-                "eq_128"
-            ],
-            "output": "or_128"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_35_7b_2587552965616"
-            ],
-            "output": "tmp_EQ_128"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_2_3b_2587563790544"
-            ],
-            "output": "eq_128"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_1_3b_2587563791024"
-            ],
-            "output": "eq_128"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_0_3b_2587563789968"
-            ],
-            "output": "eq_128"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_99_7b_2587563790352"
-            ],
-            "output": "tmp_EQ_128"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_111_7b_2587563796496"
-            ],
-            "output": "tmp_EQ_128"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_103_7b_2587563835856"
-            ],
-            "output": "tmp_EQ_128"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_EQ_128",
-                "CONST_0_1b_2587563837968",
-                "CONST_0_1b_2587563843056"
-            ],
-            "output": "mux_MemtoReg_128"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_EQ_128",
-                "CONST_0_1b_2587563799760",
-                "mux_MemtoReg_128"
-            ],
-            "output": "mux_MemtoReg_128"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_EQ_128",
-                "CONST_0_1b_2587563794384",
-                "mux_MemtoReg_128"
-            ],
-            "output": "mux_MemtoReg_128"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_EQ_128",
-                "CONST_0_1b_2587563787856",
-                "mux_MemtoReg_128"
-            ],
-            "output": "mux_MemtoReg_128"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_EQ_128",
-                "CONST_1_1b_2587552969456",
-                "mux_MemtoReg_128"
-            ],
-            "output": "mux_MemtoReg_128"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_EQ_128",
-                "CONST_0_1b_2587552409040",
-                "mux_MemtoReg_128"
-            ],
-            "output": "mux_MemtoReg_128"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_EQ_128",
-                "CONST_0_1b_2587548016208",
-                "mux_MemtoReg_128"
-            ],
-            "output": "mux_MemtoReg_128"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_EQ_128",
-                "CONST_0_1b_2587548023888",
-                "mux_MemtoReg_128"
-            ],
-            "output": "mux_MemtoReg_128"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_EQ_128",
-                "CONST_0_1b_2587548113360",
-                "mux_MemtoReg_128"
-            ],
-            "output": "mux_MemtoReg_128"
-        },
-        {
-            "type": "BUF",
-            "inputs": [
-                "mux_MemtoReg_128"
-            ],
-            "output": "MemtoReg"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_55_7b_2587546707648"
-            ],
-            "output": "tmp_EQ_160"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_23_7b_2587555157840"
-            ],
-            "output": "tmp_EQ_160"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_51_7b_2587548024656"
-            ],
-            "output": "tmp_EQ_160"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_19_7b_2587552404912"
-            ],
-            "output": "tmp_EQ_160"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_1_3b_2587552966480"
-            ],
-            "output": "tmp_EQ_160"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_5_3b_2587552972432"
-            ],
-            "output": "tmp_EQ_160"
-        },
-        {
-            "type": "OR",
-            "inputs": [
-                "tmp_EQ_160",
-                "tmp_EQ_160"
-            ],
-            "output": "tmp_OR_160"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_3_7b_2587552967728"
-            ],
-            "output": "tmp_EQ_160"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_2_3b_2587552970224"
-            ],
-            "output": "eq_160"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_1_3b_2587552967248"
-            ],
-            "output": "eq_160"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_5_3b_2587552968208"
-            ],
-            "output": "eq_160"
-        },
-        {
-            "type": "OR",
-            "inputs": [
-                "eq_160",
-                "eq_160"
-            ],
-            "output": "or_160"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_0_3b_2587552972240"
-            ],
-            "output": "eq_160"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_4_3b_2587552965328"
-            ],
-            "output": "eq_160"
-        },
-        {
-            "type": "OR",
-            "inputs": [
-                "eq_160",
-                "eq_160"
-            ],
-            "output": "or_160"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_35_7b_2587552965616"
-            ],
-            "output": "tmp_EQ_160"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_2_3b_2587563790544"
-            ],
-            "output": "eq_160"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_1_3b_2587563791024"
-            ],
-            "output": "eq_160"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_0_3b_2587563789968"
-            ],
-            "output": "eq_160"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_99_7b_2587563790352"
-            ],
-            "output": "tmp_EQ_160"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_111_7b_2587563796496"
-            ],
-            "output": "tmp_EQ_160"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_103_7b_2587563835856"
-            ],
-            "output": "tmp_EQ_160"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_EQ_160",
-                "opcode",
-                "CONST_0_7b_2587563843440"
-            ],
-            "output": "mux_ALUOp_160"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_EQ_160",
-                "opcode",
-                "mux_ALUOp_160"
-            ],
-            "output": "mux_ALUOp_160"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_EQ_160",
-                "opcode",
-                "mux_ALUOp_160"
-            ],
-            "output": "mux_ALUOp_160"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_EQ_160",
-                "opcode",
-                "mux_ALUOp_160"
-            ],
-            "output": "mux_ALUOp_160"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_EQ_160",
-                "opcode",
-                "mux_ALUOp_160"
-            ],
-            "output": "mux_ALUOp_160"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_EQ_160",
-                "opcode",
-                "mux_ALUOp_160"
-            ],
-            "output": "mux_ALUOp_160"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_EQ_160",
-                "opcode",
-                "mux_ALUOp_160"
-            ],
-            "output": "mux_ALUOp_160"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_EQ_160",
-                "opcode",
-                "mux_ALUOp_160"
-            ],
-            "output": "mux_ALUOp_160"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_EQ_160",
-                "opcode",
-                "mux_ALUOp_160"
-            ],
-            "output": "mux_ALUOp_160"
-        },
-        {
-            "type": "BUF",
-            "inputs": [
-                "mux_ALUOp_160"
-            ],
-            "output": "ALUOp"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_55_7b_2587546707648"
-            ],
-            "output": "tmp_EQ_192"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_23_7b_2587555157840"
-            ],
-            "output": "tmp_EQ_192"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_51_7b_2587548024656"
-            ],
-            "output": "tmp_EQ_192"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_19_7b_2587552404912"
-            ],
-            "output": "tmp_EQ_192"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_1_3b_2587552966480"
-            ],
-            "output": "tmp_EQ_192"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_5_3b_2587552972432"
-            ],
-            "output": "tmp_EQ_192"
-        },
-        {
-            "type": "OR",
-            "inputs": [
-                "tmp_EQ_192",
-                "tmp_EQ_192"
-            ],
-            "output": "tmp_OR_192"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_3_7b_2587552967728"
-            ],
-            "output": "tmp_EQ_192"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_2_3b_2587552970224"
-            ],
-            "output": "eq_192"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_1_3b_2587552967248"
-            ],
-            "output": "eq_192"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_5_3b_2587552968208"
-            ],
-            "output": "eq_192"
-        },
-        {
-            "type": "OR",
-            "inputs": [
-                "eq_192",
-                "eq_192"
-            ],
-            "output": "or_192"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_0_3b_2587552972240"
-            ],
-            "output": "eq_192"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_4_3b_2587552965328"
-            ],
-            "output": "eq_192"
-        },
-        {
-            "type": "OR",
-            "inputs": [
-                "eq_192",
-                "eq_192"
-            ],
-            "output": "or_192"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_35_7b_2587552965616"
-            ],
-            "output": "tmp_EQ_192"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_2_3b_2587563790544"
-            ],
-            "output": "eq_192"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_1_3b_2587563791024"
-            ],
-            "output": "eq_192"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_0_3b_2587563789968"
-            ],
-            "output": "eq_192"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_99_7b_2587563790352"
-            ],
-            "output": "tmp_EQ_192"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_111_7b_2587563796496"
-            ],
-            "output": "tmp_EQ_192"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_103_7b_2587563835856"
-            ],
-            "output": "tmp_EQ_192"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_EQ_192",
-                "CONST_0_1b_2587563838736",
-                "CONST_0_1b_2587563843824"
-            ],
-            "output": "mux_MemWrite_192"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_EQ_192",
-                "CONST_0_1b_2587563800528",
-                "mux_MemWrite_192"
-            ],
-            "output": "mux_MemWrite_192"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_EQ_192",
-                "CONST_0_1b_2587563795152",
-                "mux_MemWrite_192"
-            ],
-            "output": "mux_MemWrite_192"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_EQ_192",
-                "CONST_1_1b_2587563788624",
-                "mux_MemWrite_192"
-            ],
-            "output": "mux_MemWrite_192"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_EQ_192",
-                "CONST_0_1b_2587552971856",
-                "mux_MemWrite_192"
-            ],
-            "output": "mux_MemWrite_192"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_EQ_192",
-                "CONST_0_1b_2587552964272",
-                "mux_MemWrite_192"
-            ],
-            "output": "mux_MemWrite_192"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_EQ_192",
-                "CONST_0_1b_2587548013904",
-                "mux_MemWrite_192"
-            ],
-            "output": "mux_MemWrite_192"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_EQ_192",
-                "CONST_0_1b_2587548023792",
-                "mux_MemWrite_192"
-            ],
-            "output": "mux_MemWrite_192"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_EQ_192",
-                "CONST_0_1b_2587562805008",
-                "mux_MemWrite_192"
-            ],
-            "output": "mux_MemWrite_192"
-        },
-        {
-            "type": "BUF",
-            "inputs": [
-                "mux_MemWrite_192"
-            ],
-            "output": "MemWrite"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_55_7b_2587546707648"
-            ],
-            "output": "tmp_EQ_224"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_23_7b_2587555157840"
-            ],
-            "output": "tmp_EQ_224"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_51_7b_2587548024656"
-            ],
-            "output": "tmp_EQ_224"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_19_7b_2587552404912"
-            ],
-            "output": "tmp_EQ_224"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_1_3b_2587552966480"
-            ],
-            "output": "tmp_EQ_224"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_5_3b_2587552972432"
-            ],
-            "output": "tmp_EQ_224"
-        },
-        {
-            "type": "OR",
-            "inputs": [
-                "tmp_EQ_224",
-                "tmp_EQ_224"
-            ],
-            "output": "tmp_OR_224"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_3_7b_2587552967728"
-            ],
-            "output": "tmp_EQ_224"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_2_3b_2587552970224"
-            ],
-            "output": "eq_224"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_1_3b_2587552967248"
-            ],
-            "output": "eq_224"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_5_3b_2587552968208"
-            ],
-            "output": "eq_224"
-        },
-        {
-            "type": "OR",
-            "inputs": [
-                "eq_224",
-                "eq_224"
-            ],
-            "output": "or_224"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_0_3b_2587552972240"
-            ],
-            "output": "eq_224"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_4_3b_2587552965328"
-            ],
-            "output": "eq_224"
-        },
-        {
-            "type": "OR",
-            "inputs": [
-                "eq_224",
-                "eq_224"
-            ],
-            "output": "or_224"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_35_7b_2587552965616"
-            ],
-            "output": "tmp_EQ_224"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_2_3b_2587563790544"
-            ],
-            "output": "eq_224"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_1_3b_2587563791024"
-            ],
-            "output": "eq_224"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_0_3b_2587563789968"
-            ],
-            "output": "eq_224"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_99_7b_2587563790352"
-            ],
-            "output": "tmp_EQ_224"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_111_7b_2587563796496"
-            ],
-            "output": "tmp_EQ_224"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_103_7b_2587563835856"
-            ],
-            "output": "tmp_EQ_224"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_EQ_224",
-                "CONST_0_1b_2587563839120",
-                "ALUSrc1"
-            ],
-            "output": "mux_ALUSrc1_224"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_EQ_224",
-                "CONST_1_1b_2587563800912",
-                "mux_ALUSrc1_224"
-            ],
-            "output": "mux_ALUSrc1_224"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_EQ_224",
-                "CONST_0_1b_2587563795536",
-                "mux_ALUSrc1_224"
-            ],
-            "output": "mux_ALUSrc1_224"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_EQ_224",
-                "CONST_0_1b_2587563789008",
-                "mux_ALUSrc1_224"
-            ],
-            "output": "mux_ALUSrc1_224"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_EQ_224",
-                "CONST_0_1b_2587552964848",
-                "mux_ALUSrc1_224"
-            ],
-            "output": "mux_ALUSrc1_224"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_EQ_224",
-                "CONST_0_1b_2587552962736",
-                "mux_ALUSrc1_224"
-            ],
-            "output": "mux_ALUSrc1_224"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_EQ_224",
-                "CONST_0_1b_2587552408944",
-                "mux_ALUSrc1_224"
-            ],
-            "output": "mux_ALUSrc1_224"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_EQ_224",
-                "CONST_1_1b_2587548023408",
-                "mux_ALUSrc1_224"
-            ],
-            "output": "mux_ALUSrc1_224"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_EQ_224",
-                "CONST_0_1b_2587547619888",
-                "mux_ALUSrc1_224"
-            ],
-            "output": "mux_ALUSrc1_224"
-        },
-        {
-            "type": "BUF",
-            "inputs": [
-                "mux_ALUSrc1_224"
-            ],
-            "output": "ALUSrc1"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_55_7b_2587546707648"
-            ],
-            "output": "tmp_EQ_256"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_23_7b_2587555157840"
-            ],
-            "output": "tmp_EQ_256"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_51_7b_2587548024656"
-            ],
-            "output": "tmp_EQ_256"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_19_7b_2587552404912"
-            ],
-            "output": "tmp_EQ_256"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_1_3b_2587552966480"
-            ],
-            "output": "tmp_EQ_256"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_5_3b_2587552972432"
-            ],
-            "output": "tmp_EQ_256"
-        },
-        {
-            "type": "OR",
-            "inputs": [
-                "tmp_EQ_256",
-                "tmp_EQ_256"
-            ],
-            "output": "tmp_OR_256"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_3_7b_2587552967728"
-            ],
-            "output": "tmp_EQ_256"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_2_3b_2587552970224"
-            ],
-            "output": "eq_256"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_1_3b_2587552967248"
-            ],
-            "output": "eq_256"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_5_3b_2587552968208"
-            ],
-            "output": "eq_256"
-        },
-        {
-            "type": "OR",
-            "inputs": [
-                "eq_256",
-                "eq_256"
-            ],
-            "output": "or_256"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_0_3b_2587552972240"
-            ],
-            "output": "eq_256"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_4_3b_2587552965328"
-            ],
-            "output": "eq_256"
-        },
-        {
-            "type": "OR",
-            "inputs": [
-                "eq_256",
-                "eq_256"
-            ],
-            "output": "or_256"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_35_7b_2587552965616"
-            ],
-            "output": "tmp_EQ_256"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_2_3b_2587563790544"
-            ],
-            "output": "eq_256"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_1_3b_2587563791024"
-            ],
-            "output": "eq_256"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_0_3b_2587563789968"
-            ],
-            "output": "eq_256"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_99_7b_2587563790352"
-            ],
-            "output": "tmp_EQ_256"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_111_7b_2587563796496"
-            ],
-            "output": "tmp_EQ_256"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_103_7b_2587563835856"
-            ],
-            "output": "tmp_EQ_256"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_EQ_256",
-                "CONST_1_1b_2587563839504",
-                "CONST_0_1b_2587563844208"
-            ],
-            "output": "mux_ALUSrc2_256"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_EQ_256",
-                "CONST_1_1b_2587563801296",
-                "mux_ALUSrc2_256"
-            ],
-            "output": "mux_ALUSrc2_256"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_EQ_256",
-                "CONST_0_1b_2587563795920",
-                "mux_ALUSrc2_256"
-            ],
-            "output": "mux_ALUSrc2_256"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_EQ_256",
-                "CONST_1_1b_2587563789392",
-                "mux_ALUSrc2_256"
-            ],
-            "output": "mux_ALUSrc2_256"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_EQ_256",
-                "CONST_1_1b_2587552967632",
-                "mux_ALUSrc2_256"
-            ],
-            "output": "mux_ALUSrc2_256"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_EQ_256",
-                "CONST_1_1b_2587552965424",
-                "mux_ALUSrc2_256"
-            ],
-            "output": "mux_ALUSrc2_256"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_EQ_256",
-                "CONST_0_1b_2587552408176",
-                "mux_ALUSrc2_256"
-            ],
-            "output": "mux_ALUSrc2_256"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_EQ_256",
-                "CONST_1_1b_2587548022448",
-                "mux_ALUSrc2_256"
-            ],
-            "output": "mux_ALUSrc2_256"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_EQ_256",
-                "CONST_1_1b_2587547627456",
-                "mux_ALUSrc2_256"
-            ],
-            "output": "mux_ALUSrc2_256"
-        },
-        {
-            "type": "BUF",
-            "inputs": [
-                "mux_ALUSrc2_256"
-            ],
-            "output": "ALUSrc2"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_55_7b_2587546707648"
-            ],
-            "output": "tmp_EQ_288"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_23_7b_2587555157840"
-            ],
-            "output": "tmp_EQ_288"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_51_7b_2587548024656"
-            ],
-            "output": "tmp_EQ_288"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_19_7b_2587552404912"
-            ],
-            "output": "tmp_EQ_288"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_1_3b_2587552966480"
-            ],
-            "output": "tmp_EQ_288"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_5_3b_2587552972432"
-            ],
-            "output": "tmp_EQ_288"
-        },
-        {
-            "type": "OR",
-            "inputs": [
-                "tmp_EQ_288",
-                "tmp_EQ_288"
-            ],
-            "output": "tmp_OR_288"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_3_7b_2587552967728"
-            ],
-            "output": "tmp_EQ_288"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_2_3b_2587552970224"
-            ],
-            "output": "eq_288"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_1_3b_2587552967248"
-            ],
-            "output": "eq_288"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_5_3b_2587552968208"
-            ],
-            "output": "eq_288"
-        },
-        {
-            "type": "OR",
-            "inputs": [
-                "eq_288",
-                "eq_288"
-            ],
-            "output": "or_288"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_0_3b_2587552972240"
-            ],
-            "output": "eq_288"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_4_3b_2587552965328"
-            ],
-            "output": "eq_288"
-        },
-        {
-            "type": "OR",
-            "inputs": [
-                "eq_288",
-                "eq_288"
-            ],
-            "output": "or_288"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_35_7b_2587552965616"
-            ],
-            "output": "tmp_EQ_288"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_2_3b_2587563790544"
-            ],
-            "output": "eq_288"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_1_3b_2587563791024"
-            ],
-            "output": "eq_288"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_0_3b_2587563789968"
-            ],
-            "output": "eq_288"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_99_7b_2587563790352"
-            ],
-            "output": "tmp_EQ_288"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_111_7b_2587563796496"
-            ],
-            "output": "tmp_EQ_288"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_103_7b_2587563835856"
-            ],
-            "output": "tmp_EQ_288"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_EQ_288",
-                "CONST_1_1b_2587563839888",
-                "CONST_0_1b_2587563844592"
-            ],
-            "output": "mux_RegWrite_288"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_EQ_288",
-                "CONST_1_1b_2587563801680",
-                "mux_RegWrite_288"
-            ],
-            "output": "mux_RegWrite_288"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_EQ_288",
-                "CONST_0_1b_2587563796304",
-                "mux_RegWrite_288"
-            ],
-            "output": "mux_RegWrite_288"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_EQ_288",
-                "CONST_0_1b_2587563789776",
-                "mux_RegWrite_288"
-            ],
-            "output": "mux_RegWrite_288"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_EQ_288",
-                "CONST_1_1b_2587552968304",
-                "mux_RegWrite_288"
-            ],
-            "output": "mux_RegWrite_288"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_EQ_288",
-                "CONST_1_1b_2587552962256",
-                "mux_RegWrite_288"
-            ],
-            "output": "mux_RegWrite_288"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_EQ_288",
-                "CONST_1_1b_2587552407216",
-                "mux_RegWrite_288"
-            ],
-            "output": "mux_RegWrite_288"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_EQ_288",
-                "CONST_1_1b_2587548021488",
-                "mux_RegWrite_288"
-            ],
-            "output": "mux_RegWrite_288"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_EQ_288",
-                "CONST_1_1b_2587555922000",
-                "mux_RegWrite_288"
-            ],
-            "output": "mux_RegWrite_288"
-        },
-        {
-            "type": "BUF",
-            "inputs": [
-                "mux_RegWrite_288"
-            ],
-            "output": "RegWrite"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_55_7b_2587546707648"
-            ],
-            "output": "tmp_EQ_320"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_23_7b_2587555157840"
-            ],
-            "output": "tmp_EQ_320"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_51_7b_2587548024656"
-            ],
-            "output": "tmp_EQ_320"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_19_7b_2587552404912"
-            ],
-            "output": "tmp_EQ_320"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_1_3b_2587552966480"
-            ],
-            "output": "tmp_EQ_320"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_5_3b_2587552972432"
-            ],
-            "output": "tmp_EQ_320"
-        },
-        {
-            "type": "OR",
-            "inputs": [
-                "tmp_EQ_320",
-                "tmp_EQ_320"
-            ],
-            "output": "tmp_OR_320"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_3_7b_2587552967728"
-            ],
-            "output": "tmp_EQ_320"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_2_3b_2587552970224"
-            ],
-            "output": "eq_320"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_1_3b_2587552967248"
-            ],
-            "output": "eq_320"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_5_3b_2587552968208"
-            ],
-            "output": "eq_320"
-        },
-        {
-            "type": "OR",
-            "inputs": [
-                "eq_320",
-                "eq_320"
-            ],
-            "output": "or_320"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_0_3b_2587552972240"
-            ],
-            "output": "eq_320"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_4_3b_2587552965328"
-            ],
-            "output": "eq_320"
-        },
-        {
-            "type": "OR",
-            "inputs": [
-                "eq_320",
-                "eq_320"
-            ],
-            "output": "or_320"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_35_7b_2587552965616"
-            ],
-            "output": "tmp_EQ_320"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_2_3b_2587563790544"
-            ],
-            "output": "eq_320"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_1_3b_2587563791024"
-            ],
-            "output": "eq_320"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_0_3b_2587563789968"
-            ],
-            "output": "eq_320"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_99_7b_2587563790352"
-            ],
-            "output": "tmp_EQ_320"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_111_7b_2587563796496"
-            ],
-            "output": "tmp_EQ_320"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_103_7b_2587563835856"
-            ],
-            "output": "tmp_EQ_320"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_EQ_320",
-                "CONST_1_1b_2587563840272",
-                "JALorJALR"
-            ],
-            "output": "mux_JALorJALR_320"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_EQ_320",
-                "CONST_0_1b_2587563802064",
-                "mux_JALorJALR_320"
-            ],
-            "output": "mux_JALorJALR_320"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_EQ_320",
-                "CONST_0_1b_2587563796688",
-                "mux_JALorJALR_320"
-            ],
-            "output": "mux_JALorJALR_320"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_EQ_320",
-                "CONST_0_1b_2587563790160",
-                "mux_JALorJALR_320"
-            ],
-            "output": "mux_JALorJALR_320"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_EQ_320",
-                "CONST_0_1b_2587552966192",
-                "mux_JALorJALR_320"
-            ],
-            "output": "mux_JALorJALR_320"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_EQ_320",
-                "CONST_0_1b_2587552968688",
-                "mux_JALorJALR_320"
-            ],
-            "output": "mux_JALorJALR_320"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_EQ_320",
-                "CONST_0_1b_2587552406160",
-                "mux_JALorJALR_320"
-            ],
-            "output": "mux_JALorJALR_320"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_EQ_320",
-                "CONST_0_1b_2587548021296",
-                "mux_JALorJALR_320"
-            ],
-            "output": "mux_JALorJALR_320"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_EQ_320",
-                "CONST_0_1b_2587555922160",
-                "mux_JALorJALR_320"
-            ],
-            "output": "mux_JALorJALR_320"
-        },
-        {
-            "type": "BUF",
-            "inputs": [
-                "mux_JALorJALR_320"
-            ],
-            "output": "JALorJALR"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_55_7b_2587546707648"
-            ],
-            "output": "tmp_EQ_352"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_23_7b_2587555157840"
-            ],
-            "output": "tmp_EQ_352"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_51_7b_2587548024656"
-            ],
-            "output": "tmp_EQ_352"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_19_7b_2587552404912"
-            ],
-            "output": "tmp_EQ_352"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_1_3b_2587552966480"
-            ],
-            "output": "tmp_EQ_352"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_5_3b_2587552972432"
-            ],
-            "output": "tmp_EQ_352"
-        },
-        {
-            "type": "OR",
-            "inputs": [
-                "tmp_EQ_352",
-                "tmp_EQ_352"
-            ],
-            "output": "tmp_OR_352"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_3_7b_2587552967728"
-            ],
-            "output": "tmp_EQ_352"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_2_3b_2587552970224"
-            ],
-            "output": "eq_352"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "eq_352",
-                "CONST_15_4b_2587552965808",
-                "BE"
-            ],
-            "output": "mux_BE_352"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_1_3b_2587552967248"
-            ],
-            "output": "eq_352"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_5_3b_2587552968208"
-            ],
-            "output": "eq_352"
-        },
-        {
-            "type": "OR",
-            "inputs": [
-                "eq_352",
-                "eq_352"
-            ],
-            "output": "or_352"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "or_352",
-                "CONST_3_4b_2587552968496",
-                "mux_BE_352"
-            ],
-            "output": "mux_BE_352"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_0_3b_2587552972240"
-            ],
-            "output": "eq_352"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_4_3b_2587552965328"
-            ],
-            "output": "eq_352"
-        },
-        {
-            "type": "OR",
-            "inputs": [
-                "eq_352",
-                "eq_352"
-            ],
-            "output": "or_352"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "or_352",
-                "CONST_1_4b_2587552963504",
-                "mux_BE_352"
-            ],
-            "output": "mux_BE_352"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_35_7b_2587552965616"
-            ],
-            "output": "tmp_EQ_352"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_2_3b_2587563790544"
-            ],
-            "output": "eq_352"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "eq_352",
-                "CONST_15_4b_2587563791984",
-                "BE"
-            ],
-            "output": "mux_BE_352"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_1_3b_2587563791024"
-            ],
-            "output": "eq_352"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "eq_352",
-                "CONST_3_4b_2587563791504",
-                "mux_BE_352"
-            ],
-            "output": "mux_BE_352"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_0_3b_2587563789968"
-            ],
-            "output": "eq_352"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "eq_352",
-                "CONST_1_4b_2587563790928",
-                "mux_BE_352"
-            ],
-            "output": "mux_BE_352"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_99_7b_2587563790352"
-            ],
-            "output": "tmp_EQ_352"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_111_7b_2587563796496"
-            ],
-            "output": "tmp_EQ_352"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_103_7b_2587563835856"
-            ],
-            "output": "tmp_EQ_352"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_EQ_352",
-                "CONST_0_4b_2587563840656",
-                "CONST_0_4b_2587563844976"
-            ],
-            "output": "mux_BE_352"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_EQ_352",
-                "CONST_0_4b_2587563802448",
-                "mux_BE_352"
-            ],
-            "output": "mux_BE_352"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_EQ_352",
-                "CONST_0_4b_2587563797072",
-                "mux_BE_352"
-            ],
-            "output": "mux_BE_352"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_EQ_352",
-                "CONST_0_4b_2587552964560",
-                "mux_BE_352"
-            ],
-            "output": "mux_BE_352"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_EQ_352",
-                "CONST_0_4b_2587552405200",
-                "mux_BE_352"
-            ],
-            "output": "mux_BE_352"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_EQ_352",
-                "CONST_0_4b_2587548021104",
-                "mux_BE_352"
-            ],
-            "output": "mux_BE_352"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_EQ_352",
-                "CONST_0_4b_2587547688624",
-                "mux_BE_352"
-            ],
-            "output": "mux_BE_352"
-        },
-        {
-            "type": "BUF",
-            "inputs": [
-                "mux_BE_352"
-            ],
-            "output": "BE"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_55_7b_2587546707648"
-            ],
-            "output": "tmp_EQ_388"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_23_7b_2587555157840"
-            ],
-            "output": "tmp_EQ_388"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_51_7b_2587548024656"
-            ],
-            "output": "tmp_EQ_388"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_19_7b_2587552404912"
-            ],
-            "output": "tmp_EQ_388"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_1_3b_2587552966480"
-            ],
-            "output": "tmp_EQ_388"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_5_3b_2587552972432"
-            ],
-            "output": "tmp_EQ_388"
-        },
-        {
-            "type": "OR",
-            "inputs": [
-                "tmp_EQ_388",
-                "tmp_EQ_388"
-            ],
-            "output": "tmp_OR_388"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_OR_388",
-                "CONST_6_3b_2587552972336",
-                "CONST_3_3b_2587552964176"
-            ],
-            "output": "mux_Concat_control_388"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_3_7b_2587552967728"
-            ],
-            "output": "tmp_EQ_388"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_2_3b_2587552970224"
-            ],
-            "output": "eq_388"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_1_3b_2587552967248"
-            ],
-            "output": "eq_388"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_5_3b_2587552968208"
-            ],
-            "output": "eq_388"
-        },
-        {
-            "type": "OR",
-            "inputs": [
-                "eq_388",
-                "eq_388"
-            ],
-            "output": "or_388"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_0_3b_2587552972240"
-            ],
-            "output": "eq_388"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_4_3b_2587552965328"
-            ],
-            "output": "eq_388"
-        },
-        {
-            "type": "OR",
-            "inputs": [
-                "eq_388",
-                "eq_388"
-            ],
-            "output": "or_388"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_35_7b_2587552965616"
-            ],
-            "output": "tmp_EQ_388"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_2_3b_2587563790544"
-            ],
-            "output": "eq_388"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_1_3b_2587563791024"
-            ],
-            "output": "eq_388"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "funct3",
-                "CONST_0_3b_2587563789968"
-            ],
-            "output": "eq_388"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_99_7b_2587563790352"
-            ],
-            "output": "tmp_EQ_388"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_111_7b_2587563796496"
-            ],
-            "output": "tmp_EQ_388"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "opcode",
-                "CONST_103_7b_2587563835856"
-            ],
-            "output": "tmp_EQ_388"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_EQ_388",
-                "CONST_3_3b_2587563841040",
-                "CONST_0_3b_2587563845360"
-            ],
-            "output": "mux_Concat_control_388"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_EQ_388",
-                "CONST_2_3b_2587563835664",
-                "mux_Concat_control_388"
-            ],
-            "output": "mux_Concat_control_388"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_EQ_388",
-                "CONST_4_3b_2587563797456",
-                "mux_Concat_control_388"
-            ],
-            "output": "mux_Concat_control_388"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_EQ_388",
-                "CONST_5_3b_2587563790832",
-                "mux_Concat_control_388"
-            ],
-            "output": "mux_Concat_control_388"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_EQ_388",
-                "CONST_3_3b_2587552970416",
-                "mux_Concat_control_388"
-            ],
-            "output": "mux_Concat_control_388"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_EQ_388",
-                "CONST_0_3b_2587552404624",
-                "mux_Concat_control_388"
-            ],
-            "output": "mux_Concat_control_388"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_EQ_388",
-                "CONST_1_3b_2587548020912",
-                "mux_Concat_control_388"
-            ],
-            "output": "mux_Concat_control_388"
-        },
-        {
-            "type": "MUX",
+            "type": "NOT",
             "inputs": [
-                "tmp_EQ_388",
-                "CONST_1_3b_2587555157712",
-                "mux_Concat_control_388"
+                "tmp_eq_126"
             ],
-            "output": "mux_Concat_control_388"
+            "output": "tmp_neq_126"
         },
         {
-            "type": "BUF",
+            "type": "AND",
             "inputs": [
-                "mux_Concat_control_388"
+                "WE",
+                "tmp_neq_126"
             ],
-            "output": "Concat_control"
+            "output": "tmp_AND_126"
         }
     ]
 }

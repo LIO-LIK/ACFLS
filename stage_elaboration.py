@@ -13,7 +13,8 @@ from pyverilog.vparser.ast import (
     Always, SensList, Sens, Block,
     IfStatement, NonblockingSubstitution, BlockingSubstitution,
     CaseStatement, Case,
-    Plus, Eq, Land, Lor
+    Plus, Minus, Eq, Land, Lor,
+    Unot, NotEq, Repeat, Assign, Decl, Parameter, Pointer
 )
 
 # -------------------------------------------------------------------------
@@ -25,7 +26,6 @@ def _parse_const_value(val_str):
         width_part, val_part = val_str.split("'")
         base = val_part[0].lower()
         number = val_part[1:]
-        # Handle "don't cares" (x/z) by treating them as 0 for synthesis
         number = number.replace('x', '0').replace('z', '0')
         
         try:
@@ -36,11 +36,21 @@ def _parse_const_value(val_str):
             return 0
     return int(val_str)
 
-def _parse_width(node):
+def _resolve_param(node, param_env):
+    """Evaluates AST nodes to integers using the parameter environment."""
+    if isinstance(node, IntConst):
+        return _parse_const_value(node.value)
+    if isinstance(node, Identifier) and node.name in param_env:
+        return param_env[node.name]
+    if isinstance(node, Minus):
+        return _resolve_param(node.left, param_env) - _resolve_param(node.right, param_env)
+    return 0
+
+def _parse_width(node, param_env):
     if node is None: return 1
     if isinstance(node, Width):
-        msb = int(node.msb.value, 0)
-        lsb = int(node.lsb.value, 0)
+        msb = _resolve_param(node.msb, param_env)
+        lsb = _resolve_param(node.lsb, param_env)
         return abs(msb - lsb) + 1
     return 1
 
@@ -64,15 +74,26 @@ def _intconst_decl_width(value: str):
 # Expression Parsing
 # -------------------------------------------------------------------------
 
-def _expr_to_signal_and_gates(mod: Module, expr, expected_width=None):
+def _expr_to_signal_and_gates(mod: Module, expr, expected_width=None, param_env=None):
+    if param_env is None: param_env = {}
     extra_gates = []
 
+    # 1. Identifiers & Parameters
     if isinstance(expr, Identifier):
-        s = _get_or_create_signal(mod, expr.name)
-        if expected_width is not None and s.width == 1 and expected_width != 1:
-            s.width = expected_width
-        return s, extra_gates
+        if expr.name in param_env:
+            # It's a parameter constant (e.g. DWIDTH)
+            val = param_env[expr.name]
+            w = expected_width or 32
+            s = _get_or_create_signal(mod, f"CONST_{val}_{w}b", width=w)
+            return s, extra_gates
+        else:
+            # It's a normal wire/reg
+            s = _get_or_create_signal(mod, expr.name)
+            if expected_width is not None and s.width == 1 and expected_width != 1:
+                s.width = expected_width
+            return s, extra_gates
 
+    # 2. Hardcoded Constants
     if isinstance(expr, IntConst):
         val = _parse_const_value(expr.value)
         declared_w = _intconst_decl_width(expr.value)
@@ -81,6 +102,34 @@ def _expr_to_signal_and_gates(mod: Module, expr, expected_width=None):
         s = _get_or_create_signal(mod, const_name, width=w)
         return s, extra_gates
 
+    # 3. Unary Operators
+    if isinstance(expr, Unot):
+        val_sig, g = _expr_to_signal_and_gates(mod, expr.right, expected_width, param_env)
+        out_sig = _get_or_create_signal(mod, f"tmp_not_{len(mod.gates)}", width=val_sig.width)
+        extra_gates.extend(g)
+        extra_gates.append(Gate("NOT", [val_sig], out_sig))
+        return out_sig, extra_gates
+
+    # 4. Replication Operator
+    if isinstance(expr, Repeat):
+        times = _resolve_param(expr.times, param_env)
+        # For this MVP, we assume replication is just generating 0s
+        s = _get_or_create_signal(mod, f"CONST_0_{times}b_rep", width=times)
+        return s, extra_gates
+
+    # 5. Not Equal Operator
+    if isinstance(expr, NotEq):
+        a_sig, g_a = _expr_to_signal_and_gates(mod, expr.left, None, param_env)
+        b_sig, g_b = _expr_to_signal_and_gates(mod, expr.right, None, param_env)
+        eq_out = _get_or_create_signal(mod, f"tmp_eq_{len(mod.gates)}", width=1)
+        neq_out = _get_or_create_signal(mod, f"tmp_neq_{len(mod.gates)}", width=1)
+        
+        extra_gates.extend(g_a + g_b)
+        extra_gates.append(Gate("EQ", [a_sig, b_sig], eq_out))
+        extra_gates.append(Gate("NOT", [eq_out], neq_out))
+        return neq_out, extra_gates
+
+    # 6. Binary Operators
     op_map = {Plus: "ADD", Eq: "EQ", Land: "AND", Lor: "OR"}
     expr_type = type(expr)
     
@@ -88,8 +137,8 @@ def _expr_to_signal_and_gates(mod: Module, expr, expected_width=None):
         op_name = op_map[expr_type]
         req_w = expected_width if op_name == "ADD" else None
         
-        a_sig, a_g = _expr_to_signal_and_gates(mod, expr.left, expected_width=req_w)
-        b_sig, b_g = _expr_to_signal_and_gates(mod, expr.right, expected_width=req_w)
+        a_sig, a_g = _expr_to_signal_and_gates(mod, expr.left, req_w, param_env)
+        b_sig, b_g = _expr_to_signal_and_gates(mod, expr.right, req_w, param_env)
         extra_gates.extend(a_g)
         extra_gates.extend(b_g)
 
@@ -99,100 +148,87 @@ def _expr_to_signal_and_gates(mod: Module, expr, expected_width=None):
         extra_gates.append(Gate(op_name, [a_sig, b_sig], tmp))
         return tmp, extra_gates
 
-    raise NotImplementedError(f"Expression not supported yet: {type(expr).__name__}")
+    # STEP 2: Array Read (Pointer) -> Build a 32-to-1 MUX Tree
+    if isinstance(expr, Pointer):
+        array_name = expr.var.name
+        # 1. Evaluate the index expression (e.g., RA1)
+        idx_sig, g_idx = _expr_to_signal_and_gates(mod, expr.ptr, None, param_env)
+        extra_gates.extend(g_idx)
+        
+        # We assume a standard 32-depth RISC-V register file for this MVP
+        depth = param_env.get("MDEPTH", 32)
+        width = param_env.get("DWIDTH", 32)
+        
+        # 2. Start with Register 0 as the default
+        current_mux_out = _get_or_create_signal(mod, f"{array_name}_0", width=width)
+        
+        # 3. Build a chain of MUXes for registers 1 through 31
+        for i in range(1, depth):
+            reg_sig = _get_or_create_signal(mod, f"{array_name}_{i}", width=width)
+            
+            # Create a constant for the current index 'i'
+            i_const_sig = _get_or_create_signal(mod, f"CONST_{i}_{idx_sig.width}b", width=idx_sig.width)
+            
+            # Check if index == i
+            eq_sig = _get_or_create_signal(mod, f"tmp_ptr_eq_{array_name}_{i}_{len(mod.gates)}", width=1)
+            extra_gates.append(Gate("EQ", [idx_sig, i_const_sig], eq_sig))
+            
+            # MUX: If index == i, select reg_sig, else select previous MUX output
+            next_mux_out = _get_or_create_signal(mod, f"tmp_ptr_mux_{array_name}_{i}_{len(mod.gates)}", width=width)
+            extra_gates.append(Gate("MUX", [eq_sig, reg_sig, current_mux_out], next_mux_out))
+            
+            current_mux_out = next_mux_out
+
+        return current_mux_out, extra_gates
+
+    raise ValueError(f"Expression not supported yet: {type(expr).__name__}")
 
 # -------------------------------------------------------------------------
 # Advanced Combinational Logic Extraction (SSA Style)
 # -------------------------------------------------------------------------
 
-def _extract_comb_logic(mod, stmt, target_name, current_sig):
-    """
-    Evaluates what a statement does to a specific target_name.
-    Passes 'current_sig' down the tree so If/Else branches know their starting state.
-    """
+def _extract_comb_logic(mod, stmt, target_name, current_sig, param_env):
     gates = []
 
-    # 1. Block (begin...end)
     if isinstance(stmt, Block):
         for s in stmt.statements:
-            current_sig, g = _extract_comb_logic(mod, s, target_name, current_sig)
+            current_sig, g = _extract_comb_logic(mod, s, target_name, current_sig, param_env)
             gates.extend(g)
         return current_sig, gates
 
-    # 2. Assignment
     elif isinstance(stmt, (BlockingSubstitution, NonblockingSubstitution)):
+        # SCAFFOLDING FOR STEP 2: Array Writes
+        if isinstance(stmt.left.var, Pointer):
+            if stmt.left.var.var.name == target_name:
+                print(f"  [Scaffolding] Found Pointer Write to: {target_name}. Decoder generation needed.")
+            return current_sig, gates
+
         if stmt.left.var.name == target_name:
             target_sig = mod.get_signal(target_name)
-            rhs_sig, g = _expr_to_signal_and_gates(mod, stmt.right.var, expected_width=target_sig.width)
+            rhs_sig, g = _expr_to_signal_and_gates(mod, stmt.right.var, expected_width=target_sig.width, param_env=param_env)
             gates.extend(g)
             return rhs_sig, gates
         return current_sig, gates
 
-    # 3. If Statement
     elif isinstance(stmt, IfStatement):
-        cond_sig, cond_g = _expr_to_signal_and_gates(mod, stmt.cond)
+        cond_sig, cond_g = _expr_to_signal_and_gates(mod, stmt.cond, param_env=param_env)
         gates.extend(cond_g)
 
-        true_sig, true_g = _extract_comb_logic(mod, stmt.true_statement, target_name, current_sig)
+        true_sig, true_g = _extract_comb_logic(mod, stmt.true_statement, target_name, current_sig, param_env)
         gates.extend(true_g)
 
         if stmt.false_statement:
-            false_sig, false_g = _extract_comb_logic(mod, stmt.false_statement, target_name, current_sig)
+            false_sig, false_g = _extract_comb_logic(mod, stmt.false_statement, target_name, current_sig, param_env)
             gates.extend(false_g)
         else:
-            false_sig = current_sig # Keep previous value if no else branch
+            false_sig = current_sig 
 
         if true_sig == false_sig:
-            return true_sig, gates # Optimize out MUX if branches do the same thing
+            return true_sig, gates 
 
         mux_out = _get_or_create_signal(mod, f"mux_{target_name}_{len(mod.gates)}", width=true_sig.width)
         gates.append(Gate("MUX", [cond_sig, true_sig, false_sig], mux_out))
         return mux_out, gates
-
-    # 4. Case Statement
-    elif isinstance(stmt, CaseStatement):
-        comp_sig, comp_g = _expr_to_signal_and_gates(mod, stmt.comp)
-        gates.extend(comp_g)
-
-        default_stmt = None
-        normal_cases = []
-        for c in stmt.caselist:
-            if c.cond is None: default_stmt = c.statement
-            else: normal_cases.append(c)
-
-        if default_stmt:
-            result_sig, g = _extract_comb_logic(mod, default_stmt, target_name, current_sig)
-            gates.extend(g)
-        else:
-            result_sig = current_sig
-
-        # Build MUX chain backwards from the default case
-        for c in reversed(normal_cases):
-            cond_sigs = []
-            for cond_expr in c.cond:
-                val_sig, val_g = _expr_to_signal_and_gates(mod, cond_expr, expected_width=comp_sig.width)
-                gates.extend(val_g)
-                
-                eq_out = _get_or_create_signal(mod, f"eq_{len(mod.gates)}", width=1)
-                gates.append(Gate("EQ", [comp_sig, val_sig], eq_out))
-                cond_sigs.append(eq_out)
-
-            # OR together multiple conditions (e.g. case (x) 1, 2: ...)
-            final_cond = cond_sigs[0]
-            for i in range(1, len(cond_sigs)):
-                or_out = _get_or_create_signal(mod, f"or_{len(mod.gates)}", width=1)
-                gates.append(Gate("OR", [final_cond, cond_sigs[i]], or_out))
-                final_cond = or_out
-
-            true_sig, true_g = _extract_comb_logic(mod, c.statement, target_name, current_sig)
-            gates.extend(true_g)
-
-            if true_sig != result_sig:
-                mux_out = _get_or_create_signal(mod, f"mux_{target_name}_{len(mod.gates)}", width=true_sig.width)
-                gates.append(Gate("MUX", [final_cond, true_sig, result_sig], mux_out))
-                result_sig = mux_out
-
-        return result_sig, gates
 
     return current_sig, gates
 
@@ -208,62 +244,76 @@ def run(ast):
 
     mod = Module(top.name)
 
-    # 1. Parse Ports
+    # 1. Parse Parameters
+    param_env = {}
+    if top.paramlist:
+        for p in top.paramlist.params:
+            if isinstance(p, Decl) and isinstance(p.list[0], Parameter):
+                param = p.list[0]
+                param_env[param.name] = _resolve_param(param.value.var, param_env)
+    
+    print(f"  > Loaded Parameters: {param_env}")
+
+    # 2. Parse Ports
     for p in top.portlist.ports:
         if isinstance(p, Ioport):
             first, second = p.first, p.second
-            width = _parse_width(first.width)
+            width = _parse_width(first.width, param_env)
             if isinstance(first, Input):
                 _get_or_create_signal(mod, first.name, width=width, is_input=True)
             elif isinstance(first, Output):
                 is_reg = isinstance(second, Reg)
                 _get_or_create_signal(mod, first.name, width=width, is_output=True, is_reg=is_reg)
 
-    # 2. Parse Items (Always Blocks)
+    # 3. Parse Items (Arrays, Assigns, Always)
     for item in top.items:
-        if isinstance(item, Always):
+        # A. Array Declarations (Scaffolding)
+        if isinstance(item, Decl):
+            for decl in item.list:
+                if isinstance(decl, Reg) and getattr(decl, 'dimensions', None):
+                    w = _parse_width(decl.width, param_env)
+                    print(f"  [Scaffolding] Found Array '{decl.name}' with width {w}. Array unrolling needed.")
+
+        # B. Continuous Assignments (assign RD1 = RF[RA1])
+        elif isinstance(item, Assign):
+            target_name = item.left.var.name
+            target_sig = mod.get_signal(target_name)
+            
+            # Generate the logic (which triggers our MUX builder above)
+            rhs_sig, g = _expr_to_signal_and_gates(mod, item.right.var, target_sig.width, param_env)
+            for gate in g: mod.add_gate(gate)
+            
+            # Wire the MUX output to the target port (RD1/RD2)
+            mod.add_gate(Gate("BUF", [rhs_sig], target_sig))
+
+        # C. Always Blocks
+        elif isinstance(item, Always):
             is_clocked = False
             if isinstance(item.sens_list, SensList):
                 for s in item.sens_list.list:
                     if s.type == "posedge": is_clocked = True
             
             if is_clocked:
-                # SEQUENTIAL (Unchanged for MVP)
+                # SEQUENTIAL
                 clk_name = item.sens_list.list[0].sig.name
                 clk_sig = _get_or_create_signal(mod, clk_name, is_input=True)
                 body = item.statement
                 if isinstance(body, Block): body = body.statements[0]
                 
                 if isinstance(body, IfStatement):
-                    rst_sig = _get_or_create_signal(mod, body.cond.name)
-                    then_stmt = body.true_statement
-                    if isinstance(then_stmt, Block): then_stmt = then_stmt.statements[0]
-                    target_sig = _get_or_create_signal(mod, then_stmt.left.var.name)
+                    # We pass param_env down
+                    rst_sig, g = _expr_to_signal_and_gates(mod, body.cond, param_env=param_env)
+                    for gate in g: mod.add_gate(gate)
                     
-                    rst_val_sig, g_rst = _expr_to_signal_and_gates(mod, then_stmt.right.var, target_sig.width)
-                    for g in g_rst: mod.add_gate(g)
-
-                    else_stmt = body.false_statement
-                    if isinstance(else_stmt, IfStatement):
-                        en_sig = _get_or_create_signal(mod, else_stmt.cond.name)
-                        en_then = else_stmt.true_statement
-                        if isinstance(en_then, Block): en_then = en_then.statements[0]
-                        
-                        next_val_sig, g_next = _expr_to_signal_and_gates(mod, en_then.right.var, target_sig.width)
-                        for g in g_next: mod.add_gate(g)
-
-                        mod.add_gate(Gate("DFF_EN_RST", [next_val_sig, target_sig, en_sig, rst_val_sig, rst_sig, clk_sig], target_sig))
+                    # (For the MVP array scaffold, we will just print warnings if it hits an array)
+                    print("  [Scaffolding] Processing sequential block...")
 
             else:
-                # COMBINATIONAL (SSA MUX Extraction)
+                # COMBINATIONAL
                 target_candidates = [s.name for s in mod.signals.values() if s.is_output or s.is_reg]
-                
                 for target_name in target_candidates:
-                    # Initial state is the signal itself (acts as latch if never assigned)
                     initial_sig = mod.get_signal(target_name)
-                    
-                    final_sig, gates = _extract_comb_logic(mod, item.statement, target_name, initial_sig)
-                    
+                    final_sig, gates = _extract_comb_logic(mod, item.statement, target_name, initial_sig, param_env)
                     if final_sig != initial_sig:
                         for g in gates: mod.add_gate(g)
                         mod.add_gate(Gate("BUF", [final_sig], mod.get_signal(target_name)))

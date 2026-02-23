@@ -62,7 +62,7 @@ RISC-V CORE CODE FILES HANDLED:
 ALUControl.v :  O
 Control.v:      O
 Mem_Model.v:    XXX
-REG_FILE.v:     X
+REG_FILE.v:     O
 RISCV_CLKRST.v: X
 RISCV_TOP.v:    X
 
