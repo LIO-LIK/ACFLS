@@ -60,7 +60,7 @@ Final segmentation of the porject:
 
 RISC-V CORE CODE FILES HANDLED:
 ALUControl.v :  O
-Control.v:      X
+Control.v:      O
 Mem_Model.v:    X
 REG_FILE.v:     X
 RISCV_CLKRST.v: X
