@@ -61,7 +61,7 @@ Final segmentation of the porject:
 RISC-V CORE CODE FILES HANDLED:
 ALUControl.v :  O
 Control.v:      O
-Mem_Model.v:    X
+Mem_Model.v:    XXX
 REG_FILE.v:     X
 RISCV_CLKRST.v: X
 RISCV_TOP.v:    X
@@ -71,5 +71,7 @@ If you encounter WinError2: install iverilog and during installation check "Add 
 
 LIMITATIONS: Our project does NOT handle multiple file inputs, each verilog file MUST be synthesized individually to ensure correctness.
 We do not check for dependencies or logic errors, we assume the verilog code to be correct. The goal is not to create a functioning Linter.(The parser may catch syntax errors.)
+
+Memory instantiations (such as in Mem_Model.v) are unsupported and would require an optimized approach to not melt my Computer, therefore it is not implemented at all.
 
 Credit: RISC-V CPU code: https://github.com/hushon/Tiny-RISCV-CPU/tree/master
