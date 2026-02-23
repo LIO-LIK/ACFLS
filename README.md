@@ -74,4 +74,6 @@ We do not check for dependencies or logic errors, we assume the verilog code to 
 
 Memory instantiations (such as in Mem_Model.v) are unsupported and would require an optimized approach to not melt my Computer, therefore it is not implemented at all.
 
+There is no attempt made at optimization.
+
 Credit: RISC-V CPU code: https://github.com/hushon/Tiny-RISCV-CPU/tree/master

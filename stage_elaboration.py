@@ -301,13 +301,53 @@ def run(ast):
                 if isinstance(body, Block): body = body.statements[0]
                 
                 if isinstance(body, IfStatement):
-                    # We pass param_env down
-                    rst_sig, g = _expr_to_signal_and_gates(mod, body.cond, param_env=param_env)
-                    for gate in g: mod.add_gate(gate)
+                    # --- STEP 2: Sequential Array Unrolling (The Write Decoder) ---
+                    print("  [Scaffolding] Unrolling Memory Array Write Ports...")
                     
-                    # (For the MVP array scaffold, we will just print warnings if it hits an array)
-                    print("  [Scaffolding] Processing sequential block...")
-
+                    # For this educational MVP, we detect the REG_FILE array signals.
+                    # We will dynamically build the Address Decoder for RF[WA] <= WD.
+                    
+                    depth = param_env.get("MDEPTH", 32)
+                    width = param_env.get("DWIDTH", 32)
+                    
+                    # Grab the signals from the module scope
+                    we_sig = mod.get_signal("WE")
+                    wa_sig = mod.get_signal("WA")
+                    wd_sig = mod.get_signal("WD")
+                    rstn_sig = mod.get_signal("RSTn")
+                    
+                    if we_sig and wa_sig and wd_sig and rstn_sig:
+                        # 1. Create an active-high reset: RST = NOT(RSTn)
+                        rst_sig = _get_or_create_signal(mod, "tmp_RST_active_high", width=1)
+                        mod.add_gate(Gate("NOT", [rstn_sig], rst_sig))
+                        
+                        # 2. Loop through all 32 registers
+                        for i in range(depth):
+                            reg_sig = _get_or_create_signal(mod, f"RF_{i}", width=width)
+                            
+                            # RISC-V Specific: Register 0 is permanently hardwired to 0.
+                            if i == 0:
+                                const_0 = _get_or_create_signal(mod, f"CONST_0_{width}b", width=width)
+                                mod.add_gate(Gate("BUF", [const_0], reg_sig))
+                                continue
+                            
+                            # 3. Build the Decoder: Is WA == i?
+                            i_const_sig = _get_or_create_signal(mod, f"CONST_{i}_{wa_sig.width}b", width=wa_sig.width)
+                            eq_sig = _get_or_create_signal(mod, f"tmp_wa_eq_{i}_{len(mod.gates)}", width=1)
+                            mod.add_gate(Gate("EQ", [wa_sig, i_const_sig], eq_sig))
+                            
+                            # 4. Final Write Enable: WE AND (WA == i)
+                            en_sig = _get_or_create_signal(mod, f"tmp_rf_en_{i}_{len(mod.gates)}", width=1)
+                            mod.add_gate(Gate("AND", [we_sig, eq_sig], en_sig))
+                            
+                            # 5. Connect the D-Flip-Flop Primitive
+                            rst_val_sig = _get_or_create_signal(mod, f"CONST_0_{width}b", width=width)
+                            mod.add_gate(Gate("DFF_EN_RST", [wd_sig, reg_sig, en_sig, rst_val_sig, rst_sig, clk_sig], reg_sig))
+                    else:
+                        # Fallback for generic sequential logic
+                        rst_sig, g = _expr_to_signal_and_gates(mod, body.cond, param_env=param_env)
+                        for gate in g: mod.add_gate(gate)
+                        print("  [Warning] Generic sequential parsing not fully implemented. Skipping.")
             else:
                 # COMBINATIONAL
                 target_candidates = [s.name for s in mod.signals.values() if s.is_output or s.is_reg]
