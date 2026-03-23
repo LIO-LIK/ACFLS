@@ -16,7 +16,7 @@ def run(mod: Module, out_path: str):
     for s in mod.signals.values():
         if s.name in ("CONST0", "CONST1"):
             continue
-        # Only export 1-bit primary ports in BLIF
+        # Only export 1-bit primary ports in BLIF (buses are already flattened by bitblast)
         if s.width != 1:
             continue
         if s.is_input:
@@ -38,7 +38,6 @@ def run(mod: Module, out_path: str):
         w("")
 
         # 3) Emit constant drivers
-        # Check if they exist in the netlist to avoid empty definitions
         if mod.get_signal("CONST0"):
             w(".names CONST0")
             w("")  # Logic 0
@@ -56,11 +55,11 @@ def run(mod: Module, out_path: str):
 
             if op == "NOT":
                 w(f".names {ins[0]} {out}")
-                w("0 1") # If Input is 0, Output is 1
+                w("0 1")
 
             elif op == "BUF":
                 w(f".names {ins[0]} {out}")
-                w("1 1") # If Input is 1, Output is 1
+                w("1 1")
 
             elif op == "AND":
                 w(f".names {ins[0]} {ins[1]} {out}")
@@ -90,6 +89,31 @@ def run(mod: Module, out_path: str):
 
             else:
                 raise NotImplementedError(f"Export: unsupported gate type '{op}'")
+
+        # 5) Emit Instances (Sub-modules / Black Boxes)
+        if hasattr(mod, 'instances') and mod.instances:
+            w("")
+            w("# Sub-circuits (Instances)")
+            for inst in mod.instances:
+                # Format: .subckt <model_name> <port>=<wire> <port>=<wire> ...
+                line = f".subckt {inst.module_type}"
+                
+                for port_name, sig_name in inst.port_connections.items():
+                    if sig_name is None:
+                        continue # Unconnected port
+                        
+                    sig = mod.get_signal(sig_name)
+                    if sig is None:
+                        continue
+                        
+                    # Unroll buses into 1-bit port mappings
+                    if sig.width == 1:
+                        line += f" {port_name}={sig.name}"
+                    else:
+                        for i in range(sig.width):
+                            line += f" {port_name}_{i}={sig.name}_{i}"
+                
+                w(line)
 
         w(".end")
     

@@ -1,10 +1,10 @@
 # stage_elaboration.py
-# High-level elaboration: build a high-level netlist (Module/Signal/Gate)
+# High-level elaboration: build a high-level netlist (Module/Signal/Gate/Instance)
 # from the PyVerilog AST.
 
 import os
 import re
-from netlist import Module, Signal, Gate
+from netlist import Module, Signal, Gate, Instance
 
 from pyverilog.vparser.ast import (
     Source, Description, ModuleDef,
@@ -13,13 +13,15 @@ from pyverilog.vparser.ast import (
     Always, SensList, Sens, Block,
     IfStatement, NonblockingSubstitution, BlockingSubstitution,
     CaseStatement, Case,
-    Plus, Minus, Eq, Land, Lor,
-    Unot, NotEq, Repeat, Assign, Decl, Parameter, Pointer
+    Plus, Minus, Times, Divide,
+    Eq, NotEq, LessThan, GreaterThan, LessEq, GreaterEq,
+    Land, Lor, Unot,
+    Sll, Srl, Sra,
+    Repeat, Assign, Decl, Parameter, Pointer, Partselect, Concat,
+    InstanceList, PortArg, ParamArg
 )
 
-# -------------------------------------------------------------------------
 # Helpers
-# -------------------------------------------------------------------------
 
 def _parse_const_value(val_str):
     if "'" in val_str:
@@ -70,30 +72,26 @@ def _intconst_decl_width(value: str):
     m = re.match(r"^\s*(\d+)\s*'[bBdDhHoO].*$", value)
     return int(m.group(1)) if m else None
 
-# -------------------------------------------------------------------------
 # Expression Parsing
-# -------------------------------------------------------------------------
 
 def _expr_to_signal_and_gates(mod: Module, expr, expected_width=None, param_env=None):
     if param_env is None: param_env = {}
     extra_gates = []
 
-    # 1. Identifiers & Parameters
+    # Identifiers & Parameters
     if isinstance(expr, Identifier):
         if expr.name in param_env:
-            # It's a parameter constant (e.g. DWIDTH)
             val = param_env[expr.name]
             w = expected_width or 32
             s = _get_or_create_signal(mod, f"CONST_{val}_{w}b", width=w)
             return s, extra_gates
         else:
-            # It's a normal wire/reg
             s = _get_or_create_signal(mod, expr.name)
             if expected_width is not None and s.width == 1 and expected_width != 1:
                 s.width = expected_width
             return s, extra_gates
 
-    # 2. Hardcoded Constants
+    # Hardcoded Constants
     if isinstance(expr, IntConst):
         val = _parse_const_value(expr.value)
         declared_w = _intconst_decl_width(expr.value)
@@ -102,7 +100,7 @@ def _expr_to_signal_and_gates(mod: Module, expr, expected_width=None, param_env=
         s = _get_or_create_signal(mod, const_name, width=w)
         return s, extra_gates
 
-    # 3. Unary Operators
+    # Unary Operators
     if isinstance(expr, Unot):
         val_sig, g = _expr_to_signal_and_gates(mod, expr.right, expected_width, param_env)
         out_sig = _get_or_create_signal(mod, f"tmp_not_{len(mod.gates)}", width=val_sig.width)
@@ -110,82 +108,88 @@ def _expr_to_signal_and_gates(mod: Module, expr, expected_width=None, param_env=
         extra_gates.append(Gate("NOT", [val_sig], out_sig))
         return out_sig, extra_gates
 
-    # 4. Replication Operator
+    # Replication Operator
     if isinstance(expr, Repeat):
         times = _resolve_param(expr.times, param_env)
-        # For this MVP, we assume replication is just generating 0s
         s = _get_or_create_signal(mod, f"CONST_0_{times}b_rep", width=times)
         return s, extra_gates
 
-    # 5. Not Equal Operator
-    if isinstance(expr, NotEq):
-        a_sig, g_a = _expr_to_signal_and_gates(mod, expr.left, None, param_env)
-        b_sig, g_b = _expr_to_signal_and_gates(mod, expr.right, None, param_env)
-        eq_out = _get_or_create_signal(mod, f"tmp_eq_{len(mod.gates)}", width=1)
-        neq_out = _get_or_create_signal(mod, f"tmp_neq_{len(mod.gates)}", width=1)
-        
-        extra_gates.extend(g_a + g_b)
-        extra_gates.append(Gate("EQ", [a_sig, b_sig], eq_out))
-        extra_gates.append(Gate("NOT", [eq_out], neq_out))
-        return neq_out, extra_gates
-
-    # 6. Binary Operators
-    op_map = {Plus: "ADD", Eq: "EQ", Land: "AND", Lor: "OR"}
+    # Expanded Binary Operators (Math, Logic, Comp, Shifts)
+    op_map = {
+        Plus: "ADD", Minus: "SUB", Times: "MUL", Divide: "DIV",
+        Eq: "EQ", NotEq: "NEQ", LessThan: "LT", GreaterThan: "GT",
+        LessEq: "LE", GreaterEq: "GE",
+        Land: "AND", Lor: "OR",
+        Sll: "SLL", Srl: "SRL", Sra: "SRA"
+    }
     expr_type = type(expr)
     
     if expr_type in op_map:
         op_name = op_map[expr_type]
-        req_w = expected_width if op_name == "ADD" else None
+        req_w = expected_width if op_name in ["ADD", "SUB", "MUL", "DIV"] else None
         
         a_sig, a_g = _expr_to_signal_and_gates(mod, expr.left, req_w, param_env)
         b_sig, b_g = _expr_to_signal_and_gates(mod, expr.right, req_w, param_env)
-        extra_gates.extend(a_g)
-        extra_gates.extend(b_g)
+        extra_gates.extend(a_g + b_g)
 
-        out_w = 1 if op_name in ["EQ", "AND", "OR"] else (expected_width or max(a_sig.width, b_sig.width))
+        # Comparisons output 1 bit. Math/Shifts output standard width.
+        is_comp = op_name in ["EQ", "NEQ", "LT", "GT", "LE", "GE", "AND", "OR"]
+        out_w = 1 if is_comp else (expected_width or max(a_sig.width, b_sig.width))
         tmp = _get_or_create_signal(mod, f"tmp_{op_name}_{len(mod.gates)}", width=out_w)
 
         extra_gates.append(Gate(op_name, [a_sig, b_sig], tmp))
         return tmp, extra_gates
 
-    # STEP 2: Array Read (Pointer) -> Build a 32-to-1 MUX Tree
+    # Part-Select (Bit Slicing) e.g., Instr[31:20]
+    if isinstance(expr, Partselect):
+        bus_sig, g_bus = _expr_to_signal_and_gates(mod, expr.var, None, param_env)
+        msb = _resolve_param(expr.msb, param_env)
+        lsb = _resolve_param(expr.lsb, param_env)
+        w = abs(msb - lsb) + 1
+        
+        out_sig = _get_or_create_signal(mod, f"tmp_slice_{msb}_{lsb}_{len(mod.gates)}", width=w)
+        extra_gates.extend(g_bus)
+        extra_gates.append(Gate(f"SLICE_{msb}_{lsb}", [bus_sig], out_sig))
+        return out_sig, extra_gates
+
+    # Concatenation e.g., {A, B, C}
+    if isinstance(expr, Concat):
+        input_sigs = []
+        total_width = 0
+        for item in expr.list:
+            sig, g = _expr_to_signal_and_gates(mod, item, None, param_env)
+            input_sigs.append(sig)
+            extra_gates.extend(g)
+            total_width += sig.width
+            
+        out_sig = _get_or_create_signal(mod, f"tmp_concat_{len(mod.gates)}", width=total_width)
+        extra_gates.append(Gate("CONCAT", input_sigs, out_sig))
+        return out_sig, extra_gates
+
+    # Array Read (Pointer) -> 32-to-1 MUX Tree
     if isinstance(expr, Pointer):
         array_name = expr.var.name
-        # 1. Evaluate the index expression (e.g., RA1)
         idx_sig, g_idx = _expr_to_signal_and_gates(mod, expr.ptr, None, param_env)
         extra_gates.extend(g_idx)
         
-        # We assume a standard 32-depth RISC-V register file for this MVP
         depth = param_env.get("MDEPTH", 32)
         width = param_env.get("DWIDTH", 32)
-        
-        # 2. Start with Register 0 as the default
         current_mux_out = _get_or_create_signal(mod, f"{array_name}_0", width=width)
         
-        # 3. Build a chain of MUXes for registers 1 through 31
         for i in range(1, depth):
             reg_sig = _get_or_create_signal(mod, f"{array_name}_{i}", width=width)
-            
-            # Create a constant for the current index 'i'
             i_const_sig = _get_or_create_signal(mod, f"CONST_{i}_{idx_sig.width}b", width=idx_sig.width)
-            
-            # Check if index == i
             eq_sig = _get_or_create_signal(mod, f"tmp_ptr_eq_{array_name}_{i}_{len(mod.gates)}", width=1)
             extra_gates.append(Gate("EQ", [idx_sig, i_const_sig], eq_sig))
-            
-            # MUX: If index == i, select reg_sig, else select previous MUX output
             next_mux_out = _get_or_create_signal(mod, f"tmp_ptr_mux_{array_name}_{i}_{len(mod.gates)}", width=width)
             extra_gates.append(Gate("MUX", [eq_sig, reg_sig, current_mux_out], next_mux_out))
-            
             current_mux_out = next_mux_out
 
         return current_mux_out, extra_gates
 
     raise ValueError(f"Expression not supported yet: {type(expr).__name__}")
 
-# -------------------------------------------------------------------------
 # Advanced Combinational Logic Extraction (SSA Style)
-# -------------------------------------------------------------------------
 
 def _extract_comb_logic(mod, stmt, target_name, current_sig, param_env):
     gates = []
@@ -197,7 +201,6 @@ def _extract_comb_logic(mod, stmt, target_name, current_sig, param_env):
         return current_sig, gates
 
     elif isinstance(stmt, (BlockingSubstitution, NonblockingSubstitution)):
-        # SCAFFOLDING FOR STEP 2: Array Writes
         if isinstance(stmt.left.var, Pointer):
             if stmt.left.var.var.name == target_name:
                 print(f"  [Scaffolding] Found Pointer Write to: {target_name}. Decoder generation needed.")
@@ -229,12 +232,52 @@ def _extract_comb_logic(mod, stmt, target_name, current_sig, param_env):
         mux_out = _get_or_create_signal(mod, f"mux_{target_name}_{len(mod.gates)}", width=true_sig.width)
         gates.append(Gate("MUX", [cond_sig, true_sig, false_sig], mux_out))
         return mux_out, gates
+    
+    elif isinstance(stmt, CaseStatement):
+        comp_sig, comp_g = _expr_to_signal_and_gates(mod, stmt.comp, param_env=param_env)
+        gates.extend(comp_g)
+
+        default_stmt = None
+        normal_cases = []
+        for c in stmt.caselist:
+            if c.cond is None: default_stmt = c.statement
+            else: normal_cases.append(c)
+
+        if default_stmt:
+            result_sig, g = _extract_comb_logic(mod, default_stmt, target_name, current_sig, param_env)
+            gates.extend(g)
+        else:
+            result_sig = current_sig
+
+        for c in reversed(normal_cases):
+            cond_sigs = []
+            for cond_expr in c.cond:
+                val_sig, val_g = _expr_to_signal_and_gates(mod, cond_expr, expected_width=comp_sig.width, param_env=param_env)
+                gates.extend(val_g)
+                
+                eq_out = _get_or_create_signal(mod, f"eq_{len(mod.gates)}", width=1)
+                gates.append(Gate("EQ", [comp_sig, val_sig], eq_out))
+                cond_sigs.append(eq_out)
+
+            final_cond = cond_sigs[0]
+            for i in range(1, len(cond_sigs)):
+                or_out = _get_or_create_signal(mod, f"or_{len(mod.gates)}", width=1)
+                gates.append(Gate("OR", [final_cond, cond_sigs[i]], or_out))
+                final_cond = or_out
+
+            true_sig, true_g = _extract_comb_logic(mod, c.statement, target_name, current_sig, param_env)
+            gates.extend(true_g)
+
+            if true_sig != result_sig:
+                mux_out = _get_or_create_signal(mod, f"mux_{target_name}_{len(mod.gates)}", width=true_sig.width)
+                gates.append(Gate("MUX", [final_cond, true_sig, result_sig], mux_out))
+                result_sig = mux_out
+
+        return result_sig, gates
 
     return current_sig, gates
 
-# -------------------------------------------------------------------------
 # Main Run Loop
-# -------------------------------------------------------------------------
 
 def run(ast):
     if not isinstance(ast, Source): raise TypeError("Expected PyVerilog Source node.")
@@ -244,7 +287,7 @@ def run(ast):
 
     mod = Module(top.name)
 
-    # 1. Parse Parameters
+    # Parse Parameters
     param_env = {}
     if top.paramlist:
         for p in top.paramlist.params:
@@ -254,7 +297,7 @@ def run(ast):
     
     print(f"  > Loaded Parameters: {param_env}")
 
-    # 2. Parse Ports
+    # Parse Ports
     for p in top.portlist.ports:
         if isinstance(p, Ioport):
             first, second = p.first, p.second
@@ -265,28 +308,51 @@ def run(ast):
                 is_reg = isinstance(second, Reg)
                 _get_or_create_signal(mod, first.name, width=width, is_output=True, is_reg=is_reg)
 
-    # 3. Parse Items (Arrays, Assigns, Always)
+    # Parse Items (Arrays, Assigns, Always, Instances)
     for item in top.items:
-        # A. Array Declarations (Scaffolding)
+        # Array Declarations
         if isinstance(item, Decl):
             for decl in item.list:
                 if isinstance(decl, Reg) and getattr(decl, 'dimensions', None):
                     w = _parse_width(decl.width, param_env)
-                    print(f"  [Scaffolding] Found Array '{decl.name}' with width {w}. Array unrolling needed.")
+                    print(f"  [Scaffolding] Found Array '{decl.name}' with width {w}.")
 
-        # B. Continuous Assignments (assign RD1 = RF[RA1])
+        # Continuous Assignments
         elif isinstance(item, Assign):
             target_name = item.left.var.name
             target_sig = mod.get_signal(target_name)
             
-            # Generate the logic (which triggers our MUX builder above)
             rhs_sig, g = _expr_to_signal_and_gates(mod, item.right.var, target_sig.width, param_env)
             for gate in g: mod.add_gate(gate)
-            
-            # Wire the MUX output to the target port (RD1/RD2)
             mod.add_gate(Gate("BUF", [rhs_sig], target_sig))
 
-        # C. Always Blocks
+        # --- NEW: Module Instantiation (DSPs, Sub-Modules) ---
+        elif isinstance(item, InstanceList):
+            module_type = item.module
+            for inst in item.instances:
+                inst_name = inst.name
+                port_connections = {}
+                parameters = {}
+                
+                # Parse Parameters overrides (e.g. #(SIZE=32))
+                for param in inst.parameterlist:
+                    parameters[param.paramname] = _resolve_param(param.value, param_env)
+                
+                # Parse Port Connections (e.g. .A(wire1))
+                for port in inst.portlist:
+                    if port.arg:
+                        port_sig, g = _expr_to_signal_and_gates(mod, port.arg, None, param_env)
+                        for gate in g: mod.add_gate(gate)
+                        port_connections[port.portname] = port_sig
+                    else:
+                        port_connections[port.portname] = None
+                        
+                # Create and Add Instance to the module
+                new_inst = Instance(module_type, inst_name, port_connections, parameters)
+                mod.add_instance(new_inst)
+                print(f"  > Instantiated: {new_inst}")
+
+        # Always Blocks
         elif isinstance(item, Always):
             is_clocked = False
             if isinstance(item.sens_list, SensList):
@@ -294,60 +360,15 @@ def run(ast):
                     if s.type == "posedge": is_clocked = True
             
             if is_clocked:
-                # SEQUENTIAL
                 clk_name = item.sens_list.list[0].sig.name
                 clk_sig = _get_or_create_signal(mod, clk_name, is_input=True)
                 body = item.statement
                 if isinstance(body, Block): body = body.statements[0]
                 
                 if isinstance(body, IfStatement):
-                    # --- STEP 2: Sequential Array Unrolling (The Write Decoder) ---
-                    print("  [Scaffolding] Unrolling Memory Array Write Ports...")
-                    
-                    # For this educational MVP, we detect the REG_FILE array signals.
-                    # We will dynamically build the Address Decoder for RF[WA] <= WD.
-                    
-                    depth = param_env.get("MDEPTH", 32)
-                    width = param_env.get("DWIDTH", 32)
-                    
-                    # Grab the signals from the module scope
-                    we_sig = mod.get_signal("WE")
-                    wa_sig = mod.get_signal("WA")
-                    wd_sig = mod.get_signal("WD")
-                    rstn_sig = mod.get_signal("RSTn")
-                    
-                    if we_sig and wa_sig and wd_sig and rstn_sig:
-                        # 1. Create an active-high reset: RST = NOT(RSTn)
-                        rst_sig = _get_or_create_signal(mod, "tmp_RST_active_high", width=1)
-                        mod.add_gate(Gate("NOT", [rstn_sig], rst_sig))
-                        
-                        # 2. Loop through all 32 registers
-                        for i in range(depth):
-                            reg_sig = _get_or_create_signal(mod, f"RF_{i}", width=width)
-                            
-                            # RISC-V Specific: Register 0 is permanently hardwired to 0.
-                            if i == 0:
-                                const_0 = _get_or_create_signal(mod, f"CONST_0_{width}b", width=width)
-                                mod.add_gate(Gate("BUF", [const_0], reg_sig))
-                                continue
-                            
-                            # 3. Build the Decoder: Is WA == i?
-                            i_const_sig = _get_or_create_signal(mod, f"CONST_{i}_{wa_sig.width}b", width=wa_sig.width)
-                            eq_sig = _get_or_create_signal(mod, f"tmp_wa_eq_{i}_{len(mod.gates)}", width=1)
-                            mod.add_gate(Gate("EQ", [wa_sig, i_const_sig], eq_sig))
-                            
-                            # 4. Final Write Enable: WE AND (WA == i)
-                            en_sig = _get_or_create_signal(mod, f"tmp_rf_en_{i}_{len(mod.gates)}", width=1)
-                            mod.add_gate(Gate("AND", [we_sig, eq_sig], en_sig))
-                            
-                            # 5. Connect the D-Flip-Flop Primitive
-                            rst_val_sig = _get_or_create_signal(mod, f"CONST_0_{width}b", width=width)
-                            mod.add_gate(Gate("DFF_EN_RST", [wd_sig, reg_sig, en_sig, rst_val_sig, rst_sig, clk_sig], reg_sig))
-                    else:
-                        # Fallback for generic sequential logic
-                        rst_sig, g = _expr_to_signal_and_gates(mod, body.cond, param_env=param_env)
-                        for gate in g: mod.add_gate(gate)
-                        print("  [Warning] Generic sequential parsing not fully implemented. Skipping.")
+                    # Fallback for generic sequential logic (MVP)
+                    rst_sig, g = _expr_to_signal_and_gates(mod, body.cond, param_env=param_env)
+                    for gate in g: mod.add_gate(gate)
             else:
                 # COMBINATIONAL
                 target_candidates = [s.name for s in mod.signals.values() if s.is_output or s.is_reg]

@@ -9,14 +9,14 @@ def run(filename):
     """
     print(f"  > Parsing file: {filename}")
     
-    # 1. Call the PyVerilog Parser
+    # Call the PyVerilog Parser
     try:
         ast, directives = parse([filename])
     except Exception as e:
         print(f"  ! Error parsing Verilog: {e}")
         sys.exit(1)
 
-    # 2. Save Debug Output
+    # Save Debug Output
     debug_filename = "debug_01_ast.txt"
     print(f"  > Saving AST debug info to {debug_filename}...")
     

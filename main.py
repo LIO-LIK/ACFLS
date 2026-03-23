@@ -37,9 +37,7 @@ def main():
 
     print(f"=== Starting Synthesis for {input_path} ===")
 
-    # ---------------------------------------------------------
     # Step 1: Parsing
-    # ---------------------------------------------------------
     if stage_parser:
         print("\n[Step 1] Parsing Verilog...")
         # Returns the PyVerilog AST
@@ -48,21 +46,17 @@ def main():
         print("Error: stage_parser module not found.")
         sys.exit(1)
 
-    # ---------------------------------------------------------
     # Step 2: Elaboration & High-Level Synthesis
-    # ---------------------------------------------------------
     if stage_elaboration:
         print("\n[Step 2] Elaboration & Inference...")
         # Takes AST, returns a Module object (from netlist.py)
-        # We pass the filename to help with debug naming
+        # pass the filename to help with debug naming
         my_module = stage_elaboration.run(ast)
     else:
         print("Warning: stage_elaboration not implemented yet. Stopping.")
         sys.exit(0)
 
-    # ---------------------------------------------------------
     # Step 3: Bit Blasting
-    # ---------------------------------------------------------
     if stage_bitblast:
         print("\n[Step 3] Bit Blasting...")
         # Takes the high-level Module, modifies it in-place to be gate-level
@@ -71,9 +65,7 @@ def main():
         print("Warning: stage_bitblast not implemented yet. Stopping.")
         sys.exit(0)
 
-    # ---------------------------------------------------------
     # Step 4: Export
-    # ---------------------------------------------------------
     if stage_export:
         print(f"\n[Step 4] Exporting to {args.output}...")
         stage_export.run(my_module, args.output)

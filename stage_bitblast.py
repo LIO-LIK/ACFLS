@@ -2,22 +2,24 @@
 # Bit-blasting: convert high-level gates (ADD, EQ, MUX, AND/OR) into 1-bit primitives.
 # Supports:
 # - Expand buses into bit signals: <name>_<i> (LSB=0)
-# - ADD -> ripple-carry
-# - EQ -> XNOR tree + AND reduction
+# - ADD/SUB -> ripple-carry (2's complement)
+# - EQ/NEQ/LT -> XNOR trees and Ripple Comparators
 # - MUX (wide) -> Array of 1-bit MUXes
-# - Bitwise Ops -> Array of 1-bit gates
+# - Shifts -> MUX-based Barrel Shifters
+# - Concat/Slice -> Pure wire routing (Buffers)
 
 import re
+import math
 from netlist import Signal, Gate
 
-# ---------- helpers: naming ----------
+# helpers: naming
 def bit_name(base: str, i: int) -> str:
     return f"{base}_{i}"
 
 def tmp_name(prefix: str, idx: int) -> str:
     return f"tmp_{prefix}_{idx}"
 
-# ---------- helpers: const parsing ----------
+# helpers: const parsing
 _const_re = re.compile(r"^\s*(\d+)\s*'([bBdDhHoO])\s*([0-9a-fA-FxXzZ_]+)\s*$")
 
 def parse_verilog_const(value: str, width_hint: int = 1) -> list[int]:
@@ -92,13 +94,6 @@ def run(mod):
         if not sig.name.startswith("CONST_"):
             return get_bits(sig)
         raw = sig.name.split('_', 1)[1] # remove "CONST_"
-        # Hack to handle CONST_123_32b_ID format from elaboration
-        # We just try to parse the numeric part or rely on parse_verilog_const robustness
-        # Simpler: If it contains 'b/d/h', parse it. If not, assume raw int.
-        # But elaboration might append _ID. Let's rely on the value stored in sig object if possible?
-        # Since we didn't store value in Signal in this file's version, we parse name.
-        # Clean up name: "CONST_7'b0110_id123" -> try to extract 7'b0110
-        # For now, simplistic approach:
         bits = parse_verilog_const(raw.split('_')[0], width_hint=width_hint)
         out = []
         for b in bits:
@@ -106,13 +101,10 @@ def run(mod):
         return out
 
     def get_operand_bits(sig, width):
-        """Helper to get bits, handling Constants and Padding automatically."""
         if sig.name.startswith("CONST_"):
             bits = const_bits_from_signal(sig, width_hint=width)
         else:
             bits = get_bits(sig)
-        
-        # Pad with 0s if too short
         if len(bits) < width:
             bits = bits + [const0] * (width - len(bits))
         return bits[:width]
@@ -136,46 +128,108 @@ def run(mod):
     def AND2(a, b, out): new_gates.append(Gate("AND", [a, b], out))
     def OR2(a, b, out):  new_gates.append(Gate("OR",  [a, b], out))
     def NOT1(a, out):    new_gates.append(Gate("NOT", [a], out))
-    # MUX Convention: [Select, True_Input(1), False_Input(0)]
     def MUX2(sel, d1, d0, out): new_gates.append(Gate("MUX", [sel, d1, d0], out))
     def DFF(d, clk, q):  new_gates.append(Gate("DFF", [d, clk], q))
+    def BUF(a, out):     AND2(a, const1, out) # Buffer is just AND with 1
+
+    print(f"  > Bit-blasting {len(mod.gates)} high-level gates...")
+    if mod.instances:
+        print(f"  > Passing through {len(mod.instances)} instantiated components (Black Boxes).")
 
     for g in mod.gates:
         op = g.op_type
         
-        # -------- BITWISE OPS (AND, OR, XOR) --------
+        # WIRING (Concat, Slice, Not, Buf)
+        if op in ["NOT", "BUF"]:
+            inp = g.inputs[0]
+            out = g.output
+            for i in range(out.width):
+                if op == "NOT": NOT1(get_operand_bits(inp, out.width)[i], get_bits(out)[i])
+                if op == "BUF": BUF(get_operand_bits(inp, out.width)[i], get_bits(out)[i])
+            continue
+
+        if op.startswith("SLICE_"):
+            msb = int(op.split("_")[1])
+            lsb = int(op.split("_")[2])
+            inp = g.inputs[0]
+            out = g.output
+            inp_bits = get_operand_bits(inp, inp.width)
+            out_bits = get_bits(out)
+            
+            for i in range(abs(msb - lsb) + 1):
+                BUF(inp_bits[lsb + i], out_bits[i])
+            continue
+
+        if op == "CONCAT":
+            out_bits = get_bits(g.output)
+            idx = 0
+            # Verilog {A, B} makes A the MSB. So we reverse the list to wire LSB first.
+            for inp in reversed(g.inputs):
+                inp_bits = get_bits(inp)
+                for b in inp_bits:
+                    BUF(b, out_bits[idx])
+                    idx += 1
+            continue
+
+        # BITWISE LOGIC (AND, OR, XOR)
         if op in ["AND", "OR", "XOR"]:
-            # Handles both logical (&&) and bitwise (&) if width=1
-            # Handles bitwise (&, |, ^) for buses
             a, b = g.inputs
             out = g.output
             w = out.width
-            
             a_bits = get_operand_bits(a, w)
             b_bits = get_operand_bits(b, w)
             out_bits = get_bits(out)
             
             constructor = XOR2 if op == "XOR" else (AND2 if op == "AND" else OR2)
-            
             for i in range(w):
                 constructor(a_bits[i], b_bits[i], out_bits[i])
             continue
 
-        # -------- EQUALITY (==) --------
-        if op == "EQ":
+        # ARITHMETIC (ADD, SUB)
+        if op in ["ADD", "SUB"]:
             a, b = g.inputs
-            out = g.output # 1 bit output
-            
-            # Width is max of inputs
+            out = g.output
+            w = out.width
+            a_bits = get_operand_bits(a, w)
+            b_bits = get_operand_bits(b, w)
+            out_bits = get_bits(out)
+
+            # For Subtraction, we do A + (~B) + 1
+            is_sub = (op == "SUB")
+            carry = const1 if is_sub else const0
+
+            for i in range(w):
+                b_val = b_bits[i]
+                if is_sub:
+                    b_val = new_tmp("notb")
+                    NOT1(b_bits[i], b_val)
+
+                # sum = a ^ b ^ carry
+                t1 = new_tmp("xor")
+                XOR2(a_bits[i], b_val, t1)
+                sbit = out_bits[i]
+                XOR2(t1, carry, sbit)
+
+                # carry_out = (a&b) | (a&c) | (b&c)
+                t_ab = new_tmp("and"); AND2(a_bits[i], b_val, t_ab)
+                t_ac = new_tmp("and"); AND2(a_bits[i], carry, t_ac)
+                t_bc = new_tmp("and"); AND2(b_val, carry, t_bc)
+
+                t_or1 = new_tmp("or"); OR2(t_ab, t_ac, t_or1)
+                cnext = new_tmp("or"); OR2(t_or1, t_bc, cnext)
+                carry = cnext
+            continue
+
+        # COMPARISONS (EQ, NEQ, LT)
+        if op in ["EQ", "NEQ"]:
+            a, b = g.inputs
+            out = g.output
             w = max(a.width, b.width)
             a_bits = get_operand_bits(a, w)
             b_bits = get_operand_bits(b, w)
             
-            # Logic: (A0 XNOR B0) & (A1 XNOR B1) ...
-            
             eq_bits = []
             for i in range(w):
-                # XNOR = NOT(XOR)
                 t_xor = new_tmp("xor_eq")
                 t_xnor = new_tmp("xnor_eq")
                 XOR2(a_bits[i], b_bits[i], t_xor)
@@ -183,118 +237,114 @@ def run(mod):
                 eq_bits.append(t_xnor)
             
             # Reduce AND
-            if not eq_bits:
-                # Empty comparison? True
-                # Connect out to 1 (Buffer)
-                AND2(const1, const1, get_bits(out)[0]) 
-            elif len(eq_bits) == 1:
-                # Buffer the single result to output
-                # Using AND with 1 as buffer
-                AND2(eq_bits[0], const1, get_bits(out)[0])
+            curr = eq_bits[0]
+            for i in range(1, len(eq_bits)):
+                next_tmp = new_tmp("and_red")
+                AND2(curr, eq_bits[i], next_tmp)
+                curr = next_tmp
+            
+            if op == "EQ":
+                BUF(curr, get_bits(out)[0])
             else:
-                curr = eq_bits[0]
-                for i in range(1, len(eq_bits)):
-                    next_tmp = new_tmp("and_red")
-                    AND2(curr, eq_bits[i], next_tmp)
-                    curr = next_tmp
-                # Connect final result
-                AND2(curr, const1, get_bits(out)[0])
+                NOT1(curr, get_bits(out)[0])
             continue
 
-        # -------- MULTIPLEXER (MUX) --------
+        if op == "LT":
+            # Simple magnitude comparator (Ripple Borrow)
+            a, b = g.inputs
+            out = g.output
+            w = max(a.width, b.width)
+            a_bits = get_operand_bits(a, w)
+            b_bits = get_operand_bits(b, w)
+            
+            borrow = const0
+            for i in range(w):
+                # borrow_out = (~A & B) | (~(A ^ B) & borrow_in)
+                not_a = new_tmp("nota"); NOT1(a_bits[i], not_a)
+                a_lt_b = new_tmp("altb"); AND2(not_a, b_bits[i], a_lt_b)
+                
+                a_xnor_b = new_tmp("axnorb")
+                t_xor = new_tmp("axorb"); XOR2(a_bits[i], b_bits[i], t_xor)
+                NOT1(t_xor, a_xnor_b)
+                
+                eq_and_borrow = new_tmp("eq_b"); AND2(a_xnor_b, borrow, eq_and_borrow)
+                
+                next_borrow = new_tmp("b_out")
+                OR2(a_lt_b, eq_and_borrow, next_borrow)
+                borrow = next_borrow
+            
+            BUF(borrow, get_bits(out)[0])
+            continue
+
+        # BARREL SHIFTERS (SLL, SRL, SRA)
+        if op in ["SLL", "SRL", "SRA"]:
+            val, amt = g.inputs
+            out = g.output
+            w = out.width
+            val_bits = get_operand_bits(val, w)
+            amt_bits = get_operand_bits(amt, amt.width)
+            
+            stages = math.ceil(math.log2(w)) if w > 1 else 1
+            curr_bits = val_bits
+            
+            for s in range(stages):
+                shift_val = 1 << s
+                next_bits = []
+                sel = amt_bits[s] if s < len(amt_bits) else const0
+                
+                for i in range(w):
+                    if op == "SLL":
+                        src_idx = i - shift_val
+                        pad_bit = const0
+                    else: # SRL or SRA
+                        src_idx = i + shift_val
+                        pad_bit = curr_bits[w-1] if op == "SRA" else const0
+                        
+                    if 0 <= src_idx < w:
+                        true_in = curr_bits[src_idx]
+                    else:
+                        true_in = pad_bit
+                        
+                    mux_out = new_tmp(f"shift_{s}_{i}")
+                    MUX2(sel, true_in, curr_bits[i], mux_out)
+                    next_bits.append(mux_out)
+                curr_bits = next_bits
+                
+            for i in range(w):
+                BUF(curr_bits[i], get_bits(out)[i])
+            continue
+
+        # MUX & DFF
         if op == "MUX":
-            # High-level inputs: [Select, True_In, False_In]
             sel, t_in, f_in = g.inputs
             out = g.output
             w = out.width
-            
-            sel_bit = get_bits(sel)[0] # Select is always 1 bit
-            
+            sel_bit = get_bits(sel)[0]
             t_bits = get_operand_bits(t_in, w)
             f_bits = get_operand_bits(f_in, w)
             out_bits = get_bits(out)
             
             for i in range(w):
-                # stage_elaboration convention: MUX(cond, true, false)
-                # stage_bitblast helper convention: MUX2(sel, d1, d0, out)
                 MUX2(sel_bit, t_bits[i], f_bits[i], out_bits[i])
             continue
 
-        # -------- ADD (Ripple Carry) --------
-        if op == "ADD":
-            a, b = g.inputs
-            out = g.output
-            w = out.width
-            
-            a_bits = get_operand_bits(a, w)
-            b_bits = get_operand_bits(b, w)
-            out_bits = get_bits(out)
-
-            carry = const0
-            for i in range(w):
-                # sum = a ^ b ^ carry
-                t1 = new_tmp("xor")
-                XOR2(a_bits[i], b_bits[i], t1)
-                
-                sbit = out_bits[i]
-                XOR2(t1, carry, sbit)
-
-                # carry_out logic
-                t_ab = new_tmp("and")
-                t_ac = new_tmp("and")
-                t_bc = new_tmp("and")
-                AND2(a_bits[i], b_bits[i], t_ab)
-                AND2(a_bits[i], carry, t_ac)
-                AND2(b_bits[i], carry, t_bc)
-
-                t_or1 = new_tmp("or")
-                OR2(t_ab, t_ac, t_or1)
-                cnext = new_tmp("or")
-                OR2(t_or1, t_bc, cnext)
-                carry = cnext
-            continue
-
-        # -------- DFF_EN_RST (Macro) --------
         if op == "DFF_EN_RST":
-            # [D_when_enable, Q_old, enable, D_reset, reset, clk]
             d_en, q_old, en, d_rst, rst, clk = g.inputs
             q = g.output
             w = q.width
-            
             d_en_bits = get_operand_bits(d_en, w)
             d_rst_bits = get_operand_bits(d_rst, w)
             q_old_bits = get_operand_bits(q_old, w)
             q_bits = get_bits(q)
-            
-            en_b = get_bits(en)[0]
-            rst_b = get_bits(rst)[0]
-            clk_b = get_bits(clk)[0]
+            en_b = get_bits(en)[0]; rst_b = get_bits(rst)[0]; clk_b = get_bits(clk)[0]
 
             for i in range(w):
-                # mux_en = en ? d_en : q_old
-                mux_en = new_tmp("mux")
-                MUX2(en_b, d_en_bits[i], q_old_bits[i], mux_en)
-
-                # mux_rst = rst ? d_rst : mux_en
-                mux_rst = new_tmp("mux")
-                MUX2(rst_b, d_rst_bits[i], mux_en, mux_rst)
-
+                mux_en = new_tmp("mux"); MUX2(en_b, d_en_bits[i], q_old_bits[i], mux_en)
+                mux_rst = new_tmp("mux"); MUX2(rst_b, d_rst_bits[i], mux_en, mux_rst)
                 DFF(mux_rst, clk_b, q_bits[i])
             continue
-        
-        # -------- Passthrough for existing primitives --------
-        if op in ["NOT", "BUF"]:
-            # Basic 1-bit gate handling
-            inp = g.inputs[0]
-            out = g.output
-            if op == "NOT":
-                NOT1(get_bits(inp)[0], get_bits(out)[0])
-            elif op == "BUF":
-                # Using AND with 1 as buffer
-                AND2(get_bits(inp)[0], const1, get_bits(out)[0])
-            continue
 
-        raise NotImplementedError(f"Bitblast: unsupported gate type {op}")
+        print(f"  [Warning] Bitblast: ignoring unsupported macro {op}")
 
     mod.gates = new_gates
     mod.save_json("debug_03_bitblast.json")
