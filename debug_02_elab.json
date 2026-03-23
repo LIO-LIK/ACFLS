@@ -1,17 +1,8 @@
 {
-    "module_name": "REG_FILE",
+    "module_name": "RISCV_TOP",
     "signals": [
         {
             "name": "CLK",
-            "width": 1,
-            "attributes": {
-                "input": true,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "WE",
             "width": 1,
             "attributes": {
                 "input": true,
@@ -29,34 +20,16 @@
             }
         },
         {
-            "name": "RA1",
-            "width": 5,
+            "name": "I_MEM_CSN",
+            "width": 1,
             "attributes": {
-                "input": true,
-                "output": false,
+                "input": false,
+                "output": true,
                 "reg": false
             }
         },
         {
-            "name": "RA2",
-            "width": 5,
-            "attributes": {
-                "input": true,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "WA",
-            "width": 5,
-            "attributes": {
-                "input": true,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "WD",
+            "name": "I_MEM_DI",
             "width": 32,
             "attributes": {
                 "input": true,
@@ -65,7 +38,34 @@
             }
         },
         {
-            "name": "RD1",
+            "name": "I_MEM_ADDR",
+            "width": 12,
+            "attributes": {
+                "input": false,
+                "output": true,
+                "reg": true
+            }
+        },
+        {
+            "name": "D_MEM_CSN",
+            "width": 1,
+            "attributes": {
+                "input": false,
+                "output": true,
+                "reg": false
+            }
+        },
+        {
+            "name": "D_MEM_DI",
+            "width": 32,
+            "attributes": {
+                "input": true,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "D_MEM_DOUT",
             "width": 32,
             "attributes": {
                 "input": false,
@@ -74,7 +74,70 @@
             }
         },
         {
-            "name": "RD2",
+            "name": "D_MEM_ADDR",
+            "width": 12,
+            "attributes": {
+                "input": false,
+                "output": true,
+                "reg": false
+            }
+        },
+        {
+            "name": "D_MEM_WEN",
+            "width": 1,
+            "attributes": {
+                "input": false,
+                "output": true,
+                "reg": false
+            }
+        },
+        {
+            "name": "D_MEM_BE",
+            "width": 4,
+            "attributes": {
+                "input": false,
+                "output": true,
+                "reg": false
+            }
+        },
+        {
+            "name": "RF_WE",
+            "width": 1,
+            "attributes": {
+                "input": false,
+                "output": true,
+                "reg": false
+            }
+        },
+        {
+            "name": "RF_RA1",
+            "width": 5,
+            "attributes": {
+                "input": false,
+                "output": true,
+                "reg": false
+            }
+        },
+        {
+            "name": "RF_RA2",
+            "width": 5,
+            "attributes": {
+                "input": false,
+                "output": true,
+                "reg": false
+            }
+        },
+        {
+            "name": "RF_WA1",
+            "width": 5,
+            "attributes": {
+                "input": false,
+                "output": true,
+                "reg": false
+            }
+        },
+        {
+            "name": "RF_RD1",
             "width": 32,
             "attributes": {
                 "input": true,
@@ -83,7 +146,52 @@
             }
         },
         {
-            "name": "RF_0",
+            "name": "RF_RD2",
+            "width": 32,
+            "attributes": {
+                "input": true,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "RF_WD",
+            "width": 32,
+            "attributes": {
+                "input": false,
+                "output": true,
+                "reg": false
+            }
+        },
+        {
+            "name": "HALT",
+            "width": 1,
+            "attributes": {
+                "input": false,
+                "output": true,
+                "reg": false
+            }
+        },
+        {
+            "name": "NUM_INST",
+            "width": 32,
+            "attributes": {
+                "input": false,
+                "output": true,
+                "reg": true
+            }
+        },
+        {
+            "name": "OUTPUT_PORT",
+            "width": 32,
+            "attributes": {
+                "input": false,
+                "output": true,
+                "reg": false
+            }
+        },
+        {
+            "name": "CONST_1_32b_1976363660592",
             "width": 32,
             "attributes": {
                 "input": false,
@@ -92,7 +200,7 @@
             }
         },
         {
-            "name": "RF_1",
+            "name": "tmp_ADD_0",
             "width": 32,
             "attributes": {
                 "input": false,
@@ -101,7 +209,151 @@
             }
         },
         {
-            "name": "CONST_1_5b",
+            "name": "mux_NUM_INST_0",
+            "width": 32,
+            "attributes": {
+                "input": false,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "ALUOp",
+            "width": 7,
+            "attributes": {
+                "input": false,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "Concat_control",
+            "width": 3,
+            "attributes": {
+                "input": false,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "BE",
+            "width": 4,
+            "attributes": {
+                "input": false,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "tmp_slice_6_0_3",
+            "width": 7,
+            "attributes": {
+                "input": false,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "tmp_slice_14_12_4",
+            "width": 3,
+            "attributes": {
+                "input": false,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "RegDst",
+            "width": 1,
+            "attributes": {
+                "input": false,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "Jump",
+            "width": 1,
+            "attributes": {
+                "input": false,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "Branch",
+            "width": 1,
+            "attributes": {
+                "input": false,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "MemRead",
+            "width": 1,
+            "attributes": {
+                "input": false,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "MemtoReg",
+            "width": 1,
+            "attributes": {
+                "input": false,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "MemWrite",
+            "width": 1,
+            "attributes": {
+                "input": false,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "ALUSrc1",
+            "width": 1,
+            "attributes": {
+                "input": false,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "ALUSrc2",
+            "width": 1,
+            "attributes": {
+                "input": false,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "RegWrite",
+            "width": 1,
+            "attributes": {
+                "input": false,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "JALorJALR",
+            "width": 1,
+            "attributes": {
+                "input": false,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "ALU_operation",
             "width": 5,
             "attributes": {
                 "input": false,
@@ -110,7 +362,115 @@
             }
         },
         {
-            "name": "tmp_ptr_eq_RF_1_0",
+            "name": "tmp_slice_14_12_5",
+            "width": 3,
+            "attributes": {
+                "input": false,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "tmp_slice_31_25_6",
+            "width": 7,
+            "attributes": {
+                "input": false,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "offset",
+            "width": 32,
+            "attributes": {
+                "input": false,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "JAL_Address",
+            "width": 32,
+            "attributes": {
+                "input": false,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "JALR_Address",
+            "width": 32,
+            "attributes": {
+                "input": false,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "Branch_Target",
+            "width": 32,
+            "attributes": {
+                "input": false,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "PC",
+            "width": 32,
+            "attributes": {
+                "input": false,
+                "output": false,
+                "reg": true
+            }
+        },
+        {
+            "name": "NXT_PC",
+            "width": 32,
+            "attributes": {
+                "input": false,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "Branch_Taken",
+            "width": 32,
+            "attributes": {
+                "input": false,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "ALU_Result",
+            "width": 32,
+            "attributes": {
+                "input": false,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "tmp_cond_7",
+            "width": 32,
+            "attributes": {
+                "input": false,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "tmp_cond_8",
+            "width": 32,
+            "attributes": {
+                "input": false,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "Zero",
             "width": 1,
             "attributes": {
                 "input": false,
@@ -119,7 +479,7 @@
             }
         },
         {
-            "name": "tmp_ptr_mux_RF_1_0",
+            "name": "CONST_4294967294_32b_1976368047856",
             "width": 32,
             "attributes": {
                 "input": false,
@@ -128,7 +488,16 @@
             }
         },
         {
-            "name": "RF_2",
+            "name": "tmp_AND_10",
+            "width": 1,
+            "attributes": {
+                "input": false,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "tmp_ADD_12",
             "width": 32,
             "attributes": {
                 "input": false,
@@ -137,7 +506,160 @@
             }
         },
         {
-            "name": "CONST_2_5b",
+            "name": "tmp_AND_14",
+            "width": 1,
+            "attributes": {
+                "input": false,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "tmp_not_16",
+            "width": 1,
+            "attributes": {
+                "input": false,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "CONST_0_32b_1976368045936",
+            "width": 32,
+            "attributes": {
+                "input": false,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "tmp_cond_16",
+            "width": 32,
+            "attributes": {
+                "input": false,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "CONST_4_32b_1976368042288",
+            "width": 32,
+            "attributes": {
+                "input": false,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "tmp_ADD_16",
+            "width": 32,
+            "attributes": {
+                "input": false,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "tmp_not_23",
+            "width": 1,
+            "attributes": {
+                "input": false,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "CONST_1_1b_1976368042960",
+            "width": 1,
+            "attributes": {
+                "input": false,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "CONST_0_1b_1976368041136",
+            "width": 1,
+            "attributes": {
+                "input": false,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "tmp_cond_23",
+            "width": 1,
+            "attributes": {
+                "input": false,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "temp_ALU_Result",
+            "width": 32,
+            "attributes": {
+                "input": false,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "tmp_not_26",
+            "width": 1,
+            "attributes": {
+                "input": false,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "CONST_1_1b_1976368040560",
+            "width": 1,
+            "attributes": {
+                "input": false,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "CONST_0_1b_1976368039792",
+            "width": 1,
+            "attributes": {
+                "input": false,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "tmp_cond_26",
+            "width": 1,
+            "attributes": {
+                "input": false,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "tmp_slice_13_2_30",
+            "width": 12,
+            "attributes": {
+                "input": false,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "tmp_not_32",
+            "width": 1,
+            "attributes": {
+                "input": false,
+                "output": false,
+                "reg": false
+            }
+        },
+        {
+            "name": "tmp_slice_19_15_36",
             "width": 5,
             "attributes": {
                 "input": false,
@@ -146,34 +668,7 @@
             }
         },
         {
-            "name": "tmp_ptr_eq_RF_2_0",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_mux_RF_2_0",
-            "width": 32,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "RF_3",
-            "width": 32,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "CONST_3_5b",
+            "name": "tmp_slice_24_20_38",
             "width": 5,
             "attributes": {
                 "input": false,
@@ -182,34 +677,7 @@
             }
         },
         {
-            "name": "tmp_ptr_eq_RF_3_0",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_mux_RF_3_0",
-            "width": 32,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "RF_4",
-            "width": 32,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "CONST_4_5b",
+            "name": "tmp_slice_11_7_40",
             "width": 5,
             "attributes": {
                 "input": false,
@@ -218,34 +686,7 @@
             }
         },
         {
-            "name": "tmp_ptr_eq_RF_4_0",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_mux_RF_4_0",
-            "width": 32,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "RF_5",
-            "width": 32,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "CONST_5_5b",
+            "name": "tmp_slice_24_20_40",
             "width": 5,
             "attributes": {
                 "input": false,
@@ -254,34 +695,7 @@
             }
         },
         {
-            "name": "tmp_ptr_eq_RF_5_0",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_mux_RF_5_0",
-            "width": 32,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "RF_6",
-            "width": 32,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "CONST_6_5b",
+            "name": "tmp_cond_40",
             "width": 5,
             "attributes": {
                 "input": false,
@@ -290,232 +704,7 @@
             }
         },
         {
-            "name": "tmp_ptr_eq_RF_6_0",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_mux_RF_6_0",
-            "width": 32,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "RF_7",
-            "width": 32,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "CONST_7_5b",
-            "width": 5,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_eq_RF_7_0",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_mux_RF_7_0",
-            "width": 32,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "RF_8",
-            "width": 32,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "CONST_8_5b",
-            "width": 5,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_eq_RF_8_0",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_mux_RF_8_0",
-            "width": 32,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "RF_9",
-            "width": 32,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "CONST_9_5b",
-            "width": 5,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_eq_RF_9_0",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_mux_RF_9_0",
-            "width": 32,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "RF_10",
-            "width": 32,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "CONST_10_5b",
-            "width": 5,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_eq_RF_10_0",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_mux_RF_10_0",
-            "width": 32,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "RF_11",
-            "width": 32,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "CONST_11_5b",
-            "width": 5,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_eq_RF_11_0",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_mux_RF_11_0",
-            "width": 32,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "RF_12",
-            "width": 32,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "CONST_12_5b",
-            "width": 5,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_eq_RF_12_0",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_mux_RF_12_0",
+            "name": "CONST_4_32b_1976368576848",
             "width": 32,
             "attributes": {
                 "input": false,
@@ -524,26 +713,8 @@
             }
         },
         {
-            "name": "RF_13",
+            "name": "tmp_ADD_44",
             "width": 32,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "CONST_13_5b",
-            "width": 5,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_eq_RF_13_0",
-            "width": 1,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -551,7 +722,7 @@
             }
         },
         {
-            "name": "tmp_ptr_mux_RF_13_0",
+            "name": "tmp_cond_44",
             "width": 32,
             "attributes": {
                 "input": false,
@@ -560,17 +731,8 @@
             }
         },
         {
-            "name": "RF_14",
+            "name": "CONST_12_32b_1976368577040",
             "width": 32,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "CONST_14_5b",
-            "width": 5,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -578,17 +740,8 @@
             }
         },
         {
-            "name": "tmp_ptr_eq_RF_14_0",
+            "name": "tmp_EQ_48",
             "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_mux_RF_14_0",
-            "width": 32,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -596,7 +749,7 @@
             }
         },
         {
-            "name": "RF_15",
+            "name": "CONST_32871_32b_1976368568496",
             "width": 32,
             "attributes": {
                 "input": false,
@@ -605,26 +758,8 @@
             }
         },
         {
-            "name": "CONST_15_5b",
-            "width": 5,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_eq_RF_15_0",
+            "name": "tmp_AND_48",
             "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_mux_RF_15_0",
-            "width": 32,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -632,1709 +767,8 @@
             }
         },
         {
-            "name": "RF_16",
+            "name": "tmp_cond_52",
             "width": 32,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "CONST_16_5b",
-            "width": 5,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_eq_RF_16_0",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_mux_RF_16_0",
-            "width": 32,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "RF_17",
-            "width": 32,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "CONST_17_5b",
-            "width": 5,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_eq_RF_17_0",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_mux_RF_17_0",
-            "width": 32,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "RF_18",
-            "width": 32,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "CONST_18_5b",
-            "width": 5,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_eq_RF_18_0",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_mux_RF_18_0",
-            "width": 32,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "RF_19",
-            "width": 32,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "CONST_19_5b",
-            "width": 5,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_eq_RF_19_0",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_mux_RF_19_0",
-            "width": 32,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "RF_20",
-            "width": 32,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "CONST_20_5b",
-            "width": 5,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_eq_RF_20_0",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_mux_RF_20_0",
-            "width": 32,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "RF_21",
-            "width": 32,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "CONST_21_5b",
-            "width": 5,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_eq_RF_21_0",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_mux_RF_21_0",
-            "width": 32,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "RF_22",
-            "width": 32,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "CONST_22_5b",
-            "width": 5,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_eq_RF_22_0",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_mux_RF_22_0",
-            "width": 32,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "RF_23",
-            "width": 32,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "CONST_23_5b",
-            "width": 5,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_eq_RF_23_0",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_mux_RF_23_0",
-            "width": 32,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "RF_24",
-            "width": 32,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "CONST_24_5b",
-            "width": 5,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_eq_RF_24_0",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_mux_RF_24_0",
-            "width": 32,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "RF_25",
-            "width": 32,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "CONST_25_5b",
-            "width": 5,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_eq_RF_25_0",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_mux_RF_25_0",
-            "width": 32,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "RF_26",
-            "width": 32,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "CONST_26_5b",
-            "width": 5,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_eq_RF_26_0",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_mux_RF_26_0",
-            "width": 32,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "RF_27",
-            "width": 32,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "CONST_27_5b",
-            "width": 5,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_eq_RF_27_0",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_mux_RF_27_0",
-            "width": 32,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "RF_28",
-            "width": 32,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "CONST_28_5b",
-            "width": 5,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_eq_RF_28_0",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_mux_RF_28_0",
-            "width": 32,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "RF_29",
-            "width": 32,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "CONST_29_5b",
-            "width": 5,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_eq_RF_29_0",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_mux_RF_29_0",
-            "width": 32,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "RF_30",
-            "width": 32,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "CONST_30_5b",
-            "width": 5,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_eq_RF_30_0",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_mux_RF_30_0",
-            "width": 32,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "RF_31",
-            "width": 32,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "CONST_31_5b",
-            "width": 5,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_eq_RF_31_0",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_mux_RF_31_0",
-            "width": 32,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_eq_RF_1_63",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_mux_RF_1_63",
-            "width": 32,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_eq_RF_2_63",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_mux_RF_2_63",
-            "width": 32,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_eq_RF_3_63",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_mux_RF_3_63",
-            "width": 32,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_eq_RF_4_63",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_mux_RF_4_63",
-            "width": 32,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_eq_RF_5_63",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_mux_RF_5_63",
-            "width": 32,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_eq_RF_6_63",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_mux_RF_6_63",
-            "width": 32,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_eq_RF_7_63",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_mux_RF_7_63",
-            "width": 32,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_eq_RF_8_63",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_mux_RF_8_63",
-            "width": 32,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_eq_RF_9_63",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_mux_RF_9_63",
-            "width": 32,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_eq_RF_10_63",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_mux_RF_10_63",
-            "width": 32,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_eq_RF_11_63",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_mux_RF_11_63",
-            "width": 32,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_eq_RF_12_63",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_mux_RF_12_63",
-            "width": 32,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_eq_RF_13_63",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_mux_RF_13_63",
-            "width": 32,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_eq_RF_14_63",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_mux_RF_14_63",
-            "width": 32,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_eq_RF_15_63",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_mux_RF_15_63",
-            "width": 32,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_eq_RF_16_63",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_mux_RF_16_63",
-            "width": 32,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_eq_RF_17_63",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_mux_RF_17_63",
-            "width": 32,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_eq_RF_18_63",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_mux_RF_18_63",
-            "width": 32,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_eq_RF_19_63",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_mux_RF_19_63",
-            "width": 32,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_eq_RF_20_63",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_mux_RF_20_63",
-            "width": 32,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_eq_RF_21_63",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_mux_RF_21_63",
-            "width": 32,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_eq_RF_22_63",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_mux_RF_22_63",
-            "width": 32,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_eq_RF_23_63",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_mux_RF_23_63",
-            "width": 32,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_eq_RF_24_63",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_mux_RF_24_63",
-            "width": 32,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_eq_RF_25_63",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_mux_RF_25_63",
-            "width": 32,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_eq_RF_26_63",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_mux_RF_26_63",
-            "width": 32,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_eq_RF_27_63",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_mux_RF_27_63",
-            "width": 32,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_eq_RF_28_63",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_mux_RF_28_63",
-            "width": 32,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_eq_RF_29_63",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_mux_RF_29_63",
-            "width": 32,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_eq_RF_30_63",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_mux_RF_30_63",
-            "width": 32,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_eq_RF_31_63",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_ptr_mux_RF_31_63",
-            "width": 32,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_RST_active_high",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "CONST_0_32b",
-            "width": 32,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_wa_eq_1_128",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_rf_en_1_129",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_wa_eq_2_131",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_rf_en_2_132",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_wa_eq_3_134",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_rf_en_3_135",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_wa_eq_4_137",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_rf_en_4_138",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_wa_eq_5_140",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_rf_en_5_141",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_wa_eq_6_143",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_rf_en_6_144",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_wa_eq_7_146",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_rf_en_7_147",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_wa_eq_8_149",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_rf_en_8_150",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_wa_eq_9_152",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_rf_en_9_153",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_wa_eq_10_155",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_rf_en_10_156",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_wa_eq_11_158",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_rf_en_11_159",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_wa_eq_12_161",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_rf_en_12_162",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_wa_eq_13_164",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_rf_en_13_165",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_wa_eq_14_167",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_rf_en_14_168",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_wa_eq_15_170",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_rf_en_15_171",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_wa_eq_16_173",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_rf_en_16_174",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_wa_eq_17_176",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_rf_en_17_177",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_wa_eq_18_179",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_rf_en_18_180",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_wa_eq_19_182",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_rf_en_19_183",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_wa_eq_20_185",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_rf_en_20_186",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_wa_eq_21_188",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_rf_en_21_189",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_wa_eq_22_191",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_rf_en_22_192",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_wa_eq_23_194",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_rf_en_23_195",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_wa_eq_24_197",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_rf_en_24_198",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_wa_eq_25_200",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_rf_en_25_201",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_wa_eq_26_203",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_rf_en_26_204",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_wa_eq_27_206",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_rf_en_27_207",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_wa_eq_28_209",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_rf_en_28_210",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_wa_eq_29_212",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_rf_en_29_213",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_wa_eq_30_215",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_rf_en_30_216",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_wa_eq_31_218",
-            "width": 1,
-            "attributes": {
-                "input": false,
-                "output": false,
-                "reg": false
-            }
-        },
-        {
-            "name": "tmp_rf_en_31_219",
-            "width": 1,
             "attributes": {
                 "input": false,
                 "output": false,
@@ -2344,1954 +778,483 @@
     ],
     "gates": [
         {
-            "type": "EQ",
+            "type": "ADD",
             "inputs": [
-                "RA1",
-                "CONST_1_5b"
+                "NUM_INST",
+                "CONST_1_32b_1976363660592"
             ],
-            "output": "tmp_ptr_eq_RF_1_0"
+            "output": "tmp_ADD_0"
         },
         {
             "type": "MUX",
             "inputs": [
-                "tmp_ptr_eq_RF_1_0",
-                "RF_1",
-                "RF_0"
+                "RSTn",
+                "tmp_ADD_0",
+                "NUM_INST"
             ],
-            "output": "tmp_ptr_mux_RF_1_0"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "RA1",
-                "CONST_2_5b"
-            ],
-            "output": "tmp_ptr_eq_RF_2_0"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_ptr_eq_RF_2_0",
-                "RF_2",
-                "tmp_ptr_mux_RF_1_0"
-            ],
-            "output": "tmp_ptr_mux_RF_2_0"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "RA1",
-                "CONST_3_5b"
-            ],
-            "output": "tmp_ptr_eq_RF_3_0"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_ptr_eq_RF_3_0",
-                "RF_3",
-                "tmp_ptr_mux_RF_2_0"
-            ],
-            "output": "tmp_ptr_mux_RF_3_0"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "RA1",
-                "CONST_4_5b"
-            ],
-            "output": "tmp_ptr_eq_RF_4_0"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_ptr_eq_RF_4_0",
-                "RF_4",
-                "tmp_ptr_mux_RF_3_0"
-            ],
-            "output": "tmp_ptr_mux_RF_4_0"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "RA1",
-                "CONST_5_5b"
-            ],
-            "output": "tmp_ptr_eq_RF_5_0"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_ptr_eq_RF_5_0",
-                "RF_5",
-                "tmp_ptr_mux_RF_4_0"
-            ],
-            "output": "tmp_ptr_mux_RF_5_0"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "RA1",
-                "CONST_6_5b"
-            ],
-            "output": "tmp_ptr_eq_RF_6_0"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_ptr_eq_RF_6_0",
-                "RF_6",
-                "tmp_ptr_mux_RF_5_0"
-            ],
-            "output": "tmp_ptr_mux_RF_6_0"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "RA1",
-                "CONST_7_5b"
-            ],
-            "output": "tmp_ptr_eq_RF_7_0"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_ptr_eq_RF_7_0",
-                "RF_7",
-                "tmp_ptr_mux_RF_6_0"
-            ],
-            "output": "tmp_ptr_mux_RF_7_0"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "RA1",
-                "CONST_8_5b"
-            ],
-            "output": "tmp_ptr_eq_RF_8_0"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_ptr_eq_RF_8_0",
-                "RF_8",
-                "tmp_ptr_mux_RF_7_0"
-            ],
-            "output": "tmp_ptr_mux_RF_8_0"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "RA1",
-                "CONST_9_5b"
-            ],
-            "output": "tmp_ptr_eq_RF_9_0"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_ptr_eq_RF_9_0",
-                "RF_9",
-                "tmp_ptr_mux_RF_8_0"
-            ],
-            "output": "tmp_ptr_mux_RF_9_0"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "RA1",
-                "CONST_10_5b"
-            ],
-            "output": "tmp_ptr_eq_RF_10_0"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_ptr_eq_RF_10_0",
-                "RF_10",
-                "tmp_ptr_mux_RF_9_0"
-            ],
-            "output": "tmp_ptr_mux_RF_10_0"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "RA1",
-                "CONST_11_5b"
-            ],
-            "output": "tmp_ptr_eq_RF_11_0"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_ptr_eq_RF_11_0",
-                "RF_11",
-                "tmp_ptr_mux_RF_10_0"
-            ],
-            "output": "tmp_ptr_mux_RF_11_0"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "RA1",
-                "CONST_12_5b"
-            ],
-            "output": "tmp_ptr_eq_RF_12_0"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_ptr_eq_RF_12_0",
-                "RF_12",
-                "tmp_ptr_mux_RF_11_0"
-            ],
-            "output": "tmp_ptr_mux_RF_12_0"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "RA1",
-                "CONST_13_5b"
-            ],
-            "output": "tmp_ptr_eq_RF_13_0"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_ptr_eq_RF_13_0",
-                "RF_13",
-                "tmp_ptr_mux_RF_12_0"
-            ],
-            "output": "tmp_ptr_mux_RF_13_0"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "RA1",
-                "CONST_14_5b"
-            ],
-            "output": "tmp_ptr_eq_RF_14_0"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_ptr_eq_RF_14_0",
-                "RF_14",
-                "tmp_ptr_mux_RF_13_0"
-            ],
-            "output": "tmp_ptr_mux_RF_14_0"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "RA1",
-                "CONST_15_5b"
-            ],
-            "output": "tmp_ptr_eq_RF_15_0"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_ptr_eq_RF_15_0",
-                "RF_15",
-                "tmp_ptr_mux_RF_14_0"
-            ],
-            "output": "tmp_ptr_mux_RF_15_0"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "RA1",
-                "CONST_16_5b"
-            ],
-            "output": "tmp_ptr_eq_RF_16_0"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_ptr_eq_RF_16_0",
-                "RF_16",
-                "tmp_ptr_mux_RF_15_0"
-            ],
-            "output": "tmp_ptr_mux_RF_16_0"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "RA1",
-                "CONST_17_5b"
-            ],
-            "output": "tmp_ptr_eq_RF_17_0"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_ptr_eq_RF_17_0",
-                "RF_17",
-                "tmp_ptr_mux_RF_16_0"
-            ],
-            "output": "tmp_ptr_mux_RF_17_0"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "RA1",
-                "CONST_18_5b"
-            ],
-            "output": "tmp_ptr_eq_RF_18_0"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_ptr_eq_RF_18_0",
-                "RF_18",
-                "tmp_ptr_mux_RF_17_0"
-            ],
-            "output": "tmp_ptr_mux_RF_18_0"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "RA1",
-                "CONST_19_5b"
-            ],
-            "output": "tmp_ptr_eq_RF_19_0"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_ptr_eq_RF_19_0",
-                "RF_19",
-                "tmp_ptr_mux_RF_18_0"
-            ],
-            "output": "tmp_ptr_mux_RF_19_0"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "RA1",
-                "CONST_20_5b"
-            ],
-            "output": "tmp_ptr_eq_RF_20_0"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_ptr_eq_RF_20_0",
-                "RF_20",
-                "tmp_ptr_mux_RF_19_0"
-            ],
-            "output": "tmp_ptr_mux_RF_20_0"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "RA1",
-                "CONST_21_5b"
-            ],
-            "output": "tmp_ptr_eq_RF_21_0"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_ptr_eq_RF_21_0",
-                "RF_21",
-                "tmp_ptr_mux_RF_20_0"
-            ],
-            "output": "tmp_ptr_mux_RF_21_0"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "RA1",
-                "CONST_22_5b"
-            ],
-            "output": "tmp_ptr_eq_RF_22_0"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_ptr_eq_RF_22_0",
-                "RF_22",
-                "tmp_ptr_mux_RF_21_0"
-            ],
-            "output": "tmp_ptr_mux_RF_22_0"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "RA1",
-                "CONST_23_5b"
-            ],
-            "output": "tmp_ptr_eq_RF_23_0"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_ptr_eq_RF_23_0",
-                "RF_23",
-                "tmp_ptr_mux_RF_22_0"
-            ],
-            "output": "tmp_ptr_mux_RF_23_0"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "RA1",
-                "CONST_24_5b"
-            ],
-            "output": "tmp_ptr_eq_RF_24_0"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_ptr_eq_RF_24_0",
-                "RF_24",
-                "tmp_ptr_mux_RF_23_0"
-            ],
-            "output": "tmp_ptr_mux_RF_24_0"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "RA1",
-                "CONST_25_5b"
-            ],
-            "output": "tmp_ptr_eq_RF_25_0"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_ptr_eq_RF_25_0",
-                "RF_25",
-                "tmp_ptr_mux_RF_24_0"
-            ],
-            "output": "tmp_ptr_mux_RF_25_0"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "RA1",
-                "CONST_26_5b"
-            ],
-            "output": "tmp_ptr_eq_RF_26_0"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_ptr_eq_RF_26_0",
-                "RF_26",
-                "tmp_ptr_mux_RF_25_0"
-            ],
-            "output": "tmp_ptr_mux_RF_26_0"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "RA1",
-                "CONST_27_5b"
-            ],
-            "output": "tmp_ptr_eq_RF_27_0"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_ptr_eq_RF_27_0",
-                "RF_27",
-                "tmp_ptr_mux_RF_26_0"
-            ],
-            "output": "tmp_ptr_mux_RF_27_0"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "RA1",
-                "CONST_28_5b"
-            ],
-            "output": "tmp_ptr_eq_RF_28_0"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_ptr_eq_RF_28_0",
-                "RF_28",
-                "tmp_ptr_mux_RF_27_0"
-            ],
-            "output": "tmp_ptr_mux_RF_28_0"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "RA1",
-                "CONST_29_5b"
-            ],
-            "output": "tmp_ptr_eq_RF_29_0"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_ptr_eq_RF_29_0",
-                "RF_29",
-                "tmp_ptr_mux_RF_28_0"
-            ],
-            "output": "tmp_ptr_mux_RF_29_0"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "RA1",
-                "CONST_30_5b"
-            ],
-            "output": "tmp_ptr_eq_RF_30_0"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_ptr_eq_RF_30_0",
-                "RF_30",
-                "tmp_ptr_mux_RF_29_0"
-            ],
-            "output": "tmp_ptr_mux_RF_30_0"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "RA1",
-                "CONST_31_5b"
-            ],
-            "output": "tmp_ptr_eq_RF_31_0"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_ptr_eq_RF_31_0",
-                "RF_31",
-                "tmp_ptr_mux_RF_30_0"
-            ],
-            "output": "tmp_ptr_mux_RF_31_0"
+            "output": "mux_NUM_INST_0"
         },
         {
             "type": "BUF",
             "inputs": [
-                "tmp_ptr_mux_RF_31_0"
+                "mux_NUM_INST_0"
             ],
-            "output": "RD1"
+            "output": "NUM_INST"
         },
         {
-            "type": "EQ",
+            "type": "SLICE_6_0",
             "inputs": [
-                "RA2",
-                "CONST_1_5b"
+                "I_MEM_DI"
             ],
-            "output": "tmp_ptr_eq_RF_1_63"
+            "output": "tmp_slice_6_0_3"
         },
         {
-            "type": "MUX",
+            "type": "SLICE_14_12",
             "inputs": [
-                "tmp_ptr_eq_RF_1_63",
-                "RF_1",
-                "RF_0"
+                "I_MEM_DI"
             ],
-            "output": "tmp_ptr_mux_RF_1_63"
+            "output": "tmp_slice_14_12_4"
         },
         {
-            "type": "EQ",
+            "type": "SLICE_14_12",
             "inputs": [
-                "RA2",
-                "CONST_2_5b"
+                "I_MEM_DI"
             ],
-            "output": "tmp_ptr_eq_RF_2_63"
+            "output": "tmp_slice_14_12_5"
         },
         {
-            "type": "MUX",
+            "type": "SLICE_31_25",
             "inputs": [
-                "tmp_ptr_eq_RF_2_63",
-                "RF_2",
-                "tmp_ptr_mux_RF_1_63"
+                "I_MEM_DI"
             ],
-            "output": "tmp_ptr_mux_RF_2_63"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "RA2",
-                "CONST_3_5b"
-            ],
-            "output": "tmp_ptr_eq_RF_3_63"
+            "output": "tmp_slice_31_25_6"
         },
         {
             "type": "MUX",
             "inputs": [
-                "tmp_ptr_eq_RF_3_63",
-                "RF_3",
-                "tmp_ptr_mux_RF_2_63"
+                "ALUSrc1",
+                "PC",
+                "RF_RD1"
             ],
-            "output": "tmp_ptr_mux_RF_3_63"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "RA2",
-                "CONST_4_5b"
-            ],
-            "output": "tmp_ptr_eq_RF_4_63"
+            "output": "tmp_cond_7"
         },
         {
             "type": "MUX",
             "inputs": [
-                "tmp_ptr_eq_RF_4_63",
-                "RF_4",
-                "tmp_ptr_mux_RF_3_63"
+                "ALUSrc2",
+                "offset",
+                "RF_RD2"
             ],
-            "output": "tmp_ptr_mux_RF_4_63"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "RA2",
-                "CONST_5_5b"
-            ],
-            "output": "tmp_ptr_eq_RF_5_63"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_ptr_eq_RF_5_63",
-                "RF_5",
-                "tmp_ptr_mux_RF_4_63"
-            ],
-            "output": "tmp_ptr_mux_RF_5_63"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "RA2",
-                "CONST_6_5b"
-            ],
-            "output": "tmp_ptr_eq_RF_6_63"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_ptr_eq_RF_6_63",
-                "RF_6",
-                "tmp_ptr_mux_RF_5_63"
-            ],
-            "output": "tmp_ptr_mux_RF_6_63"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "RA2",
-                "CONST_7_5b"
-            ],
-            "output": "tmp_ptr_eq_RF_7_63"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_ptr_eq_RF_7_63",
-                "RF_7",
-                "tmp_ptr_mux_RF_6_63"
-            ],
-            "output": "tmp_ptr_mux_RF_7_63"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "RA2",
-                "CONST_8_5b"
-            ],
-            "output": "tmp_ptr_eq_RF_8_63"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_ptr_eq_RF_8_63",
-                "RF_8",
-                "tmp_ptr_mux_RF_7_63"
-            ],
-            "output": "tmp_ptr_mux_RF_8_63"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "RA2",
-                "CONST_9_5b"
-            ],
-            "output": "tmp_ptr_eq_RF_9_63"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_ptr_eq_RF_9_63",
-                "RF_9",
-                "tmp_ptr_mux_RF_8_63"
-            ],
-            "output": "tmp_ptr_mux_RF_9_63"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "RA2",
-                "CONST_10_5b"
-            ],
-            "output": "tmp_ptr_eq_RF_10_63"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_ptr_eq_RF_10_63",
-                "RF_10",
-                "tmp_ptr_mux_RF_9_63"
-            ],
-            "output": "tmp_ptr_mux_RF_10_63"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "RA2",
-                "CONST_11_5b"
-            ],
-            "output": "tmp_ptr_eq_RF_11_63"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_ptr_eq_RF_11_63",
-                "RF_11",
-                "tmp_ptr_mux_RF_10_63"
-            ],
-            "output": "tmp_ptr_mux_RF_11_63"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "RA2",
-                "CONST_12_5b"
-            ],
-            "output": "tmp_ptr_eq_RF_12_63"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_ptr_eq_RF_12_63",
-                "RF_12",
-                "tmp_ptr_mux_RF_11_63"
-            ],
-            "output": "tmp_ptr_mux_RF_12_63"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "RA2",
-                "CONST_13_5b"
-            ],
-            "output": "tmp_ptr_eq_RF_13_63"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_ptr_eq_RF_13_63",
-                "RF_13",
-                "tmp_ptr_mux_RF_12_63"
-            ],
-            "output": "tmp_ptr_mux_RF_13_63"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "RA2",
-                "CONST_14_5b"
-            ],
-            "output": "tmp_ptr_eq_RF_14_63"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_ptr_eq_RF_14_63",
-                "RF_14",
-                "tmp_ptr_mux_RF_13_63"
-            ],
-            "output": "tmp_ptr_mux_RF_14_63"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "RA2",
-                "CONST_15_5b"
-            ],
-            "output": "tmp_ptr_eq_RF_15_63"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_ptr_eq_RF_15_63",
-                "RF_15",
-                "tmp_ptr_mux_RF_14_63"
-            ],
-            "output": "tmp_ptr_mux_RF_15_63"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "RA2",
-                "CONST_16_5b"
-            ],
-            "output": "tmp_ptr_eq_RF_16_63"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_ptr_eq_RF_16_63",
-                "RF_16",
-                "tmp_ptr_mux_RF_15_63"
-            ],
-            "output": "tmp_ptr_mux_RF_16_63"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "RA2",
-                "CONST_17_5b"
-            ],
-            "output": "tmp_ptr_eq_RF_17_63"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_ptr_eq_RF_17_63",
-                "RF_17",
-                "tmp_ptr_mux_RF_16_63"
-            ],
-            "output": "tmp_ptr_mux_RF_17_63"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "RA2",
-                "CONST_18_5b"
-            ],
-            "output": "tmp_ptr_eq_RF_18_63"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_ptr_eq_RF_18_63",
-                "RF_18",
-                "tmp_ptr_mux_RF_17_63"
-            ],
-            "output": "tmp_ptr_mux_RF_18_63"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "RA2",
-                "CONST_19_5b"
-            ],
-            "output": "tmp_ptr_eq_RF_19_63"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_ptr_eq_RF_19_63",
-                "RF_19",
-                "tmp_ptr_mux_RF_18_63"
-            ],
-            "output": "tmp_ptr_mux_RF_19_63"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "RA2",
-                "CONST_20_5b"
-            ],
-            "output": "tmp_ptr_eq_RF_20_63"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_ptr_eq_RF_20_63",
-                "RF_20",
-                "tmp_ptr_mux_RF_19_63"
-            ],
-            "output": "tmp_ptr_mux_RF_20_63"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "RA2",
-                "CONST_21_5b"
-            ],
-            "output": "tmp_ptr_eq_RF_21_63"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_ptr_eq_RF_21_63",
-                "RF_21",
-                "tmp_ptr_mux_RF_20_63"
-            ],
-            "output": "tmp_ptr_mux_RF_21_63"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "RA2",
-                "CONST_22_5b"
-            ],
-            "output": "tmp_ptr_eq_RF_22_63"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_ptr_eq_RF_22_63",
-                "RF_22",
-                "tmp_ptr_mux_RF_21_63"
-            ],
-            "output": "tmp_ptr_mux_RF_22_63"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "RA2",
-                "CONST_23_5b"
-            ],
-            "output": "tmp_ptr_eq_RF_23_63"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_ptr_eq_RF_23_63",
-                "RF_23",
-                "tmp_ptr_mux_RF_22_63"
-            ],
-            "output": "tmp_ptr_mux_RF_23_63"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "RA2",
-                "CONST_24_5b"
-            ],
-            "output": "tmp_ptr_eq_RF_24_63"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_ptr_eq_RF_24_63",
-                "RF_24",
-                "tmp_ptr_mux_RF_23_63"
-            ],
-            "output": "tmp_ptr_mux_RF_24_63"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "RA2",
-                "CONST_25_5b"
-            ],
-            "output": "tmp_ptr_eq_RF_25_63"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_ptr_eq_RF_25_63",
-                "RF_25",
-                "tmp_ptr_mux_RF_24_63"
-            ],
-            "output": "tmp_ptr_mux_RF_25_63"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "RA2",
-                "CONST_26_5b"
-            ],
-            "output": "tmp_ptr_eq_RF_26_63"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_ptr_eq_RF_26_63",
-                "RF_26",
-                "tmp_ptr_mux_RF_25_63"
-            ],
-            "output": "tmp_ptr_mux_RF_26_63"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "RA2",
-                "CONST_27_5b"
-            ],
-            "output": "tmp_ptr_eq_RF_27_63"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_ptr_eq_RF_27_63",
-                "RF_27",
-                "tmp_ptr_mux_RF_26_63"
-            ],
-            "output": "tmp_ptr_mux_RF_27_63"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "RA2",
-                "CONST_28_5b"
-            ],
-            "output": "tmp_ptr_eq_RF_28_63"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_ptr_eq_RF_28_63",
-                "RF_28",
-                "tmp_ptr_mux_RF_27_63"
-            ],
-            "output": "tmp_ptr_mux_RF_28_63"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "RA2",
-                "CONST_29_5b"
-            ],
-            "output": "tmp_ptr_eq_RF_29_63"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_ptr_eq_RF_29_63",
-                "RF_29",
-                "tmp_ptr_mux_RF_28_63"
-            ],
-            "output": "tmp_ptr_mux_RF_29_63"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "RA2",
-                "CONST_30_5b"
-            ],
-            "output": "tmp_ptr_eq_RF_30_63"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_ptr_eq_RF_30_63",
-                "RF_30",
-                "tmp_ptr_mux_RF_29_63"
-            ],
-            "output": "tmp_ptr_mux_RF_30_63"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "RA2",
-                "CONST_31_5b"
-            ],
-            "output": "tmp_ptr_eq_RF_31_63"
-        },
-        {
-            "type": "MUX",
-            "inputs": [
-                "tmp_ptr_eq_RF_31_63",
-                "RF_31",
-                "tmp_ptr_mux_RF_30_63"
-            ],
-            "output": "tmp_ptr_mux_RF_31_63"
+            "output": "tmp_cond_8"
         },
         {
             "type": "BUF",
             "inputs": [
-                "tmp_ptr_mux_RF_31_63"
+                "ALU_Result"
             ],
-            "output": "RD2"
+            "output": "JAL_Address"
+        },
+        {
+            "type": "AND",
+            "inputs": [
+                "ALU_Result",
+                "CONST_4294967294_32b_1976368047856"
+            ],
+            "output": "tmp_AND_10"
+        },
+        {
+            "type": "BUF",
+            "inputs": [
+                "tmp_AND_10"
+            ],
+            "output": "JALR_Address"
+        },
+        {
+            "type": "ADD",
+            "inputs": [
+                "offset",
+                "PC"
+            ],
+            "output": "tmp_ADD_12"
+        },
+        {
+            "type": "BUF",
+            "inputs": [
+                "tmp_ADD_12"
+            ],
+            "output": "Branch_Target"
+        },
+        {
+            "type": "AND",
+            "inputs": [
+                "Branch",
+                "Zero"
+            ],
+            "output": "tmp_AND_14"
+        },
+        {
+            "type": "BUF",
+            "inputs": [
+                "tmp_AND_14"
+            ],
+            "output": "Branch_Taken"
         },
         {
             "type": "NOT",
             "inputs": [
                 "RSTn"
             ],
-            "output": "tmp_RST_active_high"
+            "output": "tmp_not_16"
+        },
+        {
+            "type": "MUX",
+            "inputs": [
+                "JALorJALR",
+                "JALR_Address",
+                "JAL_Address"
+            ],
+            "output": "tmp_cond_16"
+        },
+        {
+            "type": "ADD",
+            "inputs": [
+                "PC",
+                "CONST_4_32b_1976368042288"
+            ],
+            "output": "tmp_ADD_16"
+        },
+        {
+            "type": "MUX",
+            "inputs": [
+                "Branch_Taken",
+                "Branch_Target",
+                "tmp_ADD_16"
+            ],
+            "output": "tmp_cond_16"
+        },
+        {
+            "type": "MUX",
+            "inputs": [
+                "Jump",
+                "tmp_cond_16",
+                "tmp_cond_16"
+            ],
+            "output": "tmp_cond_16"
+        },
+        {
+            "type": "MUX",
+            "inputs": [
+                "tmp_not_16",
+                "CONST_0_32b_1976368045936",
+                "tmp_cond_16"
+            ],
+            "output": "tmp_cond_16"
         },
         {
             "type": "BUF",
             "inputs": [
-                "CONST_0_32b"
+                "tmp_cond_16"
             ],
-            "output": "RF_0"
+            "output": "NXT_PC"
+        },
+        {
+            "type": "NOT",
+            "inputs": [
+                "RSTn"
+            ],
+            "output": "tmp_not_23"
+        },
+        {
+            "type": "MUX",
+            "inputs": [
+                "tmp_not_23",
+                "CONST_1_1b_1976368042960",
+                "CONST_0_1b_1976368041136"
+            ],
+            "output": "tmp_cond_23"
+        },
+        {
+            "type": "BUF",
+            "inputs": [
+                "tmp_cond_23"
+            ],
+            "output": "I_MEM_CSN"
+        },
+        {
+            "type": "NOT",
+            "inputs": [
+                "RSTn"
+            ],
+            "output": "tmp_not_26"
+        },
+        {
+            "type": "MUX",
+            "inputs": [
+                "tmp_not_26",
+                "CONST_1_1b_1976368040560",
+                "CONST_0_1b_1976368039792"
+            ],
+            "output": "tmp_cond_26"
+        },
+        {
+            "type": "BUF",
+            "inputs": [
+                "tmp_cond_26"
+            ],
+            "output": "D_MEM_CSN"
+        },
+        {
+            "type": "BUF",
+            "inputs": [
+                "RF_RD2"
+            ],
+            "output": "D_MEM_DOUT"
+        },
+        {
+            "type": "SLICE_13_2",
+            "inputs": [
+                "temp_ALU_Result"
+            ],
+            "output": "tmp_slice_13_2_30"
+        },
+        {
+            "type": "BUF",
+            "inputs": [
+                "tmp_slice_13_2_30"
+            ],
+            "output": "D_MEM_ADDR"
+        },
+        {
+            "type": "NOT",
+            "inputs": [
+                "MemWrite"
+            ],
+            "output": "tmp_not_32"
+        },
+        {
+            "type": "BUF",
+            "inputs": [
+                "tmp_not_32"
+            ],
+            "output": "D_MEM_WEN"
+        },
+        {
+            "type": "BUF",
+            "inputs": [
+                "BE"
+            ],
+            "output": "D_MEM_BE"
+        },
+        {
+            "type": "BUF",
+            "inputs": [
+                "RegWrite"
+            ],
+            "output": "RF_WE"
+        },
+        {
+            "type": "SLICE_19_15",
+            "inputs": [
+                "I_MEM_DI"
+            ],
+            "output": "tmp_slice_19_15_36"
+        },
+        {
+            "type": "BUF",
+            "inputs": [
+                "tmp_slice_19_15_36"
+            ],
+            "output": "RF_RA1"
+        },
+        {
+            "type": "SLICE_24_20",
+            "inputs": [
+                "I_MEM_DI"
+            ],
+            "output": "tmp_slice_24_20_38"
+        },
+        {
+            "type": "BUF",
+            "inputs": [
+                "tmp_slice_24_20_38"
+            ],
+            "output": "RF_RA2"
+        },
+        {
+            "type": "SLICE_11_7",
+            "inputs": [
+                "I_MEM_DI"
+            ],
+            "output": "tmp_slice_11_7_40"
+        },
+        {
+            "type": "SLICE_24_20",
+            "inputs": [
+                "I_MEM_DI"
+            ],
+            "output": "tmp_slice_24_20_40"
+        },
+        {
+            "type": "MUX",
+            "inputs": [
+                "RegDst",
+                "tmp_slice_11_7_40",
+                "tmp_slice_24_20_40"
+            ],
+            "output": "tmp_cond_40"
+        },
+        {
+            "type": "BUF",
+            "inputs": [
+                "tmp_cond_40"
+            ],
+            "output": "RF_WA1"
+        },
+        {
+            "type": "ADD",
+            "inputs": [
+                "PC",
+                "CONST_4_32b_1976368576848"
+            ],
+            "output": "tmp_ADD_44"
+        },
+        {
+            "type": "MUX",
+            "inputs": [
+                "MemtoReg",
+                "D_MEM_DI",
+                "ALU_Result"
+            ],
+            "output": "tmp_cond_44"
+        },
+        {
+            "type": "MUX",
+            "inputs": [
+                "Jump",
+                "tmp_ADD_44",
+                "tmp_cond_44"
+            ],
+            "output": "tmp_cond_44"
+        },
+        {
+            "type": "BUF",
+            "inputs": [
+                "tmp_cond_44"
+            ],
+            "output": "RF_WD"
         },
         {
             "type": "EQ",
             "inputs": [
-                "WA",
-                "CONST_1_5b"
+                "RF_RD1",
+                "CONST_12_32b_1976368577040"
             ],
-            "output": "tmp_wa_eq_1_128"
-        },
-        {
-            "type": "AND",
-            "inputs": [
-                "WE",
-                "tmp_wa_eq_1_128"
-            ],
-            "output": "tmp_rf_en_1_129"
-        },
-        {
-            "type": "DFF_EN_RST",
-            "inputs": [
-                "WD",
-                "RF_1",
-                "tmp_rf_en_1_129",
-                "CONST_0_32b",
-                "tmp_RST_active_high",
-                "CLK"
-            ],
-            "output": "RF_1"
+            "output": "tmp_EQ_48"
         },
         {
             "type": "EQ",
             "inputs": [
-                "WA",
-                "CONST_2_5b"
+                "I_MEM_DI",
+                "CONST_32871_32b_1976368568496"
             ],
-            "output": "tmp_wa_eq_2_131"
+            "output": "tmp_EQ_48"
         },
         {
             "type": "AND",
             "inputs": [
-                "WE",
-                "tmp_wa_eq_2_131"
+                "tmp_EQ_48",
+                "tmp_EQ_48"
             ],
-            "output": "tmp_rf_en_2_132"
+            "output": "tmp_AND_48"
         },
         {
-            "type": "DFF_EN_RST",
+            "type": "BUF",
             "inputs": [
-                "WD",
-                "RF_2",
-                "tmp_rf_en_2_132",
-                "CONST_0_32b",
-                "tmp_RST_active_high",
-                "CLK"
+                "tmp_AND_48"
             ],
-            "output": "RF_2"
+            "output": "HALT"
         },
         {
-            "type": "EQ",
+            "type": "MUX",
             "inputs": [
-                "WA",
-                "CONST_3_5b"
+                "MemWrite",
+                "ALU_Result",
+                "RF_WD"
             ],
-            "output": "tmp_wa_eq_3_134"
+            "output": "tmp_cond_52"
         },
         {
-            "type": "AND",
+            "type": "MUX",
             "inputs": [
-                "WE",
-                "tmp_wa_eq_3_134"
+                "Branch",
+                "Branch_Taken",
+                "tmp_cond_52"
             ],
-            "output": "tmp_rf_en_3_135"
+            "output": "tmp_cond_52"
         },
         {
-            "type": "DFF_EN_RST",
+            "type": "BUF",
             "inputs": [
-                "WD",
-                "RF_3",
-                "tmp_rf_en_3_135",
-                "CONST_0_32b",
-                "tmp_RST_active_high",
-                "CLK"
+                "tmp_cond_52"
             ],
-            "output": "RF_3"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "WA",
-                "CONST_4_5b"
-            ],
-            "output": "tmp_wa_eq_4_137"
-        },
-        {
-            "type": "AND",
-            "inputs": [
-                "WE",
-                "tmp_wa_eq_4_137"
-            ],
-            "output": "tmp_rf_en_4_138"
-        },
-        {
-            "type": "DFF_EN_RST",
-            "inputs": [
-                "WD",
-                "RF_4",
-                "tmp_rf_en_4_138",
-                "CONST_0_32b",
-                "tmp_RST_active_high",
-                "CLK"
-            ],
-            "output": "RF_4"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "WA",
-                "CONST_5_5b"
-            ],
-            "output": "tmp_wa_eq_5_140"
-        },
-        {
-            "type": "AND",
-            "inputs": [
-                "WE",
-                "tmp_wa_eq_5_140"
-            ],
-            "output": "tmp_rf_en_5_141"
-        },
-        {
-            "type": "DFF_EN_RST",
-            "inputs": [
-                "WD",
-                "RF_5",
-                "tmp_rf_en_5_141",
-                "CONST_0_32b",
-                "tmp_RST_active_high",
-                "CLK"
-            ],
-            "output": "RF_5"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "WA",
-                "CONST_6_5b"
-            ],
-            "output": "tmp_wa_eq_6_143"
-        },
-        {
-            "type": "AND",
-            "inputs": [
-                "WE",
-                "tmp_wa_eq_6_143"
-            ],
-            "output": "tmp_rf_en_6_144"
-        },
-        {
-            "type": "DFF_EN_RST",
-            "inputs": [
-                "WD",
-                "RF_6",
-                "tmp_rf_en_6_144",
-                "CONST_0_32b",
-                "tmp_RST_active_high",
-                "CLK"
-            ],
-            "output": "RF_6"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "WA",
-                "CONST_7_5b"
-            ],
-            "output": "tmp_wa_eq_7_146"
-        },
-        {
-            "type": "AND",
-            "inputs": [
-                "WE",
-                "tmp_wa_eq_7_146"
-            ],
-            "output": "tmp_rf_en_7_147"
-        },
-        {
-            "type": "DFF_EN_RST",
-            "inputs": [
-                "WD",
-                "RF_7",
-                "tmp_rf_en_7_147",
-                "CONST_0_32b",
-                "tmp_RST_active_high",
-                "CLK"
-            ],
-            "output": "RF_7"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "WA",
-                "CONST_8_5b"
-            ],
-            "output": "tmp_wa_eq_8_149"
-        },
-        {
-            "type": "AND",
-            "inputs": [
-                "WE",
-                "tmp_wa_eq_8_149"
-            ],
-            "output": "tmp_rf_en_8_150"
-        },
-        {
-            "type": "DFF_EN_RST",
-            "inputs": [
-                "WD",
-                "RF_8",
-                "tmp_rf_en_8_150",
-                "CONST_0_32b",
-                "tmp_RST_active_high",
-                "CLK"
-            ],
-            "output": "RF_8"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "WA",
-                "CONST_9_5b"
-            ],
-            "output": "tmp_wa_eq_9_152"
-        },
-        {
-            "type": "AND",
-            "inputs": [
-                "WE",
-                "tmp_wa_eq_9_152"
-            ],
-            "output": "tmp_rf_en_9_153"
-        },
-        {
-            "type": "DFF_EN_RST",
-            "inputs": [
-                "WD",
-                "RF_9",
-                "tmp_rf_en_9_153",
-                "CONST_0_32b",
-                "tmp_RST_active_high",
-                "CLK"
-            ],
-            "output": "RF_9"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "WA",
-                "CONST_10_5b"
-            ],
-            "output": "tmp_wa_eq_10_155"
-        },
-        {
-            "type": "AND",
-            "inputs": [
-                "WE",
-                "tmp_wa_eq_10_155"
-            ],
-            "output": "tmp_rf_en_10_156"
-        },
-        {
-            "type": "DFF_EN_RST",
-            "inputs": [
-                "WD",
-                "RF_10",
-                "tmp_rf_en_10_156",
-                "CONST_0_32b",
-                "tmp_RST_active_high",
-                "CLK"
-            ],
-            "output": "RF_10"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "WA",
-                "CONST_11_5b"
-            ],
-            "output": "tmp_wa_eq_11_158"
-        },
-        {
-            "type": "AND",
-            "inputs": [
-                "WE",
-                "tmp_wa_eq_11_158"
-            ],
-            "output": "tmp_rf_en_11_159"
-        },
-        {
-            "type": "DFF_EN_RST",
-            "inputs": [
-                "WD",
-                "RF_11",
-                "tmp_rf_en_11_159",
-                "CONST_0_32b",
-                "tmp_RST_active_high",
-                "CLK"
-            ],
-            "output": "RF_11"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "WA",
-                "CONST_12_5b"
-            ],
-            "output": "tmp_wa_eq_12_161"
-        },
-        {
-            "type": "AND",
-            "inputs": [
-                "WE",
-                "tmp_wa_eq_12_161"
-            ],
-            "output": "tmp_rf_en_12_162"
-        },
-        {
-            "type": "DFF_EN_RST",
-            "inputs": [
-                "WD",
-                "RF_12",
-                "tmp_rf_en_12_162",
-                "CONST_0_32b",
-                "tmp_RST_active_high",
-                "CLK"
-            ],
-            "output": "RF_12"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "WA",
-                "CONST_13_5b"
-            ],
-            "output": "tmp_wa_eq_13_164"
-        },
-        {
-            "type": "AND",
-            "inputs": [
-                "WE",
-                "tmp_wa_eq_13_164"
-            ],
-            "output": "tmp_rf_en_13_165"
-        },
-        {
-            "type": "DFF_EN_RST",
-            "inputs": [
-                "WD",
-                "RF_13",
-                "tmp_rf_en_13_165",
-                "CONST_0_32b",
-                "tmp_RST_active_high",
-                "CLK"
-            ],
-            "output": "RF_13"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "WA",
-                "CONST_14_5b"
-            ],
-            "output": "tmp_wa_eq_14_167"
-        },
-        {
-            "type": "AND",
-            "inputs": [
-                "WE",
-                "tmp_wa_eq_14_167"
-            ],
-            "output": "tmp_rf_en_14_168"
-        },
-        {
-            "type": "DFF_EN_RST",
-            "inputs": [
-                "WD",
-                "RF_14",
-                "tmp_rf_en_14_168",
-                "CONST_0_32b",
-                "tmp_RST_active_high",
-                "CLK"
-            ],
-            "output": "RF_14"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "WA",
-                "CONST_15_5b"
-            ],
-            "output": "tmp_wa_eq_15_170"
-        },
-        {
-            "type": "AND",
-            "inputs": [
-                "WE",
-                "tmp_wa_eq_15_170"
-            ],
-            "output": "tmp_rf_en_15_171"
-        },
-        {
-            "type": "DFF_EN_RST",
-            "inputs": [
-                "WD",
-                "RF_15",
-                "tmp_rf_en_15_171",
-                "CONST_0_32b",
-                "tmp_RST_active_high",
-                "CLK"
-            ],
-            "output": "RF_15"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "WA",
-                "CONST_16_5b"
-            ],
-            "output": "tmp_wa_eq_16_173"
-        },
-        {
-            "type": "AND",
-            "inputs": [
-                "WE",
-                "tmp_wa_eq_16_173"
-            ],
-            "output": "tmp_rf_en_16_174"
-        },
-        {
-            "type": "DFF_EN_RST",
-            "inputs": [
-                "WD",
-                "RF_16",
-                "tmp_rf_en_16_174",
-                "CONST_0_32b",
-                "tmp_RST_active_high",
-                "CLK"
-            ],
-            "output": "RF_16"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "WA",
-                "CONST_17_5b"
-            ],
-            "output": "tmp_wa_eq_17_176"
-        },
-        {
-            "type": "AND",
-            "inputs": [
-                "WE",
-                "tmp_wa_eq_17_176"
-            ],
-            "output": "tmp_rf_en_17_177"
-        },
-        {
-            "type": "DFF_EN_RST",
-            "inputs": [
-                "WD",
-                "RF_17",
-                "tmp_rf_en_17_177",
-                "CONST_0_32b",
-                "tmp_RST_active_high",
-                "CLK"
-            ],
-            "output": "RF_17"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "WA",
-                "CONST_18_5b"
-            ],
-            "output": "tmp_wa_eq_18_179"
-        },
-        {
-            "type": "AND",
-            "inputs": [
-                "WE",
-                "tmp_wa_eq_18_179"
-            ],
-            "output": "tmp_rf_en_18_180"
-        },
-        {
-            "type": "DFF_EN_RST",
-            "inputs": [
-                "WD",
-                "RF_18",
-                "tmp_rf_en_18_180",
-                "CONST_0_32b",
-                "tmp_RST_active_high",
-                "CLK"
-            ],
-            "output": "RF_18"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "WA",
-                "CONST_19_5b"
-            ],
-            "output": "tmp_wa_eq_19_182"
-        },
-        {
-            "type": "AND",
-            "inputs": [
-                "WE",
-                "tmp_wa_eq_19_182"
-            ],
-            "output": "tmp_rf_en_19_183"
-        },
-        {
-            "type": "DFF_EN_RST",
-            "inputs": [
-                "WD",
-                "RF_19",
-                "tmp_rf_en_19_183",
-                "CONST_0_32b",
-                "tmp_RST_active_high",
-                "CLK"
-            ],
-            "output": "RF_19"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "WA",
-                "CONST_20_5b"
-            ],
-            "output": "tmp_wa_eq_20_185"
-        },
-        {
-            "type": "AND",
-            "inputs": [
-                "WE",
-                "tmp_wa_eq_20_185"
-            ],
-            "output": "tmp_rf_en_20_186"
-        },
-        {
-            "type": "DFF_EN_RST",
-            "inputs": [
-                "WD",
-                "RF_20",
-                "tmp_rf_en_20_186",
-                "CONST_0_32b",
-                "tmp_RST_active_high",
-                "CLK"
-            ],
-            "output": "RF_20"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "WA",
-                "CONST_21_5b"
-            ],
-            "output": "tmp_wa_eq_21_188"
-        },
-        {
-            "type": "AND",
-            "inputs": [
-                "WE",
-                "tmp_wa_eq_21_188"
-            ],
-            "output": "tmp_rf_en_21_189"
-        },
-        {
-            "type": "DFF_EN_RST",
-            "inputs": [
-                "WD",
-                "RF_21",
-                "tmp_rf_en_21_189",
-                "CONST_0_32b",
-                "tmp_RST_active_high",
-                "CLK"
-            ],
-            "output": "RF_21"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "WA",
-                "CONST_22_5b"
-            ],
-            "output": "tmp_wa_eq_22_191"
-        },
-        {
-            "type": "AND",
-            "inputs": [
-                "WE",
-                "tmp_wa_eq_22_191"
-            ],
-            "output": "tmp_rf_en_22_192"
-        },
-        {
-            "type": "DFF_EN_RST",
-            "inputs": [
-                "WD",
-                "RF_22",
-                "tmp_rf_en_22_192",
-                "CONST_0_32b",
-                "tmp_RST_active_high",
-                "CLK"
-            ],
-            "output": "RF_22"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "WA",
-                "CONST_23_5b"
-            ],
-            "output": "tmp_wa_eq_23_194"
-        },
-        {
-            "type": "AND",
-            "inputs": [
-                "WE",
-                "tmp_wa_eq_23_194"
-            ],
-            "output": "tmp_rf_en_23_195"
-        },
-        {
-            "type": "DFF_EN_RST",
-            "inputs": [
-                "WD",
-                "RF_23",
-                "tmp_rf_en_23_195",
-                "CONST_0_32b",
-                "tmp_RST_active_high",
-                "CLK"
-            ],
-            "output": "RF_23"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "WA",
-                "CONST_24_5b"
-            ],
-            "output": "tmp_wa_eq_24_197"
-        },
-        {
-            "type": "AND",
-            "inputs": [
-                "WE",
-                "tmp_wa_eq_24_197"
-            ],
-            "output": "tmp_rf_en_24_198"
-        },
-        {
-            "type": "DFF_EN_RST",
-            "inputs": [
-                "WD",
-                "RF_24",
-                "tmp_rf_en_24_198",
-                "CONST_0_32b",
-                "tmp_RST_active_high",
-                "CLK"
-            ],
-            "output": "RF_24"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "WA",
-                "CONST_25_5b"
-            ],
-            "output": "tmp_wa_eq_25_200"
-        },
-        {
-            "type": "AND",
-            "inputs": [
-                "WE",
-                "tmp_wa_eq_25_200"
-            ],
-            "output": "tmp_rf_en_25_201"
-        },
-        {
-            "type": "DFF_EN_RST",
-            "inputs": [
-                "WD",
-                "RF_25",
-                "tmp_rf_en_25_201",
-                "CONST_0_32b",
-                "tmp_RST_active_high",
-                "CLK"
-            ],
-            "output": "RF_25"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "WA",
-                "CONST_26_5b"
-            ],
-            "output": "tmp_wa_eq_26_203"
-        },
-        {
-            "type": "AND",
-            "inputs": [
-                "WE",
-                "tmp_wa_eq_26_203"
-            ],
-            "output": "tmp_rf_en_26_204"
-        },
-        {
-            "type": "DFF_EN_RST",
-            "inputs": [
-                "WD",
-                "RF_26",
-                "tmp_rf_en_26_204",
-                "CONST_0_32b",
-                "tmp_RST_active_high",
-                "CLK"
-            ],
-            "output": "RF_26"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "WA",
-                "CONST_27_5b"
-            ],
-            "output": "tmp_wa_eq_27_206"
-        },
-        {
-            "type": "AND",
-            "inputs": [
-                "WE",
-                "tmp_wa_eq_27_206"
-            ],
-            "output": "tmp_rf_en_27_207"
-        },
-        {
-            "type": "DFF_EN_RST",
-            "inputs": [
-                "WD",
-                "RF_27",
-                "tmp_rf_en_27_207",
-                "CONST_0_32b",
-                "tmp_RST_active_high",
-                "CLK"
-            ],
-            "output": "RF_27"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "WA",
-                "CONST_28_5b"
-            ],
-            "output": "tmp_wa_eq_28_209"
-        },
-        {
-            "type": "AND",
-            "inputs": [
-                "WE",
-                "tmp_wa_eq_28_209"
-            ],
-            "output": "tmp_rf_en_28_210"
-        },
-        {
-            "type": "DFF_EN_RST",
-            "inputs": [
-                "WD",
-                "RF_28",
-                "tmp_rf_en_28_210",
-                "CONST_0_32b",
-                "tmp_RST_active_high",
-                "CLK"
-            ],
-            "output": "RF_28"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "WA",
-                "CONST_29_5b"
-            ],
-            "output": "tmp_wa_eq_29_212"
-        },
-        {
-            "type": "AND",
-            "inputs": [
-                "WE",
-                "tmp_wa_eq_29_212"
-            ],
-            "output": "tmp_rf_en_29_213"
-        },
-        {
-            "type": "DFF_EN_RST",
-            "inputs": [
-                "WD",
-                "RF_29",
-                "tmp_rf_en_29_213",
-                "CONST_0_32b",
-                "tmp_RST_active_high",
-                "CLK"
-            ],
-            "output": "RF_29"
-        },
-        {
-            "type": "EQ",
-            "inputs": [
-                "WA",
-                "CONST_30_5b"
-            ],
-            "output": "tmp_wa_eq_30_215"
-        },
-        {
-            "type": "AND",
-            "inputs": [
-                "WE",
-                "tmp_wa_eq_30_215"
-            ],
-            "output": "tmp_rf_en_30_216"
-        },
+            "output": "OUTPUT_PORT"
+        }
+    ],
+    "instances": [
         {
-            "type": "DFF_EN_RST",
-            "inputs": [
-                "WD",
-                "RF_30",
-                "tmp_rf_en_30_216",
-                "CONST_0_32b",
-                "tmp_RST_active_high",
-                "CLK"
-            ],
-            "output": "RF_30"
+            "module_type": "Control",
+            "instance_name": "control",
+            "parameters": {},
+            "port_connections": {
+                "opcode": "tmp_slice_6_0_3",
+                "funct3": "tmp_slice_14_12_4",
+                "RegDst": "RegDst",
+                "Jump": "Jump",
+                "Branch": "Branch",
+                "MemRead": "MemRead",
+                "MemtoReg": "MemtoReg",
+                "ALUOp": "ALUOp",
+                "MemWrite": "MemWrite",
+                "ALUSrc1": "ALUSrc1",
+                "ALUSrc2": "ALUSrc2",
+                "RegWrite": "RegWrite",
+                "JALorJALR": "JALorJALR",
+                "BE": "BE",
+                "Concat_control": "Concat_control"
+            }
         },
         {
-            "type": "EQ",
-            "inputs": [
-                "WA",
-                "CONST_31_5b"
-            ],
-            "output": "tmp_wa_eq_31_218"
+            "module_type": "ALUControl",
+            "instance_name": "alucontrol",
+            "parameters": {},
+            "port_connections": {
+                "ALUOp": "ALUOp",
+                "funct3": "tmp_slice_14_12_5",
+                "funct7": "tmp_slice_31_25_6",
+                "ALU_operation": "ALU_operation"
+            }
         },
         {
-            "type": "AND",
-            "inputs": [
-                "WE",
-                "tmp_wa_eq_31_218"
-            ],
-            "output": "tmp_rf_en_31_219"
+            "module_type": "Immediate_Concatenator",
+            "instance_name": "Im_con",
+            "parameters": {},
+            "port_connections": {
+                "Instr": "I_MEM_DI",
+                "Concat_control": "Concat_control",
+                "offset": "offset"
+            }
         },
         {
-            "type": "DFF_EN_RST",
-            "inputs": [
-                "WD",
-                "RF_31",
-                "tmp_rf_en_31_219",
-                "CONST_0_32b",
-                "tmp_RST_active_high",
-                "CLK"
-            ],
-            "output": "RF_31"
+            "module_type": "ALU",
+            "instance_name": "alu",
+            "parameters": {},
+            "port_connections": {
+                "Operand1": "tmp_cond_7",
+                "Operand2": "tmp_cond_8",
+                "ALU_operation": "ALU_operation",
+                "Zero": "Zero",
+                "ALU_Result": "ALU_Result"
+            }
         }
     ]
 }

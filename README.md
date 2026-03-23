@@ -20,7 +20,7 @@ ALUControl.v :  O
 Control.v:      O
 Mem_Model.v:    XXX (Scope)
 REG_FILE.v:     O
-RISCV_CLKRST.v: XXX (testbench)
+RISCV_CLKRST.v: XXX (testbench file)
 RISCV_TOP.v:    XXX (Scope)
 
 ATTENTION: MAKE SURE TO INSTALL PYVERILOG WITH "pip install pyverilog" BEFORE RUNNING

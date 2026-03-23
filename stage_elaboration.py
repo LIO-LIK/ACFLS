@@ -15,10 +15,10 @@ from pyverilog.vparser.ast import (
     CaseStatement, Case,
     Plus, Minus, Times, Divide,
     Eq, NotEq, LessThan, GreaterThan, LessEq, GreaterEq,
-    Land, Lor, Unot,
+    Land, Lor, And, Or, Xor, Xnor, Unot, Ulnot,
     Sll, Srl, Sra,
     Repeat, Assign, Decl, Parameter, Pointer, Partselect, Concat,
-    InstanceList, PortArg, ParamArg
+    InstanceList, PortArg, ParamArg, Cond
 )
 
 # Helpers
@@ -101,7 +101,8 @@ def _expr_to_signal_and_gates(mod: Module, expr, expected_width=None, param_env=
         return s, extra_gates
 
     # Unary Operators
-    if isinstance(expr, Unot):
+    if isinstance(expr, (Unot, Ulnot)):
+        val_sig, g = _expr_to_signal_and_gates(mod, expr.right, expected_width, param_env)
         val_sig, g = _expr_to_signal_and_gates(mod, expr.right, expected_width, param_env)
         out_sig = _get_or_create_signal(mod, f"tmp_not_{len(mod.gates)}", width=val_sig.width)
         extra_gates.extend(g)
@@ -119,8 +120,9 @@ def _expr_to_signal_and_gates(mod: Module, expr, expected_width=None, param_env=
         Plus: "ADD", Minus: "SUB", Times: "MUL", Divide: "DIV",
         Eq: "EQ", NotEq: "NEQ", LessThan: "LT", GreaterThan: "GT",
         LessEq: "LE", GreaterEq: "GE",
-        Land: "AND", Lor: "OR",
-        Sll: "SLL", Srl: "SRL", Sra: "SRA"
+        Land: "AND", Lor: "OR",                           # Logical
+        And: "AND", Or: "OR", Xor: "XOR", Xnor: "XNOR",   # Bitwise
+        Sll: "SLL", Srl: "SRL", Sra: "SRA"                # Shifts
     }
     expr_type = type(expr)
     
@@ -187,9 +189,23 @@ def _expr_to_signal_and_gates(mod: Module, expr, expected_width=None, param_env=
 
         return current_mux_out, extra_gates
 
+    # Ternary Operator (Condition ? True : False) -> MUX
+    if isinstance(expr, Cond):
+        cond_sig, g_cond = _expr_to_signal_and_gates(mod, expr.cond, 1, param_env)
+        true_sig, g_t = _expr_to_signal_and_gates(mod, expr.true_value, expected_width, param_env)
+        false_sig, g_f = _expr_to_signal_and_gates(mod, expr.false_value, expected_width, param_env)
+        
+        w = expected_width or max(true_sig.width, false_sig.width)
+        out_sig = _get_or_create_signal(mod, f"tmp_cond_{len(mod.gates)}", width=w)
+        
+        extra_gates.extend(g_cond + g_t + g_f)
+        extra_gates.append(Gate("MUX", [cond_sig, true_sig, false_sig], out_sig))
+        
+        return out_sig, extra_gates
+
     raise ValueError(f"Expression not supported yet: {type(expr).__name__}")
 
-# Advanced Combinational Logic Extraction (SSA Style)
+# Advanced Combinational Logic Extraction
 
 def _extract_comb_logic(mod, stmt, target_name, current_sig, param_env):
     gates = []
@@ -311,22 +327,31 @@ def run(ast):
     # Parse Items (Arrays, Assigns, Always, Instances)
     for item in top.items:
         # Array Declarations
+        # Declarations (Wires, Regs, Arrays)
         if isinstance(item, Decl):
             for decl in item.list:
-                if isinstance(decl, Reg) and getattr(decl, 'dimensions', None):
+                if isinstance(decl, (Wire, Reg)):
                     w = _parse_width(decl.width, param_env)
-                    print(f"  [Scaffolding] Found Array '{decl.name}' with width {w}.")
+                    if getattr(decl, 'dimensions', None):
+                        print(f"  [Scaffolding] Found Array '{decl.name}' with width {w}.")
+                    else:
+                        # Register the internal wire/reg
+                        _get_or_create_signal(mod, decl.name, width=w, is_reg=isinstance(decl, Reg))
 
         # Continuous Assignments
         elif isinstance(item, Assign):
             target_name = item.left.var.name
             target_sig = mod.get_signal(target_name)
             
+            # Fallback for implicitly declared 1-bit wires
+            if target_sig is None:
+                target_sig = _get_or_create_signal(mod, target_name, width=1)
+            
             rhs_sig, g = _expr_to_signal_and_gates(mod, item.right.var, target_sig.width, param_env)
             for gate in g: mod.add_gate(gate)
             mod.add_gate(Gate("BUF", [rhs_sig], target_sig))
 
-        # --- NEW: Module Instantiation (DSPs, Sub-Modules) ---
+        # Module Instantiation (DSPs, Sub-Modules)
         elif isinstance(item, InstanceList):
             module_type = item.module
             for inst in item.instances:
@@ -340,8 +365,8 @@ def run(ast):
                 
                 # Parse Port Connections (e.g. .A(wire1))
                 for port in inst.portlist:
-                    if port.arg:
-                        port_sig, g = _expr_to_signal_and_gates(mod, port.arg, None, param_env)
+                    if port.argname:
+                        port_sig, g = _expr_to_signal_and_gates(mod, port.argname, None, param_env)
                         for gate in g: mod.add_gate(gate)
                         port_connections[port.portname] = port_sig
                     else:

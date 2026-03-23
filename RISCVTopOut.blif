@@ -1,0 +1,4611 @@
+.model RISCV_TOP
+.inputs CLK D_MEM_DI_0 D_MEM_DI_1 D_MEM_DI_10 D_MEM_DI_11 D_MEM_DI_12 D_MEM_DI_13 D_MEM_DI_14 D_MEM_DI_15 D_MEM_DI_16 D_MEM_DI_17 D_MEM_DI_18 D_MEM_DI_19 D_MEM_DI_2 D_MEM_DI_20 D_MEM_DI_21 D_MEM_DI_22 D_MEM_DI_23 D_MEM_DI_24 D_MEM_DI_25 D_MEM_DI_26 D_MEM_DI_27 D_MEM_DI_28 D_MEM_DI_29 D_MEM_DI_3 D_MEM_DI_30 D_MEM_DI_31 D_MEM_DI_4 D_MEM_DI_5 D_MEM_DI_6 D_MEM_DI_7 D_MEM_DI_8 D_MEM_DI_9 I_MEM_DI_0 I_MEM_DI_1 I_MEM_DI_10 I_MEM_DI_11 I_MEM_DI_12 I_MEM_DI_13 I_MEM_DI_14 I_MEM_DI_15 I_MEM_DI_16 I_MEM_DI_17 I_MEM_DI_18 I_MEM_DI_19 I_MEM_DI_2 I_MEM_DI_20 I_MEM_DI_21 I_MEM_DI_22 I_MEM_DI_23 I_MEM_DI_24 I_MEM_DI_25 I_MEM_DI_26 I_MEM_DI_27 I_MEM_DI_28 I_MEM_DI_29 I_MEM_DI_3 I_MEM_DI_30 I_MEM_DI_31 I_MEM_DI_4 I_MEM_DI_5 I_MEM_DI_6 I_MEM_DI_7 I_MEM_DI_8 I_MEM_DI_9 RF_RD1_0 RF_RD1_1 RF_RD1_10 RF_RD1_11 RF_RD1_12 RF_RD1_13 RF_RD1_14 RF_RD1_15 RF_RD1_16 RF_RD1_17 RF_RD1_18 RF_RD1_19 RF_RD1_2 RF_RD1_20 RF_RD1_21 RF_RD1_22 RF_RD1_23 RF_RD1_24 RF_RD1_25 RF_RD1_26 RF_RD1_27 RF_RD1_28 RF_RD1_29 RF_RD1_3 RF_RD1_30 RF_RD1_31 RF_RD1_4 RF_RD1_5 RF_RD1_6 RF_RD1_7 RF_RD1_8 RF_RD1_9 RF_RD2_0 RF_RD2_1 RF_RD2_10 RF_RD2_11 RF_RD2_12 RF_RD2_13 RF_RD2_14 RF_RD2_15 RF_RD2_16 RF_RD2_17 RF_RD2_18 RF_RD2_19 RF_RD2_2 RF_RD2_20 RF_RD2_21 RF_RD2_22 RF_RD2_23 RF_RD2_24 RF_RD2_25 RF_RD2_26 RF_RD2_27 RF_RD2_28 RF_RD2_29 RF_RD2_3 RF_RD2_30 RF_RD2_31 RF_RD2_4 RF_RD2_5 RF_RD2_6 RF_RD2_7 RF_RD2_8 RF_RD2_9 RSTn
+.outputs D_MEM_ADDR_0 D_MEM_ADDR_1 D_MEM_ADDR_10 D_MEM_ADDR_11 D_MEM_ADDR_2 D_MEM_ADDR_3 D_MEM_ADDR_4 D_MEM_ADDR_5 D_MEM_ADDR_6 D_MEM_ADDR_7 D_MEM_ADDR_8 D_MEM_ADDR_9 D_MEM_BE_0 D_MEM_BE_1 D_MEM_BE_2 D_MEM_BE_3 D_MEM_CSN D_MEM_DOUT_0 D_MEM_DOUT_1 D_MEM_DOUT_10 D_MEM_DOUT_11 D_MEM_DOUT_12 D_MEM_DOUT_13 D_MEM_DOUT_14 D_MEM_DOUT_15 D_MEM_DOUT_16 D_MEM_DOUT_17 D_MEM_DOUT_18 D_MEM_DOUT_19 D_MEM_DOUT_2 D_MEM_DOUT_20 D_MEM_DOUT_21 D_MEM_DOUT_22 D_MEM_DOUT_23 D_MEM_DOUT_24 D_MEM_DOUT_25 D_MEM_DOUT_26 D_MEM_DOUT_27 D_MEM_DOUT_28 D_MEM_DOUT_29 D_MEM_DOUT_3 D_MEM_DOUT_30 D_MEM_DOUT_31 D_MEM_DOUT_4 D_MEM_DOUT_5 D_MEM_DOUT_6 D_MEM_DOUT_7 D_MEM_DOUT_8 D_MEM_DOUT_9 D_MEM_WEN HALT I_MEM_ADDR_0 I_MEM_ADDR_1 I_MEM_ADDR_10 I_MEM_ADDR_11 I_MEM_ADDR_2 I_MEM_ADDR_3 I_MEM_ADDR_4 I_MEM_ADDR_5 I_MEM_ADDR_6 I_MEM_ADDR_7 I_MEM_ADDR_8 I_MEM_ADDR_9 I_MEM_CSN NUM_INST_0 NUM_INST_1 NUM_INST_10 NUM_INST_11 NUM_INST_12 NUM_INST_13 NUM_INST_14 NUM_INST_15 NUM_INST_16 NUM_INST_17 NUM_INST_18 NUM_INST_19 NUM_INST_2 NUM_INST_20 NUM_INST_21 NUM_INST_22 NUM_INST_23 NUM_INST_24 NUM_INST_25 NUM_INST_26 NUM_INST_27 NUM_INST_28 NUM_INST_29 NUM_INST_3 NUM_INST_30 NUM_INST_31 NUM_INST_4 NUM_INST_5 NUM_INST_6 NUM_INST_7 NUM_INST_8 NUM_INST_9 OUTPUT_PORT_0 OUTPUT_PORT_1 OUTPUT_PORT_10 OUTPUT_PORT_11 OUTPUT_PORT_12 OUTPUT_PORT_13 OUTPUT_PORT_14 OUTPUT_PORT_15 OUTPUT_PORT_16 OUTPUT_PORT_17 OUTPUT_PORT_18 OUTPUT_PORT_19 OUTPUT_PORT_2 OUTPUT_PORT_20 OUTPUT_PORT_21 OUTPUT_PORT_22 OUTPUT_PORT_23 OUTPUT_PORT_24 OUTPUT_PORT_25 OUTPUT_PORT_26 OUTPUT_PORT_27 OUTPUT_PORT_28 OUTPUT_PORT_29 OUTPUT_PORT_3 OUTPUT_PORT_30 OUTPUT_PORT_31 OUTPUT_PORT_4 OUTPUT_PORT_5 OUTPUT_PORT_6 OUTPUT_PORT_7 OUTPUT_PORT_8 OUTPUT_PORT_9 RF_RA1_0 RF_RA1_1 RF_RA1_2 RF_RA1_3 RF_RA1_4 RF_RA2_0 RF_RA2_1 RF_RA2_2 RF_RA2_3 RF_RA2_4 RF_WA1_0 RF_WA1_1 RF_WA1_2 RF_WA1_3 RF_WA1_4 RF_WD_0 RF_WD_1 RF_WD_10 RF_WD_11 RF_WD_12 RF_WD_13 RF_WD_14 RF_WD_15 RF_WD_16 RF_WD_17 RF_WD_18 RF_WD_19 RF_WD_2 RF_WD_20 RF_WD_21 RF_WD_22 RF_WD_23 RF_WD_24 RF_WD_25 RF_WD_26 RF_WD_27 RF_WD_28 RF_WD_29 RF_WD_3 RF_WD_30 RF_WD_31 RF_WD_4 RF_WD_5 RF_WD_6 RF_WD_7 RF_WD_8 RF_WD_9 RF_WE
+
+.names CONST0
+
+.names CONST1
+1
+
+.names NUM_INST_0 CONST1 tmp_xor_0
+10 1
+01 1
+.names tmp_xor_0 CONST0 tmp_ADD_0_0
+10 1
+01 1
+.names NUM_INST_0 CONST1 tmp_and_1
+11 1
+.names NUM_INST_0 CONST0 tmp_and_2
+11 1
+.names CONST1 CONST0 tmp_and_3
+11 1
+.names tmp_and_1 tmp_and_2 tmp_or_4
+1- 1
+-1 1
+.names tmp_or_4 tmp_and_3 tmp_or_5
+1- 1
+-1 1
+.names NUM_INST_1 CONST0 tmp_xor_6
+10 1
+01 1
+.names tmp_xor_6 tmp_or_5 tmp_ADD_0_1
+10 1
+01 1
+.names NUM_INST_1 CONST0 tmp_and_7
+11 1
+.names NUM_INST_1 tmp_or_5 tmp_and_8
+11 1
+.names CONST0 tmp_or_5 tmp_and_9
+11 1
+.names tmp_and_7 tmp_and_8 tmp_or_10
+1- 1
+-1 1
+.names tmp_or_10 tmp_and_9 tmp_or_11
+1- 1
+-1 1
+.names NUM_INST_2 CONST0 tmp_xor_12
+10 1
+01 1
+.names tmp_xor_12 tmp_or_11 tmp_ADD_0_2
+10 1
+01 1
+.names NUM_INST_2 CONST0 tmp_and_13
+11 1
+.names NUM_INST_2 tmp_or_11 tmp_and_14
+11 1
+.names CONST0 tmp_or_11 tmp_and_15
+11 1
+.names tmp_and_13 tmp_and_14 tmp_or_16
+1- 1
+-1 1
+.names tmp_or_16 tmp_and_15 tmp_or_17
+1- 1
+-1 1
+.names NUM_INST_3 CONST0 tmp_xor_18
+10 1
+01 1
+.names tmp_xor_18 tmp_or_17 tmp_ADD_0_3
+10 1
+01 1
+.names NUM_INST_3 CONST0 tmp_and_19
+11 1
+.names NUM_INST_3 tmp_or_17 tmp_and_20
+11 1
+.names CONST0 tmp_or_17 tmp_and_21
+11 1
+.names tmp_and_19 tmp_and_20 tmp_or_22
+1- 1
+-1 1
+.names tmp_or_22 tmp_and_21 tmp_or_23
+1- 1
+-1 1
+.names NUM_INST_4 CONST0 tmp_xor_24
+10 1
+01 1
+.names tmp_xor_24 tmp_or_23 tmp_ADD_0_4
+10 1
+01 1
+.names NUM_INST_4 CONST0 tmp_and_25
+11 1
+.names NUM_INST_4 tmp_or_23 tmp_and_26
+11 1
+.names CONST0 tmp_or_23 tmp_and_27
+11 1
+.names tmp_and_25 tmp_and_26 tmp_or_28
+1- 1
+-1 1
+.names tmp_or_28 tmp_and_27 tmp_or_29
+1- 1
+-1 1
+.names NUM_INST_5 CONST0 tmp_xor_30
+10 1
+01 1
+.names tmp_xor_30 tmp_or_29 tmp_ADD_0_5
+10 1
+01 1
+.names NUM_INST_5 CONST0 tmp_and_31
+11 1
+.names NUM_INST_5 tmp_or_29 tmp_and_32
+11 1
+.names CONST0 tmp_or_29 tmp_and_33
+11 1
+.names tmp_and_31 tmp_and_32 tmp_or_34
+1- 1
+-1 1
+.names tmp_or_34 tmp_and_33 tmp_or_35
+1- 1
+-1 1
+.names NUM_INST_6 CONST0 tmp_xor_36
+10 1
+01 1
+.names tmp_xor_36 tmp_or_35 tmp_ADD_0_6
+10 1
+01 1
+.names NUM_INST_6 CONST0 tmp_and_37
+11 1
+.names NUM_INST_6 tmp_or_35 tmp_and_38
+11 1
+.names CONST0 tmp_or_35 tmp_and_39
+11 1
+.names tmp_and_37 tmp_and_38 tmp_or_40
+1- 1
+-1 1
+.names tmp_or_40 tmp_and_39 tmp_or_41
+1- 1
+-1 1
+.names NUM_INST_7 CONST0 tmp_xor_42
+10 1
+01 1
+.names tmp_xor_42 tmp_or_41 tmp_ADD_0_7
+10 1
+01 1
+.names NUM_INST_7 CONST0 tmp_and_43
+11 1
+.names NUM_INST_7 tmp_or_41 tmp_and_44
+11 1
+.names CONST0 tmp_or_41 tmp_and_45
+11 1
+.names tmp_and_43 tmp_and_44 tmp_or_46
+1- 1
+-1 1
+.names tmp_or_46 tmp_and_45 tmp_or_47
+1- 1
+-1 1
+.names NUM_INST_8 CONST0 tmp_xor_48
+10 1
+01 1
+.names tmp_xor_48 tmp_or_47 tmp_ADD_0_8
+10 1
+01 1
+.names NUM_INST_8 CONST0 tmp_and_49
+11 1
+.names NUM_INST_8 tmp_or_47 tmp_and_50
+11 1
+.names CONST0 tmp_or_47 tmp_and_51
+11 1
+.names tmp_and_49 tmp_and_50 tmp_or_52
+1- 1
+-1 1
+.names tmp_or_52 tmp_and_51 tmp_or_53
+1- 1
+-1 1
+.names NUM_INST_9 CONST0 tmp_xor_54
+10 1
+01 1
+.names tmp_xor_54 tmp_or_53 tmp_ADD_0_9
+10 1
+01 1
+.names NUM_INST_9 CONST0 tmp_and_55
+11 1
+.names NUM_INST_9 tmp_or_53 tmp_and_56
+11 1
+.names CONST0 tmp_or_53 tmp_and_57
+11 1
+.names tmp_and_55 tmp_and_56 tmp_or_58
+1- 1
+-1 1
+.names tmp_or_58 tmp_and_57 tmp_or_59
+1- 1
+-1 1
+.names NUM_INST_10 CONST0 tmp_xor_60
+10 1
+01 1
+.names tmp_xor_60 tmp_or_59 tmp_ADD_0_10
+10 1
+01 1
+.names NUM_INST_10 CONST0 tmp_and_61
+11 1
+.names NUM_INST_10 tmp_or_59 tmp_and_62
+11 1
+.names CONST0 tmp_or_59 tmp_and_63
+11 1
+.names tmp_and_61 tmp_and_62 tmp_or_64
+1- 1
+-1 1
+.names tmp_or_64 tmp_and_63 tmp_or_65
+1- 1
+-1 1
+.names NUM_INST_11 CONST0 tmp_xor_66
+10 1
+01 1
+.names tmp_xor_66 tmp_or_65 tmp_ADD_0_11
+10 1
+01 1
+.names NUM_INST_11 CONST0 tmp_and_67
+11 1
+.names NUM_INST_11 tmp_or_65 tmp_and_68
+11 1
+.names CONST0 tmp_or_65 tmp_and_69
+11 1
+.names tmp_and_67 tmp_and_68 tmp_or_70
+1- 1
+-1 1
+.names tmp_or_70 tmp_and_69 tmp_or_71
+1- 1
+-1 1
+.names NUM_INST_12 CONST0 tmp_xor_72
+10 1
+01 1
+.names tmp_xor_72 tmp_or_71 tmp_ADD_0_12
+10 1
+01 1
+.names NUM_INST_12 CONST0 tmp_and_73
+11 1
+.names NUM_INST_12 tmp_or_71 tmp_and_74
+11 1
+.names CONST0 tmp_or_71 tmp_and_75
+11 1
+.names tmp_and_73 tmp_and_74 tmp_or_76
+1- 1
+-1 1
+.names tmp_or_76 tmp_and_75 tmp_or_77
+1- 1
+-1 1
+.names NUM_INST_13 CONST0 tmp_xor_78
+10 1
+01 1
+.names tmp_xor_78 tmp_or_77 tmp_ADD_0_13
+10 1
+01 1
+.names NUM_INST_13 CONST0 tmp_and_79
+11 1
+.names NUM_INST_13 tmp_or_77 tmp_and_80
+11 1
+.names CONST0 tmp_or_77 tmp_and_81
+11 1
+.names tmp_and_79 tmp_and_80 tmp_or_82
+1- 1
+-1 1
+.names tmp_or_82 tmp_and_81 tmp_or_83
+1- 1
+-1 1
+.names NUM_INST_14 CONST0 tmp_xor_84
+10 1
+01 1
+.names tmp_xor_84 tmp_or_83 tmp_ADD_0_14
+10 1
+01 1
+.names NUM_INST_14 CONST0 tmp_and_85
+11 1
+.names NUM_INST_14 tmp_or_83 tmp_and_86
+11 1
+.names CONST0 tmp_or_83 tmp_and_87
+11 1
+.names tmp_and_85 tmp_and_86 tmp_or_88
+1- 1
+-1 1
+.names tmp_or_88 tmp_and_87 tmp_or_89
+1- 1
+-1 1
+.names NUM_INST_15 CONST0 tmp_xor_90
+10 1
+01 1
+.names tmp_xor_90 tmp_or_89 tmp_ADD_0_15
+10 1
+01 1
+.names NUM_INST_15 CONST0 tmp_and_91
+11 1
+.names NUM_INST_15 tmp_or_89 tmp_and_92
+11 1
+.names CONST0 tmp_or_89 tmp_and_93
+11 1
+.names tmp_and_91 tmp_and_92 tmp_or_94
+1- 1
+-1 1
+.names tmp_or_94 tmp_and_93 tmp_or_95
+1- 1
+-1 1
+.names NUM_INST_16 CONST0 tmp_xor_96
+10 1
+01 1
+.names tmp_xor_96 tmp_or_95 tmp_ADD_0_16
+10 1
+01 1
+.names NUM_INST_16 CONST0 tmp_and_97
+11 1
+.names NUM_INST_16 tmp_or_95 tmp_and_98
+11 1
+.names CONST0 tmp_or_95 tmp_and_99
+11 1
+.names tmp_and_97 tmp_and_98 tmp_or_100
+1- 1
+-1 1
+.names tmp_or_100 tmp_and_99 tmp_or_101
+1- 1
+-1 1
+.names NUM_INST_17 CONST0 tmp_xor_102
+10 1
+01 1
+.names tmp_xor_102 tmp_or_101 tmp_ADD_0_17
+10 1
+01 1
+.names NUM_INST_17 CONST0 tmp_and_103
+11 1
+.names NUM_INST_17 tmp_or_101 tmp_and_104
+11 1
+.names CONST0 tmp_or_101 tmp_and_105
+11 1
+.names tmp_and_103 tmp_and_104 tmp_or_106
+1- 1
+-1 1
+.names tmp_or_106 tmp_and_105 tmp_or_107
+1- 1
+-1 1
+.names NUM_INST_18 CONST0 tmp_xor_108
+10 1
+01 1
+.names tmp_xor_108 tmp_or_107 tmp_ADD_0_18
+10 1
+01 1
+.names NUM_INST_18 CONST0 tmp_and_109
+11 1
+.names NUM_INST_18 tmp_or_107 tmp_and_110
+11 1
+.names CONST0 tmp_or_107 tmp_and_111
+11 1
+.names tmp_and_109 tmp_and_110 tmp_or_112
+1- 1
+-1 1
+.names tmp_or_112 tmp_and_111 tmp_or_113
+1- 1
+-1 1
+.names NUM_INST_19 CONST0 tmp_xor_114
+10 1
+01 1
+.names tmp_xor_114 tmp_or_113 tmp_ADD_0_19
+10 1
+01 1
+.names NUM_INST_19 CONST0 tmp_and_115
+11 1
+.names NUM_INST_19 tmp_or_113 tmp_and_116
+11 1
+.names CONST0 tmp_or_113 tmp_and_117
+11 1
+.names tmp_and_115 tmp_and_116 tmp_or_118
+1- 1
+-1 1
+.names tmp_or_118 tmp_and_117 tmp_or_119
+1- 1
+-1 1
+.names NUM_INST_20 CONST0 tmp_xor_120
+10 1
+01 1
+.names tmp_xor_120 tmp_or_119 tmp_ADD_0_20
+10 1
+01 1
+.names NUM_INST_20 CONST0 tmp_and_121
+11 1
+.names NUM_INST_20 tmp_or_119 tmp_and_122
+11 1
+.names CONST0 tmp_or_119 tmp_and_123
+11 1
+.names tmp_and_121 tmp_and_122 tmp_or_124
+1- 1
+-1 1
+.names tmp_or_124 tmp_and_123 tmp_or_125
+1- 1
+-1 1
+.names NUM_INST_21 CONST0 tmp_xor_126
+10 1
+01 1
+.names tmp_xor_126 tmp_or_125 tmp_ADD_0_21
+10 1
+01 1
+.names NUM_INST_21 CONST0 tmp_and_127
+11 1
+.names NUM_INST_21 tmp_or_125 tmp_and_128
+11 1
+.names CONST0 tmp_or_125 tmp_and_129
+11 1
+.names tmp_and_127 tmp_and_128 tmp_or_130
+1- 1
+-1 1
+.names tmp_or_130 tmp_and_129 tmp_or_131
+1- 1
+-1 1
+.names NUM_INST_22 CONST0 tmp_xor_132
+10 1
+01 1
+.names tmp_xor_132 tmp_or_131 tmp_ADD_0_22
+10 1
+01 1
+.names NUM_INST_22 CONST0 tmp_and_133
+11 1
+.names NUM_INST_22 tmp_or_131 tmp_and_134
+11 1
+.names CONST0 tmp_or_131 tmp_and_135
+11 1
+.names tmp_and_133 tmp_and_134 tmp_or_136
+1- 1
+-1 1
+.names tmp_or_136 tmp_and_135 tmp_or_137
+1- 1
+-1 1
+.names NUM_INST_23 CONST0 tmp_xor_138
+10 1
+01 1
+.names tmp_xor_138 tmp_or_137 tmp_ADD_0_23
+10 1
+01 1
+.names NUM_INST_23 CONST0 tmp_and_139
+11 1
+.names NUM_INST_23 tmp_or_137 tmp_and_140
+11 1
+.names CONST0 tmp_or_137 tmp_and_141
+11 1
+.names tmp_and_139 tmp_and_140 tmp_or_142
+1- 1
+-1 1
+.names tmp_or_142 tmp_and_141 tmp_or_143
+1- 1
+-1 1
+.names NUM_INST_24 CONST0 tmp_xor_144
+10 1
+01 1
+.names tmp_xor_144 tmp_or_143 tmp_ADD_0_24
+10 1
+01 1
+.names NUM_INST_24 CONST0 tmp_and_145
+11 1
+.names NUM_INST_24 tmp_or_143 tmp_and_146
+11 1
+.names CONST0 tmp_or_143 tmp_and_147
+11 1
+.names tmp_and_145 tmp_and_146 tmp_or_148
+1- 1
+-1 1
+.names tmp_or_148 tmp_and_147 tmp_or_149
+1- 1
+-1 1
+.names NUM_INST_25 CONST0 tmp_xor_150
+10 1
+01 1
+.names tmp_xor_150 tmp_or_149 tmp_ADD_0_25
+10 1
+01 1
+.names NUM_INST_25 CONST0 tmp_and_151
+11 1
+.names NUM_INST_25 tmp_or_149 tmp_and_152
+11 1
+.names CONST0 tmp_or_149 tmp_and_153
+11 1
+.names tmp_and_151 tmp_and_152 tmp_or_154
+1- 1
+-1 1
+.names tmp_or_154 tmp_and_153 tmp_or_155
+1- 1
+-1 1
+.names NUM_INST_26 CONST0 tmp_xor_156
+10 1
+01 1
+.names tmp_xor_156 tmp_or_155 tmp_ADD_0_26
+10 1
+01 1
+.names NUM_INST_26 CONST0 tmp_and_157
+11 1
+.names NUM_INST_26 tmp_or_155 tmp_and_158
+11 1
+.names CONST0 tmp_or_155 tmp_and_159
+11 1
+.names tmp_and_157 tmp_and_158 tmp_or_160
+1- 1
+-1 1
+.names tmp_or_160 tmp_and_159 tmp_or_161
+1- 1
+-1 1
+.names NUM_INST_27 CONST0 tmp_xor_162
+10 1
+01 1
+.names tmp_xor_162 tmp_or_161 tmp_ADD_0_27
+10 1
+01 1
+.names NUM_INST_27 CONST0 tmp_and_163
+11 1
+.names NUM_INST_27 tmp_or_161 tmp_and_164
+11 1
+.names CONST0 tmp_or_161 tmp_and_165
+11 1
+.names tmp_and_163 tmp_and_164 tmp_or_166
+1- 1
+-1 1
+.names tmp_or_166 tmp_and_165 tmp_or_167
+1- 1
+-1 1
+.names NUM_INST_28 CONST0 tmp_xor_168
+10 1
+01 1
+.names tmp_xor_168 tmp_or_167 tmp_ADD_0_28
+10 1
+01 1
+.names NUM_INST_28 CONST0 tmp_and_169
+11 1
+.names NUM_INST_28 tmp_or_167 tmp_and_170
+11 1
+.names CONST0 tmp_or_167 tmp_and_171
+11 1
+.names tmp_and_169 tmp_and_170 tmp_or_172
+1- 1
+-1 1
+.names tmp_or_172 tmp_and_171 tmp_or_173
+1- 1
+-1 1
+.names NUM_INST_29 CONST0 tmp_xor_174
+10 1
+01 1
+.names tmp_xor_174 tmp_or_173 tmp_ADD_0_29
+10 1
+01 1
+.names NUM_INST_29 CONST0 tmp_and_175
+11 1
+.names NUM_INST_29 tmp_or_173 tmp_and_176
+11 1
+.names CONST0 tmp_or_173 tmp_and_177
+11 1
+.names tmp_and_175 tmp_and_176 tmp_or_178
+1- 1
+-1 1
+.names tmp_or_178 tmp_and_177 tmp_or_179
+1- 1
+-1 1
+.names NUM_INST_30 CONST0 tmp_xor_180
+10 1
+01 1
+.names tmp_xor_180 tmp_or_179 tmp_ADD_0_30
+10 1
+01 1
+.names NUM_INST_30 CONST0 tmp_and_181
+11 1
+.names NUM_INST_30 tmp_or_179 tmp_and_182
+11 1
+.names CONST0 tmp_or_179 tmp_and_183
+11 1
+.names tmp_and_181 tmp_and_182 tmp_or_184
+1- 1
+-1 1
+.names tmp_or_184 tmp_and_183 tmp_or_185
+1- 1
+-1 1
+.names NUM_INST_31 CONST0 tmp_xor_186
+10 1
+01 1
+.names tmp_xor_186 tmp_or_185 tmp_ADD_0_31
+10 1
+01 1
+.names NUM_INST_31 CONST0 tmp_and_187
+11 1
+.names NUM_INST_31 tmp_or_185 tmp_and_188
+11 1
+.names CONST0 tmp_or_185 tmp_and_189
+11 1
+.names tmp_and_187 tmp_and_188 tmp_or_190
+1- 1
+-1 1
+.names tmp_or_190 tmp_and_189 tmp_or_191
+1- 1
+-1 1
+.names RSTn tmp_ADD_0_0 NUM_INST_0 mux_NUM_INST_0_0
+11- 1
+0-1 1
+.names RSTn tmp_ADD_0_1 NUM_INST_1 mux_NUM_INST_0_1
+11- 1
+0-1 1
+.names RSTn tmp_ADD_0_2 NUM_INST_2 mux_NUM_INST_0_2
+11- 1
+0-1 1
+.names RSTn tmp_ADD_0_3 NUM_INST_3 mux_NUM_INST_0_3
+11- 1
+0-1 1
+.names RSTn tmp_ADD_0_4 NUM_INST_4 mux_NUM_INST_0_4
+11- 1
+0-1 1
+.names RSTn tmp_ADD_0_5 NUM_INST_5 mux_NUM_INST_0_5
+11- 1
+0-1 1
+.names RSTn tmp_ADD_0_6 NUM_INST_6 mux_NUM_INST_0_6
+11- 1
+0-1 1
+.names RSTn tmp_ADD_0_7 NUM_INST_7 mux_NUM_INST_0_7
+11- 1
+0-1 1
+.names RSTn tmp_ADD_0_8 NUM_INST_8 mux_NUM_INST_0_8
+11- 1
+0-1 1
+.names RSTn tmp_ADD_0_9 NUM_INST_9 mux_NUM_INST_0_9
+11- 1
+0-1 1
+.names RSTn tmp_ADD_0_10 NUM_INST_10 mux_NUM_INST_0_10
+11- 1
+0-1 1
+.names RSTn tmp_ADD_0_11 NUM_INST_11 mux_NUM_INST_0_11
+11- 1
+0-1 1
+.names RSTn tmp_ADD_0_12 NUM_INST_12 mux_NUM_INST_0_12
+11- 1
+0-1 1
+.names RSTn tmp_ADD_0_13 NUM_INST_13 mux_NUM_INST_0_13
+11- 1
+0-1 1
+.names RSTn tmp_ADD_0_14 NUM_INST_14 mux_NUM_INST_0_14
+11- 1
+0-1 1
+.names RSTn tmp_ADD_0_15 NUM_INST_15 mux_NUM_INST_0_15
+11- 1
+0-1 1
+.names RSTn tmp_ADD_0_16 NUM_INST_16 mux_NUM_INST_0_16
+11- 1
+0-1 1
+.names RSTn tmp_ADD_0_17 NUM_INST_17 mux_NUM_INST_0_17
+11- 1
+0-1 1
+.names RSTn tmp_ADD_0_18 NUM_INST_18 mux_NUM_INST_0_18
+11- 1
+0-1 1
+.names RSTn tmp_ADD_0_19 NUM_INST_19 mux_NUM_INST_0_19
+11- 1
+0-1 1
+.names RSTn tmp_ADD_0_20 NUM_INST_20 mux_NUM_INST_0_20
+11- 1
+0-1 1
+.names RSTn tmp_ADD_0_21 NUM_INST_21 mux_NUM_INST_0_21
+11- 1
+0-1 1
+.names RSTn tmp_ADD_0_22 NUM_INST_22 mux_NUM_INST_0_22
+11- 1
+0-1 1
+.names RSTn tmp_ADD_0_23 NUM_INST_23 mux_NUM_INST_0_23
+11- 1
+0-1 1
+.names RSTn tmp_ADD_0_24 NUM_INST_24 mux_NUM_INST_0_24
+11- 1
+0-1 1
+.names RSTn tmp_ADD_0_25 NUM_INST_25 mux_NUM_INST_0_25
+11- 1
+0-1 1
+.names RSTn tmp_ADD_0_26 NUM_INST_26 mux_NUM_INST_0_26
+11- 1
+0-1 1
+.names RSTn tmp_ADD_0_27 NUM_INST_27 mux_NUM_INST_0_27
+11- 1
+0-1 1
+.names RSTn tmp_ADD_0_28 NUM_INST_28 mux_NUM_INST_0_28
+11- 1
+0-1 1
+.names RSTn tmp_ADD_0_29 NUM_INST_29 mux_NUM_INST_0_29
+11- 1
+0-1 1
+.names RSTn tmp_ADD_0_30 NUM_INST_30 mux_NUM_INST_0_30
+11- 1
+0-1 1
+.names RSTn tmp_ADD_0_31 NUM_INST_31 mux_NUM_INST_0_31
+11- 1
+0-1 1
+.names mux_NUM_INST_0_0 CONST1 NUM_INST_0
+11 1
+.names mux_NUM_INST_0_1 CONST1 NUM_INST_1
+11 1
+.names mux_NUM_INST_0_2 CONST1 NUM_INST_2
+11 1
+.names mux_NUM_INST_0_3 CONST1 NUM_INST_3
+11 1
+.names mux_NUM_INST_0_4 CONST1 NUM_INST_4
+11 1
+.names mux_NUM_INST_0_5 CONST1 NUM_INST_5
+11 1
+.names mux_NUM_INST_0_6 CONST1 NUM_INST_6
+11 1
+.names mux_NUM_INST_0_7 CONST1 NUM_INST_7
+11 1
+.names mux_NUM_INST_0_8 CONST1 NUM_INST_8
+11 1
+.names mux_NUM_INST_0_9 CONST1 NUM_INST_9
+11 1
+.names mux_NUM_INST_0_10 CONST1 NUM_INST_10
+11 1
+.names mux_NUM_INST_0_11 CONST1 NUM_INST_11
+11 1
+.names mux_NUM_INST_0_12 CONST1 NUM_INST_12
+11 1
+.names mux_NUM_INST_0_13 CONST1 NUM_INST_13
+11 1
+.names mux_NUM_INST_0_14 CONST1 NUM_INST_14
+11 1
+.names mux_NUM_INST_0_15 CONST1 NUM_INST_15
+11 1
+.names mux_NUM_INST_0_16 CONST1 NUM_INST_16
+11 1
+.names mux_NUM_INST_0_17 CONST1 NUM_INST_17
+11 1
+.names mux_NUM_INST_0_18 CONST1 NUM_INST_18
+11 1
+.names mux_NUM_INST_0_19 CONST1 NUM_INST_19
+11 1
+.names mux_NUM_INST_0_20 CONST1 NUM_INST_20
+11 1
+.names mux_NUM_INST_0_21 CONST1 NUM_INST_21
+11 1
+.names mux_NUM_INST_0_22 CONST1 NUM_INST_22
+11 1
+.names mux_NUM_INST_0_23 CONST1 NUM_INST_23
+11 1
+.names mux_NUM_INST_0_24 CONST1 NUM_INST_24
+11 1
+.names mux_NUM_INST_0_25 CONST1 NUM_INST_25
+11 1
+.names mux_NUM_INST_0_26 CONST1 NUM_INST_26
+11 1
+.names mux_NUM_INST_0_27 CONST1 NUM_INST_27
+11 1
+.names mux_NUM_INST_0_28 CONST1 NUM_INST_28
+11 1
+.names mux_NUM_INST_0_29 CONST1 NUM_INST_29
+11 1
+.names mux_NUM_INST_0_30 CONST1 NUM_INST_30
+11 1
+.names mux_NUM_INST_0_31 CONST1 NUM_INST_31
+11 1
+.names I_MEM_DI_0 CONST1 tmp_slice_6_0_3_0
+11 1
+.names I_MEM_DI_1 CONST1 tmp_slice_6_0_3_1
+11 1
+.names I_MEM_DI_2 CONST1 tmp_slice_6_0_3_2
+11 1
+.names I_MEM_DI_3 CONST1 tmp_slice_6_0_3_3
+11 1
+.names I_MEM_DI_4 CONST1 tmp_slice_6_0_3_4
+11 1
+.names I_MEM_DI_5 CONST1 tmp_slice_6_0_3_5
+11 1
+.names I_MEM_DI_6 CONST1 tmp_slice_6_0_3_6
+11 1
+.names I_MEM_DI_12 CONST1 tmp_slice_14_12_4_0
+11 1
+.names I_MEM_DI_13 CONST1 tmp_slice_14_12_4_1
+11 1
+.names I_MEM_DI_14 CONST1 tmp_slice_14_12_4_2
+11 1
+.names I_MEM_DI_12 CONST1 tmp_slice_14_12_5_0
+11 1
+.names I_MEM_DI_13 CONST1 tmp_slice_14_12_5_1
+11 1
+.names I_MEM_DI_14 CONST1 tmp_slice_14_12_5_2
+11 1
+.names I_MEM_DI_25 CONST1 tmp_slice_31_25_6_0
+11 1
+.names I_MEM_DI_26 CONST1 tmp_slice_31_25_6_1
+11 1
+.names I_MEM_DI_27 CONST1 tmp_slice_31_25_6_2
+11 1
+.names I_MEM_DI_28 CONST1 tmp_slice_31_25_6_3
+11 1
+.names I_MEM_DI_29 CONST1 tmp_slice_31_25_6_4
+11 1
+.names I_MEM_DI_30 CONST1 tmp_slice_31_25_6_5
+11 1
+.names I_MEM_DI_31 CONST1 tmp_slice_31_25_6_6
+11 1
+.names ALUSrc1 PC_0 RF_RD1_0 tmp_cond_7_0
+11- 1
+0-1 1
+.names ALUSrc1 PC_1 RF_RD1_1 tmp_cond_7_1
+11- 1
+0-1 1
+.names ALUSrc1 PC_2 RF_RD1_2 tmp_cond_7_2
+11- 1
+0-1 1
+.names ALUSrc1 PC_3 RF_RD1_3 tmp_cond_7_3
+11- 1
+0-1 1
+.names ALUSrc1 PC_4 RF_RD1_4 tmp_cond_7_4
+11- 1
+0-1 1
+.names ALUSrc1 PC_5 RF_RD1_5 tmp_cond_7_5
+11- 1
+0-1 1
+.names ALUSrc1 PC_6 RF_RD1_6 tmp_cond_7_6
+11- 1
+0-1 1
+.names ALUSrc1 PC_7 RF_RD1_7 tmp_cond_7_7
+11- 1
+0-1 1
+.names ALUSrc1 PC_8 RF_RD1_8 tmp_cond_7_8
+11- 1
+0-1 1
+.names ALUSrc1 PC_9 RF_RD1_9 tmp_cond_7_9
+11- 1
+0-1 1
+.names ALUSrc1 PC_10 RF_RD1_10 tmp_cond_7_10
+11- 1
+0-1 1
+.names ALUSrc1 PC_11 RF_RD1_11 tmp_cond_7_11
+11- 1
+0-1 1
+.names ALUSrc1 PC_12 RF_RD1_12 tmp_cond_7_12
+11- 1
+0-1 1
+.names ALUSrc1 PC_13 RF_RD1_13 tmp_cond_7_13
+11- 1
+0-1 1
+.names ALUSrc1 PC_14 RF_RD1_14 tmp_cond_7_14
+11- 1
+0-1 1
+.names ALUSrc1 PC_15 RF_RD1_15 tmp_cond_7_15
+11- 1
+0-1 1
+.names ALUSrc1 PC_16 RF_RD1_16 tmp_cond_7_16
+11- 1
+0-1 1
+.names ALUSrc1 PC_17 RF_RD1_17 tmp_cond_7_17
+11- 1
+0-1 1
+.names ALUSrc1 PC_18 RF_RD1_18 tmp_cond_7_18
+11- 1
+0-1 1
+.names ALUSrc1 PC_19 RF_RD1_19 tmp_cond_7_19
+11- 1
+0-1 1
+.names ALUSrc1 PC_20 RF_RD1_20 tmp_cond_7_20
+11- 1
+0-1 1
+.names ALUSrc1 PC_21 RF_RD1_21 tmp_cond_7_21
+11- 1
+0-1 1
+.names ALUSrc1 PC_22 RF_RD1_22 tmp_cond_7_22
+11- 1
+0-1 1
+.names ALUSrc1 PC_23 RF_RD1_23 tmp_cond_7_23
+11- 1
+0-1 1
+.names ALUSrc1 PC_24 RF_RD1_24 tmp_cond_7_24
+11- 1
+0-1 1
+.names ALUSrc1 PC_25 RF_RD1_25 tmp_cond_7_25
+11- 1
+0-1 1
+.names ALUSrc1 PC_26 RF_RD1_26 tmp_cond_7_26
+11- 1
+0-1 1
+.names ALUSrc1 PC_27 RF_RD1_27 tmp_cond_7_27
+11- 1
+0-1 1
+.names ALUSrc1 PC_28 RF_RD1_28 tmp_cond_7_28
+11- 1
+0-1 1
+.names ALUSrc1 PC_29 RF_RD1_29 tmp_cond_7_29
+11- 1
+0-1 1
+.names ALUSrc1 PC_30 RF_RD1_30 tmp_cond_7_30
+11- 1
+0-1 1
+.names ALUSrc1 PC_31 RF_RD1_31 tmp_cond_7_31
+11- 1
+0-1 1
+.names ALUSrc2 offset_0 RF_RD2_0 tmp_cond_8_0
+11- 1
+0-1 1
+.names ALUSrc2 offset_1 RF_RD2_1 tmp_cond_8_1
+11- 1
+0-1 1
+.names ALUSrc2 offset_2 RF_RD2_2 tmp_cond_8_2
+11- 1
+0-1 1
+.names ALUSrc2 offset_3 RF_RD2_3 tmp_cond_8_3
+11- 1
+0-1 1
+.names ALUSrc2 offset_4 RF_RD2_4 tmp_cond_8_4
+11- 1
+0-1 1
+.names ALUSrc2 offset_5 RF_RD2_5 tmp_cond_8_5
+11- 1
+0-1 1
+.names ALUSrc2 offset_6 RF_RD2_6 tmp_cond_8_6
+11- 1
+0-1 1
+.names ALUSrc2 offset_7 RF_RD2_7 tmp_cond_8_7
+11- 1
+0-1 1
+.names ALUSrc2 offset_8 RF_RD2_8 tmp_cond_8_8
+11- 1
+0-1 1
+.names ALUSrc2 offset_9 RF_RD2_9 tmp_cond_8_9
+11- 1
+0-1 1
+.names ALUSrc2 offset_10 RF_RD2_10 tmp_cond_8_10
+11- 1
+0-1 1
+.names ALUSrc2 offset_11 RF_RD2_11 tmp_cond_8_11
+11- 1
+0-1 1
+.names ALUSrc2 offset_12 RF_RD2_12 tmp_cond_8_12
+11- 1
+0-1 1
+.names ALUSrc2 offset_13 RF_RD2_13 tmp_cond_8_13
+11- 1
+0-1 1
+.names ALUSrc2 offset_14 RF_RD2_14 tmp_cond_8_14
+11- 1
+0-1 1
+.names ALUSrc2 offset_15 RF_RD2_15 tmp_cond_8_15
+11- 1
+0-1 1
+.names ALUSrc2 offset_16 RF_RD2_16 tmp_cond_8_16
+11- 1
+0-1 1
+.names ALUSrc2 offset_17 RF_RD2_17 tmp_cond_8_17
+11- 1
+0-1 1
+.names ALUSrc2 offset_18 RF_RD2_18 tmp_cond_8_18
+11- 1
+0-1 1
+.names ALUSrc2 offset_19 RF_RD2_19 tmp_cond_8_19
+11- 1
+0-1 1
+.names ALUSrc2 offset_20 RF_RD2_20 tmp_cond_8_20
+11- 1
+0-1 1
+.names ALUSrc2 offset_21 RF_RD2_21 tmp_cond_8_21
+11- 1
+0-1 1
+.names ALUSrc2 offset_22 RF_RD2_22 tmp_cond_8_22
+11- 1
+0-1 1
+.names ALUSrc2 offset_23 RF_RD2_23 tmp_cond_8_23
+11- 1
+0-1 1
+.names ALUSrc2 offset_24 RF_RD2_24 tmp_cond_8_24
+11- 1
+0-1 1
+.names ALUSrc2 offset_25 RF_RD2_25 tmp_cond_8_25
+11- 1
+0-1 1
+.names ALUSrc2 offset_26 RF_RD2_26 tmp_cond_8_26
+11- 1
+0-1 1
+.names ALUSrc2 offset_27 RF_RD2_27 tmp_cond_8_27
+11- 1
+0-1 1
+.names ALUSrc2 offset_28 RF_RD2_28 tmp_cond_8_28
+11- 1
+0-1 1
+.names ALUSrc2 offset_29 RF_RD2_29 tmp_cond_8_29
+11- 1
+0-1 1
+.names ALUSrc2 offset_30 RF_RD2_30 tmp_cond_8_30
+11- 1
+0-1 1
+.names ALUSrc2 offset_31 RF_RD2_31 tmp_cond_8_31
+11- 1
+0-1 1
+.names ALU_Result_0 CONST1 JAL_Address_0
+11 1
+.names ALU_Result_1 CONST1 JAL_Address_1
+11 1
+.names ALU_Result_2 CONST1 JAL_Address_2
+11 1
+.names ALU_Result_3 CONST1 JAL_Address_3
+11 1
+.names ALU_Result_4 CONST1 JAL_Address_4
+11 1
+.names ALU_Result_5 CONST1 JAL_Address_5
+11 1
+.names ALU_Result_6 CONST1 JAL_Address_6
+11 1
+.names ALU_Result_7 CONST1 JAL_Address_7
+11 1
+.names ALU_Result_8 CONST1 JAL_Address_8
+11 1
+.names ALU_Result_9 CONST1 JAL_Address_9
+11 1
+.names ALU_Result_10 CONST1 JAL_Address_10
+11 1
+.names ALU_Result_11 CONST1 JAL_Address_11
+11 1
+.names ALU_Result_12 CONST1 JAL_Address_12
+11 1
+.names ALU_Result_13 CONST1 JAL_Address_13
+11 1
+.names ALU_Result_14 CONST1 JAL_Address_14
+11 1
+.names ALU_Result_15 CONST1 JAL_Address_15
+11 1
+.names ALU_Result_16 CONST1 JAL_Address_16
+11 1
+.names ALU_Result_17 CONST1 JAL_Address_17
+11 1
+.names ALU_Result_18 CONST1 JAL_Address_18
+11 1
+.names ALU_Result_19 CONST1 JAL_Address_19
+11 1
+.names ALU_Result_20 CONST1 JAL_Address_20
+11 1
+.names ALU_Result_21 CONST1 JAL_Address_21
+11 1
+.names ALU_Result_22 CONST1 JAL_Address_22
+11 1
+.names ALU_Result_23 CONST1 JAL_Address_23
+11 1
+.names ALU_Result_24 CONST1 JAL_Address_24
+11 1
+.names ALU_Result_25 CONST1 JAL_Address_25
+11 1
+.names ALU_Result_26 CONST1 JAL_Address_26
+11 1
+.names ALU_Result_27 CONST1 JAL_Address_27
+11 1
+.names ALU_Result_28 CONST1 JAL_Address_28
+11 1
+.names ALU_Result_29 CONST1 JAL_Address_29
+11 1
+.names ALU_Result_30 CONST1 JAL_Address_30
+11 1
+.names ALU_Result_31 CONST1 JAL_Address_31
+11 1
+.names ALU_Result_0 CONST0 tmp_AND_10
+11 1
+.names tmp_AND_10 CONST1 JALR_Address_0
+11 1
+.names CONST0 CONST1 JALR_Address_1
+11 1
+.names CONST0 CONST1 JALR_Address_2
+11 1
+.names CONST0 CONST1 JALR_Address_3
+11 1
+.names CONST0 CONST1 JALR_Address_4
+11 1
+.names CONST0 CONST1 JALR_Address_5
+11 1
+.names CONST0 CONST1 JALR_Address_6
+11 1
+.names CONST0 CONST1 JALR_Address_7
+11 1
+.names CONST0 CONST1 JALR_Address_8
+11 1
+.names CONST0 CONST1 JALR_Address_9
+11 1
+.names CONST0 CONST1 JALR_Address_10
+11 1
+.names CONST0 CONST1 JALR_Address_11
+11 1
+.names CONST0 CONST1 JALR_Address_12
+11 1
+.names CONST0 CONST1 JALR_Address_13
+11 1
+.names CONST0 CONST1 JALR_Address_14
+11 1
+.names CONST0 CONST1 JALR_Address_15
+11 1
+.names CONST0 CONST1 JALR_Address_16
+11 1
+.names CONST0 CONST1 JALR_Address_17
+11 1
+.names CONST0 CONST1 JALR_Address_18
+11 1
+.names CONST0 CONST1 JALR_Address_19
+11 1
+.names CONST0 CONST1 JALR_Address_20
+11 1
+.names CONST0 CONST1 JALR_Address_21
+11 1
+.names CONST0 CONST1 JALR_Address_22
+11 1
+.names CONST0 CONST1 JALR_Address_23
+11 1
+.names CONST0 CONST1 JALR_Address_24
+11 1
+.names CONST0 CONST1 JALR_Address_25
+11 1
+.names CONST0 CONST1 JALR_Address_26
+11 1
+.names CONST0 CONST1 JALR_Address_27
+11 1
+.names CONST0 CONST1 JALR_Address_28
+11 1
+.names CONST0 CONST1 JALR_Address_29
+11 1
+.names CONST0 CONST1 JALR_Address_30
+11 1
+.names CONST0 CONST1 JALR_Address_31
+11 1
+.names offset_0 PC_0 tmp_xor_192
+10 1
+01 1
+.names tmp_xor_192 CONST0 tmp_ADD_12_0
+10 1
+01 1
+.names offset_0 PC_0 tmp_and_193
+11 1
+.names offset_0 CONST0 tmp_and_194
+11 1
+.names PC_0 CONST0 tmp_and_195
+11 1
+.names tmp_and_193 tmp_and_194 tmp_or_196
+1- 1
+-1 1
+.names tmp_or_196 tmp_and_195 tmp_or_197
+1- 1
+-1 1
+.names offset_1 PC_1 tmp_xor_198
+10 1
+01 1
+.names tmp_xor_198 tmp_or_197 tmp_ADD_12_1
+10 1
+01 1
+.names offset_1 PC_1 tmp_and_199
+11 1
+.names offset_1 tmp_or_197 tmp_and_200
+11 1
+.names PC_1 tmp_or_197 tmp_and_201
+11 1
+.names tmp_and_199 tmp_and_200 tmp_or_202
+1- 1
+-1 1
+.names tmp_or_202 tmp_and_201 tmp_or_203
+1- 1
+-1 1
+.names offset_2 PC_2 tmp_xor_204
+10 1
+01 1
+.names tmp_xor_204 tmp_or_203 tmp_ADD_12_2
+10 1
+01 1
+.names offset_2 PC_2 tmp_and_205
+11 1
+.names offset_2 tmp_or_203 tmp_and_206
+11 1
+.names PC_2 tmp_or_203 tmp_and_207
+11 1
+.names tmp_and_205 tmp_and_206 tmp_or_208
+1- 1
+-1 1
+.names tmp_or_208 tmp_and_207 tmp_or_209
+1- 1
+-1 1
+.names offset_3 PC_3 tmp_xor_210
+10 1
+01 1
+.names tmp_xor_210 tmp_or_209 tmp_ADD_12_3
+10 1
+01 1
+.names offset_3 PC_3 tmp_and_211
+11 1
+.names offset_3 tmp_or_209 tmp_and_212
+11 1
+.names PC_3 tmp_or_209 tmp_and_213
+11 1
+.names tmp_and_211 tmp_and_212 tmp_or_214
+1- 1
+-1 1
+.names tmp_or_214 tmp_and_213 tmp_or_215
+1- 1
+-1 1
+.names offset_4 PC_4 tmp_xor_216
+10 1
+01 1
+.names tmp_xor_216 tmp_or_215 tmp_ADD_12_4
+10 1
+01 1
+.names offset_4 PC_4 tmp_and_217
+11 1
+.names offset_4 tmp_or_215 tmp_and_218
+11 1
+.names PC_4 tmp_or_215 tmp_and_219
+11 1
+.names tmp_and_217 tmp_and_218 tmp_or_220
+1- 1
+-1 1
+.names tmp_or_220 tmp_and_219 tmp_or_221
+1- 1
+-1 1
+.names offset_5 PC_5 tmp_xor_222
+10 1
+01 1
+.names tmp_xor_222 tmp_or_221 tmp_ADD_12_5
+10 1
+01 1
+.names offset_5 PC_5 tmp_and_223
+11 1
+.names offset_5 tmp_or_221 tmp_and_224
+11 1
+.names PC_5 tmp_or_221 tmp_and_225
+11 1
+.names tmp_and_223 tmp_and_224 tmp_or_226
+1- 1
+-1 1
+.names tmp_or_226 tmp_and_225 tmp_or_227
+1- 1
+-1 1
+.names offset_6 PC_6 tmp_xor_228
+10 1
+01 1
+.names tmp_xor_228 tmp_or_227 tmp_ADD_12_6
+10 1
+01 1
+.names offset_6 PC_6 tmp_and_229
+11 1
+.names offset_6 tmp_or_227 tmp_and_230
+11 1
+.names PC_6 tmp_or_227 tmp_and_231
+11 1
+.names tmp_and_229 tmp_and_230 tmp_or_232
+1- 1
+-1 1
+.names tmp_or_232 tmp_and_231 tmp_or_233
+1- 1
+-1 1
+.names offset_7 PC_7 tmp_xor_234
+10 1
+01 1
+.names tmp_xor_234 tmp_or_233 tmp_ADD_12_7
+10 1
+01 1
+.names offset_7 PC_7 tmp_and_235
+11 1
+.names offset_7 tmp_or_233 tmp_and_236
+11 1
+.names PC_7 tmp_or_233 tmp_and_237
+11 1
+.names tmp_and_235 tmp_and_236 tmp_or_238
+1- 1
+-1 1
+.names tmp_or_238 tmp_and_237 tmp_or_239
+1- 1
+-1 1
+.names offset_8 PC_8 tmp_xor_240
+10 1
+01 1
+.names tmp_xor_240 tmp_or_239 tmp_ADD_12_8
+10 1
+01 1
+.names offset_8 PC_8 tmp_and_241
+11 1
+.names offset_8 tmp_or_239 tmp_and_242
+11 1
+.names PC_8 tmp_or_239 tmp_and_243
+11 1
+.names tmp_and_241 tmp_and_242 tmp_or_244
+1- 1
+-1 1
+.names tmp_or_244 tmp_and_243 tmp_or_245
+1- 1
+-1 1
+.names offset_9 PC_9 tmp_xor_246
+10 1
+01 1
+.names tmp_xor_246 tmp_or_245 tmp_ADD_12_9
+10 1
+01 1
+.names offset_9 PC_9 tmp_and_247
+11 1
+.names offset_9 tmp_or_245 tmp_and_248
+11 1
+.names PC_9 tmp_or_245 tmp_and_249
+11 1
+.names tmp_and_247 tmp_and_248 tmp_or_250
+1- 1
+-1 1
+.names tmp_or_250 tmp_and_249 tmp_or_251
+1- 1
+-1 1
+.names offset_10 PC_10 tmp_xor_252
+10 1
+01 1
+.names tmp_xor_252 tmp_or_251 tmp_ADD_12_10
+10 1
+01 1
+.names offset_10 PC_10 tmp_and_253
+11 1
+.names offset_10 tmp_or_251 tmp_and_254
+11 1
+.names PC_10 tmp_or_251 tmp_and_255
+11 1
+.names tmp_and_253 tmp_and_254 tmp_or_256
+1- 1
+-1 1
+.names tmp_or_256 tmp_and_255 tmp_or_257
+1- 1
+-1 1
+.names offset_11 PC_11 tmp_xor_258
+10 1
+01 1
+.names tmp_xor_258 tmp_or_257 tmp_ADD_12_11
+10 1
+01 1
+.names offset_11 PC_11 tmp_and_259
+11 1
+.names offset_11 tmp_or_257 tmp_and_260
+11 1
+.names PC_11 tmp_or_257 tmp_and_261
+11 1
+.names tmp_and_259 tmp_and_260 tmp_or_262
+1- 1
+-1 1
+.names tmp_or_262 tmp_and_261 tmp_or_263
+1- 1
+-1 1
+.names offset_12 PC_12 tmp_xor_264
+10 1
+01 1
+.names tmp_xor_264 tmp_or_263 tmp_ADD_12_12
+10 1
+01 1
+.names offset_12 PC_12 tmp_and_265
+11 1
+.names offset_12 tmp_or_263 tmp_and_266
+11 1
+.names PC_12 tmp_or_263 tmp_and_267
+11 1
+.names tmp_and_265 tmp_and_266 tmp_or_268
+1- 1
+-1 1
+.names tmp_or_268 tmp_and_267 tmp_or_269
+1- 1
+-1 1
+.names offset_13 PC_13 tmp_xor_270
+10 1
+01 1
+.names tmp_xor_270 tmp_or_269 tmp_ADD_12_13
+10 1
+01 1
+.names offset_13 PC_13 tmp_and_271
+11 1
+.names offset_13 tmp_or_269 tmp_and_272
+11 1
+.names PC_13 tmp_or_269 tmp_and_273
+11 1
+.names tmp_and_271 tmp_and_272 tmp_or_274
+1- 1
+-1 1
+.names tmp_or_274 tmp_and_273 tmp_or_275
+1- 1
+-1 1
+.names offset_14 PC_14 tmp_xor_276
+10 1
+01 1
+.names tmp_xor_276 tmp_or_275 tmp_ADD_12_14
+10 1
+01 1
+.names offset_14 PC_14 tmp_and_277
+11 1
+.names offset_14 tmp_or_275 tmp_and_278
+11 1
+.names PC_14 tmp_or_275 tmp_and_279
+11 1
+.names tmp_and_277 tmp_and_278 tmp_or_280
+1- 1
+-1 1
+.names tmp_or_280 tmp_and_279 tmp_or_281
+1- 1
+-1 1
+.names offset_15 PC_15 tmp_xor_282
+10 1
+01 1
+.names tmp_xor_282 tmp_or_281 tmp_ADD_12_15
+10 1
+01 1
+.names offset_15 PC_15 tmp_and_283
+11 1
+.names offset_15 tmp_or_281 tmp_and_284
+11 1
+.names PC_15 tmp_or_281 tmp_and_285
+11 1
+.names tmp_and_283 tmp_and_284 tmp_or_286
+1- 1
+-1 1
+.names tmp_or_286 tmp_and_285 tmp_or_287
+1- 1
+-1 1
+.names offset_16 PC_16 tmp_xor_288
+10 1
+01 1
+.names tmp_xor_288 tmp_or_287 tmp_ADD_12_16
+10 1
+01 1
+.names offset_16 PC_16 tmp_and_289
+11 1
+.names offset_16 tmp_or_287 tmp_and_290
+11 1
+.names PC_16 tmp_or_287 tmp_and_291
+11 1
+.names tmp_and_289 tmp_and_290 tmp_or_292
+1- 1
+-1 1
+.names tmp_or_292 tmp_and_291 tmp_or_293
+1- 1
+-1 1
+.names offset_17 PC_17 tmp_xor_294
+10 1
+01 1
+.names tmp_xor_294 tmp_or_293 tmp_ADD_12_17
+10 1
+01 1
+.names offset_17 PC_17 tmp_and_295
+11 1
+.names offset_17 tmp_or_293 tmp_and_296
+11 1
+.names PC_17 tmp_or_293 tmp_and_297
+11 1
+.names tmp_and_295 tmp_and_296 tmp_or_298
+1- 1
+-1 1
+.names tmp_or_298 tmp_and_297 tmp_or_299
+1- 1
+-1 1
+.names offset_18 PC_18 tmp_xor_300
+10 1
+01 1
+.names tmp_xor_300 tmp_or_299 tmp_ADD_12_18
+10 1
+01 1
+.names offset_18 PC_18 tmp_and_301
+11 1
+.names offset_18 tmp_or_299 tmp_and_302
+11 1
+.names PC_18 tmp_or_299 tmp_and_303
+11 1
+.names tmp_and_301 tmp_and_302 tmp_or_304
+1- 1
+-1 1
+.names tmp_or_304 tmp_and_303 tmp_or_305
+1- 1
+-1 1
+.names offset_19 PC_19 tmp_xor_306
+10 1
+01 1
+.names tmp_xor_306 tmp_or_305 tmp_ADD_12_19
+10 1
+01 1
+.names offset_19 PC_19 tmp_and_307
+11 1
+.names offset_19 tmp_or_305 tmp_and_308
+11 1
+.names PC_19 tmp_or_305 tmp_and_309
+11 1
+.names tmp_and_307 tmp_and_308 tmp_or_310
+1- 1
+-1 1
+.names tmp_or_310 tmp_and_309 tmp_or_311
+1- 1
+-1 1
+.names offset_20 PC_20 tmp_xor_312
+10 1
+01 1
+.names tmp_xor_312 tmp_or_311 tmp_ADD_12_20
+10 1
+01 1
+.names offset_20 PC_20 tmp_and_313
+11 1
+.names offset_20 tmp_or_311 tmp_and_314
+11 1
+.names PC_20 tmp_or_311 tmp_and_315
+11 1
+.names tmp_and_313 tmp_and_314 tmp_or_316
+1- 1
+-1 1
+.names tmp_or_316 tmp_and_315 tmp_or_317
+1- 1
+-1 1
+.names offset_21 PC_21 tmp_xor_318
+10 1
+01 1
+.names tmp_xor_318 tmp_or_317 tmp_ADD_12_21
+10 1
+01 1
+.names offset_21 PC_21 tmp_and_319
+11 1
+.names offset_21 tmp_or_317 tmp_and_320
+11 1
+.names PC_21 tmp_or_317 tmp_and_321
+11 1
+.names tmp_and_319 tmp_and_320 tmp_or_322
+1- 1
+-1 1
+.names tmp_or_322 tmp_and_321 tmp_or_323
+1- 1
+-1 1
+.names offset_22 PC_22 tmp_xor_324
+10 1
+01 1
+.names tmp_xor_324 tmp_or_323 tmp_ADD_12_22
+10 1
+01 1
+.names offset_22 PC_22 tmp_and_325
+11 1
+.names offset_22 tmp_or_323 tmp_and_326
+11 1
+.names PC_22 tmp_or_323 tmp_and_327
+11 1
+.names tmp_and_325 tmp_and_326 tmp_or_328
+1- 1
+-1 1
+.names tmp_or_328 tmp_and_327 tmp_or_329
+1- 1
+-1 1
+.names offset_23 PC_23 tmp_xor_330
+10 1
+01 1
+.names tmp_xor_330 tmp_or_329 tmp_ADD_12_23
+10 1
+01 1
+.names offset_23 PC_23 tmp_and_331
+11 1
+.names offset_23 tmp_or_329 tmp_and_332
+11 1
+.names PC_23 tmp_or_329 tmp_and_333
+11 1
+.names tmp_and_331 tmp_and_332 tmp_or_334
+1- 1
+-1 1
+.names tmp_or_334 tmp_and_333 tmp_or_335
+1- 1
+-1 1
+.names offset_24 PC_24 tmp_xor_336
+10 1
+01 1
+.names tmp_xor_336 tmp_or_335 tmp_ADD_12_24
+10 1
+01 1
+.names offset_24 PC_24 tmp_and_337
+11 1
+.names offset_24 tmp_or_335 tmp_and_338
+11 1
+.names PC_24 tmp_or_335 tmp_and_339
+11 1
+.names tmp_and_337 tmp_and_338 tmp_or_340
+1- 1
+-1 1
+.names tmp_or_340 tmp_and_339 tmp_or_341
+1- 1
+-1 1
+.names offset_25 PC_25 tmp_xor_342
+10 1
+01 1
+.names tmp_xor_342 tmp_or_341 tmp_ADD_12_25
+10 1
+01 1
+.names offset_25 PC_25 tmp_and_343
+11 1
+.names offset_25 tmp_or_341 tmp_and_344
+11 1
+.names PC_25 tmp_or_341 tmp_and_345
+11 1
+.names tmp_and_343 tmp_and_344 tmp_or_346
+1- 1
+-1 1
+.names tmp_or_346 tmp_and_345 tmp_or_347
+1- 1
+-1 1
+.names offset_26 PC_26 tmp_xor_348
+10 1
+01 1
+.names tmp_xor_348 tmp_or_347 tmp_ADD_12_26
+10 1
+01 1
+.names offset_26 PC_26 tmp_and_349
+11 1
+.names offset_26 tmp_or_347 tmp_and_350
+11 1
+.names PC_26 tmp_or_347 tmp_and_351
+11 1
+.names tmp_and_349 tmp_and_350 tmp_or_352
+1- 1
+-1 1
+.names tmp_or_352 tmp_and_351 tmp_or_353
+1- 1
+-1 1
+.names offset_27 PC_27 tmp_xor_354
+10 1
+01 1
+.names tmp_xor_354 tmp_or_353 tmp_ADD_12_27
+10 1
+01 1
+.names offset_27 PC_27 tmp_and_355
+11 1
+.names offset_27 tmp_or_353 tmp_and_356
+11 1
+.names PC_27 tmp_or_353 tmp_and_357
+11 1
+.names tmp_and_355 tmp_and_356 tmp_or_358
+1- 1
+-1 1
+.names tmp_or_358 tmp_and_357 tmp_or_359
+1- 1
+-1 1
+.names offset_28 PC_28 tmp_xor_360
+10 1
+01 1
+.names tmp_xor_360 tmp_or_359 tmp_ADD_12_28
+10 1
+01 1
+.names offset_28 PC_28 tmp_and_361
+11 1
+.names offset_28 tmp_or_359 tmp_and_362
+11 1
+.names PC_28 tmp_or_359 tmp_and_363
+11 1
+.names tmp_and_361 tmp_and_362 tmp_or_364
+1- 1
+-1 1
+.names tmp_or_364 tmp_and_363 tmp_or_365
+1- 1
+-1 1
+.names offset_29 PC_29 tmp_xor_366
+10 1
+01 1
+.names tmp_xor_366 tmp_or_365 tmp_ADD_12_29
+10 1
+01 1
+.names offset_29 PC_29 tmp_and_367
+11 1
+.names offset_29 tmp_or_365 tmp_and_368
+11 1
+.names PC_29 tmp_or_365 tmp_and_369
+11 1
+.names tmp_and_367 tmp_and_368 tmp_or_370
+1- 1
+-1 1
+.names tmp_or_370 tmp_and_369 tmp_or_371
+1- 1
+-1 1
+.names offset_30 PC_30 tmp_xor_372
+10 1
+01 1
+.names tmp_xor_372 tmp_or_371 tmp_ADD_12_30
+10 1
+01 1
+.names offset_30 PC_30 tmp_and_373
+11 1
+.names offset_30 tmp_or_371 tmp_and_374
+11 1
+.names PC_30 tmp_or_371 tmp_and_375
+11 1
+.names tmp_and_373 tmp_and_374 tmp_or_376
+1- 1
+-1 1
+.names tmp_or_376 tmp_and_375 tmp_or_377
+1- 1
+-1 1
+.names offset_31 PC_31 tmp_xor_378
+10 1
+01 1
+.names tmp_xor_378 tmp_or_377 tmp_ADD_12_31
+10 1
+01 1
+.names offset_31 PC_31 tmp_and_379
+11 1
+.names offset_31 tmp_or_377 tmp_and_380
+11 1
+.names PC_31 tmp_or_377 tmp_and_381
+11 1
+.names tmp_and_379 tmp_and_380 tmp_or_382
+1- 1
+-1 1
+.names tmp_or_382 tmp_and_381 tmp_or_383
+1- 1
+-1 1
+.names tmp_ADD_12_0 CONST1 Branch_Target_0
+11 1
+.names tmp_ADD_12_1 CONST1 Branch_Target_1
+11 1
+.names tmp_ADD_12_2 CONST1 Branch_Target_2
+11 1
+.names tmp_ADD_12_3 CONST1 Branch_Target_3
+11 1
+.names tmp_ADD_12_4 CONST1 Branch_Target_4
+11 1
+.names tmp_ADD_12_5 CONST1 Branch_Target_5
+11 1
+.names tmp_ADD_12_6 CONST1 Branch_Target_6
+11 1
+.names tmp_ADD_12_7 CONST1 Branch_Target_7
+11 1
+.names tmp_ADD_12_8 CONST1 Branch_Target_8
+11 1
+.names tmp_ADD_12_9 CONST1 Branch_Target_9
+11 1
+.names tmp_ADD_12_10 CONST1 Branch_Target_10
+11 1
+.names tmp_ADD_12_11 CONST1 Branch_Target_11
+11 1
+.names tmp_ADD_12_12 CONST1 Branch_Target_12
+11 1
+.names tmp_ADD_12_13 CONST1 Branch_Target_13
+11 1
+.names tmp_ADD_12_14 CONST1 Branch_Target_14
+11 1
+.names tmp_ADD_12_15 CONST1 Branch_Target_15
+11 1
+.names tmp_ADD_12_16 CONST1 Branch_Target_16
+11 1
+.names tmp_ADD_12_17 CONST1 Branch_Target_17
+11 1
+.names tmp_ADD_12_18 CONST1 Branch_Target_18
+11 1
+.names tmp_ADD_12_19 CONST1 Branch_Target_19
+11 1
+.names tmp_ADD_12_20 CONST1 Branch_Target_20
+11 1
+.names tmp_ADD_12_21 CONST1 Branch_Target_21
+11 1
+.names tmp_ADD_12_22 CONST1 Branch_Target_22
+11 1
+.names tmp_ADD_12_23 CONST1 Branch_Target_23
+11 1
+.names tmp_ADD_12_24 CONST1 Branch_Target_24
+11 1
+.names tmp_ADD_12_25 CONST1 Branch_Target_25
+11 1
+.names tmp_ADD_12_26 CONST1 Branch_Target_26
+11 1
+.names tmp_ADD_12_27 CONST1 Branch_Target_27
+11 1
+.names tmp_ADD_12_28 CONST1 Branch_Target_28
+11 1
+.names tmp_ADD_12_29 CONST1 Branch_Target_29
+11 1
+.names tmp_ADD_12_30 CONST1 Branch_Target_30
+11 1
+.names tmp_ADD_12_31 CONST1 Branch_Target_31
+11 1
+.names Branch Zero tmp_AND_14
+11 1
+.names tmp_AND_14 CONST1 Branch_Taken_0
+11 1
+.names CONST0 CONST1 Branch_Taken_1
+11 1
+.names CONST0 CONST1 Branch_Taken_2
+11 1
+.names CONST0 CONST1 Branch_Taken_3
+11 1
+.names CONST0 CONST1 Branch_Taken_4
+11 1
+.names CONST0 CONST1 Branch_Taken_5
+11 1
+.names CONST0 CONST1 Branch_Taken_6
+11 1
+.names CONST0 CONST1 Branch_Taken_7
+11 1
+.names CONST0 CONST1 Branch_Taken_8
+11 1
+.names CONST0 CONST1 Branch_Taken_9
+11 1
+.names CONST0 CONST1 Branch_Taken_10
+11 1
+.names CONST0 CONST1 Branch_Taken_11
+11 1
+.names CONST0 CONST1 Branch_Taken_12
+11 1
+.names CONST0 CONST1 Branch_Taken_13
+11 1
+.names CONST0 CONST1 Branch_Taken_14
+11 1
+.names CONST0 CONST1 Branch_Taken_15
+11 1
+.names CONST0 CONST1 Branch_Taken_16
+11 1
+.names CONST0 CONST1 Branch_Taken_17
+11 1
+.names CONST0 CONST1 Branch_Taken_18
+11 1
+.names CONST0 CONST1 Branch_Taken_19
+11 1
+.names CONST0 CONST1 Branch_Taken_20
+11 1
+.names CONST0 CONST1 Branch_Taken_21
+11 1
+.names CONST0 CONST1 Branch_Taken_22
+11 1
+.names CONST0 CONST1 Branch_Taken_23
+11 1
+.names CONST0 CONST1 Branch_Taken_24
+11 1
+.names CONST0 CONST1 Branch_Taken_25
+11 1
+.names CONST0 CONST1 Branch_Taken_26
+11 1
+.names CONST0 CONST1 Branch_Taken_27
+11 1
+.names CONST0 CONST1 Branch_Taken_28
+11 1
+.names CONST0 CONST1 Branch_Taken_29
+11 1
+.names CONST0 CONST1 Branch_Taken_30
+11 1
+.names CONST0 CONST1 Branch_Taken_31
+11 1
+.names RSTn tmp_not_16
+0 1
+.names JALorJALR JALR_Address_0 JAL_Address_0 tmp_cond_16_0
+11- 1
+0-1 1
+.names JALorJALR JALR_Address_1 JAL_Address_1 tmp_cond_16_1
+11- 1
+0-1 1
+.names JALorJALR JALR_Address_2 JAL_Address_2 tmp_cond_16_2
+11- 1
+0-1 1
+.names JALorJALR JALR_Address_3 JAL_Address_3 tmp_cond_16_3
+11- 1
+0-1 1
+.names JALorJALR JALR_Address_4 JAL_Address_4 tmp_cond_16_4
+11- 1
+0-1 1
+.names JALorJALR JALR_Address_5 JAL_Address_5 tmp_cond_16_5
+11- 1
+0-1 1
+.names JALorJALR JALR_Address_6 JAL_Address_6 tmp_cond_16_6
+11- 1
+0-1 1
+.names JALorJALR JALR_Address_7 JAL_Address_7 tmp_cond_16_7
+11- 1
+0-1 1
+.names JALorJALR JALR_Address_8 JAL_Address_8 tmp_cond_16_8
+11- 1
+0-1 1
+.names JALorJALR JALR_Address_9 JAL_Address_9 tmp_cond_16_9
+11- 1
+0-1 1
+.names JALorJALR JALR_Address_10 JAL_Address_10 tmp_cond_16_10
+11- 1
+0-1 1
+.names JALorJALR JALR_Address_11 JAL_Address_11 tmp_cond_16_11
+11- 1
+0-1 1
+.names JALorJALR JALR_Address_12 JAL_Address_12 tmp_cond_16_12
+11- 1
+0-1 1
+.names JALorJALR JALR_Address_13 JAL_Address_13 tmp_cond_16_13
+11- 1
+0-1 1
+.names JALorJALR JALR_Address_14 JAL_Address_14 tmp_cond_16_14
+11- 1
+0-1 1
+.names JALorJALR JALR_Address_15 JAL_Address_15 tmp_cond_16_15
+11- 1
+0-1 1
+.names JALorJALR JALR_Address_16 JAL_Address_16 tmp_cond_16_16
+11- 1
+0-1 1
+.names JALorJALR JALR_Address_17 JAL_Address_17 tmp_cond_16_17
+11- 1
+0-1 1
+.names JALorJALR JALR_Address_18 JAL_Address_18 tmp_cond_16_18
+11- 1
+0-1 1
+.names JALorJALR JALR_Address_19 JAL_Address_19 tmp_cond_16_19
+11- 1
+0-1 1
+.names JALorJALR JALR_Address_20 JAL_Address_20 tmp_cond_16_20
+11- 1
+0-1 1
+.names JALorJALR JALR_Address_21 JAL_Address_21 tmp_cond_16_21
+11- 1
+0-1 1
+.names JALorJALR JALR_Address_22 JAL_Address_22 tmp_cond_16_22
+11- 1
+0-1 1
+.names JALorJALR JALR_Address_23 JAL_Address_23 tmp_cond_16_23
+11- 1
+0-1 1
+.names JALorJALR JALR_Address_24 JAL_Address_24 tmp_cond_16_24
+11- 1
+0-1 1
+.names JALorJALR JALR_Address_25 JAL_Address_25 tmp_cond_16_25
+11- 1
+0-1 1
+.names JALorJALR JALR_Address_26 JAL_Address_26 tmp_cond_16_26
+11- 1
+0-1 1
+.names JALorJALR JALR_Address_27 JAL_Address_27 tmp_cond_16_27
+11- 1
+0-1 1
+.names JALorJALR JALR_Address_28 JAL_Address_28 tmp_cond_16_28
+11- 1
+0-1 1
+.names JALorJALR JALR_Address_29 JAL_Address_29 tmp_cond_16_29
+11- 1
+0-1 1
+.names JALorJALR JALR_Address_30 JAL_Address_30 tmp_cond_16_30
+11- 1
+0-1 1
+.names JALorJALR JALR_Address_31 JAL_Address_31 tmp_cond_16_31
+11- 1
+0-1 1
+.names PC_0 CONST0 tmp_xor_384
+10 1
+01 1
+.names tmp_xor_384 CONST0 tmp_ADD_16_0
+10 1
+01 1
+.names PC_0 CONST0 tmp_and_385
+11 1
+.names PC_0 CONST0 tmp_and_386
+11 1
+.names CONST0 CONST0 tmp_and_387
+11 1
+.names tmp_and_385 tmp_and_386 tmp_or_388
+1- 1
+-1 1
+.names tmp_or_388 tmp_and_387 tmp_or_389
+1- 1
+-1 1
+.names PC_1 CONST0 tmp_xor_390
+10 1
+01 1
+.names tmp_xor_390 tmp_or_389 tmp_ADD_16_1
+10 1
+01 1
+.names PC_1 CONST0 tmp_and_391
+11 1
+.names PC_1 tmp_or_389 tmp_and_392
+11 1
+.names CONST0 tmp_or_389 tmp_and_393
+11 1
+.names tmp_and_391 tmp_and_392 tmp_or_394
+1- 1
+-1 1
+.names tmp_or_394 tmp_and_393 tmp_or_395
+1- 1
+-1 1
+.names PC_2 CONST1 tmp_xor_396
+10 1
+01 1
+.names tmp_xor_396 tmp_or_395 tmp_ADD_16_2
+10 1
+01 1
+.names PC_2 CONST1 tmp_and_397
+11 1
+.names PC_2 tmp_or_395 tmp_and_398
+11 1
+.names CONST1 tmp_or_395 tmp_and_399
+11 1
+.names tmp_and_397 tmp_and_398 tmp_or_400
+1- 1
+-1 1
+.names tmp_or_400 tmp_and_399 tmp_or_401
+1- 1
+-1 1
+.names PC_3 CONST0 tmp_xor_402
+10 1
+01 1
+.names tmp_xor_402 tmp_or_401 tmp_ADD_16_3
+10 1
+01 1
+.names PC_3 CONST0 tmp_and_403
+11 1
+.names PC_3 tmp_or_401 tmp_and_404
+11 1
+.names CONST0 tmp_or_401 tmp_and_405
+11 1
+.names tmp_and_403 tmp_and_404 tmp_or_406
+1- 1
+-1 1
+.names tmp_or_406 tmp_and_405 tmp_or_407
+1- 1
+-1 1
+.names PC_4 CONST0 tmp_xor_408
+10 1
+01 1
+.names tmp_xor_408 tmp_or_407 tmp_ADD_16_4
+10 1
+01 1
+.names PC_4 CONST0 tmp_and_409
+11 1
+.names PC_4 tmp_or_407 tmp_and_410
+11 1
+.names CONST0 tmp_or_407 tmp_and_411
+11 1
+.names tmp_and_409 tmp_and_410 tmp_or_412
+1- 1
+-1 1
+.names tmp_or_412 tmp_and_411 tmp_or_413
+1- 1
+-1 1
+.names PC_5 CONST0 tmp_xor_414
+10 1
+01 1
+.names tmp_xor_414 tmp_or_413 tmp_ADD_16_5
+10 1
+01 1
+.names PC_5 CONST0 tmp_and_415
+11 1
+.names PC_5 tmp_or_413 tmp_and_416
+11 1
+.names CONST0 tmp_or_413 tmp_and_417
+11 1
+.names tmp_and_415 tmp_and_416 tmp_or_418
+1- 1
+-1 1
+.names tmp_or_418 tmp_and_417 tmp_or_419
+1- 1
+-1 1
+.names PC_6 CONST0 tmp_xor_420
+10 1
+01 1
+.names tmp_xor_420 tmp_or_419 tmp_ADD_16_6
+10 1
+01 1
+.names PC_6 CONST0 tmp_and_421
+11 1
+.names PC_6 tmp_or_419 tmp_and_422
+11 1
+.names CONST0 tmp_or_419 tmp_and_423
+11 1
+.names tmp_and_421 tmp_and_422 tmp_or_424
+1- 1
+-1 1
+.names tmp_or_424 tmp_and_423 tmp_or_425
+1- 1
+-1 1
+.names PC_7 CONST0 tmp_xor_426
+10 1
+01 1
+.names tmp_xor_426 tmp_or_425 tmp_ADD_16_7
+10 1
+01 1
+.names PC_7 CONST0 tmp_and_427
+11 1
+.names PC_7 tmp_or_425 tmp_and_428
+11 1
+.names CONST0 tmp_or_425 tmp_and_429
+11 1
+.names tmp_and_427 tmp_and_428 tmp_or_430
+1- 1
+-1 1
+.names tmp_or_430 tmp_and_429 tmp_or_431
+1- 1
+-1 1
+.names PC_8 CONST0 tmp_xor_432
+10 1
+01 1
+.names tmp_xor_432 tmp_or_431 tmp_ADD_16_8
+10 1
+01 1
+.names PC_8 CONST0 tmp_and_433
+11 1
+.names PC_8 tmp_or_431 tmp_and_434
+11 1
+.names CONST0 tmp_or_431 tmp_and_435
+11 1
+.names tmp_and_433 tmp_and_434 tmp_or_436
+1- 1
+-1 1
+.names tmp_or_436 tmp_and_435 tmp_or_437
+1- 1
+-1 1
+.names PC_9 CONST0 tmp_xor_438
+10 1
+01 1
+.names tmp_xor_438 tmp_or_437 tmp_ADD_16_9
+10 1
+01 1
+.names PC_9 CONST0 tmp_and_439
+11 1
+.names PC_9 tmp_or_437 tmp_and_440
+11 1
+.names CONST0 tmp_or_437 tmp_and_441
+11 1
+.names tmp_and_439 tmp_and_440 tmp_or_442
+1- 1
+-1 1
+.names tmp_or_442 tmp_and_441 tmp_or_443
+1- 1
+-1 1
+.names PC_10 CONST0 tmp_xor_444
+10 1
+01 1
+.names tmp_xor_444 tmp_or_443 tmp_ADD_16_10
+10 1
+01 1
+.names PC_10 CONST0 tmp_and_445
+11 1
+.names PC_10 tmp_or_443 tmp_and_446
+11 1
+.names CONST0 tmp_or_443 tmp_and_447
+11 1
+.names tmp_and_445 tmp_and_446 tmp_or_448
+1- 1
+-1 1
+.names tmp_or_448 tmp_and_447 tmp_or_449
+1- 1
+-1 1
+.names PC_11 CONST0 tmp_xor_450
+10 1
+01 1
+.names tmp_xor_450 tmp_or_449 tmp_ADD_16_11
+10 1
+01 1
+.names PC_11 CONST0 tmp_and_451
+11 1
+.names PC_11 tmp_or_449 tmp_and_452
+11 1
+.names CONST0 tmp_or_449 tmp_and_453
+11 1
+.names tmp_and_451 tmp_and_452 tmp_or_454
+1- 1
+-1 1
+.names tmp_or_454 tmp_and_453 tmp_or_455
+1- 1
+-1 1
+.names PC_12 CONST0 tmp_xor_456
+10 1
+01 1
+.names tmp_xor_456 tmp_or_455 tmp_ADD_16_12
+10 1
+01 1
+.names PC_12 CONST0 tmp_and_457
+11 1
+.names PC_12 tmp_or_455 tmp_and_458
+11 1
+.names CONST0 tmp_or_455 tmp_and_459
+11 1
+.names tmp_and_457 tmp_and_458 tmp_or_460
+1- 1
+-1 1
+.names tmp_or_460 tmp_and_459 tmp_or_461
+1- 1
+-1 1
+.names PC_13 CONST0 tmp_xor_462
+10 1
+01 1
+.names tmp_xor_462 tmp_or_461 tmp_ADD_16_13
+10 1
+01 1
+.names PC_13 CONST0 tmp_and_463
+11 1
+.names PC_13 tmp_or_461 tmp_and_464
+11 1
+.names CONST0 tmp_or_461 tmp_and_465
+11 1
+.names tmp_and_463 tmp_and_464 tmp_or_466
+1- 1
+-1 1
+.names tmp_or_466 tmp_and_465 tmp_or_467
+1- 1
+-1 1
+.names PC_14 CONST0 tmp_xor_468
+10 1
+01 1
+.names tmp_xor_468 tmp_or_467 tmp_ADD_16_14
+10 1
+01 1
+.names PC_14 CONST0 tmp_and_469
+11 1
+.names PC_14 tmp_or_467 tmp_and_470
+11 1
+.names CONST0 tmp_or_467 tmp_and_471
+11 1
+.names tmp_and_469 tmp_and_470 tmp_or_472
+1- 1
+-1 1
+.names tmp_or_472 tmp_and_471 tmp_or_473
+1- 1
+-1 1
+.names PC_15 CONST0 tmp_xor_474
+10 1
+01 1
+.names tmp_xor_474 tmp_or_473 tmp_ADD_16_15
+10 1
+01 1
+.names PC_15 CONST0 tmp_and_475
+11 1
+.names PC_15 tmp_or_473 tmp_and_476
+11 1
+.names CONST0 tmp_or_473 tmp_and_477
+11 1
+.names tmp_and_475 tmp_and_476 tmp_or_478
+1- 1
+-1 1
+.names tmp_or_478 tmp_and_477 tmp_or_479
+1- 1
+-1 1
+.names PC_16 CONST0 tmp_xor_480
+10 1
+01 1
+.names tmp_xor_480 tmp_or_479 tmp_ADD_16_16
+10 1
+01 1
+.names PC_16 CONST0 tmp_and_481
+11 1
+.names PC_16 tmp_or_479 tmp_and_482
+11 1
+.names CONST0 tmp_or_479 tmp_and_483
+11 1
+.names tmp_and_481 tmp_and_482 tmp_or_484
+1- 1
+-1 1
+.names tmp_or_484 tmp_and_483 tmp_or_485
+1- 1
+-1 1
+.names PC_17 CONST0 tmp_xor_486
+10 1
+01 1
+.names tmp_xor_486 tmp_or_485 tmp_ADD_16_17
+10 1
+01 1
+.names PC_17 CONST0 tmp_and_487
+11 1
+.names PC_17 tmp_or_485 tmp_and_488
+11 1
+.names CONST0 tmp_or_485 tmp_and_489
+11 1
+.names tmp_and_487 tmp_and_488 tmp_or_490
+1- 1
+-1 1
+.names tmp_or_490 tmp_and_489 tmp_or_491
+1- 1
+-1 1
+.names PC_18 CONST0 tmp_xor_492
+10 1
+01 1
+.names tmp_xor_492 tmp_or_491 tmp_ADD_16_18
+10 1
+01 1
+.names PC_18 CONST0 tmp_and_493
+11 1
+.names PC_18 tmp_or_491 tmp_and_494
+11 1
+.names CONST0 tmp_or_491 tmp_and_495
+11 1
+.names tmp_and_493 tmp_and_494 tmp_or_496
+1- 1
+-1 1
+.names tmp_or_496 tmp_and_495 tmp_or_497
+1- 1
+-1 1
+.names PC_19 CONST0 tmp_xor_498
+10 1
+01 1
+.names tmp_xor_498 tmp_or_497 tmp_ADD_16_19
+10 1
+01 1
+.names PC_19 CONST0 tmp_and_499
+11 1
+.names PC_19 tmp_or_497 tmp_and_500
+11 1
+.names CONST0 tmp_or_497 tmp_and_501
+11 1
+.names tmp_and_499 tmp_and_500 tmp_or_502
+1- 1
+-1 1
+.names tmp_or_502 tmp_and_501 tmp_or_503
+1- 1
+-1 1
+.names PC_20 CONST0 tmp_xor_504
+10 1
+01 1
+.names tmp_xor_504 tmp_or_503 tmp_ADD_16_20
+10 1
+01 1
+.names PC_20 CONST0 tmp_and_505
+11 1
+.names PC_20 tmp_or_503 tmp_and_506
+11 1
+.names CONST0 tmp_or_503 tmp_and_507
+11 1
+.names tmp_and_505 tmp_and_506 tmp_or_508
+1- 1
+-1 1
+.names tmp_or_508 tmp_and_507 tmp_or_509
+1- 1
+-1 1
+.names PC_21 CONST0 tmp_xor_510
+10 1
+01 1
+.names tmp_xor_510 tmp_or_509 tmp_ADD_16_21
+10 1
+01 1
+.names PC_21 CONST0 tmp_and_511
+11 1
+.names PC_21 tmp_or_509 tmp_and_512
+11 1
+.names CONST0 tmp_or_509 tmp_and_513
+11 1
+.names tmp_and_511 tmp_and_512 tmp_or_514
+1- 1
+-1 1
+.names tmp_or_514 tmp_and_513 tmp_or_515
+1- 1
+-1 1
+.names PC_22 CONST0 tmp_xor_516
+10 1
+01 1
+.names tmp_xor_516 tmp_or_515 tmp_ADD_16_22
+10 1
+01 1
+.names PC_22 CONST0 tmp_and_517
+11 1
+.names PC_22 tmp_or_515 tmp_and_518
+11 1
+.names CONST0 tmp_or_515 tmp_and_519
+11 1
+.names tmp_and_517 tmp_and_518 tmp_or_520
+1- 1
+-1 1
+.names tmp_or_520 tmp_and_519 tmp_or_521
+1- 1
+-1 1
+.names PC_23 CONST0 tmp_xor_522
+10 1
+01 1
+.names tmp_xor_522 tmp_or_521 tmp_ADD_16_23
+10 1
+01 1
+.names PC_23 CONST0 tmp_and_523
+11 1
+.names PC_23 tmp_or_521 tmp_and_524
+11 1
+.names CONST0 tmp_or_521 tmp_and_525
+11 1
+.names tmp_and_523 tmp_and_524 tmp_or_526
+1- 1
+-1 1
+.names tmp_or_526 tmp_and_525 tmp_or_527
+1- 1
+-1 1
+.names PC_24 CONST0 tmp_xor_528
+10 1
+01 1
+.names tmp_xor_528 tmp_or_527 tmp_ADD_16_24
+10 1
+01 1
+.names PC_24 CONST0 tmp_and_529
+11 1
+.names PC_24 tmp_or_527 tmp_and_530
+11 1
+.names CONST0 tmp_or_527 tmp_and_531
+11 1
+.names tmp_and_529 tmp_and_530 tmp_or_532
+1- 1
+-1 1
+.names tmp_or_532 tmp_and_531 tmp_or_533
+1- 1
+-1 1
+.names PC_25 CONST0 tmp_xor_534
+10 1
+01 1
+.names tmp_xor_534 tmp_or_533 tmp_ADD_16_25
+10 1
+01 1
+.names PC_25 CONST0 tmp_and_535
+11 1
+.names PC_25 tmp_or_533 tmp_and_536
+11 1
+.names CONST0 tmp_or_533 tmp_and_537
+11 1
+.names tmp_and_535 tmp_and_536 tmp_or_538
+1- 1
+-1 1
+.names tmp_or_538 tmp_and_537 tmp_or_539
+1- 1
+-1 1
+.names PC_26 CONST0 tmp_xor_540
+10 1
+01 1
+.names tmp_xor_540 tmp_or_539 tmp_ADD_16_26
+10 1
+01 1
+.names PC_26 CONST0 tmp_and_541
+11 1
+.names PC_26 tmp_or_539 tmp_and_542
+11 1
+.names CONST0 tmp_or_539 tmp_and_543
+11 1
+.names tmp_and_541 tmp_and_542 tmp_or_544
+1- 1
+-1 1
+.names tmp_or_544 tmp_and_543 tmp_or_545
+1- 1
+-1 1
+.names PC_27 CONST0 tmp_xor_546
+10 1
+01 1
+.names tmp_xor_546 tmp_or_545 tmp_ADD_16_27
+10 1
+01 1
+.names PC_27 CONST0 tmp_and_547
+11 1
+.names PC_27 tmp_or_545 tmp_and_548
+11 1
+.names CONST0 tmp_or_545 tmp_and_549
+11 1
+.names tmp_and_547 tmp_and_548 tmp_or_550
+1- 1
+-1 1
+.names tmp_or_550 tmp_and_549 tmp_or_551
+1- 1
+-1 1
+.names PC_28 CONST0 tmp_xor_552
+10 1
+01 1
+.names tmp_xor_552 tmp_or_551 tmp_ADD_16_28
+10 1
+01 1
+.names PC_28 CONST0 tmp_and_553
+11 1
+.names PC_28 tmp_or_551 tmp_and_554
+11 1
+.names CONST0 tmp_or_551 tmp_and_555
+11 1
+.names tmp_and_553 tmp_and_554 tmp_or_556
+1- 1
+-1 1
+.names tmp_or_556 tmp_and_555 tmp_or_557
+1- 1
+-1 1
+.names PC_29 CONST0 tmp_xor_558
+10 1
+01 1
+.names tmp_xor_558 tmp_or_557 tmp_ADD_16_29
+10 1
+01 1
+.names PC_29 CONST0 tmp_and_559
+11 1
+.names PC_29 tmp_or_557 tmp_and_560
+11 1
+.names CONST0 tmp_or_557 tmp_and_561
+11 1
+.names tmp_and_559 tmp_and_560 tmp_or_562
+1- 1
+-1 1
+.names tmp_or_562 tmp_and_561 tmp_or_563
+1- 1
+-1 1
+.names PC_30 CONST0 tmp_xor_564
+10 1
+01 1
+.names tmp_xor_564 tmp_or_563 tmp_ADD_16_30
+10 1
+01 1
+.names PC_30 CONST0 tmp_and_565
+11 1
+.names PC_30 tmp_or_563 tmp_and_566
+11 1
+.names CONST0 tmp_or_563 tmp_and_567
+11 1
+.names tmp_and_565 tmp_and_566 tmp_or_568
+1- 1
+-1 1
+.names tmp_or_568 tmp_and_567 tmp_or_569
+1- 1
+-1 1
+.names PC_31 CONST0 tmp_xor_570
+10 1
+01 1
+.names tmp_xor_570 tmp_or_569 tmp_ADD_16_31
+10 1
+01 1
+.names PC_31 CONST0 tmp_and_571
+11 1
+.names PC_31 tmp_or_569 tmp_and_572
+11 1
+.names CONST0 tmp_or_569 tmp_and_573
+11 1
+.names tmp_and_571 tmp_and_572 tmp_or_574
+1- 1
+-1 1
+.names tmp_or_574 tmp_and_573 tmp_or_575
+1- 1
+-1 1
+.names Branch_Taken_0 Branch_Target_0 tmp_ADD_16_0 tmp_cond_16_0
+11- 1
+0-1 1
+.names Branch_Taken_0 Branch_Target_1 tmp_ADD_16_1 tmp_cond_16_1
+11- 1
+0-1 1
+.names Branch_Taken_0 Branch_Target_2 tmp_ADD_16_2 tmp_cond_16_2
+11- 1
+0-1 1
+.names Branch_Taken_0 Branch_Target_3 tmp_ADD_16_3 tmp_cond_16_3
+11- 1
+0-1 1
+.names Branch_Taken_0 Branch_Target_4 tmp_ADD_16_4 tmp_cond_16_4
+11- 1
+0-1 1
+.names Branch_Taken_0 Branch_Target_5 tmp_ADD_16_5 tmp_cond_16_5
+11- 1
+0-1 1
+.names Branch_Taken_0 Branch_Target_6 tmp_ADD_16_6 tmp_cond_16_6
+11- 1
+0-1 1
+.names Branch_Taken_0 Branch_Target_7 tmp_ADD_16_7 tmp_cond_16_7
+11- 1
+0-1 1
+.names Branch_Taken_0 Branch_Target_8 tmp_ADD_16_8 tmp_cond_16_8
+11- 1
+0-1 1
+.names Branch_Taken_0 Branch_Target_9 tmp_ADD_16_9 tmp_cond_16_9
+11- 1
+0-1 1
+.names Branch_Taken_0 Branch_Target_10 tmp_ADD_16_10 tmp_cond_16_10
+11- 1
+0-1 1
+.names Branch_Taken_0 Branch_Target_11 tmp_ADD_16_11 tmp_cond_16_11
+11- 1
+0-1 1
+.names Branch_Taken_0 Branch_Target_12 tmp_ADD_16_12 tmp_cond_16_12
+11- 1
+0-1 1
+.names Branch_Taken_0 Branch_Target_13 tmp_ADD_16_13 tmp_cond_16_13
+11- 1
+0-1 1
+.names Branch_Taken_0 Branch_Target_14 tmp_ADD_16_14 tmp_cond_16_14
+11- 1
+0-1 1
+.names Branch_Taken_0 Branch_Target_15 tmp_ADD_16_15 tmp_cond_16_15
+11- 1
+0-1 1
+.names Branch_Taken_0 Branch_Target_16 tmp_ADD_16_16 tmp_cond_16_16
+11- 1
+0-1 1
+.names Branch_Taken_0 Branch_Target_17 tmp_ADD_16_17 tmp_cond_16_17
+11- 1
+0-1 1
+.names Branch_Taken_0 Branch_Target_18 tmp_ADD_16_18 tmp_cond_16_18
+11- 1
+0-1 1
+.names Branch_Taken_0 Branch_Target_19 tmp_ADD_16_19 tmp_cond_16_19
+11- 1
+0-1 1
+.names Branch_Taken_0 Branch_Target_20 tmp_ADD_16_20 tmp_cond_16_20
+11- 1
+0-1 1
+.names Branch_Taken_0 Branch_Target_21 tmp_ADD_16_21 tmp_cond_16_21
+11- 1
+0-1 1
+.names Branch_Taken_0 Branch_Target_22 tmp_ADD_16_22 tmp_cond_16_22
+11- 1
+0-1 1
+.names Branch_Taken_0 Branch_Target_23 tmp_ADD_16_23 tmp_cond_16_23
+11- 1
+0-1 1
+.names Branch_Taken_0 Branch_Target_24 tmp_ADD_16_24 tmp_cond_16_24
+11- 1
+0-1 1
+.names Branch_Taken_0 Branch_Target_25 tmp_ADD_16_25 tmp_cond_16_25
+11- 1
+0-1 1
+.names Branch_Taken_0 Branch_Target_26 tmp_ADD_16_26 tmp_cond_16_26
+11- 1
+0-1 1
+.names Branch_Taken_0 Branch_Target_27 tmp_ADD_16_27 tmp_cond_16_27
+11- 1
+0-1 1
+.names Branch_Taken_0 Branch_Target_28 tmp_ADD_16_28 tmp_cond_16_28
+11- 1
+0-1 1
+.names Branch_Taken_0 Branch_Target_29 tmp_ADD_16_29 tmp_cond_16_29
+11- 1
+0-1 1
+.names Branch_Taken_0 Branch_Target_30 tmp_ADD_16_30 tmp_cond_16_30
+11- 1
+0-1 1
+.names Branch_Taken_0 Branch_Target_31 tmp_ADD_16_31 tmp_cond_16_31
+11- 1
+0-1 1
+.names Jump tmp_cond_16_0 tmp_cond_16_0 tmp_cond_16_0
+11- 1
+0-1 1
+.names Jump tmp_cond_16_1 tmp_cond_16_1 tmp_cond_16_1
+11- 1
+0-1 1
+.names Jump tmp_cond_16_2 tmp_cond_16_2 tmp_cond_16_2
+11- 1
+0-1 1
+.names Jump tmp_cond_16_3 tmp_cond_16_3 tmp_cond_16_3
+11- 1
+0-1 1
+.names Jump tmp_cond_16_4 tmp_cond_16_4 tmp_cond_16_4
+11- 1
+0-1 1
+.names Jump tmp_cond_16_5 tmp_cond_16_5 tmp_cond_16_5
+11- 1
+0-1 1
+.names Jump tmp_cond_16_6 tmp_cond_16_6 tmp_cond_16_6
+11- 1
+0-1 1
+.names Jump tmp_cond_16_7 tmp_cond_16_7 tmp_cond_16_7
+11- 1
+0-1 1
+.names Jump tmp_cond_16_8 tmp_cond_16_8 tmp_cond_16_8
+11- 1
+0-1 1
+.names Jump tmp_cond_16_9 tmp_cond_16_9 tmp_cond_16_9
+11- 1
+0-1 1
+.names Jump tmp_cond_16_10 tmp_cond_16_10 tmp_cond_16_10
+11- 1
+0-1 1
+.names Jump tmp_cond_16_11 tmp_cond_16_11 tmp_cond_16_11
+11- 1
+0-1 1
+.names Jump tmp_cond_16_12 tmp_cond_16_12 tmp_cond_16_12
+11- 1
+0-1 1
+.names Jump tmp_cond_16_13 tmp_cond_16_13 tmp_cond_16_13
+11- 1
+0-1 1
+.names Jump tmp_cond_16_14 tmp_cond_16_14 tmp_cond_16_14
+11- 1
+0-1 1
+.names Jump tmp_cond_16_15 tmp_cond_16_15 tmp_cond_16_15
+11- 1
+0-1 1
+.names Jump tmp_cond_16_16 tmp_cond_16_16 tmp_cond_16_16
+11- 1
+0-1 1
+.names Jump tmp_cond_16_17 tmp_cond_16_17 tmp_cond_16_17
+11- 1
+0-1 1
+.names Jump tmp_cond_16_18 tmp_cond_16_18 tmp_cond_16_18
+11- 1
+0-1 1
+.names Jump tmp_cond_16_19 tmp_cond_16_19 tmp_cond_16_19
+11- 1
+0-1 1
+.names Jump tmp_cond_16_20 tmp_cond_16_20 tmp_cond_16_20
+11- 1
+0-1 1
+.names Jump tmp_cond_16_21 tmp_cond_16_21 tmp_cond_16_21
+11- 1
+0-1 1
+.names Jump tmp_cond_16_22 tmp_cond_16_22 tmp_cond_16_22
+11- 1
+0-1 1
+.names Jump tmp_cond_16_23 tmp_cond_16_23 tmp_cond_16_23
+11- 1
+0-1 1
+.names Jump tmp_cond_16_24 tmp_cond_16_24 tmp_cond_16_24
+11- 1
+0-1 1
+.names Jump tmp_cond_16_25 tmp_cond_16_25 tmp_cond_16_25
+11- 1
+0-1 1
+.names Jump tmp_cond_16_26 tmp_cond_16_26 tmp_cond_16_26
+11- 1
+0-1 1
+.names Jump tmp_cond_16_27 tmp_cond_16_27 tmp_cond_16_27
+11- 1
+0-1 1
+.names Jump tmp_cond_16_28 tmp_cond_16_28 tmp_cond_16_28
+11- 1
+0-1 1
+.names Jump tmp_cond_16_29 tmp_cond_16_29 tmp_cond_16_29
+11- 1
+0-1 1
+.names Jump tmp_cond_16_30 tmp_cond_16_30 tmp_cond_16_30
+11- 1
+0-1 1
+.names Jump tmp_cond_16_31 tmp_cond_16_31 tmp_cond_16_31
+11- 1
+0-1 1
+.names tmp_not_16 CONST0 tmp_cond_16_0 tmp_cond_16_0
+11- 1
+0-1 1
+.names tmp_not_16 CONST0 tmp_cond_16_1 tmp_cond_16_1
+11- 1
+0-1 1
+.names tmp_not_16 CONST0 tmp_cond_16_2 tmp_cond_16_2
+11- 1
+0-1 1
+.names tmp_not_16 CONST0 tmp_cond_16_3 tmp_cond_16_3
+11- 1
+0-1 1
+.names tmp_not_16 CONST0 tmp_cond_16_4 tmp_cond_16_4
+11- 1
+0-1 1
+.names tmp_not_16 CONST0 tmp_cond_16_5 tmp_cond_16_5
+11- 1
+0-1 1
+.names tmp_not_16 CONST0 tmp_cond_16_6 tmp_cond_16_6
+11- 1
+0-1 1
+.names tmp_not_16 CONST0 tmp_cond_16_7 tmp_cond_16_7
+11- 1
+0-1 1
+.names tmp_not_16 CONST0 tmp_cond_16_8 tmp_cond_16_8
+11- 1
+0-1 1
+.names tmp_not_16 CONST0 tmp_cond_16_9 tmp_cond_16_9
+11- 1
+0-1 1
+.names tmp_not_16 CONST0 tmp_cond_16_10 tmp_cond_16_10
+11- 1
+0-1 1
+.names tmp_not_16 CONST0 tmp_cond_16_11 tmp_cond_16_11
+11- 1
+0-1 1
+.names tmp_not_16 CONST0 tmp_cond_16_12 tmp_cond_16_12
+11- 1
+0-1 1
+.names tmp_not_16 CONST0 tmp_cond_16_13 tmp_cond_16_13
+11- 1
+0-1 1
+.names tmp_not_16 CONST0 tmp_cond_16_14 tmp_cond_16_14
+11- 1
+0-1 1
+.names tmp_not_16 CONST0 tmp_cond_16_15 tmp_cond_16_15
+11- 1
+0-1 1
+.names tmp_not_16 CONST0 tmp_cond_16_16 tmp_cond_16_16
+11- 1
+0-1 1
+.names tmp_not_16 CONST0 tmp_cond_16_17 tmp_cond_16_17
+11- 1
+0-1 1
+.names tmp_not_16 CONST0 tmp_cond_16_18 tmp_cond_16_18
+11- 1
+0-1 1
+.names tmp_not_16 CONST0 tmp_cond_16_19 tmp_cond_16_19
+11- 1
+0-1 1
+.names tmp_not_16 CONST0 tmp_cond_16_20 tmp_cond_16_20
+11- 1
+0-1 1
+.names tmp_not_16 CONST0 tmp_cond_16_21 tmp_cond_16_21
+11- 1
+0-1 1
+.names tmp_not_16 CONST0 tmp_cond_16_22 tmp_cond_16_22
+11- 1
+0-1 1
+.names tmp_not_16 CONST0 tmp_cond_16_23 tmp_cond_16_23
+11- 1
+0-1 1
+.names tmp_not_16 CONST0 tmp_cond_16_24 tmp_cond_16_24
+11- 1
+0-1 1
+.names tmp_not_16 CONST0 tmp_cond_16_25 tmp_cond_16_25
+11- 1
+0-1 1
+.names tmp_not_16 CONST0 tmp_cond_16_26 tmp_cond_16_26
+11- 1
+0-1 1
+.names tmp_not_16 CONST0 tmp_cond_16_27 tmp_cond_16_27
+11- 1
+0-1 1
+.names tmp_not_16 CONST0 tmp_cond_16_28 tmp_cond_16_28
+11- 1
+0-1 1
+.names tmp_not_16 CONST0 tmp_cond_16_29 tmp_cond_16_29
+11- 1
+0-1 1
+.names tmp_not_16 CONST0 tmp_cond_16_30 tmp_cond_16_30
+11- 1
+0-1 1
+.names tmp_not_16 CONST0 tmp_cond_16_31 tmp_cond_16_31
+11- 1
+0-1 1
+.names tmp_cond_16_0 CONST1 NXT_PC_0
+11 1
+.names tmp_cond_16_1 CONST1 NXT_PC_1
+11 1
+.names tmp_cond_16_2 CONST1 NXT_PC_2
+11 1
+.names tmp_cond_16_3 CONST1 NXT_PC_3
+11 1
+.names tmp_cond_16_4 CONST1 NXT_PC_4
+11 1
+.names tmp_cond_16_5 CONST1 NXT_PC_5
+11 1
+.names tmp_cond_16_6 CONST1 NXT_PC_6
+11 1
+.names tmp_cond_16_7 CONST1 NXT_PC_7
+11 1
+.names tmp_cond_16_8 CONST1 NXT_PC_8
+11 1
+.names tmp_cond_16_9 CONST1 NXT_PC_9
+11 1
+.names tmp_cond_16_10 CONST1 NXT_PC_10
+11 1
+.names tmp_cond_16_11 CONST1 NXT_PC_11
+11 1
+.names tmp_cond_16_12 CONST1 NXT_PC_12
+11 1
+.names tmp_cond_16_13 CONST1 NXT_PC_13
+11 1
+.names tmp_cond_16_14 CONST1 NXT_PC_14
+11 1
+.names tmp_cond_16_15 CONST1 NXT_PC_15
+11 1
+.names tmp_cond_16_16 CONST1 NXT_PC_16
+11 1
+.names tmp_cond_16_17 CONST1 NXT_PC_17
+11 1
+.names tmp_cond_16_18 CONST1 NXT_PC_18
+11 1
+.names tmp_cond_16_19 CONST1 NXT_PC_19
+11 1
+.names tmp_cond_16_20 CONST1 NXT_PC_20
+11 1
+.names tmp_cond_16_21 CONST1 NXT_PC_21
+11 1
+.names tmp_cond_16_22 CONST1 NXT_PC_22
+11 1
+.names tmp_cond_16_23 CONST1 NXT_PC_23
+11 1
+.names tmp_cond_16_24 CONST1 NXT_PC_24
+11 1
+.names tmp_cond_16_25 CONST1 NXT_PC_25
+11 1
+.names tmp_cond_16_26 CONST1 NXT_PC_26
+11 1
+.names tmp_cond_16_27 CONST1 NXT_PC_27
+11 1
+.names tmp_cond_16_28 CONST1 NXT_PC_28
+11 1
+.names tmp_cond_16_29 CONST1 NXT_PC_29
+11 1
+.names tmp_cond_16_30 CONST1 NXT_PC_30
+11 1
+.names tmp_cond_16_31 CONST1 NXT_PC_31
+11 1
+.names RSTn tmp_not_23
+0 1
+.names tmp_not_23 CONST1 CONST0 tmp_cond_23
+11- 1
+0-1 1
+.names tmp_cond_23 CONST1 I_MEM_CSN
+11 1
+.names RSTn tmp_not_26
+0 1
+.names tmp_not_26 CONST1 CONST0 tmp_cond_26
+11- 1
+0-1 1
+.names tmp_cond_26 CONST1 D_MEM_CSN
+11 1
+.names RF_RD2_0 CONST1 D_MEM_DOUT_0
+11 1
+.names RF_RD2_1 CONST1 D_MEM_DOUT_1
+11 1
+.names RF_RD2_2 CONST1 D_MEM_DOUT_2
+11 1
+.names RF_RD2_3 CONST1 D_MEM_DOUT_3
+11 1
+.names RF_RD2_4 CONST1 D_MEM_DOUT_4
+11 1
+.names RF_RD2_5 CONST1 D_MEM_DOUT_5
+11 1
+.names RF_RD2_6 CONST1 D_MEM_DOUT_6
+11 1
+.names RF_RD2_7 CONST1 D_MEM_DOUT_7
+11 1
+.names RF_RD2_8 CONST1 D_MEM_DOUT_8
+11 1
+.names RF_RD2_9 CONST1 D_MEM_DOUT_9
+11 1
+.names RF_RD2_10 CONST1 D_MEM_DOUT_10
+11 1
+.names RF_RD2_11 CONST1 D_MEM_DOUT_11
+11 1
+.names RF_RD2_12 CONST1 D_MEM_DOUT_12
+11 1
+.names RF_RD2_13 CONST1 D_MEM_DOUT_13
+11 1
+.names RF_RD2_14 CONST1 D_MEM_DOUT_14
+11 1
+.names RF_RD2_15 CONST1 D_MEM_DOUT_15
+11 1
+.names RF_RD2_16 CONST1 D_MEM_DOUT_16
+11 1
+.names RF_RD2_17 CONST1 D_MEM_DOUT_17
+11 1
+.names RF_RD2_18 CONST1 D_MEM_DOUT_18
+11 1
+.names RF_RD2_19 CONST1 D_MEM_DOUT_19
+11 1
+.names RF_RD2_20 CONST1 D_MEM_DOUT_20
+11 1
+.names RF_RD2_21 CONST1 D_MEM_DOUT_21
+11 1
+.names RF_RD2_22 CONST1 D_MEM_DOUT_22
+11 1
+.names RF_RD2_23 CONST1 D_MEM_DOUT_23
+11 1
+.names RF_RD2_24 CONST1 D_MEM_DOUT_24
+11 1
+.names RF_RD2_25 CONST1 D_MEM_DOUT_25
+11 1
+.names RF_RD2_26 CONST1 D_MEM_DOUT_26
+11 1
+.names RF_RD2_27 CONST1 D_MEM_DOUT_27
+11 1
+.names RF_RD2_28 CONST1 D_MEM_DOUT_28
+11 1
+.names RF_RD2_29 CONST1 D_MEM_DOUT_29
+11 1
+.names RF_RD2_30 CONST1 D_MEM_DOUT_30
+11 1
+.names RF_RD2_31 CONST1 D_MEM_DOUT_31
+11 1
+.names temp_ALU_Result_2 CONST1 tmp_slice_13_2_30_0
+11 1
+.names temp_ALU_Result_3 CONST1 tmp_slice_13_2_30_1
+11 1
+.names temp_ALU_Result_4 CONST1 tmp_slice_13_2_30_2
+11 1
+.names temp_ALU_Result_5 CONST1 tmp_slice_13_2_30_3
+11 1
+.names temp_ALU_Result_6 CONST1 tmp_slice_13_2_30_4
+11 1
+.names temp_ALU_Result_7 CONST1 tmp_slice_13_2_30_5
+11 1
+.names temp_ALU_Result_8 CONST1 tmp_slice_13_2_30_6
+11 1
+.names temp_ALU_Result_9 CONST1 tmp_slice_13_2_30_7
+11 1
+.names temp_ALU_Result_10 CONST1 tmp_slice_13_2_30_8
+11 1
+.names temp_ALU_Result_11 CONST1 tmp_slice_13_2_30_9
+11 1
+.names temp_ALU_Result_12 CONST1 tmp_slice_13_2_30_10
+11 1
+.names temp_ALU_Result_13 CONST1 tmp_slice_13_2_30_11
+11 1
+.names tmp_slice_13_2_30_0 CONST1 D_MEM_ADDR_0
+11 1
+.names tmp_slice_13_2_30_1 CONST1 D_MEM_ADDR_1
+11 1
+.names tmp_slice_13_2_30_2 CONST1 D_MEM_ADDR_2
+11 1
+.names tmp_slice_13_2_30_3 CONST1 D_MEM_ADDR_3
+11 1
+.names tmp_slice_13_2_30_4 CONST1 D_MEM_ADDR_4
+11 1
+.names tmp_slice_13_2_30_5 CONST1 D_MEM_ADDR_5
+11 1
+.names tmp_slice_13_2_30_6 CONST1 D_MEM_ADDR_6
+11 1
+.names tmp_slice_13_2_30_7 CONST1 D_MEM_ADDR_7
+11 1
+.names tmp_slice_13_2_30_8 CONST1 D_MEM_ADDR_8
+11 1
+.names tmp_slice_13_2_30_9 CONST1 D_MEM_ADDR_9
+11 1
+.names tmp_slice_13_2_30_10 CONST1 D_MEM_ADDR_10
+11 1
+.names tmp_slice_13_2_30_11 CONST1 D_MEM_ADDR_11
+11 1
+.names MemWrite tmp_not_32
+0 1
+.names tmp_not_32 CONST1 D_MEM_WEN
+11 1
+.names BE_0 CONST1 D_MEM_BE_0
+11 1
+.names BE_1 CONST1 D_MEM_BE_1
+11 1
+.names BE_2 CONST1 D_MEM_BE_2
+11 1
+.names BE_3 CONST1 D_MEM_BE_3
+11 1
+.names RegWrite CONST1 RF_WE
+11 1
+.names I_MEM_DI_15 CONST1 tmp_slice_19_15_36_0
+11 1
+.names I_MEM_DI_16 CONST1 tmp_slice_19_15_36_1
+11 1
+.names I_MEM_DI_17 CONST1 tmp_slice_19_15_36_2
+11 1
+.names I_MEM_DI_18 CONST1 tmp_slice_19_15_36_3
+11 1
+.names I_MEM_DI_19 CONST1 tmp_slice_19_15_36_4
+11 1
+.names tmp_slice_19_15_36_0 CONST1 RF_RA1_0
+11 1
+.names tmp_slice_19_15_36_1 CONST1 RF_RA1_1
+11 1
+.names tmp_slice_19_15_36_2 CONST1 RF_RA1_2
+11 1
+.names tmp_slice_19_15_36_3 CONST1 RF_RA1_3
+11 1
+.names tmp_slice_19_15_36_4 CONST1 RF_RA1_4
+11 1
+.names I_MEM_DI_20 CONST1 tmp_slice_24_20_38_0
+11 1
+.names I_MEM_DI_21 CONST1 tmp_slice_24_20_38_1
+11 1
+.names I_MEM_DI_22 CONST1 tmp_slice_24_20_38_2
+11 1
+.names I_MEM_DI_23 CONST1 tmp_slice_24_20_38_3
+11 1
+.names I_MEM_DI_24 CONST1 tmp_slice_24_20_38_4
+11 1
+.names tmp_slice_24_20_38_0 CONST1 RF_RA2_0
+11 1
+.names tmp_slice_24_20_38_1 CONST1 RF_RA2_1
+11 1
+.names tmp_slice_24_20_38_2 CONST1 RF_RA2_2
+11 1
+.names tmp_slice_24_20_38_3 CONST1 RF_RA2_3
+11 1
+.names tmp_slice_24_20_38_4 CONST1 RF_RA2_4
+11 1
+.names I_MEM_DI_7 CONST1 tmp_slice_11_7_40_0
+11 1
+.names I_MEM_DI_8 CONST1 tmp_slice_11_7_40_1
+11 1
+.names I_MEM_DI_9 CONST1 tmp_slice_11_7_40_2
+11 1
+.names I_MEM_DI_10 CONST1 tmp_slice_11_7_40_3
+11 1
+.names I_MEM_DI_11 CONST1 tmp_slice_11_7_40_4
+11 1
+.names I_MEM_DI_20 CONST1 tmp_slice_24_20_40_0
+11 1
+.names I_MEM_DI_21 CONST1 tmp_slice_24_20_40_1
+11 1
+.names I_MEM_DI_22 CONST1 tmp_slice_24_20_40_2
+11 1
+.names I_MEM_DI_23 CONST1 tmp_slice_24_20_40_3
+11 1
+.names I_MEM_DI_24 CONST1 tmp_slice_24_20_40_4
+11 1
+.names RegDst tmp_slice_11_7_40_0 tmp_slice_24_20_40_0 tmp_cond_40_0
+11- 1
+0-1 1
+.names RegDst tmp_slice_11_7_40_1 tmp_slice_24_20_40_1 tmp_cond_40_1
+11- 1
+0-1 1
+.names RegDst tmp_slice_11_7_40_2 tmp_slice_24_20_40_2 tmp_cond_40_2
+11- 1
+0-1 1
+.names RegDst tmp_slice_11_7_40_3 tmp_slice_24_20_40_3 tmp_cond_40_3
+11- 1
+0-1 1
+.names RegDst tmp_slice_11_7_40_4 tmp_slice_24_20_40_4 tmp_cond_40_4
+11- 1
+0-1 1
+.names tmp_cond_40_0 CONST1 RF_WA1_0
+11 1
+.names tmp_cond_40_1 CONST1 RF_WA1_1
+11 1
+.names tmp_cond_40_2 CONST1 RF_WA1_2
+11 1
+.names tmp_cond_40_3 CONST1 RF_WA1_3
+11 1
+.names tmp_cond_40_4 CONST1 RF_WA1_4
+11 1
+.names PC_0 CONST0 tmp_xor_576
+10 1
+01 1
+.names tmp_xor_576 CONST0 tmp_ADD_44_0
+10 1
+01 1
+.names PC_0 CONST0 tmp_and_577
+11 1
+.names PC_0 CONST0 tmp_and_578
+11 1
+.names CONST0 CONST0 tmp_and_579
+11 1
+.names tmp_and_577 tmp_and_578 tmp_or_580
+1- 1
+-1 1
+.names tmp_or_580 tmp_and_579 tmp_or_581
+1- 1
+-1 1
+.names PC_1 CONST0 tmp_xor_582
+10 1
+01 1
+.names tmp_xor_582 tmp_or_581 tmp_ADD_44_1
+10 1
+01 1
+.names PC_1 CONST0 tmp_and_583
+11 1
+.names PC_1 tmp_or_581 tmp_and_584
+11 1
+.names CONST0 tmp_or_581 tmp_and_585
+11 1
+.names tmp_and_583 tmp_and_584 tmp_or_586
+1- 1
+-1 1
+.names tmp_or_586 tmp_and_585 tmp_or_587
+1- 1
+-1 1
+.names PC_2 CONST1 tmp_xor_588
+10 1
+01 1
+.names tmp_xor_588 tmp_or_587 tmp_ADD_44_2
+10 1
+01 1
+.names PC_2 CONST1 tmp_and_589
+11 1
+.names PC_2 tmp_or_587 tmp_and_590
+11 1
+.names CONST1 tmp_or_587 tmp_and_591
+11 1
+.names tmp_and_589 tmp_and_590 tmp_or_592
+1- 1
+-1 1
+.names tmp_or_592 tmp_and_591 tmp_or_593
+1- 1
+-1 1
+.names PC_3 CONST0 tmp_xor_594
+10 1
+01 1
+.names tmp_xor_594 tmp_or_593 tmp_ADD_44_3
+10 1
+01 1
+.names PC_3 CONST0 tmp_and_595
+11 1
+.names PC_3 tmp_or_593 tmp_and_596
+11 1
+.names CONST0 tmp_or_593 tmp_and_597
+11 1
+.names tmp_and_595 tmp_and_596 tmp_or_598
+1- 1
+-1 1
+.names tmp_or_598 tmp_and_597 tmp_or_599
+1- 1
+-1 1
+.names PC_4 CONST0 tmp_xor_600
+10 1
+01 1
+.names tmp_xor_600 tmp_or_599 tmp_ADD_44_4
+10 1
+01 1
+.names PC_4 CONST0 tmp_and_601
+11 1
+.names PC_4 tmp_or_599 tmp_and_602
+11 1
+.names CONST0 tmp_or_599 tmp_and_603
+11 1
+.names tmp_and_601 tmp_and_602 tmp_or_604
+1- 1
+-1 1
+.names tmp_or_604 tmp_and_603 tmp_or_605
+1- 1
+-1 1
+.names PC_5 CONST0 tmp_xor_606
+10 1
+01 1
+.names tmp_xor_606 tmp_or_605 tmp_ADD_44_5
+10 1
+01 1
+.names PC_5 CONST0 tmp_and_607
+11 1
+.names PC_5 tmp_or_605 tmp_and_608
+11 1
+.names CONST0 tmp_or_605 tmp_and_609
+11 1
+.names tmp_and_607 tmp_and_608 tmp_or_610
+1- 1
+-1 1
+.names tmp_or_610 tmp_and_609 tmp_or_611
+1- 1
+-1 1
+.names PC_6 CONST0 tmp_xor_612
+10 1
+01 1
+.names tmp_xor_612 tmp_or_611 tmp_ADD_44_6
+10 1
+01 1
+.names PC_6 CONST0 tmp_and_613
+11 1
+.names PC_6 tmp_or_611 tmp_and_614
+11 1
+.names CONST0 tmp_or_611 tmp_and_615
+11 1
+.names tmp_and_613 tmp_and_614 tmp_or_616
+1- 1
+-1 1
+.names tmp_or_616 tmp_and_615 tmp_or_617
+1- 1
+-1 1
+.names PC_7 CONST0 tmp_xor_618
+10 1
+01 1
+.names tmp_xor_618 tmp_or_617 tmp_ADD_44_7
+10 1
+01 1
+.names PC_7 CONST0 tmp_and_619
+11 1
+.names PC_7 tmp_or_617 tmp_and_620
+11 1
+.names CONST0 tmp_or_617 tmp_and_621
+11 1
+.names tmp_and_619 tmp_and_620 tmp_or_622
+1- 1
+-1 1
+.names tmp_or_622 tmp_and_621 tmp_or_623
+1- 1
+-1 1
+.names PC_8 CONST0 tmp_xor_624
+10 1
+01 1
+.names tmp_xor_624 tmp_or_623 tmp_ADD_44_8
+10 1
+01 1
+.names PC_8 CONST0 tmp_and_625
+11 1
+.names PC_8 tmp_or_623 tmp_and_626
+11 1
+.names CONST0 tmp_or_623 tmp_and_627
+11 1
+.names tmp_and_625 tmp_and_626 tmp_or_628
+1- 1
+-1 1
+.names tmp_or_628 tmp_and_627 tmp_or_629
+1- 1
+-1 1
+.names PC_9 CONST0 tmp_xor_630
+10 1
+01 1
+.names tmp_xor_630 tmp_or_629 tmp_ADD_44_9
+10 1
+01 1
+.names PC_9 CONST0 tmp_and_631
+11 1
+.names PC_9 tmp_or_629 tmp_and_632
+11 1
+.names CONST0 tmp_or_629 tmp_and_633
+11 1
+.names tmp_and_631 tmp_and_632 tmp_or_634
+1- 1
+-1 1
+.names tmp_or_634 tmp_and_633 tmp_or_635
+1- 1
+-1 1
+.names PC_10 CONST0 tmp_xor_636
+10 1
+01 1
+.names tmp_xor_636 tmp_or_635 tmp_ADD_44_10
+10 1
+01 1
+.names PC_10 CONST0 tmp_and_637
+11 1
+.names PC_10 tmp_or_635 tmp_and_638
+11 1
+.names CONST0 tmp_or_635 tmp_and_639
+11 1
+.names tmp_and_637 tmp_and_638 tmp_or_640
+1- 1
+-1 1
+.names tmp_or_640 tmp_and_639 tmp_or_641
+1- 1
+-1 1
+.names PC_11 CONST0 tmp_xor_642
+10 1
+01 1
+.names tmp_xor_642 tmp_or_641 tmp_ADD_44_11
+10 1
+01 1
+.names PC_11 CONST0 tmp_and_643
+11 1
+.names PC_11 tmp_or_641 tmp_and_644
+11 1
+.names CONST0 tmp_or_641 tmp_and_645
+11 1
+.names tmp_and_643 tmp_and_644 tmp_or_646
+1- 1
+-1 1
+.names tmp_or_646 tmp_and_645 tmp_or_647
+1- 1
+-1 1
+.names PC_12 CONST0 tmp_xor_648
+10 1
+01 1
+.names tmp_xor_648 tmp_or_647 tmp_ADD_44_12
+10 1
+01 1
+.names PC_12 CONST0 tmp_and_649
+11 1
+.names PC_12 tmp_or_647 tmp_and_650
+11 1
+.names CONST0 tmp_or_647 tmp_and_651
+11 1
+.names tmp_and_649 tmp_and_650 tmp_or_652
+1- 1
+-1 1
+.names tmp_or_652 tmp_and_651 tmp_or_653
+1- 1
+-1 1
+.names PC_13 CONST0 tmp_xor_654
+10 1
+01 1
+.names tmp_xor_654 tmp_or_653 tmp_ADD_44_13
+10 1
+01 1
+.names PC_13 CONST0 tmp_and_655
+11 1
+.names PC_13 tmp_or_653 tmp_and_656
+11 1
+.names CONST0 tmp_or_653 tmp_and_657
+11 1
+.names tmp_and_655 tmp_and_656 tmp_or_658
+1- 1
+-1 1
+.names tmp_or_658 tmp_and_657 tmp_or_659
+1- 1
+-1 1
+.names PC_14 CONST0 tmp_xor_660
+10 1
+01 1
+.names tmp_xor_660 tmp_or_659 tmp_ADD_44_14
+10 1
+01 1
+.names PC_14 CONST0 tmp_and_661
+11 1
+.names PC_14 tmp_or_659 tmp_and_662
+11 1
+.names CONST0 tmp_or_659 tmp_and_663
+11 1
+.names tmp_and_661 tmp_and_662 tmp_or_664
+1- 1
+-1 1
+.names tmp_or_664 tmp_and_663 tmp_or_665
+1- 1
+-1 1
+.names PC_15 CONST0 tmp_xor_666
+10 1
+01 1
+.names tmp_xor_666 tmp_or_665 tmp_ADD_44_15
+10 1
+01 1
+.names PC_15 CONST0 tmp_and_667
+11 1
+.names PC_15 tmp_or_665 tmp_and_668
+11 1
+.names CONST0 tmp_or_665 tmp_and_669
+11 1
+.names tmp_and_667 tmp_and_668 tmp_or_670
+1- 1
+-1 1
+.names tmp_or_670 tmp_and_669 tmp_or_671
+1- 1
+-1 1
+.names PC_16 CONST0 tmp_xor_672
+10 1
+01 1
+.names tmp_xor_672 tmp_or_671 tmp_ADD_44_16
+10 1
+01 1
+.names PC_16 CONST0 tmp_and_673
+11 1
+.names PC_16 tmp_or_671 tmp_and_674
+11 1
+.names CONST0 tmp_or_671 tmp_and_675
+11 1
+.names tmp_and_673 tmp_and_674 tmp_or_676
+1- 1
+-1 1
+.names tmp_or_676 tmp_and_675 tmp_or_677
+1- 1
+-1 1
+.names PC_17 CONST0 tmp_xor_678
+10 1
+01 1
+.names tmp_xor_678 tmp_or_677 tmp_ADD_44_17
+10 1
+01 1
+.names PC_17 CONST0 tmp_and_679
+11 1
+.names PC_17 tmp_or_677 tmp_and_680
+11 1
+.names CONST0 tmp_or_677 tmp_and_681
+11 1
+.names tmp_and_679 tmp_and_680 tmp_or_682
+1- 1
+-1 1
+.names tmp_or_682 tmp_and_681 tmp_or_683
+1- 1
+-1 1
+.names PC_18 CONST0 tmp_xor_684
+10 1
+01 1
+.names tmp_xor_684 tmp_or_683 tmp_ADD_44_18
+10 1
+01 1
+.names PC_18 CONST0 tmp_and_685
+11 1
+.names PC_18 tmp_or_683 tmp_and_686
+11 1
+.names CONST0 tmp_or_683 tmp_and_687
+11 1
+.names tmp_and_685 tmp_and_686 tmp_or_688
+1- 1
+-1 1
+.names tmp_or_688 tmp_and_687 tmp_or_689
+1- 1
+-1 1
+.names PC_19 CONST0 tmp_xor_690
+10 1
+01 1
+.names tmp_xor_690 tmp_or_689 tmp_ADD_44_19
+10 1
+01 1
+.names PC_19 CONST0 tmp_and_691
+11 1
+.names PC_19 tmp_or_689 tmp_and_692
+11 1
+.names CONST0 tmp_or_689 tmp_and_693
+11 1
+.names tmp_and_691 tmp_and_692 tmp_or_694
+1- 1
+-1 1
+.names tmp_or_694 tmp_and_693 tmp_or_695
+1- 1
+-1 1
+.names PC_20 CONST0 tmp_xor_696
+10 1
+01 1
+.names tmp_xor_696 tmp_or_695 tmp_ADD_44_20
+10 1
+01 1
+.names PC_20 CONST0 tmp_and_697
+11 1
+.names PC_20 tmp_or_695 tmp_and_698
+11 1
+.names CONST0 tmp_or_695 tmp_and_699
+11 1
+.names tmp_and_697 tmp_and_698 tmp_or_700
+1- 1
+-1 1
+.names tmp_or_700 tmp_and_699 tmp_or_701
+1- 1
+-1 1
+.names PC_21 CONST0 tmp_xor_702
+10 1
+01 1
+.names tmp_xor_702 tmp_or_701 tmp_ADD_44_21
+10 1
+01 1
+.names PC_21 CONST0 tmp_and_703
+11 1
+.names PC_21 tmp_or_701 tmp_and_704
+11 1
+.names CONST0 tmp_or_701 tmp_and_705
+11 1
+.names tmp_and_703 tmp_and_704 tmp_or_706
+1- 1
+-1 1
+.names tmp_or_706 tmp_and_705 tmp_or_707
+1- 1
+-1 1
+.names PC_22 CONST0 tmp_xor_708
+10 1
+01 1
+.names tmp_xor_708 tmp_or_707 tmp_ADD_44_22
+10 1
+01 1
+.names PC_22 CONST0 tmp_and_709
+11 1
+.names PC_22 tmp_or_707 tmp_and_710
+11 1
+.names CONST0 tmp_or_707 tmp_and_711
+11 1
+.names tmp_and_709 tmp_and_710 tmp_or_712
+1- 1
+-1 1
+.names tmp_or_712 tmp_and_711 tmp_or_713
+1- 1
+-1 1
+.names PC_23 CONST0 tmp_xor_714
+10 1
+01 1
+.names tmp_xor_714 tmp_or_713 tmp_ADD_44_23
+10 1
+01 1
+.names PC_23 CONST0 tmp_and_715
+11 1
+.names PC_23 tmp_or_713 tmp_and_716
+11 1
+.names CONST0 tmp_or_713 tmp_and_717
+11 1
+.names tmp_and_715 tmp_and_716 tmp_or_718
+1- 1
+-1 1
+.names tmp_or_718 tmp_and_717 tmp_or_719
+1- 1
+-1 1
+.names PC_24 CONST0 tmp_xor_720
+10 1
+01 1
+.names tmp_xor_720 tmp_or_719 tmp_ADD_44_24
+10 1
+01 1
+.names PC_24 CONST0 tmp_and_721
+11 1
+.names PC_24 tmp_or_719 tmp_and_722
+11 1
+.names CONST0 tmp_or_719 tmp_and_723
+11 1
+.names tmp_and_721 tmp_and_722 tmp_or_724
+1- 1
+-1 1
+.names tmp_or_724 tmp_and_723 tmp_or_725
+1- 1
+-1 1
+.names PC_25 CONST0 tmp_xor_726
+10 1
+01 1
+.names tmp_xor_726 tmp_or_725 tmp_ADD_44_25
+10 1
+01 1
+.names PC_25 CONST0 tmp_and_727
+11 1
+.names PC_25 tmp_or_725 tmp_and_728
+11 1
+.names CONST0 tmp_or_725 tmp_and_729
+11 1
+.names tmp_and_727 tmp_and_728 tmp_or_730
+1- 1
+-1 1
+.names tmp_or_730 tmp_and_729 tmp_or_731
+1- 1
+-1 1
+.names PC_26 CONST0 tmp_xor_732
+10 1
+01 1
+.names tmp_xor_732 tmp_or_731 tmp_ADD_44_26
+10 1
+01 1
+.names PC_26 CONST0 tmp_and_733
+11 1
+.names PC_26 tmp_or_731 tmp_and_734
+11 1
+.names CONST0 tmp_or_731 tmp_and_735
+11 1
+.names tmp_and_733 tmp_and_734 tmp_or_736
+1- 1
+-1 1
+.names tmp_or_736 tmp_and_735 tmp_or_737
+1- 1
+-1 1
+.names PC_27 CONST0 tmp_xor_738
+10 1
+01 1
+.names tmp_xor_738 tmp_or_737 tmp_ADD_44_27
+10 1
+01 1
+.names PC_27 CONST0 tmp_and_739
+11 1
+.names PC_27 tmp_or_737 tmp_and_740
+11 1
+.names CONST0 tmp_or_737 tmp_and_741
+11 1
+.names tmp_and_739 tmp_and_740 tmp_or_742
+1- 1
+-1 1
+.names tmp_or_742 tmp_and_741 tmp_or_743
+1- 1
+-1 1
+.names PC_28 CONST0 tmp_xor_744
+10 1
+01 1
+.names tmp_xor_744 tmp_or_743 tmp_ADD_44_28
+10 1
+01 1
+.names PC_28 CONST0 tmp_and_745
+11 1
+.names PC_28 tmp_or_743 tmp_and_746
+11 1
+.names CONST0 tmp_or_743 tmp_and_747
+11 1
+.names tmp_and_745 tmp_and_746 tmp_or_748
+1- 1
+-1 1
+.names tmp_or_748 tmp_and_747 tmp_or_749
+1- 1
+-1 1
+.names PC_29 CONST0 tmp_xor_750
+10 1
+01 1
+.names tmp_xor_750 tmp_or_749 tmp_ADD_44_29
+10 1
+01 1
+.names PC_29 CONST0 tmp_and_751
+11 1
+.names PC_29 tmp_or_749 tmp_and_752
+11 1
+.names CONST0 tmp_or_749 tmp_and_753
+11 1
+.names tmp_and_751 tmp_and_752 tmp_or_754
+1- 1
+-1 1
+.names tmp_or_754 tmp_and_753 tmp_or_755
+1- 1
+-1 1
+.names PC_30 CONST0 tmp_xor_756
+10 1
+01 1
+.names tmp_xor_756 tmp_or_755 tmp_ADD_44_30
+10 1
+01 1
+.names PC_30 CONST0 tmp_and_757
+11 1
+.names PC_30 tmp_or_755 tmp_and_758
+11 1
+.names CONST0 tmp_or_755 tmp_and_759
+11 1
+.names tmp_and_757 tmp_and_758 tmp_or_760
+1- 1
+-1 1
+.names tmp_or_760 tmp_and_759 tmp_or_761
+1- 1
+-1 1
+.names PC_31 CONST0 tmp_xor_762
+10 1
+01 1
+.names tmp_xor_762 tmp_or_761 tmp_ADD_44_31
+10 1
+01 1
+.names PC_31 CONST0 tmp_and_763
+11 1
+.names PC_31 tmp_or_761 tmp_and_764
+11 1
+.names CONST0 tmp_or_761 tmp_and_765
+11 1
+.names tmp_and_763 tmp_and_764 tmp_or_766
+1- 1
+-1 1
+.names tmp_or_766 tmp_and_765 tmp_or_767
+1- 1
+-1 1
+.names MemtoReg D_MEM_DI_0 ALU_Result_0 tmp_cond_44_0
+11- 1
+0-1 1
+.names MemtoReg D_MEM_DI_1 ALU_Result_1 tmp_cond_44_1
+11- 1
+0-1 1
+.names MemtoReg D_MEM_DI_2 ALU_Result_2 tmp_cond_44_2
+11- 1
+0-1 1
+.names MemtoReg D_MEM_DI_3 ALU_Result_3 tmp_cond_44_3
+11- 1
+0-1 1
+.names MemtoReg D_MEM_DI_4 ALU_Result_4 tmp_cond_44_4
+11- 1
+0-1 1
+.names MemtoReg D_MEM_DI_5 ALU_Result_5 tmp_cond_44_5
+11- 1
+0-1 1
+.names MemtoReg D_MEM_DI_6 ALU_Result_6 tmp_cond_44_6
+11- 1
+0-1 1
+.names MemtoReg D_MEM_DI_7 ALU_Result_7 tmp_cond_44_7
+11- 1
+0-1 1
+.names MemtoReg D_MEM_DI_8 ALU_Result_8 tmp_cond_44_8
+11- 1
+0-1 1
+.names MemtoReg D_MEM_DI_9 ALU_Result_9 tmp_cond_44_9
+11- 1
+0-1 1
+.names MemtoReg D_MEM_DI_10 ALU_Result_10 tmp_cond_44_10
+11- 1
+0-1 1
+.names MemtoReg D_MEM_DI_11 ALU_Result_11 tmp_cond_44_11
+11- 1
+0-1 1
+.names MemtoReg D_MEM_DI_12 ALU_Result_12 tmp_cond_44_12
+11- 1
+0-1 1
+.names MemtoReg D_MEM_DI_13 ALU_Result_13 tmp_cond_44_13
+11- 1
+0-1 1
+.names MemtoReg D_MEM_DI_14 ALU_Result_14 tmp_cond_44_14
+11- 1
+0-1 1
+.names MemtoReg D_MEM_DI_15 ALU_Result_15 tmp_cond_44_15
+11- 1
+0-1 1
+.names MemtoReg D_MEM_DI_16 ALU_Result_16 tmp_cond_44_16
+11- 1
+0-1 1
+.names MemtoReg D_MEM_DI_17 ALU_Result_17 tmp_cond_44_17
+11- 1
+0-1 1
+.names MemtoReg D_MEM_DI_18 ALU_Result_18 tmp_cond_44_18
+11- 1
+0-1 1
+.names MemtoReg D_MEM_DI_19 ALU_Result_19 tmp_cond_44_19
+11- 1
+0-1 1
+.names MemtoReg D_MEM_DI_20 ALU_Result_20 tmp_cond_44_20
+11- 1
+0-1 1
+.names MemtoReg D_MEM_DI_21 ALU_Result_21 tmp_cond_44_21
+11- 1
+0-1 1
+.names MemtoReg D_MEM_DI_22 ALU_Result_22 tmp_cond_44_22
+11- 1
+0-1 1
+.names MemtoReg D_MEM_DI_23 ALU_Result_23 tmp_cond_44_23
+11- 1
+0-1 1
+.names MemtoReg D_MEM_DI_24 ALU_Result_24 tmp_cond_44_24
+11- 1
+0-1 1
+.names MemtoReg D_MEM_DI_25 ALU_Result_25 tmp_cond_44_25
+11- 1
+0-1 1
+.names MemtoReg D_MEM_DI_26 ALU_Result_26 tmp_cond_44_26
+11- 1
+0-1 1
+.names MemtoReg D_MEM_DI_27 ALU_Result_27 tmp_cond_44_27
+11- 1
+0-1 1
+.names MemtoReg D_MEM_DI_28 ALU_Result_28 tmp_cond_44_28
+11- 1
+0-1 1
+.names MemtoReg D_MEM_DI_29 ALU_Result_29 tmp_cond_44_29
+11- 1
+0-1 1
+.names MemtoReg D_MEM_DI_30 ALU_Result_30 tmp_cond_44_30
+11- 1
+0-1 1
+.names MemtoReg D_MEM_DI_31 ALU_Result_31 tmp_cond_44_31
+11- 1
+0-1 1
+.names Jump tmp_ADD_44_0 tmp_cond_44_0 tmp_cond_44_0
+11- 1
+0-1 1
+.names Jump tmp_ADD_44_1 tmp_cond_44_1 tmp_cond_44_1
+11- 1
+0-1 1
+.names Jump tmp_ADD_44_2 tmp_cond_44_2 tmp_cond_44_2
+11- 1
+0-1 1
+.names Jump tmp_ADD_44_3 tmp_cond_44_3 tmp_cond_44_3
+11- 1
+0-1 1
+.names Jump tmp_ADD_44_4 tmp_cond_44_4 tmp_cond_44_4
+11- 1
+0-1 1
+.names Jump tmp_ADD_44_5 tmp_cond_44_5 tmp_cond_44_5
+11- 1
+0-1 1
+.names Jump tmp_ADD_44_6 tmp_cond_44_6 tmp_cond_44_6
+11- 1
+0-1 1
+.names Jump tmp_ADD_44_7 tmp_cond_44_7 tmp_cond_44_7
+11- 1
+0-1 1
+.names Jump tmp_ADD_44_8 tmp_cond_44_8 tmp_cond_44_8
+11- 1
+0-1 1
+.names Jump tmp_ADD_44_9 tmp_cond_44_9 tmp_cond_44_9
+11- 1
+0-1 1
+.names Jump tmp_ADD_44_10 tmp_cond_44_10 tmp_cond_44_10
+11- 1
+0-1 1
+.names Jump tmp_ADD_44_11 tmp_cond_44_11 tmp_cond_44_11
+11- 1
+0-1 1
+.names Jump tmp_ADD_44_12 tmp_cond_44_12 tmp_cond_44_12
+11- 1
+0-1 1
+.names Jump tmp_ADD_44_13 tmp_cond_44_13 tmp_cond_44_13
+11- 1
+0-1 1
+.names Jump tmp_ADD_44_14 tmp_cond_44_14 tmp_cond_44_14
+11- 1
+0-1 1
+.names Jump tmp_ADD_44_15 tmp_cond_44_15 tmp_cond_44_15
+11- 1
+0-1 1
+.names Jump tmp_ADD_44_16 tmp_cond_44_16 tmp_cond_44_16
+11- 1
+0-1 1
+.names Jump tmp_ADD_44_17 tmp_cond_44_17 tmp_cond_44_17
+11- 1
+0-1 1
+.names Jump tmp_ADD_44_18 tmp_cond_44_18 tmp_cond_44_18
+11- 1
+0-1 1
+.names Jump tmp_ADD_44_19 tmp_cond_44_19 tmp_cond_44_19
+11- 1
+0-1 1
+.names Jump tmp_ADD_44_20 tmp_cond_44_20 tmp_cond_44_20
+11- 1
+0-1 1
+.names Jump tmp_ADD_44_21 tmp_cond_44_21 tmp_cond_44_21
+11- 1
+0-1 1
+.names Jump tmp_ADD_44_22 tmp_cond_44_22 tmp_cond_44_22
+11- 1
+0-1 1
+.names Jump tmp_ADD_44_23 tmp_cond_44_23 tmp_cond_44_23
+11- 1
+0-1 1
+.names Jump tmp_ADD_44_24 tmp_cond_44_24 tmp_cond_44_24
+11- 1
+0-1 1
+.names Jump tmp_ADD_44_25 tmp_cond_44_25 tmp_cond_44_25
+11- 1
+0-1 1
+.names Jump tmp_ADD_44_26 tmp_cond_44_26 tmp_cond_44_26
+11- 1
+0-1 1
+.names Jump tmp_ADD_44_27 tmp_cond_44_27 tmp_cond_44_27
+11- 1
+0-1 1
+.names Jump tmp_ADD_44_28 tmp_cond_44_28 tmp_cond_44_28
+11- 1
+0-1 1
+.names Jump tmp_ADD_44_29 tmp_cond_44_29 tmp_cond_44_29
+11- 1
+0-1 1
+.names Jump tmp_ADD_44_30 tmp_cond_44_30 tmp_cond_44_30
+11- 1
+0-1 1
+.names Jump tmp_ADD_44_31 tmp_cond_44_31 tmp_cond_44_31
+11- 1
+0-1 1
+.names tmp_cond_44_0 CONST1 RF_WD_0
+11 1
+.names tmp_cond_44_1 CONST1 RF_WD_1
+11 1
+.names tmp_cond_44_2 CONST1 RF_WD_2
+11 1
+.names tmp_cond_44_3 CONST1 RF_WD_3
+11 1
+.names tmp_cond_44_4 CONST1 RF_WD_4
+11 1
+.names tmp_cond_44_5 CONST1 RF_WD_5
+11 1
+.names tmp_cond_44_6 CONST1 RF_WD_6
+11 1
+.names tmp_cond_44_7 CONST1 RF_WD_7
+11 1
+.names tmp_cond_44_8 CONST1 RF_WD_8
+11 1
+.names tmp_cond_44_9 CONST1 RF_WD_9
+11 1
+.names tmp_cond_44_10 CONST1 RF_WD_10
+11 1
+.names tmp_cond_44_11 CONST1 RF_WD_11
+11 1
+.names tmp_cond_44_12 CONST1 RF_WD_12
+11 1
+.names tmp_cond_44_13 CONST1 RF_WD_13
+11 1
+.names tmp_cond_44_14 CONST1 RF_WD_14
+11 1
+.names tmp_cond_44_15 CONST1 RF_WD_15
+11 1
+.names tmp_cond_44_16 CONST1 RF_WD_16
+11 1
+.names tmp_cond_44_17 CONST1 RF_WD_17
+11 1
+.names tmp_cond_44_18 CONST1 RF_WD_18
+11 1
+.names tmp_cond_44_19 CONST1 RF_WD_19
+11 1
+.names tmp_cond_44_20 CONST1 RF_WD_20
+11 1
+.names tmp_cond_44_21 CONST1 RF_WD_21
+11 1
+.names tmp_cond_44_22 CONST1 RF_WD_22
+11 1
+.names tmp_cond_44_23 CONST1 RF_WD_23
+11 1
+.names tmp_cond_44_24 CONST1 RF_WD_24
+11 1
+.names tmp_cond_44_25 CONST1 RF_WD_25
+11 1
+.names tmp_cond_44_26 CONST1 RF_WD_26
+11 1
+.names tmp_cond_44_27 CONST1 RF_WD_27
+11 1
+.names tmp_cond_44_28 CONST1 RF_WD_28
+11 1
+.names tmp_cond_44_29 CONST1 RF_WD_29
+11 1
+.names tmp_cond_44_30 CONST1 RF_WD_30
+11 1
+.names tmp_cond_44_31 CONST1 RF_WD_31
+11 1
+.names RF_RD1_0 CONST0 tmp_xor_eq_768
+10 1
+01 1
+.names tmp_xor_eq_768 tmp_xnor_eq_769
+0 1
+.names RF_RD1_1 CONST0 tmp_xor_eq_770
+10 1
+01 1
+.names tmp_xor_eq_770 tmp_xnor_eq_771
+0 1
+.names RF_RD1_2 CONST1 tmp_xor_eq_772
+10 1
+01 1
+.names tmp_xor_eq_772 tmp_xnor_eq_773
+0 1
+.names RF_RD1_3 CONST1 tmp_xor_eq_774
+10 1
+01 1
+.names tmp_xor_eq_774 tmp_xnor_eq_775
+0 1
+.names RF_RD1_4 CONST0 tmp_xor_eq_776
+10 1
+01 1
+.names tmp_xor_eq_776 tmp_xnor_eq_777
+0 1
+.names RF_RD1_5 CONST0 tmp_xor_eq_778
+10 1
+01 1
+.names tmp_xor_eq_778 tmp_xnor_eq_779
+0 1
+.names RF_RD1_6 CONST0 tmp_xor_eq_780
+10 1
+01 1
+.names tmp_xor_eq_780 tmp_xnor_eq_781
+0 1
+.names RF_RD1_7 CONST0 tmp_xor_eq_782
+10 1
+01 1
+.names tmp_xor_eq_782 tmp_xnor_eq_783
+0 1
+.names RF_RD1_8 CONST0 tmp_xor_eq_784
+10 1
+01 1
+.names tmp_xor_eq_784 tmp_xnor_eq_785
+0 1
+.names RF_RD1_9 CONST0 tmp_xor_eq_786
+10 1
+01 1
+.names tmp_xor_eq_786 tmp_xnor_eq_787
+0 1
+.names RF_RD1_10 CONST0 tmp_xor_eq_788
+10 1
+01 1
+.names tmp_xor_eq_788 tmp_xnor_eq_789
+0 1
+.names RF_RD1_11 CONST0 tmp_xor_eq_790
+10 1
+01 1
+.names tmp_xor_eq_790 tmp_xnor_eq_791
+0 1
+.names RF_RD1_12 CONST0 tmp_xor_eq_792
+10 1
+01 1
+.names tmp_xor_eq_792 tmp_xnor_eq_793
+0 1
+.names RF_RD1_13 CONST0 tmp_xor_eq_794
+10 1
+01 1
+.names tmp_xor_eq_794 tmp_xnor_eq_795
+0 1
+.names RF_RD1_14 CONST0 tmp_xor_eq_796
+10 1
+01 1
+.names tmp_xor_eq_796 tmp_xnor_eq_797
+0 1
+.names RF_RD1_15 CONST0 tmp_xor_eq_798
+10 1
+01 1
+.names tmp_xor_eq_798 tmp_xnor_eq_799
+0 1
+.names RF_RD1_16 CONST0 tmp_xor_eq_800
+10 1
+01 1
+.names tmp_xor_eq_800 tmp_xnor_eq_801
+0 1
+.names RF_RD1_17 CONST0 tmp_xor_eq_802
+10 1
+01 1
+.names tmp_xor_eq_802 tmp_xnor_eq_803
+0 1
+.names RF_RD1_18 CONST0 tmp_xor_eq_804
+10 1
+01 1
+.names tmp_xor_eq_804 tmp_xnor_eq_805
+0 1
+.names RF_RD1_19 CONST0 tmp_xor_eq_806
+10 1
+01 1
+.names tmp_xor_eq_806 tmp_xnor_eq_807
+0 1
+.names RF_RD1_20 CONST0 tmp_xor_eq_808
+10 1
+01 1
+.names tmp_xor_eq_808 tmp_xnor_eq_809
+0 1
+.names RF_RD1_21 CONST0 tmp_xor_eq_810
+10 1
+01 1
+.names tmp_xor_eq_810 tmp_xnor_eq_811
+0 1
+.names RF_RD1_22 CONST0 tmp_xor_eq_812
+10 1
+01 1
+.names tmp_xor_eq_812 tmp_xnor_eq_813
+0 1
+.names RF_RD1_23 CONST0 tmp_xor_eq_814
+10 1
+01 1
+.names tmp_xor_eq_814 tmp_xnor_eq_815
+0 1
+.names RF_RD1_24 CONST0 tmp_xor_eq_816
+10 1
+01 1
+.names tmp_xor_eq_816 tmp_xnor_eq_817
+0 1
+.names RF_RD1_25 CONST0 tmp_xor_eq_818
+10 1
+01 1
+.names tmp_xor_eq_818 tmp_xnor_eq_819
+0 1
+.names RF_RD1_26 CONST0 tmp_xor_eq_820
+10 1
+01 1
+.names tmp_xor_eq_820 tmp_xnor_eq_821
+0 1
+.names RF_RD1_27 CONST0 tmp_xor_eq_822
+10 1
+01 1
+.names tmp_xor_eq_822 tmp_xnor_eq_823
+0 1
+.names RF_RD1_28 CONST0 tmp_xor_eq_824
+10 1
+01 1
+.names tmp_xor_eq_824 tmp_xnor_eq_825
+0 1
+.names RF_RD1_29 CONST0 tmp_xor_eq_826
+10 1
+01 1
+.names tmp_xor_eq_826 tmp_xnor_eq_827
+0 1
+.names RF_RD1_30 CONST0 tmp_xor_eq_828
+10 1
+01 1
+.names tmp_xor_eq_828 tmp_xnor_eq_829
+0 1
+.names RF_RD1_31 CONST0 tmp_xor_eq_830
+10 1
+01 1
+.names tmp_xor_eq_830 tmp_xnor_eq_831
+0 1
+.names tmp_xnor_eq_769 tmp_xnor_eq_771 tmp_and_red_832
+11 1
+.names tmp_and_red_832 tmp_xnor_eq_773 tmp_and_red_833
+11 1
+.names tmp_and_red_833 tmp_xnor_eq_775 tmp_and_red_834
+11 1
+.names tmp_and_red_834 tmp_xnor_eq_777 tmp_and_red_835
+11 1
+.names tmp_and_red_835 tmp_xnor_eq_779 tmp_and_red_836
+11 1
+.names tmp_and_red_836 tmp_xnor_eq_781 tmp_and_red_837
+11 1
+.names tmp_and_red_837 tmp_xnor_eq_783 tmp_and_red_838
+11 1
+.names tmp_and_red_838 tmp_xnor_eq_785 tmp_and_red_839
+11 1
+.names tmp_and_red_839 tmp_xnor_eq_787 tmp_and_red_840
+11 1
+.names tmp_and_red_840 tmp_xnor_eq_789 tmp_and_red_841
+11 1
+.names tmp_and_red_841 tmp_xnor_eq_791 tmp_and_red_842
+11 1
+.names tmp_and_red_842 tmp_xnor_eq_793 tmp_and_red_843
+11 1
+.names tmp_and_red_843 tmp_xnor_eq_795 tmp_and_red_844
+11 1
+.names tmp_and_red_844 tmp_xnor_eq_797 tmp_and_red_845
+11 1
+.names tmp_and_red_845 tmp_xnor_eq_799 tmp_and_red_846
+11 1
+.names tmp_and_red_846 tmp_xnor_eq_801 tmp_and_red_847
+11 1
+.names tmp_and_red_847 tmp_xnor_eq_803 tmp_and_red_848
+11 1
+.names tmp_and_red_848 tmp_xnor_eq_805 tmp_and_red_849
+11 1
+.names tmp_and_red_849 tmp_xnor_eq_807 tmp_and_red_850
+11 1
+.names tmp_and_red_850 tmp_xnor_eq_809 tmp_and_red_851
+11 1
+.names tmp_and_red_851 tmp_xnor_eq_811 tmp_and_red_852
+11 1
+.names tmp_and_red_852 tmp_xnor_eq_813 tmp_and_red_853
+11 1
+.names tmp_and_red_853 tmp_xnor_eq_815 tmp_and_red_854
+11 1
+.names tmp_and_red_854 tmp_xnor_eq_817 tmp_and_red_855
+11 1
+.names tmp_and_red_855 tmp_xnor_eq_819 tmp_and_red_856
+11 1
+.names tmp_and_red_856 tmp_xnor_eq_821 tmp_and_red_857
+11 1
+.names tmp_and_red_857 tmp_xnor_eq_823 tmp_and_red_858
+11 1
+.names tmp_and_red_858 tmp_xnor_eq_825 tmp_and_red_859
+11 1
+.names tmp_and_red_859 tmp_xnor_eq_827 tmp_and_red_860
+11 1
+.names tmp_and_red_860 tmp_xnor_eq_829 tmp_and_red_861
+11 1
+.names tmp_and_red_861 tmp_xnor_eq_831 tmp_and_red_862
+11 1
+.names tmp_and_red_862 CONST1 tmp_EQ_48
+11 1
+.names I_MEM_DI_0 CONST1 tmp_xor_eq_863
+10 1
+01 1
+.names tmp_xor_eq_863 tmp_xnor_eq_864
+0 1
+.names I_MEM_DI_1 CONST1 tmp_xor_eq_865
+10 1
+01 1
+.names tmp_xor_eq_865 tmp_xnor_eq_866
+0 1
+.names I_MEM_DI_2 CONST1 tmp_xor_eq_867
+10 1
+01 1
+.names tmp_xor_eq_867 tmp_xnor_eq_868
+0 1
+.names I_MEM_DI_3 CONST0 tmp_xor_eq_869
+10 1
+01 1
+.names tmp_xor_eq_869 tmp_xnor_eq_870
+0 1
+.names I_MEM_DI_4 CONST0 tmp_xor_eq_871
+10 1
+01 1
+.names tmp_xor_eq_871 tmp_xnor_eq_872
+0 1
+.names I_MEM_DI_5 CONST1 tmp_xor_eq_873
+10 1
+01 1
+.names tmp_xor_eq_873 tmp_xnor_eq_874
+0 1
+.names I_MEM_DI_6 CONST1 tmp_xor_eq_875
+10 1
+01 1
+.names tmp_xor_eq_875 tmp_xnor_eq_876
+0 1
+.names I_MEM_DI_7 CONST0 tmp_xor_eq_877
+10 1
+01 1
+.names tmp_xor_eq_877 tmp_xnor_eq_878
+0 1
+.names I_MEM_DI_8 CONST0 tmp_xor_eq_879
+10 1
+01 1
+.names tmp_xor_eq_879 tmp_xnor_eq_880
+0 1
+.names I_MEM_DI_9 CONST0 tmp_xor_eq_881
+10 1
+01 1
+.names tmp_xor_eq_881 tmp_xnor_eq_882
+0 1
+.names I_MEM_DI_10 CONST0 tmp_xor_eq_883
+10 1
+01 1
+.names tmp_xor_eq_883 tmp_xnor_eq_884
+0 1
+.names I_MEM_DI_11 CONST0 tmp_xor_eq_885
+10 1
+01 1
+.names tmp_xor_eq_885 tmp_xnor_eq_886
+0 1
+.names I_MEM_DI_12 CONST0 tmp_xor_eq_887
+10 1
+01 1
+.names tmp_xor_eq_887 tmp_xnor_eq_888
+0 1
+.names I_MEM_DI_13 CONST0 tmp_xor_eq_889
+10 1
+01 1
+.names tmp_xor_eq_889 tmp_xnor_eq_890
+0 1
+.names I_MEM_DI_14 CONST0 tmp_xor_eq_891
+10 1
+01 1
+.names tmp_xor_eq_891 tmp_xnor_eq_892
+0 1
+.names I_MEM_DI_15 CONST1 tmp_xor_eq_893
+10 1
+01 1
+.names tmp_xor_eq_893 tmp_xnor_eq_894
+0 1
+.names I_MEM_DI_16 CONST0 tmp_xor_eq_895
+10 1
+01 1
+.names tmp_xor_eq_895 tmp_xnor_eq_896
+0 1
+.names I_MEM_DI_17 CONST0 tmp_xor_eq_897
+10 1
+01 1
+.names tmp_xor_eq_897 tmp_xnor_eq_898
+0 1
+.names I_MEM_DI_18 CONST0 tmp_xor_eq_899
+10 1
+01 1
+.names tmp_xor_eq_899 tmp_xnor_eq_900
+0 1
+.names I_MEM_DI_19 CONST0 tmp_xor_eq_901
+10 1
+01 1
+.names tmp_xor_eq_901 tmp_xnor_eq_902
+0 1
+.names I_MEM_DI_20 CONST0 tmp_xor_eq_903
+10 1
+01 1
+.names tmp_xor_eq_903 tmp_xnor_eq_904
+0 1
+.names I_MEM_DI_21 CONST0 tmp_xor_eq_905
+10 1
+01 1
+.names tmp_xor_eq_905 tmp_xnor_eq_906
+0 1
+.names I_MEM_DI_22 CONST0 tmp_xor_eq_907
+10 1
+01 1
+.names tmp_xor_eq_907 tmp_xnor_eq_908
+0 1
+.names I_MEM_DI_23 CONST0 tmp_xor_eq_909
+10 1
+01 1
+.names tmp_xor_eq_909 tmp_xnor_eq_910
+0 1
+.names I_MEM_DI_24 CONST0 tmp_xor_eq_911
+10 1
+01 1
+.names tmp_xor_eq_911 tmp_xnor_eq_912
+0 1
+.names I_MEM_DI_25 CONST0 tmp_xor_eq_913
+10 1
+01 1
+.names tmp_xor_eq_913 tmp_xnor_eq_914
+0 1
+.names I_MEM_DI_26 CONST0 tmp_xor_eq_915
+10 1
+01 1
+.names tmp_xor_eq_915 tmp_xnor_eq_916
+0 1
+.names I_MEM_DI_27 CONST0 tmp_xor_eq_917
+10 1
+01 1
+.names tmp_xor_eq_917 tmp_xnor_eq_918
+0 1
+.names I_MEM_DI_28 CONST0 tmp_xor_eq_919
+10 1
+01 1
+.names tmp_xor_eq_919 tmp_xnor_eq_920
+0 1
+.names I_MEM_DI_29 CONST0 tmp_xor_eq_921
+10 1
+01 1
+.names tmp_xor_eq_921 tmp_xnor_eq_922
+0 1
+.names I_MEM_DI_30 CONST0 tmp_xor_eq_923
+10 1
+01 1
+.names tmp_xor_eq_923 tmp_xnor_eq_924
+0 1
+.names I_MEM_DI_31 CONST0 tmp_xor_eq_925
+10 1
+01 1
+.names tmp_xor_eq_925 tmp_xnor_eq_926
+0 1
+.names tmp_xnor_eq_864 tmp_xnor_eq_866 tmp_and_red_927
+11 1
+.names tmp_and_red_927 tmp_xnor_eq_868 tmp_and_red_928
+11 1
+.names tmp_and_red_928 tmp_xnor_eq_870 tmp_and_red_929
+11 1
+.names tmp_and_red_929 tmp_xnor_eq_872 tmp_and_red_930
+11 1
+.names tmp_and_red_930 tmp_xnor_eq_874 tmp_and_red_931
+11 1
+.names tmp_and_red_931 tmp_xnor_eq_876 tmp_and_red_932
+11 1
+.names tmp_and_red_932 tmp_xnor_eq_878 tmp_and_red_933
+11 1
+.names tmp_and_red_933 tmp_xnor_eq_880 tmp_and_red_934
+11 1
+.names tmp_and_red_934 tmp_xnor_eq_882 tmp_and_red_935
+11 1
+.names tmp_and_red_935 tmp_xnor_eq_884 tmp_and_red_936
+11 1
+.names tmp_and_red_936 tmp_xnor_eq_886 tmp_and_red_937
+11 1
+.names tmp_and_red_937 tmp_xnor_eq_888 tmp_and_red_938
+11 1
+.names tmp_and_red_938 tmp_xnor_eq_890 tmp_and_red_939
+11 1
+.names tmp_and_red_939 tmp_xnor_eq_892 tmp_and_red_940
+11 1
+.names tmp_and_red_940 tmp_xnor_eq_894 tmp_and_red_941
+11 1
+.names tmp_and_red_941 tmp_xnor_eq_896 tmp_and_red_942
+11 1
+.names tmp_and_red_942 tmp_xnor_eq_898 tmp_and_red_943
+11 1
+.names tmp_and_red_943 tmp_xnor_eq_900 tmp_and_red_944
+11 1
+.names tmp_and_red_944 tmp_xnor_eq_902 tmp_and_red_945
+11 1
+.names tmp_and_red_945 tmp_xnor_eq_904 tmp_and_red_946
+11 1
+.names tmp_and_red_946 tmp_xnor_eq_906 tmp_and_red_947
+11 1
+.names tmp_and_red_947 tmp_xnor_eq_908 tmp_and_red_948
+11 1
+.names tmp_and_red_948 tmp_xnor_eq_910 tmp_and_red_949
+11 1
+.names tmp_and_red_949 tmp_xnor_eq_912 tmp_and_red_950
+11 1
+.names tmp_and_red_950 tmp_xnor_eq_914 tmp_and_red_951
+11 1
+.names tmp_and_red_951 tmp_xnor_eq_916 tmp_and_red_952
+11 1
+.names tmp_and_red_952 tmp_xnor_eq_918 tmp_and_red_953
+11 1
+.names tmp_and_red_953 tmp_xnor_eq_920 tmp_and_red_954
+11 1
+.names tmp_and_red_954 tmp_xnor_eq_922 tmp_and_red_955
+11 1
+.names tmp_and_red_955 tmp_xnor_eq_924 tmp_and_red_956
+11 1
+.names tmp_and_red_956 tmp_xnor_eq_926 tmp_and_red_957
+11 1
+.names tmp_and_red_957 CONST1 tmp_EQ_48
+11 1
+.names tmp_EQ_48 tmp_EQ_48 tmp_AND_48
+11 1
+.names tmp_AND_48 CONST1 HALT
+11 1
+.names MemWrite ALU_Result_0 RF_WD_0 tmp_cond_52_0
+11- 1
+0-1 1
+.names MemWrite ALU_Result_1 RF_WD_1 tmp_cond_52_1
+11- 1
+0-1 1
+.names MemWrite ALU_Result_2 RF_WD_2 tmp_cond_52_2
+11- 1
+0-1 1
+.names MemWrite ALU_Result_3 RF_WD_3 tmp_cond_52_3
+11- 1
+0-1 1
+.names MemWrite ALU_Result_4 RF_WD_4 tmp_cond_52_4
+11- 1
+0-1 1
+.names MemWrite ALU_Result_5 RF_WD_5 tmp_cond_52_5
+11- 1
+0-1 1
+.names MemWrite ALU_Result_6 RF_WD_6 tmp_cond_52_6
+11- 1
+0-1 1
+.names MemWrite ALU_Result_7 RF_WD_7 tmp_cond_52_7
+11- 1
+0-1 1
+.names MemWrite ALU_Result_8 RF_WD_8 tmp_cond_52_8
+11- 1
+0-1 1
+.names MemWrite ALU_Result_9 RF_WD_9 tmp_cond_52_9
+11- 1
+0-1 1
+.names MemWrite ALU_Result_10 RF_WD_10 tmp_cond_52_10
+11- 1
+0-1 1
+.names MemWrite ALU_Result_11 RF_WD_11 tmp_cond_52_11
+11- 1
+0-1 1
+.names MemWrite ALU_Result_12 RF_WD_12 tmp_cond_52_12
+11- 1
+0-1 1
+.names MemWrite ALU_Result_13 RF_WD_13 tmp_cond_52_13
+11- 1
+0-1 1
+.names MemWrite ALU_Result_14 RF_WD_14 tmp_cond_52_14
+11- 1
+0-1 1
+.names MemWrite ALU_Result_15 RF_WD_15 tmp_cond_52_15
+11- 1
+0-1 1
+.names MemWrite ALU_Result_16 RF_WD_16 tmp_cond_52_16
+11- 1
+0-1 1
+.names MemWrite ALU_Result_17 RF_WD_17 tmp_cond_52_17
+11- 1
+0-1 1
+.names MemWrite ALU_Result_18 RF_WD_18 tmp_cond_52_18
+11- 1
+0-1 1
+.names MemWrite ALU_Result_19 RF_WD_19 tmp_cond_52_19
+11- 1
+0-1 1
+.names MemWrite ALU_Result_20 RF_WD_20 tmp_cond_52_20
+11- 1
+0-1 1
+.names MemWrite ALU_Result_21 RF_WD_21 tmp_cond_52_21
+11- 1
+0-1 1
+.names MemWrite ALU_Result_22 RF_WD_22 tmp_cond_52_22
+11- 1
+0-1 1
+.names MemWrite ALU_Result_23 RF_WD_23 tmp_cond_52_23
+11- 1
+0-1 1
+.names MemWrite ALU_Result_24 RF_WD_24 tmp_cond_52_24
+11- 1
+0-1 1
+.names MemWrite ALU_Result_25 RF_WD_25 tmp_cond_52_25
+11- 1
+0-1 1
+.names MemWrite ALU_Result_26 RF_WD_26 tmp_cond_52_26
+11- 1
+0-1 1
+.names MemWrite ALU_Result_27 RF_WD_27 tmp_cond_52_27
+11- 1
+0-1 1
+.names MemWrite ALU_Result_28 RF_WD_28 tmp_cond_52_28
+11- 1
+0-1 1
+.names MemWrite ALU_Result_29 RF_WD_29 tmp_cond_52_29
+11- 1
+0-1 1
+.names MemWrite ALU_Result_30 RF_WD_30 tmp_cond_52_30
+11- 1
+0-1 1
+.names MemWrite ALU_Result_31 RF_WD_31 tmp_cond_52_31
+11- 1
+0-1 1
+.names Branch Branch_Taken_0 tmp_cond_52_0 tmp_cond_52_0
+11- 1
+0-1 1
+.names Branch Branch_Taken_1 tmp_cond_52_1 tmp_cond_52_1
+11- 1
+0-1 1
+.names Branch Branch_Taken_2 tmp_cond_52_2 tmp_cond_52_2
+11- 1
+0-1 1
+.names Branch Branch_Taken_3 tmp_cond_52_3 tmp_cond_52_3
+11- 1
+0-1 1
+.names Branch Branch_Taken_4 tmp_cond_52_4 tmp_cond_52_4
+11- 1
+0-1 1
+.names Branch Branch_Taken_5 tmp_cond_52_5 tmp_cond_52_5
+11- 1
+0-1 1
+.names Branch Branch_Taken_6 tmp_cond_52_6 tmp_cond_52_6
+11- 1
+0-1 1
+.names Branch Branch_Taken_7 tmp_cond_52_7 tmp_cond_52_7
+11- 1
+0-1 1
+.names Branch Branch_Taken_8 tmp_cond_52_8 tmp_cond_52_8
+11- 1
+0-1 1
+.names Branch Branch_Taken_9 tmp_cond_52_9 tmp_cond_52_9
+11- 1
+0-1 1
+.names Branch Branch_Taken_10 tmp_cond_52_10 tmp_cond_52_10
+11- 1
+0-1 1
+.names Branch Branch_Taken_11 tmp_cond_52_11 tmp_cond_52_11
+11- 1
+0-1 1
+.names Branch Branch_Taken_12 tmp_cond_52_12 tmp_cond_52_12
+11- 1
+0-1 1
+.names Branch Branch_Taken_13 tmp_cond_52_13 tmp_cond_52_13
+11- 1
+0-1 1
+.names Branch Branch_Taken_14 tmp_cond_52_14 tmp_cond_52_14
+11- 1
+0-1 1
+.names Branch Branch_Taken_15 tmp_cond_52_15 tmp_cond_52_15
+11- 1
+0-1 1
+.names Branch Branch_Taken_16 tmp_cond_52_16 tmp_cond_52_16
+11- 1
+0-1 1
+.names Branch Branch_Taken_17 tmp_cond_52_17 tmp_cond_52_17
+11- 1
+0-1 1
+.names Branch Branch_Taken_18 tmp_cond_52_18 tmp_cond_52_18
+11- 1
+0-1 1
+.names Branch Branch_Taken_19 tmp_cond_52_19 tmp_cond_52_19
+11- 1
+0-1 1
+.names Branch Branch_Taken_20 tmp_cond_52_20 tmp_cond_52_20
+11- 1
+0-1 1
+.names Branch Branch_Taken_21 tmp_cond_52_21 tmp_cond_52_21
+11- 1
+0-1 1
+.names Branch Branch_Taken_22 tmp_cond_52_22 tmp_cond_52_22
+11- 1
+0-1 1
+.names Branch Branch_Taken_23 tmp_cond_52_23 tmp_cond_52_23
+11- 1
+0-1 1
+.names Branch Branch_Taken_24 tmp_cond_52_24 tmp_cond_52_24
+11- 1
+0-1 1
+.names Branch Branch_Taken_25 tmp_cond_52_25 tmp_cond_52_25
+11- 1
+0-1 1
+.names Branch Branch_Taken_26 tmp_cond_52_26 tmp_cond_52_26
+11- 1
+0-1 1
+.names Branch Branch_Taken_27 tmp_cond_52_27 tmp_cond_52_27
+11- 1
+0-1 1
+.names Branch Branch_Taken_28 tmp_cond_52_28 tmp_cond_52_28
+11- 1
+0-1 1
+.names Branch Branch_Taken_29 tmp_cond_52_29 tmp_cond_52_29
+11- 1
+0-1 1
+.names Branch Branch_Taken_30 tmp_cond_52_30 tmp_cond_52_30
+11- 1
+0-1 1
+.names Branch Branch_Taken_31 tmp_cond_52_31 tmp_cond_52_31
+11- 1
+0-1 1
+.names tmp_cond_52_0 CONST1 OUTPUT_PORT_0
+11 1
+.names tmp_cond_52_1 CONST1 OUTPUT_PORT_1
+11 1
+.names tmp_cond_52_2 CONST1 OUTPUT_PORT_2
+11 1
+.names tmp_cond_52_3 CONST1 OUTPUT_PORT_3
+11 1
+.names tmp_cond_52_4 CONST1 OUTPUT_PORT_4
+11 1
+.names tmp_cond_52_5 CONST1 OUTPUT_PORT_5
+11 1
+.names tmp_cond_52_6 CONST1 OUTPUT_PORT_6
+11 1
+.names tmp_cond_52_7 CONST1 OUTPUT_PORT_7
+11 1
+.names tmp_cond_52_8 CONST1 OUTPUT_PORT_8
+11 1
+.names tmp_cond_52_9 CONST1 OUTPUT_PORT_9
+11 1
+.names tmp_cond_52_10 CONST1 OUTPUT_PORT_10
+11 1
+.names tmp_cond_52_11 CONST1 OUTPUT_PORT_11
+11 1
+.names tmp_cond_52_12 CONST1 OUTPUT_PORT_12
+11 1
+.names tmp_cond_52_13 CONST1 OUTPUT_PORT_13
+11 1
+.names tmp_cond_52_14 CONST1 OUTPUT_PORT_14
+11 1
+.names tmp_cond_52_15 CONST1 OUTPUT_PORT_15
+11 1
+.names tmp_cond_52_16 CONST1 OUTPUT_PORT_16
+11 1
+.names tmp_cond_52_17 CONST1 OUTPUT_PORT_17
+11 1
+.names tmp_cond_52_18 CONST1 OUTPUT_PORT_18
+11 1
+.names tmp_cond_52_19 CONST1 OUTPUT_PORT_19
+11 1
+.names tmp_cond_52_20 CONST1 OUTPUT_PORT_20
+11 1
+.names tmp_cond_52_21 CONST1 OUTPUT_PORT_21
+11 1
+.names tmp_cond_52_22 CONST1 OUTPUT_PORT_22
+11 1
+.names tmp_cond_52_23 CONST1 OUTPUT_PORT_23
+11 1
+.names tmp_cond_52_24 CONST1 OUTPUT_PORT_24
+11 1
+.names tmp_cond_52_25 CONST1 OUTPUT_PORT_25
+11 1
+.names tmp_cond_52_26 CONST1 OUTPUT_PORT_26
+11 1
+.names tmp_cond_52_27 CONST1 OUTPUT_PORT_27
+11 1
+.names tmp_cond_52_28 CONST1 OUTPUT_PORT_28
+11 1
+.names tmp_cond_52_29 CONST1 OUTPUT_PORT_29
+11 1
+.names tmp_cond_52_30 CONST1 OUTPUT_PORT_30
+11 1
+.names tmp_cond_52_31 CONST1 OUTPUT_PORT_31
+11 1
+
+# Sub-circuits (Instances)
+.subckt Control
+.subckt ALUControl
+.subckt Immediate_Concatenator
+.subckt ALU
+.end
